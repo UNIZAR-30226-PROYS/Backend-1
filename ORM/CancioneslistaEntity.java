@@ -1,9 +1,10 @@
 package ORM;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
-@Table(name = "cancioneslista", schema = "wolfic", catalog = "")
+@Table(name = "cancioneslista", schema = "wolfic")
 @IdClass(CancioneslistaEntityPK.class)
 public class CancioneslistaEntity {
     private String listaRep;

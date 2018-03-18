@@ -2,6 +2,7 @@ package ORM;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 public class AlbumEntityPK implements Serializable {
     private String nombre;
