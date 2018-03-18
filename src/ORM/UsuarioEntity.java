@@ -11,7 +11,7 @@ public class UsuarioEntity {
     private String email;
     private String conexion;
     private int ultRep;
-    private String contraseña;
+    private String contrasenya;
     private byte publico;
 
     @Id
@@ -65,13 +65,13 @@ public class UsuarioEntity {
     }
 
     @Basic
-    @Column(name = "Contraseña")
-    public String getContraseña() {
-        return contraseña;
+    @Column(name = "Contrasenya")
+    public String getContrasenya() {
+        return contrasenya;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenya(String contrasenya) {
+        this.contrasenya = contrasenya;
     }
 
     @Basic
@@ -95,12 +95,12 @@ public class UsuarioEntity {
                 Objects.equals(nomAp, that.nomAp) &&
                 Objects.equals(email, that.email) &&
                 Objects.equals(conexion, that.conexion) &&
-                Objects.equals(contraseña, that.contraseña);
+                Objects.equals(contrasenya, that.contrasenya);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idUser, nomAp, email, conexion, ultRep, contraseña, publico);
+        return Objects.hash(idUser, nomAp, email, conexion, ultRep, contrasenya, publico);
     }
 }
