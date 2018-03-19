@@ -11,6 +11,7 @@ public class Listarep {
     private String idLista;
     private int numElementos;
     private Collection<Cancioneslista> cancioneslistasByIdLista;
+    private Usuario usuarioByIdUser;
 
     @Basic
     @Column(name = "idUser")
@@ -76,5 +77,15 @@ public class Listarep {
 
     public void setCancioneslistasByIdLista(Collection<Cancioneslista> cancioneslistasByIdLista) {
         this.cancioneslistasByIdLista = cancioneslistasByIdLista;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
+    public Usuario getUsuarioByIdUser() {
+        return usuarioByIdUser;
+    }
+
+    public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
+        this.usuarioByIdUser = usuarioByIdUser;
     }
 }
