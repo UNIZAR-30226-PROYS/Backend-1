@@ -2,11 +2,11 @@ package ORM;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "cancion", schema = "wolfic")
-public class CancionEntity {
+public class Cancion {
     private int idCancion;
     private String nombre;
     private String genero;
@@ -15,6 +15,9 @@ public class CancionEntity {
     private int numRep;
     private String idUser;
     private String nombreAlbum;
+    private Usuario usuarioByIdUser;
+    private Collection<Cancioneslista> cancioneslistasByIdCancion;
+    private Collection<Comentario> comentariosByIdCancion;
 
     @Id
     @Column(name = "idCancion")
@@ -100,20 +103,48 @@ public class CancionEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CancionEntity that = (CancionEntity) o;
-        return idCancion == that.idCancion &&
-                duracion == that.duracion &&
-                numRep == that.numRep &&
-                Objects.equals(nombre, that.nombre) &&
-                Objects.equals(genero, that.genero) &&
-                Objects.equals(fechaSubida, that.fechaSubida) &&
-                Objects.equals(idUser, that.idUser) &&
-                Objects.equals(nombreAlbum, that.nombreAlbum);
+        Cancion cancion = (Cancion) o;
+        return idCancion == cancion.idCancion &&
+                duracion == cancion.duracion &&
+                numRep == cancion.numRep &&
+                Objects.equals(nombre, cancion.nombre) &&
+                Objects.equals(genero, cancion.genero) &&
+                Objects.equals(fechaSubida, cancion.fechaSubida) &&
+                Objects.equals(idUser, cancion.idUser) &&
+                Objects.equals(nombreAlbum, cancion.nombreAlbum);
     }
 
     @Override
     public int hashCode() {
 
         return Objects.hash(idCancion, nombre, genero, duracion, fechaSubida, numRep, idUser, nombreAlbum);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
+    public Usuario getUsuarioByIdUser() {
+        return usuarioByIdUser;
+    }
+
+    public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
+        this.usuarioByIdUser = usuarioByIdUser;
+    }
+
+    @OneToMany(mappedBy = "cancionByIdCancion")
+    public Collection<Cancioneslista> getCancioneslistasByIdCancion() {
+        return cancioneslistasByIdCancion;
+    }
+
+    public void setCancioneslistasByIdCancion(Collection<Cancioneslista> cancioneslistasByIdCancion) {
+        this.cancioneslistasByIdCancion = cancioneslistasByIdCancion;
+    }
+
+    @OneToMany(mappedBy = "cancionByIdCancion")
+    public Collection<Comentario> getComentariosByIdCancion() {
+        return comentariosByIdCancion;
+    }
+
+    public void setComentariosByIdCancion(Collection<Comentario> comentariosByIdCancion) {
+        this.comentariosByIdCancion = comentariosByIdCancion;
     }
 }

@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ComentarioEntityPK implements Serializable {
+public class ComentarioPK implements Serializable {
     private int idCancion;
     private String idUser;
     private int idComentario;
@@ -44,7 +44,7 @@ public class ComentarioEntityPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ComentarioEntityPK that = (ComentarioEntityPK) o;
+        ComentarioPK that = (ComentarioPK) o;
         return idCancion == that.idCancion &&
                 idComentario == that.idComentario &&
                 Objects.equals(idUser, that.idUser);

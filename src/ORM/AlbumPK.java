@@ -5,19 +5,9 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class ListarepEntityPK implements Serializable {
-    private String idUser;
+public class AlbumPK implements Serializable {
     private String nombre;
-
-    @Column(name = "idUser")
-    @Id
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
+    private String idUser;
 
     @Column(name = "nombre")
     @Id
@@ -29,18 +19,28 @@ public class ListarepEntityPK implements Serializable {
         this.nombre = nombre;
     }
 
+    @Column(name = "idUser")
+    @Id
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ListarepEntityPK that = (ListarepEntityPK) o;
-        return Objects.equals(idUser, that.idUser) &&
-                Objects.equals(nombre, that.nombre);
+        AlbumPK albumPK = (AlbumPK) o;
+        return Objects.equals(nombre, albumPK.nombre) &&
+                Objects.equals(idUser, albumPK.idUser);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idUser, nombre);
+        return Objects.hash(nombre, idUser);
     }
 }

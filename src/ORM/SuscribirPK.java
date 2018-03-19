@@ -1,17 +1,16 @@
 package ORM;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Objects;
 
-@Entity
-@Table(name = "suscribir", schema = "wolfic")
-@IdClass(SuscribirEntityPK.class)
-public class SuscribirEntity {
+public class SuscribirPK implements Serializable {
     private String idSuscrito;
     private String idSuscriptor;
 
-    @Id
     @Column(name = "idSuscrito")
+    @Id
     public String getIdSuscrito() {
         return idSuscrito;
     }
@@ -20,8 +19,8 @@ public class SuscribirEntity {
         this.idSuscrito = idSuscrito;
     }
 
-    @Id
     @Column(name = "idSuscriptor")
+    @Id
     public String getIdSuscriptor() {
         return idSuscriptor;
     }
@@ -34,7 +33,7 @@ public class SuscribirEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SuscribirEntity that = (SuscribirEntity) o;
+        SuscribirPK that = (SuscribirPK) o;
         return Objects.equals(idSuscrito, that.idSuscrito) &&
                 Objects.equals(idSuscriptor, that.idSuscriptor);
     }

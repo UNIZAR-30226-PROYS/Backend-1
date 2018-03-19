@@ -5,12 +5,13 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "album", schema = "wolfic")
-@IdClass(AlbumEntityPK.class)
-public class AlbumEntity {
+@IdClass(AlbumPK.class)
+public class Album {
     private String nombre;
     private String idUser;
     private Date fechaCreacion;
+    private Usuario usuarioByIdUser;
+    private Cancion cancionByNombre;
 
     @Id
     @Column(name = "nombre")
@@ -46,15 +47,35 @@ public class AlbumEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AlbumEntity that = (AlbumEntity) o;
-        return Objects.equals(nombre, that.nombre) &&
-                Objects.equals(idUser, that.idUser) &&
-                Objects.equals(fechaCreacion, that.fechaCreacion);
+        Album album = (Album) o;
+        return Objects.equals(nombre, album.nombre) &&
+                Objects.equals(idUser, album.idUser) &&
+                Objects.equals(fechaCreacion, album.fechaCreacion);
     }
 
     @Override
     public int hashCode() {
 
         return Objects.hash(nombre, idUser, fechaCreacion);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
+    public Usuario getUsuarioByIdUser() {
+        return usuarioByIdUser;
+    }
+
+    public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
+        this.usuarioByIdUser = usuarioByIdUser;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "nombre", referencedColumnName = "nombreAlbum", nullable = false)
+    public Cancion getCancionByNombre() {
+        return cancionByNombre;
+    }
+
+    public void setCancionByNombre(Cancion cancionByNombre) {
+        this.cancionByNombre = cancionByNombre;
     }
 }

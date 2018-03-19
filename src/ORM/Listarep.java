@@ -1,18 +1,18 @@
 package ORM;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "listarep", schema = "wolfic")
-@IdClass(ListarepEntityPK.class)
-public class ListarepEntity {
+public class Listarep {
     private String idUser;
     private String nombre;
     private String idLista;
     private int numElementos;
+    private Collection<Cancioneslista> cancioneslistasByIdLista;
 
-    @Id
+    @Basic
     @Column(name = "idUser")
     public String getIdUser() {
         return idUser;
@@ -22,7 +22,7 @@ public class ListarepEntity {
         this.idUser = idUser;
     }
 
-    @Id
+    @Basic
     @Column(name = "nombre")
     public String getNombre() {
         return nombre;
@@ -32,7 +32,7 @@ public class ListarepEntity {
         this.nombre = nombre;
     }
 
-    @Basic
+    @Id
     @Column(name = "idLista")
     public String getIdLista() {
         return idLista;
@@ -56,16 +56,25 @@ public class ListarepEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ListarepEntity that = (ListarepEntity) o;
-        return numElementos == that.numElementos &&
-                Objects.equals(idUser, that.idUser) &&
-                Objects.equals(nombre, that.nombre) &&
-                Objects.equals(idLista, that.idLista);
+        Listarep listarep = (Listarep) o;
+        return numElementos == listarep.numElementos &&
+                Objects.equals(idUser, listarep.idUser) &&
+                Objects.equals(nombre, listarep.nombre) &&
+                Objects.equals(idLista, listarep.idLista);
     }
 
     @Override
     public int hashCode() {
 
         return Objects.hash(idUser, nombre, idLista, numElementos);
+    }
+
+    @OneToMany(mappedBy = "listarepByListaRep")
+    public Collection<Cancioneslista> getCancioneslistasByIdLista() {
+        return cancioneslistasByIdLista;
+    }
+
+    public void setCancioneslistasByIdLista(Collection<Cancioneslista> cancioneslistasByIdLista) {
+        this.cancioneslistasByIdLista = cancioneslistasByIdLista;
     }
 }

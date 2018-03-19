@@ -6,13 +6,15 @@
     <session-factory>
         <property name="connection.url">jdbc:mysql://localhost:3306/wolfic</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <mapping class="ORM.AlbumEntity"/>
-        <mapping class="ORM.CancionEntity"/>
-        <mapping class="ORM.CancioneslistaEntity"/>
-        <mapping class="ORM.ComentarioEntity"/>
-        <mapping class="ORM.ListarepEntity"/>
-        <mapping class="ORM.SuscribirEntity"/>
-        <mapping class="ORM.UsuarioEntity"/>
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <mapping class="ORM.Album"/>
+        <mapping class="ORM.Cancion"/>
+        <mapping class="ORM.Cancioneslista"/>
+        <mapping class="ORM.Comentario"/>
+        <mapping class="ORM.Listarep"/>
+        <mapping class="ORM.Suscribir"/>
+        <mapping class="ORM.Usuario"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

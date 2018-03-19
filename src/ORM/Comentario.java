@@ -5,14 +5,15 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "comentario", schema = "wolfic")
-@IdClass(ComentarioEntityPK.class)
-public class ComentarioEntity {
+@IdClass(ComentarioPK.class)
+public class Comentario {
     private int idCancion;
     private String idUser;
     private int idComentario;
     private String cuerpo;
     private Date fechaSubida;
+    private Cancion cancionByIdCancion;
+    private Usuario usuarioByIdUser;
 
     @Id
     @Column(name = "idCancion")
@@ -68,7 +69,7 @@ public class ComentarioEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ComentarioEntity that = (ComentarioEntity) o;
+        Comentario that = (Comentario) o;
         return idCancion == that.idCancion &&
                 idComentario == that.idComentario &&
                 Objects.equals(idUser, that.idUser) &&
@@ -80,5 +81,25 @@ public class ComentarioEntity {
     public int hashCode() {
 
         return Objects.hash(idCancion, idUser, idComentario, cuerpo, fechaSubida);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
+    public Cancion getCancionByIdCancion() {
+        return cancionByIdCancion;
+    }
+
+    public void setCancionByIdCancion(Cancion cancionByIdCancion) {
+        this.cancionByIdCancion = cancionByIdCancion;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
+    public Usuario getUsuarioByIdUser() {
+        return usuarioByIdUser;
+    }
+
+    public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
+        this.usuarioByIdUser = usuarioByIdUser;
     }
 }

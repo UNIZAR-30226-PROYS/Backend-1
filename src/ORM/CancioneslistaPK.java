@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CancioneslistaEntityPK implements Serializable {
+public class CancioneslistaPK implements Serializable {
     private String listaRep;
     private int idCancion;
 
@@ -33,7 +33,7 @@ public class CancioneslistaEntityPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CancioneslistaEntityPK that = (CancioneslistaEntityPK) o;
+        CancioneslistaPK that = (CancioneslistaPK) o;
         return idCancion == that.idCancion &&
                 Objects.equals(listaRep, that.listaRep);
     }

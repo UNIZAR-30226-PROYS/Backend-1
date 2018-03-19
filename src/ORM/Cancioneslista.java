@@ -5,12 +5,13 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "cancioneslista", schema = "wolfic")
-@IdClass(CancioneslistaEntityPK.class)
-public class CancioneslistaEntity {
+@IdClass(CancioneslistaPK.class)
+public class Cancioneslista {
     private String listaRep;
     private int idCancion;
     private Date fechaIntroduccion;
+    private Listarep listarepByListaRep;
+    private Cancion cancionByIdCancion;
 
     @Id
     @Column(name = "listaRep")
@@ -46,7 +47,7 @@ public class CancioneslistaEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CancioneslistaEntity that = (CancioneslistaEntity) o;
+        Cancioneslista that = (Cancioneslista) o;
         return idCancion == that.idCancion &&
                 Objects.equals(listaRep, that.listaRep) &&
                 Objects.equals(fechaIntroduccion, that.fechaIntroduccion);
@@ -56,5 +57,25 @@ public class CancioneslistaEntity {
     public int hashCode() {
 
         return Objects.hash(listaRep, idCancion, fechaIntroduccion);
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "listaRep", referencedColumnName = "idLista", nullable = false)
+    public Listarep getListarepByListaRep() {
+        return listarepByListaRep;
+    }
+
+    public void setListarepByListaRep(Listarep listarepByListaRep) {
+        this.listarepByListaRep = listarepByListaRep;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
+    public Cancion getCancionByIdCancion() {
+        return cancionByIdCancion;
+    }
+
+    public void setCancionByIdCancion(Cancion cancionByIdCancion) {
+        this.cancionByIdCancion = cancionByIdCancion;
     }
 }
