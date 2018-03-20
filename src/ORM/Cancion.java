@@ -13,7 +13,6 @@ public class Cancion {
     private int duracion;
     private Date fechaSubida;
     private int numRep;
-    private String idUser;
     private String nombreAlbum;
     private Usuario usuarioByIdUser;
     private Collection<Cancioneslista> cancioneslistasByIdCancion;
@@ -80,16 +79,6 @@ public class Cancion {
     }
 
     @Basic
-    @Column(name = "idUser")
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
-    @Basic
     @Column(name = "nombreAlbum")
     public String getNombreAlbum() {
         return nombreAlbum;
@@ -110,18 +99,18 @@ public class Cancion {
                 Objects.equals(nombre, cancion.nombre) &&
                 Objects.equals(genero, cancion.genero) &&
                 Objects.equals(fechaSubida, cancion.fechaSubida) &&
-                Objects.equals(idUser, cancion.idUser) &&
+                Objects.equals(usuarioByIdUser, cancion.usuarioByIdUser) &&
                 Objects.equals(nombreAlbum, cancion.nombreAlbum);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idCancion, nombre, genero, duracion, fechaSubida, numRep, idUser, nombreAlbum);
+        return Objects.hash(idCancion, nombre, genero, duracion, fechaSubida, numRep, usuarioByIdUser, nombreAlbum);
     }
 
     @ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
     }

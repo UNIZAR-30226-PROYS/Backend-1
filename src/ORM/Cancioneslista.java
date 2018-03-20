@@ -5,32 +5,20 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@IdClass(CancioneslistaPK.class)
 public class Cancioneslista {
-    private String listaRep;
-    private int idCancion;
+    private int idCancLista;
     private Date fechaIntroduccion;
     private Listarep listarepByListaRep;
     private Cancion cancionByIdCancion;
 
     @Id
-    @Column(name = "listaRep")
-    public String getListaRep() {
-        return listaRep;
+    @Column(name = "idCancLista")
+    public int getIdCancLista() {
+        return idCancLista;
     }
 
-    public void setListaRep(String listaRep) {
-        this.listaRep = listaRep;
-    }
-
-    @Id
-    @Column(name = "idCancion")
-    public int getIdCancion() {
-        return idCancion;
-    }
-
-    public void setIdCancion(int idCancion) {
-        this.idCancion = idCancion;
+    public void setIdCancLista(int idCancLista) {
+        this.idCancLista = idCancLista;
     }
 
     @Basic
@@ -48,19 +36,20 @@ public class Cancioneslista {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cancioneslista that = (Cancioneslista) o;
-        return idCancion == that.idCancion &&
-                Objects.equals(listaRep, that.listaRep) &&
+        return idCancLista == that.idCancLista &&
+                listarepByListaRep == that.listarepByListaRep &&
+                cancionByIdCancion == that.cancionByIdCancion &&
                 Objects.equals(fechaIntroduccion, that.fechaIntroduccion);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(listaRep, idCancion, fechaIntroduccion);
+        return Objects.hash(idCancLista, listarepByListaRep, cancionByIdCancion, fechaIntroduccion);
     }
 
     @ManyToOne
-    @JoinColumn(name = "listaRep", referencedColumnName = "idLista", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "listaRep", referencedColumnName = "idLista", nullable = false)
     public Listarep getListarepByListaRep() {
         return listarepByListaRep;
     }
@@ -70,7 +59,7 @@ public class Cancioneslista {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
     }

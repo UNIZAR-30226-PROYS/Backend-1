@@ -5,35 +5,12 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@IdClass(ComentarioPK.class)
 public class Comentario {
-    private int idCancion;
-    private String idUser;
     private int idComentario;
     private String cuerpo;
     private Date fechaSubida;
     private Cancion cancionByIdCancion;
     private Usuario usuarioByIdUser;
-
-    @Id
-    @Column(name = "idCancion")
-    public int getIdCancion() {
-        return idCancion;
-    }
-
-    public void setIdCancion(int idCancion) {
-        this.idCancion = idCancion;
-    }
-
-    @Id
-    @Column(name = "idUser")
-    public String getIdUser() {
-        return idUser;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
 
     @Id
     @Column(name = "idComentario")
@@ -70,9 +47,9 @@ public class Comentario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comentario that = (Comentario) o;
-        return idCancion == that.idCancion &&
-                idComentario == that.idComentario &&
-                Objects.equals(idUser, that.idUser) &&
+        return idComentario == that.idComentario &&
+                Objects.equals(cancionByIdCancion, that.cancionByIdCancion) &&
+                Objects.equals(usuarioByIdUser, that.usuarioByIdUser) &&
                 Objects.equals(cuerpo, that.cuerpo) &&
                 Objects.equals(fechaSubida, that.fechaSubida);
     }
@@ -80,11 +57,11 @@ public class Comentario {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idCancion, idUser, idComentario, cuerpo, fechaSubida);
+        return Objects.hash(idComentario, cancionByIdCancion, usuarioByIdUser, cuerpo, fechaSubida);
     }
 
     @ManyToOne
-    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
     }
@@ -94,7 +71,7 @@ public class Comentario {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
     }

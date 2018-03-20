@@ -6,21 +6,20 @@ import java.util.Objects;
 
 @Entity
 public class Listarep {
-    private String idUser;
+    private int idLista;
     private String nombre;
-    private String idLista;
     private int numElementos;
     private Collection<Cancioneslista> cancioneslistasByIdLista;
     private Usuario usuarioByIdUser;
 
-    @Basic
-    @Column(name = "idUser")
-    public String getIdUser() {
-        return idUser;
+    @Id
+    @Column(name = "idLista")
+    public int getIdLista() {
+        return idLista;
     }
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
+    public void setIdLista(int idLista) {
+        this.idLista = idLista;
     }
 
     @Basic
@@ -31,16 +30,6 @@ public class Listarep {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    @Id
-    @Column(name = "idLista")
-    public String getIdLista() {
-        return idLista;
-    }
-
-    public void setIdLista(String idLista) {
-        this.idLista = idLista;
     }
 
     @Basic
@@ -58,16 +47,16 @@ public class Listarep {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Listarep listarep = (Listarep) o;
-        return numElementos == listarep.numElementos &&
-                Objects.equals(idUser, listarep.idUser) &&
-                Objects.equals(nombre, listarep.nombre) &&
-                Objects.equals(idLista, listarep.idLista);
+        return idLista == listarep.idLista &&
+                numElementos == listarep.numElementos &&
+                Objects.equals(usuarioByIdUser, listarep.usuarioByIdUser) &&
+                Objects.equals(nombre, listarep.nombre);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idUser, nombre, idLista, numElementos);
+        return Objects.hash(idLista, usuarioByIdUser, nombre, numElementos);
     }
 
     @OneToMany(mappedBy = "listarepByListaRep")
@@ -80,7 +69,7 @@ public class Listarep {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
     }

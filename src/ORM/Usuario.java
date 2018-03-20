@@ -16,9 +16,9 @@ public class Usuario {
     private Collection<Album> albumsByIdUser;
     private Collection<Cancion> cancionsByIdUser;
     private Collection<Comentario> comentariosByIdUser;
+    private Collection<Listarep> listarepsByIdUser;
     private Collection<Suscribir> suscribirsByIdUser;
     private Collection<Suscribir> suscribirsByIdUser_0;
-    private Collection<Listarep> listarepsByIdUser;
 
     @Id
     @Column(name = "idUser")
@@ -137,6 +137,15 @@ public class Usuario {
         this.comentariosByIdUser = comentariosByIdUser;
     }
 
+    @OneToMany(mappedBy = "usuarioByIdUser")
+    public Collection<Listarep> getListarepsByIdUser() {
+        return listarepsByIdUser;
+    }
+
+    public void setListarepsByIdUser(Collection<Listarep> listarepsByIdUser) {
+        this.listarepsByIdUser = listarepsByIdUser;
+    }
+
     @OneToMany(mappedBy = "usuarioByIdSuscrito")
     public Collection<Suscribir> getSuscribirsByIdUser() {
         return suscribirsByIdUser;
@@ -153,14 +162,5 @@ public class Usuario {
 
     public void setSuscribirsByIdUser_0(Collection<Suscribir> suscribirsByIdUser_0) {
         this.suscribirsByIdUser_0 = suscribirsByIdUser_0;
-    }
-
-    @OneToMany(mappedBy = "usuarioByIdUser")
-    public Collection<Listarep> getListarepsByIdUser() {
-        return listarepsByIdUser;
-    }
-
-    public void setListarepsByIdUser(Collection<Listarep> listarepsByIdUser) {
-        this.listarepsByIdUser = listarepsByIdUser;
     }
 }

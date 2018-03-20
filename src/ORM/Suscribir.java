@@ -4,31 +4,19 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@IdClass(SuscribirPK.class)
 public class Suscribir {
-    private String idSuscrito;
-    private String idSuscriptor;
+    private int idSuscripcion;
     private Usuario usuarioByIdSuscrito;
     private Usuario usuarioByIdSuscriptor;
 
     @Id
-    @Column(name = "idSuscrito")
-    public String getIdSuscrito() {
-        return idSuscrito;
+    @Column(name = "idSuscripcion")
+    public int getIdSuscripcion() {
+        return idSuscripcion;
     }
 
-    public void setIdSuscrito(String idSuscrito) {
-        this.idSuscrito = idSuscrito;
-    }
-
-    @Id
-    @Column(name = "idSuscriptor")
-    public String getIdSuscriptor() {
-        return idSuscriptor;
-    }
-
-    public void setIdSuscriptor(String idSuscriptor) {
-        this.idSuscriptor = idSuscriptor;
+    public void setIdSuscripcion(int idSuscripcion) {
+        this.idSuscripcion = idSuscripcion;
     }
 
     @Override
@@ -36,18 +24,19 @@ public class Suscribir {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Suscribir suscribir = (Suscribir) o;
-        return Objects.equals(idSuscrito, suscribir.idSuscrito) &&
-                Objects.equals(idSuscriptor, suscribir.idSuscriptor);
+        return idSuscripcion == suscribir.idSuscripcion &&
+                Objects.equals(usuarioByIdSuscrito, suscribir.usuarioByIdSuscrito) &&
+                Objects.equals(usuarioByIdSuscriptor, suscribir.usuarioByIdSuscriptor);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idSuscrito, idSuscriptor);
+        return Objects.hash(idSuscripcion, usuarioByIdSuscrito, usuarioByIdSuscriptor);
     }
 
     @ManyToOne
-    @JoinColumn(name = "idSuscrito", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idSuscrito", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdSuscrito() {
         return usuarioByIdSuscrito;
     }
@@ -57,7 +46,7 @@ public class Suscribir {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idSuscriptor", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "idSuscriptor", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdSuscriptor() {
         return usuarioByIdSuscriptor;
     }
