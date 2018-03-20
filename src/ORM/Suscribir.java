@@ -6,6 +6,8 @@ import java.util.Objects;
 @Entity
 public class Suscribir {
     private int idSuscripcion;
+    private String idSuscrito;
+    private String idSuscriptor;
     private Usuario usuarioByIdSuscrito;
     private Usuario usuarioByIdSuscriptor;
 
@@ -19,20 +21,40 @@ public class Suscribir {
         this.idSuscripcion = idSuscripcion;
     }
 
+    @Basic
+    @Column(name = "idSuscrito")
+    public String getIdSuscrito() {
+        return idSuscrito;
+    }
+
+    public void setIdSuscrito(String idSuscrito) {
+        this.idSuscrito = idSuscrito;
+    }
+
+    @Basic
+    @Column(name = "idSuscriptor")
+    public String getIdSuscriptor() {
+        return idSuscriptor;
+    }
+
+    public void setIdSuscriptor(String idSuscriptor) {
+        this.idSuscriptor = idSuscriptor;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Suscribir suscribir = (Suscribir) o;
         return idSuscripcion == suscribir.idSuscripcion &&
-                Objects.equals(usuarioByIdSuscrito, suscribir.usuarioByIdSuscrito) &&
-                Objects.equals(usuarioByIdSuscriptor, suscribir.usuarioByIdSuscriptor);
+                Objects.equals(idSuscrito, suscribir.idSuscrito) &&
+                Objects.equals(idSuscriptor, suscribir.idSuscriptor);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idSuscripcion, usuarioByIdSuscrito, usuarioByIdSuscriptor);
+        return Objects.hash(idSuscripcion, idSuscrito, idSuscriptor);
     }
 
     @ManyToOne

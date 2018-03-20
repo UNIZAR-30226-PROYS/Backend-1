@@ -12,7 +12,7 @@ public class Usuario {
     private String conexion;
     private int ultRep;
     private String contrasenya;
-    private byte publico;
+    private boolean publico;
     private Collection<Album> albumsByIdUser;
     private Collection<Cancion> cancionsByIdUser;
     private Collection<Comentario> comentariosByIdUser;
@@ -82,11 +82,11 @@ public class Usuario {
 
     @Basic
     @Column(name = "Publico")
-    public byte getPublico() {
+    public boolean isPublico() {
         return publico;
     }
 
-    public void setPublico(byte publico) {
+    public void setPublico(boolean publico) {
         this.publico = publico;
     }
 

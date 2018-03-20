@@ -13,8 +13,10 @@ public class Cancion {
     private int duracion;
     private Date fechaSubida;
     private int numRep;
-    private String nombreAlbum;
+    private String idUser;
+    private Integer idAlbum;
     private Usuario usuarioByIdUser;
+    private Album albumByIdAlbum;
     private Collection<Cancioneslista> cancioneslistasByIdCancion;
     private Collection<Comentario> comentariosByIdCancion;
 
@@ -79,13 +81,23 @@ public class Cancion {
     }
 
     @Basic
-    @Column(name = "nombreAlbum")
-    public String getNombreAlbum() {
-        return nombreAlbum;
+    @Column(name = "idUser")
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setNombreAlbum(String nombreAlbum) {
-        this.nombreAlbum = nombreAlbum;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
+    }
+
+    @Basic
+    @Column(name = "idAlbum")
+    public Integer getIdAlbum() {
+        return idAlbum;
+    }
+
+    public void setIdAlbum(Integer idAlbum) {
+        this.idAlbum = idAlbum;
     }
 
     @Override
@@ -99,14 +111,14 @@ public class Cancion {
                 Objects.equals(nombre, cancion.nombre) &&
                 Objects.equals(genero, cancion.genero) &&
                 Objects.equals(fechaSubida, cancion.fechaSubida) &&
-                Objects.equals(usuarioByIdUser, cancion.usuarioByIdUser) &&
-                Objects.equals(nombreAlbum, cancion.nombreAlbum);
+                Objects.equals(idUser, cancion.idUser) &&
+                Objects.equals(idAlbum, cancion.idAlbum);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idCancion, nombre, genero, duracion, fechaSubida, numRep, usuarioByIdUser, nombreAlbum);
+        return Objects.hash(idCancion, nombre, genero, duracion, fechaSubida, numRep, idUser, idAlbum);
     }
 
     @ManyToOne
@@ -117,6 +129,16 @@ public class Cancion {
 
     public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
         this.usuarioByIdUser = usuarioByIdUser;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "idAlbum", referencedColumnName = "idAlbum")
+    public Album getAlbumByIdAlbum() {
+        return albumByIdAlbum;
+    }
+
+    public void setAlbumByIdAlbum(Album albumByIdAlbum) {
+        this.albumByIdAlbum = albumByIdAlbum;
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")

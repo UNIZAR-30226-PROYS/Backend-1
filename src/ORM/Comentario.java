@@ -7,6 +7,8 @@ import java.util.Objects;
 @Entity
 public class Comentario {
     private int idComentario;
+    private int idCancion;
+    private String idUser;
     private String cuerpo;
     private Date fechaSubida;
     private Cancion cancionByIdCancion;
@@ -20,6 +22,26 @@ public class Comentario {
 
     public void setIdComentario(int idComentario) {
         this.idComentario = idComentario;
+    }
+
+    @Basic
+    @Column(name = "idCancion")
+    public int getIdCancion() {
+        return idCancion;
+    }
+
+    public void setIdCancion(int idCancion) {
+        this.idCancion = idCancion;
+    }
+
+    @Basic
+    @Column(name = "idUser")
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     @Basic
@@ -48,8 +70,8 @@ public class Comentario {
         if (o == null || getClass() != o.getClass()) return false;
         Comentario that = (Comentario) o;
         return idComentario == that.idComentario &&
-                Objects.equals(cancionByIdCancion, that.cancionByIdCancion) &&
-                Objects.equals(usuarioByIdUser, that.usuarioByIdUser) &&
+                idCancion == that.idCancion &&
+                Objects.equals(idUser, that.idUser) &&
                 Objects.equals(cuerpo, that.cuerpo) &&
                 Objects.equals(fechaSubida, that.fechaSubida);
     }
@@ -57,7 +79,7 @@ public class Comentario {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idComentario, cancionByIdCancion, usuarioByIdUser, cuerpo, fechaSubida);
+        return Objects.hash(idComentario, idCancion, idUser, cuerpo, fechaSubida);
     }
 
     @ManyToOne

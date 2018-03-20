@@ -7,6 +7,8 @@ import java.util.Objects;
 @Entity
 public class Cancioneslista {
     private int idCancLista;
+    private int listaRep;
+    private int idCancion;
     private Date fechaIntroduccion;
     private Listarep listarepByListaRep;
     private Cancion cancionByIdCancion;
@@ -19,6 +21,26 @@ public class Cancioneslista {
 
     public void setIdCancLista(int idCancLista) {
         this.idCancLista = idCancLista;
+    }
+
+    @Basic
+    @Column(name = "listaRep")
+    public int getListaRep() {
+        return listaRep;
+    }
+
+    public void setListaRep(int listaRep) {
+        this.listaRep = listaRep;
+    }
+
+    @Basic
+    @Column(name = "idCancion")
+    public int getIdCancion() {
+        return idCancion;
+    }
+
+    public void setIdCancion(int idCancion) {
+        this.idCancion = idCancion;
     }
 
     @Basic
@@ -37,15 +59,15 @@ public class Cancioneslista {
         if (o == null || getClass() != o.getClass()) return false;
         Cancioneslista that = (Cancioneslista) o;
         return idCancLista == that.idCancLista &&
-                listarepByListaRep == that.listarepByListaRep &&
-                cancionByIdCancion == that.cancionByIdCancion &&
+                listaRep == that.listaRep &&
+                idCancion == that.idCancion &&
                 Objects.equals(fechaIntroduccion, that.fechaIntroduccion);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idCancLista, listarepByListaRep, cancionByIdCancion, fechaIntroduccion);
+        return Objects.hash(idCancLista, listaRep, idCancion, fechaIntroduccion);
     }
 
     @ManyToOne

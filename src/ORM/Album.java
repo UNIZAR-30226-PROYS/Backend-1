@@ -2,15 +2,17 @@ package ORM;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 public class Album {
     private int idAlbum;
     private String nombre;
+    private String idUser;
     private Date fechaCreacion;
     private Usuario usuarioByIdUser;
-    private Cancion cancionByNombre;
+    private Collection<Cancion> cancionsByIdAlbum;
 
     @Id
     @Column(name = "idAlbum")
@@ -20,6 +22,26 @@ public class Album {
 
     public void setIdAlbum(int idAlbum) {
         this.idAlbum = idAlbum;
+    }
+
+    @Basic
+    @Column(name = "nombre")
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    @Basic
+    @Column(name = "idUser")
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     @Basic
@@ -38,15 +60,15 @@ public class Album {
         if (o == null || getClass() != o.getClass()) return false;
         Album album = (Album) o;
         return idAlbum == album.idAlbum &&
-                Objects.equals(usuarioByIdUser, album.usuarioByIdUser) &&
-                Objects.equals(cancionByNombre, album.cancionByNombre) &&
+                Objects.equals(nombre, album.nombre) &&
+                Objects.equals(idUser, album.idUser) &&
                 Objects.equals(fechaCreacion, album.fechaCreacion);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idAlbum, usuarioByIdUser, cancionByNombre, fechaCreacion);
+        return Objects.hash(idAlbum, nombre, idUser, fechaCreacion);
     }
 
     @ManyToOne
@@ -59,13 +81,12 @@ public class Album {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "nombre", referencedColumnName = "nombreAlbum", nullable = false)
-    public Cancion getCancionByNombre() {
-        return cancionByNombre;
+    @OneToMany(mappedBy = "albumByIdAlbum")
+    public Collection<Cancion> getCancionsByIdAlbum() {
+        return cancionsByIdAlbum;
     }
 
-    public void setCancionByNombre(Cancion cancionByNombre) {
-        this.cancionByNombre = cancionByNombre;
+    public void setCancionsByIdAlbum(Collection<Cancion> cancionsByIdAlbum) {
+        this.cancionsByIdAlbum = cancionsByIdAlbum;
     }
 }

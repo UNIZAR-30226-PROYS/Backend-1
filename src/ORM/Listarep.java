@@ -7,6 +7,7 @@ import java.util.Objects;
 @Entity
 public class Listarep {
     private int idLista;
+    private String idUser;
     private String nombre;
     private int numElementos;
     private Collection<Cancioneslista> cancioneslistasByIdLista;
@@ -20,6 +21,16 @@ public class Listarep {
 
     public void setIdLista(int idLista) {
         this.idLista = idLista;
+    }
+
+    @Basic
+    @Column(name = "idUser")
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     @Basic
@@ -49,14 +60,14 @@ public class Listarep {
         Listarep listarep = (Listarep) o;
         return idLista == listarep.idLista &&
                 numElementos == listarep.numElementos &&
-                Objects.equals(usuarioByIdUser, listarep.usuarioByIdUser) &&
+                Objects.equals(idUser, listarep.idUser) &&
                 Objects.equals(nombre, listarep.nombre);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(idLista, usuarioByIdUser, nombre, numElementos);
+        return Objects.hash(idLista, idUser, nombre, numElementos);
     }
 
     @OneToMany(mappedBy = "listarepByListaRep")
