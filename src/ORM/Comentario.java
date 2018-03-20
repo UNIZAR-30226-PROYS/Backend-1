@@ -84,7 +84,7 @@ public class Comentario {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
+    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false, insertable=false, updatable=false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
     }
@@ -94,7 +94,7 @@ public class Comentario {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
     }

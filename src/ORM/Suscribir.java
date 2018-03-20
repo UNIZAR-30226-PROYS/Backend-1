@@ -47,7 +47,7 @@ public class Suscribir {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idSuscrito", referencedColumnName = "idUser", nullable = false)
+    @JoinColumn(name = "idSuscrito", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
     public Usuario getUsuarioByIdSuscrito() {
         return usuarioByIdSuscrito;
     }
@@ -57,7 +57,7 @@ public class Suscribir {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idSuscriptor", referencedColumnName = "idUser", nullable = false)
+    @JoinColumn(name = "idSuscriptor", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
     public Usuario getUsuarioByIdSuscriptor() {
         return usuarioByIdSuscriptor;
     }

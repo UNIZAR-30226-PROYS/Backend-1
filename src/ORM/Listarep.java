@@ -80,7 +80,7 @@ public class Listarep {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
+    @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false, insertable=false, updatable=false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
     }

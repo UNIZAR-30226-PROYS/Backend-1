@@ -60,7 +60,7 @@ public class Cancioneslista {
     }
 
     @ManyToOne
-    @JoinColumn(name = "listaRep", referencedColumnName = "idLista", nullable = false)
+    @JoinColumn(name = "listaRep", referencedColumnName = "idLista", nullable = false, insertable=false, updatable=false)
     public Listarep getListarepByListaRep() {
         return listarepByListaRep;
     }
@@ -70,7 +70,7 @@ public class Cancioneslista {
     }
 
     @ManyToOne
-    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
+    @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false, insertable=false, updatable=false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
     }
