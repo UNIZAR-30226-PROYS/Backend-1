@@ -1,0 +1,15 @@
+Usuario
+
+    public Usuario() {}
+
+    public Usuario(String idUser, String nomAp, String email, String contrasenya) {
+        this.idUser = idUser;
+        this.nomAp = nomAp;
+        this.email = email;
+        this.conexion = "desconectado";
+        this.ultRep = 0;
+        this.contrasenya = contrasenya;
+        this.publico = false;
+    }
+
+Cancion
