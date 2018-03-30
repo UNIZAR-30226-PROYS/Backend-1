@@ -8,3 +8,21 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+    compile 'org.hibernate:hibernate-core:5.2.16.Final'
+    compile 'mysql:mysql-connector-java:5.1.6'
+    compile 'javax.xml.bind:jaxb-api:2.2.11'
+    compile 'com.sun.xml.bind:jaxb-impl:2.2.11'
+    compile 'com.sun.xml.bind:jaxb-core:2.2.11'
+    compile 'javax.activation:activation:1.1.1'
+}
+
+sourceSets{
+    main.java.srcDir "src/main"
+    test.java.srcDir "src/test"
+}
+
+jar {
+    from configurations.compile.collect { zipTree it }
+    manifest.attributes "Main-Class" : "Main"
+}
