@@ -42,22 +42,6 @@ public class Main {
             }
             */
 
-                Usuario pablo = new Usuario();
-
-                pablo.setIdUser("pablo");
-                pablo.setNomAp("Pablo");
-                pablo.setContrasenya(" ");
-                pablo.setUltRep(10);
-                pablo.setPublico(false);
-                pablo.setConexion("conectado");
-                pablo.setEmail("email");
-
-                System.out.println(pablo);
-
-                session.beginTransaction();
-                session.save( pablo );
-                session.getTransaction().commit();
-
                 /*
                 System.out.println("Enter your username: ");
                 Scanner sc = new Scanner(System.in);
