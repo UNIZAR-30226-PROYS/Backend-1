@@ -3,17 +3,15 @@ package ControllerORM;
 import ORM.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-import org.hibernate.Session;
 
 import javax.naming.AuthenticationException;
 
 public class LoginORM {
 
     public static Session getSession() throws HibernateException {
-        return HibernateUtil.getSessionFactory().openSession();
+        return HibernateUtil.getSessionFactory().getCurrentSession();
+        //return HibernateUtil.getSessionFactory().openSession(); //para conversaciones "largas"
     }
 
     /*
