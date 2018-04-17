@@ -1,4 +1,4 @@
-import ORM.Usuario;
+import ORM.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
