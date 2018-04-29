@@ -104,6 +104,19 @@ ul ul a {
 /* ---------------------------------------------------
     REPRODCUTOR
 ----------------------------------------------------- */
+.reproductor hr{
+ color:white !important;
+    border-top: 1px solid #ccc;
+}
+
+.reproductor, .reprodcutor_list_item{
+	background: black !important;
+}
+.reprodcutor_list_item:hover{
+	  background: #CFCBCB !important;
+	  color : black !important;
+	  
+}
 
 .fa-heart.active{
   color:red !important;
@@ -112,3 +125,17 @@ ul ul a {
 .btn.active {
    background: #2853DC !important;	/* Blue */
 }
+
+
+.botones .btn:hover {
+   background: #2853DC !important;	/* Blue */
+}
+
+
+
+
+
+
+
+
+

@@ -51,7 +51,10 @@ jQuery(document).ready(function() {
                 if (trackNumber.toString().length === 1) {
                     trackNumber = '0' + trackNumber;
                 }
-                $('#plList').append('<li><div class="plItem"><span class="plNum">' + trackNumber + '.</span><span class="plTitle">' + trackName + '</span><span class="plLength">' + trackDuration + '</span></div></li>');
+						
+				$('#plList').append('<li class="list-group-item text-white  reprodcutor_list_item d-flex justify-content-between list-group-item-action"> <div>'+trackNumber+'</div>  <div>'+trackName+'</div>  <div>'+ trackDuration +'</div> </li>');
+		
+                //$('#plList').append('<li><div class="plItem"><span class="plNum">' + trackNumber + '.</span><span class="plTitle">' + trackName + '</span><span class="plLength">' + trackDuration + '</span></div></li>');
             }),
 			 
             trackCount = tracks.length,
@@ -125,6 +128,7 @@ jQuery(document).ready(function() {
 			
 			/* FALTA CAMBIAR */
             li = $('#plList li').on('click', function () {
+				
                 var id = parseInt($(this).index());
                 if (id !== index) {
                     playTrack(id);
