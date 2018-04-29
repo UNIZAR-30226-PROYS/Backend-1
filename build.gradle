@@ -2,7 +2,11 @@ plugins {
     id "org.hibernate.gradle.tools" version "1.2.5"
     id "java"
     id "idea"
+    id "war"
 }
+
+war.baseName = 'wolfsound'
+project.webAppDirName = 'view'
 
 repositories {
     mavenCentral()
@@ -15,6 +19,8 @@ dependencies {
     compile 'com.sun.xml.bind:jaxb-impl:2.2.11'
     compile 'com.sun.xml.bind:jaxb-core:2.2.11'
     compile 'javax.activation:activation:1.1.1'
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    compile group: 'taglibs', name: 'standard', version: '1.1.2'
 }
 
 sourceSets{
