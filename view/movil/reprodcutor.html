@@ -30,6 +30,7 @@
 
 <body>
 
+	
         <!-- Cabecera y sidebar fijos -->
         <nav id="topbar" class="navbar sticky-top">
             <span id="sidebarCollapse" style="font-size:20px; color:white">
@@ -56,73 +57,66 @@
             </div>
         </div>
 		
-
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
-		
-			<!-- CONTENIDO REPRODUCTOR -->
-			<div class="container-fluid reproductor text-white fixed-bottom py-3">
-			
-				<div class="collapse  " id="reprodcutor_list">		
-					<ul class="list-group " id="plList">	</ul>	
+			<!-- CONTENIDO REPRODUCTOR -->	
+			<div  class="container-fluid reproductor text-white fixed-bottom  py-3">
+				
+				<div class="collapse container-fluid " id="reprodcutor_list">		
+					<ul class="list-group " id="plList">	</ul>	 
 					<hr>
 				</div> 
-					
-				<div class="container pt-3">
-				  <div class="row ">
-					<div class="col-2 ">
-						<div class="btn">
-							<i class="fa fa-heart" id="like" style="font-size:20px;" ></i> 
+	
+				<div class="container pt-2">
+					<div class="row">
+						<div class="col-2 ">
+							<div class="btn">
+								<i class="fa fa-heart" id="like" style="font-size:18px;" ></i> 
+							</div>
+						</div>
+						<div class="col-8 text-center">
+							<div id="nowPlay">
+								<h6> <span class="right" id="npTitle"></span> </h6>
+							</div>
+						</div>
+						<div class="col-2">
+							<a class="btn">	
+								<i class="fa fa-align-justify" aria-controls="#reprodcutor_list" data-toggle="collapse" aria-expanded="false" href="#reprodcutor_list" style="font-size:18px;" ></i> 
+							</a>
 						</div>
 					</div>
-					<div class="col-8 text-center">
-						<div id="nowPlay">
-							<h5> <span class="right" id="npTitle"></span> </h5>
-						</div>
-					</div>
-					<div class="col-2">
-						<a class="btn">	
-							<i class="fa fa-align-justify" aria-controls="#reprodcutor_list" data-toggle="collapse" aria-expanded="false" href="#reprodcutor_list" style="font-size:20px;" ></i> 
-						</a>
-					</div>
-				  </div>
-				  
-
 				</div>
 
 				<div class="container-fluid">	
-						<audio controls class="w-100 " id="audio1" ></audio>		
+						<audio controls class="w-100 " style="height: 40px;" id="audio1" ></audio>		
 				</div>
 				
 				<div class="container-fluid botones">
 				  <div class="row text-center" >
 					<div class="col ">
 						<div class="btn">
-							<i class="fa fa-random" id="btnRandom" style="font-size:20px;" ></i>
+							<i class="fa fa-random" id="btnRandom" style="font-size:18px;" ></i>
 						</div>
 					</div>
 					<div class="col">
 						<div class="btn">
-							<i class="fa fa-step-backward" id="btnPrev" style="font-size:20px;" ></i>
+							<i class="fa fa-step-backward" id="btnPrev" style="font-size:18px;" ></i>
 						</div>
 					</div>
 					<div class="col">
 						<div class="btn">
-							<i class="fa fa-step-forward" id="btnNext" style="font-size:20px;" ></i>
+							<i class="fa fa-step-forward" id="btnNext" style="font-size:18px;" ></i>
 						</div>
 					</div>
 					<div class="col">
 
-						<i class="btn fa fa-repeat" id="btnRepeat" style="font-size:20px;" ></i>
+						<i class="btn fa fa-repeat" id="btnRepeat" style="font-size:18px;" ></i>
 					</div>
 				  </div>
 				</div>
-		
 				
-					
-			</div>	<!-- FIN CONTENIDO REPRODUCTOR -->
-			
-		</div>
+			</div>	<!-- FIN CONTENIDO REPRODUCTOR -->	
+		</div>	<!-- FIN CONTENIDO DE LA VISTA -->
 		<script>
 		$('#btnRepeat, #like').click(function(){
 			if($(this).hasClass('active')){

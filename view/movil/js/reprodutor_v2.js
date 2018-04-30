@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
 
 			// alert(tracks[0].track + tracks[0].name + tracks[0].duration);	alert(tracks[1].track + tracks[1].name + tracks[1].duration);
 
-			/* FALTA CAMBIAR */
+		
             buildPlaylist = $(tracks).each(function(key, value) {
                 var trackNumber = value.track,
                     trackName = value.name,
@@ -51,10 +51,7 @@ jQuery(document).ready(function() {
                 if (trackNumber.toString().length === 1) {
                     trackNumber = '0' + trackNumber;
                 }
-						
-				$('#plList').append('<li class="list-group-item text-white  reprodcutor_list_item d-flex justify-content-between list-group-item-action"> <div>'+trackNumber+'</div>  <div>'+trackName+'</div>  <div>'+ trackDuration +'</div> </li>');
-		
-                //$('#plList').append('<li><div class="plItem"><span class="plNum">' + trackNumber + '.</span><span class="plTitle">' + trackName + '</span><span class="plLength">' + trackDuration + '</span></div></li>');
+				$('#plList').append('<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > <div>'+trackNumber+'</div>  <div>'+trackName+'</div>  <div>'+ trackDuration +'</div> </div>');
             }),
 			 
             trackCount = tracks.length,
@@ -126,19 +123,18 @@ jQuery(document).ready(function() {
 				}
             }),
 			
-			/* FALTA CAMBIAR */
+
             li = $('#plList li').on('click', function () {
-				
                 var id = parseInt($(this).index());
                 if (id !== index) {
                     playTrack(id);
                 }
             }),
 			
-			/* FALTA CAMBIAR */
             loadTrack = function (id) {
-                $('.plSel').removeClass('plSel');
-                $('#plList li:eq(' + id + ')').addClass('plSel');
+                $('.active').removeClass('active');
+                $('#plList li:eq(' + id + ')').addClass('active');
+				
                 npTitle.text(tracks[id].name);
                 index = id;
                 audio.src = mediaPath + tracks[id].name;

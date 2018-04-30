@@ -105,37 +105,30 @@ ul ul a {
     REPRODCUTOR
 ----------------------------------------------------- */
 .reproductor hr{
- color:white !important;
+	color:white !important;
     border-top: 1px solid #ccc;
 }
 
 .reproductor, .reprodcutor_list_item{
-	background: black !important;
+	 background: black ; 
 }
-.reprodcutor_list_item:hover{
+
+.reprodcutor_list_item:hover, .reprodcutor_list_item.active{
 	  background: #CFCBCB !important;
 	  color : black !important;
-	  
+	  border : none;
 }
 
 .fa-heart.active{
   color:red !important;
 }
 
-.btn.active {
+.btn.active, .botones .btn:hover {
    background: #2853DC !important;	/* Blue */
 }
 
-
-.botones .btn:hover {
-   background: #2853DC !important;	/* Blue */
+#plList{
+	overflow-y:auto;
+    max-height: 60vh;
 }
-
-
-
-
-
-
-
-
 
