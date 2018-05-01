@@ -1,11 +1,10 @@
 #!/bin/sh
 
-
 #version="8.5.30"
 #short_ver="8"
 version="9.0.7"
 short_ver="9"
-dowload()
+download()
 {
 wget "http://apache.rediris.es/tomcat/tomcat-$short_ver/v$version/bin/apache-tomcat-$version.tar.gz" &&
 # wget "http://www-eu.apache.org/dist/tomcat/tomcat-$short_ver/v$version/bin/apache-tomcat-$version.tar.gz" # Mirror
@@ -19,9 +18,9 @@ rm apache-tomcat-$version.tar.gz
 build()
 {
 gradle build &&
-sh ./tomcat/bin/shutdown.sh &&
-rm -rf ./tomcat/webapps/wolf* &&
-cp -r build/libs/wolfsound.war ./tomcat/webapps/. &&
+sh ./tomcat/bin/shutdown.sh
+rm -r ./tomcat/webapps/wolf*
+cp -r build/libs/wolfsound.war ./tomcat/webapps/.
 sh ./tomcat/bin/startup.sh
 }
 
@@ -36,7 +35,7 @@ case $1 in
         if [ -d tomcat ]; then
             build
         else
-            dowload &&
+            download &&
             build
         fi
         ;;
