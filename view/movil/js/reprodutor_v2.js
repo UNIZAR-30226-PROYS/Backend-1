@@ -7,7 +7,8 @@ jQuery(document).ready(function() {
 		    var index = 0;
             playing = false;
 			repeat_option = false;
-			mouseup = false;
+			random_option = false;
+			var mouseup = false;
             mediaPath = 'music/';
             extension = '';
 						
@@ -53,12 +54,15 @@ jQuery(document).ready(function() {
             }).on('pause', function () {
                 playing = false;
             }).on('ended', function () {
+				
 				if (repeat_option == true ){
-					
 					loadTrack(index);
-					audio.play();
-					
-					
+					audio.play();				
+				}
+				else if (random_option == true){		
+					var song_to_play = Math.floor(Math.random() * (trackCount ) ) ;
+					loadTrack(song_to_play);
+					audio.play();	
 				}
 				else{
 					if ((index + 1) < trackCount) {
@@ -82,9 +86,13 @@ jQuery(document).ready(function() {
 		
 		$("#seek").on("mousedown", function () { mouseup = true;		});
 
-		$("#seek").bind("change", function() {
+		
+		$("#seek").bind("change", function() {	
+			mouseup = true;
 			audio.currentTime = ($(this).val())/10;	
+			 mouseup = false;	
 		});
+
 	
 		$('#audio1').on('timeupdate', function() {
 			var curMins = Math.floor(this.currentTime / 60);
@@ -99,6 +107,9 @@ jQuery(document).ready(function() {
 			if (secs >0 || mins > 0)  {
 				$("#full_time_id").text(mins + ':' + secs);
 			}
+			if ( mouseup == true ){
+					return;
+			}
 			
 			if ( mouseup == false ){
 				$("#seek").val(this.currentTime*10);
@@ -110,12 +121,12 @@ jQuery(document).ready(function() {
 			 btnPlayStio = $('#btnPlayStio').on('click', function () {
                 if (!playing) {
 					audio.play();
-					$('#btnPlayStio').removeClass('fa-play');
-					$('#btnPlayStio').addClass('fa-pause');
+					$('#btnPlayStio_v2').removeClass('fa-play');
+					$('#btnPlayStio_v2').addClass('fa-pause');
                 } else {
 					 audio.pause();
-					$('#btnPlayStio').removeClass('fa-pause');
-					$('#btnPlayStio').addClass('fa-play');
+					$('#btnPlayStio_v2').removeClass('fa-pause');
+					$('#btnPlayStio_v2').addClass('fa-play');
                 }
             }),
 			
@@ -150,9 +161,11 @@ jQuery(document).ready(function() {
             }),
 			
 			btnRandom = $('#btnRandom').on('click', function () {
-				loadTrack(Math.floor(Math.random() * (tracks.length ) )  );
-				if (playing) {
-					audio.play();
+				if (random_option == true){
+					random_option = false;
+				}
+				else{
+					random_option = true;
 				}
             }),
 			

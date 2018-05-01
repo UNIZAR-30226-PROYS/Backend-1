@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 		<!-- CSS -->
 		<link rel="stylesheet" href="css/reproductor.css">
+		<link rel="stylesheet" href="css/navbars.css">
 
         <!-- Font Awesome CSS -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -29,9 +30,6 @@
 
 <body>
 
-	
-
-	
         <!-- Cabecera y sidebar fijos -->
         <nav id="topbar" class="navbar sticky-top">
             <span id="sidebarCollapse" style="font-size:20px; color:white">
@@ -57,12 +55,10 @@
                <a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
             </div>
         </div>
-
-		
-
 		
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
+		
 			<!-- CONTENIDO REPRODUCTOR -->	
 			<div  class="container-fluid reproductor text-white fixed-bottom  py-3">
 				
@@ -112,43 +108,57 @@
 				</div>
 			
 				<div class="container-fluid botones">
-				  <div class="row text-center" >
-					<div class="col ">
-						<div class="btn">
-							<i class="fa fa-random" id="btnRandom" style="font-size:15px;" ></i>
-						</div>
-					</div>
-					<div class="col">
-						<div class="btn">
-							<i class="fa fa-step-backward" id="btnPrev" style="font-size:16px;" ></i>
-						</div>
-					</div>
-					<div class="col">
-						<div class="btn">
-							<i class="fa fa-play" id="btnPlayStio" style="font-size:18px;" ></i>
-						</div>
-					</div>
-					<div class="col">
-						<div class="btn">
-							<i class="fa fa-step-forward" id="btnNext" style="font-size:16px;" ></i>
-						</div>
-					</div>
-					<div class="col">
+					<div class="row" >
+						<div class="col offset-1 col-2">
+							<div class="btn" id="btnRandom">
+								<!-- <i class="fa fa-random" id="btnRandom" style="font-size:15px;" ></i> -->
+								<i class="fa fa-random"  style="font-size:15px;" ></i>
+							</div>
 						
-						<i class="btn fa fa-repeat" id="btnRepeat" style="font-size:15px;" ></i>
+						</div>
+						<div class="col col-2">
+							<div class="btn" id="btnPrev">
+								<i class="fa fa-step-backward"  style="font-size:16px;" ></i>
+							</div>
+						</div>
+						<div class="col   col-2">
+							<div class="btn" id="btnPlayStio">
+								<i class="fa fa-play"  id="btnPlayStio_v2" style="font-size:18px;" ></i>
+							</div>
+						</div>
+						<div class="col col-2">
+							<div class="btn" id="btnNext">
+								<i class="fa fa-step-forward"  style="font-size:16px;" ></i>
+							</div>
+						</div>
+						<div class="col col-2" >
+							<div class="btn" id="btnRepeat">
+								<i class="fa fa-repeat"  style="font-size:15px;" ></i>
+							</div>
+						</div>
 					</div>
-				  </div>
-				  
 				</div>
-
 				
 			</div>	<!-- FIN CONTENIDO REPRODUCTOR -->	
 		</div>	<!-- FIN CONTENIDO DE LA VISTA -->
 		<script>
-		$('#btnRepeat, #like').click(function(){
+		$('#btnRepeat, #btnRandom, #like').click(function(){
 			if($(this).hasClass('active')){
 				$(this).removeClass('active')
 			} else {
+			
+				/* Solo se puede seleccionar o la reproduccion aleatorio, o repetir canción al acabar */
+				if ($(this).is('#btnRepeat')){
+					if ($('#btnRandom').hasClass('active')){
+						$('#btnRandom').removeClass('active')
+					}
+				}
+				else{
+					if ($('#btnRepeat').hasClass('active')){
+						$('#btnRepeat').removeClass('active')
+					}
+				}
+				
 				$(this).addClass('active')
 			}
 		});
