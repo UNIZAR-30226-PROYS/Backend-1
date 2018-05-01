@@ -127,8 +127,50 @@ ul ul a {
    background: #2853DC !important;	/* Blue */
 }
 
+
+
 #plList{
 	overflow-y:auto;
-    max-height: 60vh;
+    max-height: 55vh;
 }
+
+::-ms-tooltip { 
+	 display: none;  
+}
+
+/* https://github.com/samuelcarreira/webkit-input-range-fill-lower/blob/master/script.min.js */
+
+/*
+.custom-range::-ms-fill-lower{
+	background-color:#2853DC  !important;
+}
+*/
+.custom-range::-webkit-slider-thumb{
+	background-color:white!important;
+	border-radius:0rem !important;	
+}
+
+.volumen{
+	width : 20vw !important;	
+}
+
+/* https://codepen.io/noahblon/pen/OyajvN */
+input[type="range"] {  
+    -webkit-appearance: none;
+    overflow: hidden;
+    height: 10px;
+    cursor: pointer;
+	 background: linear-gradient(to right, #0000ff 0%, #cc0066 100%) !important;  
+}
+input[type=range]::-webkit-slider-runnable-track {	/* For Chrome */
+   background: linear-gradient(to right, #0000ff 0%, #cc0066 100%) !important;  
+}
+
+::-webkit-slider-thumb {
+	/* un poco sucio */
+    /*  box-shadow: -100vw 0 0 100vw #2853DC;	 */
+     box-shadow: 100vw 0px 0px 100vw grey;  
+
+}
+
 
