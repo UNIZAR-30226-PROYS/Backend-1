@@ -1,45 +1,12 @@
+<%@page contentType="text/html; ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<title>Bienvenido a Wolfic</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1 ">
-
-		<!-- Bootstrap CSS 4.0.0 -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-
-		<!-- CSS -->
-		<link rel="stylesheet" href="css/registrarse_iniciar_sesion.css">
-
-        <!-- Font Awesome CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <jsp:include page="includes/header.jsp"></jsp:include>
 	</head>
 	<body>
-        <!-- Cabecera y sidebar fijos -->
-		<nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-			<a href="explorar.html">    <!-- Brand/logo -->
-				<img src="images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-			</a>
-			<a href="usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
-		</nav>
-
-		<div id="sidebar" class="d-none">
-			<div class="sidebar-header">
-				<p class="text-center mx-auto">Escuchando</p>
-			</div>
-			<ul class="list-unstyled components">
-
-				<li><a href="listas.html">Mis listas</a></li>
-				<li><a href="lista.html">Mi audio</a></li>
-				<li><a href="suscripciones.html">Suscripciones</a></li>
-			</ul>
-			<div class="text-white text-center">
-				<a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
-			</div>
-		</div>
+        <jsp:include page="includes/navbars.jsp"></jsp:include>
 
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
@@ -58,10 +25,11 @@
 			</ul>
 
 			<div class="tab-content" id="myTabContent"> 		<!-- Sino aparece uno debajo de otro -->
-			
+
+				<%--TODO: Mantener campos necesarios en caso de error e indicar el error arpopiado --%>
 				<!-- Iniciar Sesion -->
 				<div class="tab-pane fade show active" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
-					<form class="needs-validation" action="explorar.html" novalidate>
+					<form class="needs-validation" action="/login" method="post" novalidate>
 						<h4 class="text-center py-3">Iniciar sesión en WolfSound</h4>
 						
 						<div class="form-group">
@@ -85,11 +53,12 @@
                         </div>
 					</form>	
 				</div>
-			
+
+                <%--TODO: Mantener campos necesarios en caso de error e indicar el error arpopiado --%>
 				<!-- Registrarse -->
 				<div class="tab-pane fade" 	id="registrarse" role="tabpanel" aria-labelledby="registrarse-tab">
 		
-					<form class="needs-validation" action="explorar.html" novalidate>
+					<form class="needs-validation" action="/registro" method="post" novalidate>
 						<h4 class="text-center py-3">Registrarse en WolfSound</h4>
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
@@ -139,18 +108,7 @@
 			</div>
 		</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#sidebar').hide();
-            $('#sidebar').toggleClass("d-none");
-            $('#sidebarCollapse').on('click', function () {
-                $("#sidebar").animate({width:'toggle'},200);
-            });
-        });
-    </script>
+    <jsp:include page="includes/footer.jsp"></jsp:include>
 	
 	<script>	
 		/* Derechos de autor  : https://getbootstrap.com/docs/4.0/components/forms/#validation */

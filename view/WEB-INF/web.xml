@@ -41,7 +41,7 @@
 
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <url-pattern>/registro</url-pattern>
     </servlet-mapping>
 
 </web-app>

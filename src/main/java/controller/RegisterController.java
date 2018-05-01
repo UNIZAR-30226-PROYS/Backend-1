@@ -16,14 +16,15 @@ public class RegisterController extends HttpServlet {
         String confirm = request.getParameter("confirm_pass");
         String email = request.getParameter("email");
         RequestDispatcher rd = null;
+        // TODO: Terminar registro con funciones de hibernate, esto es una prueba
         if (user.equals("Miguel") && pass.equals("1234")){
-            String agent = request.getHeader("User-Agent");
+
             rd = request.getRequestDispatcher("/explorar.html");
             request.setAttribute("user", "Miguel");
         }
         else{
-            rd = request.getRequestDispatcher("/error.jsp");
-            request.setAttribute("error", "Username taken");
+            rd = request.getRequestDispatcher("/registrarse-iniciar-sesion.jsp");
+            request.setAttribute("error", "Motivo");
         }
         rd.forward(request,response);
     }

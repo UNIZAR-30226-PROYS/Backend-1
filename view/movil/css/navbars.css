@@ -7,7 +7,7 @@
 }
 
 /* ---------------------------------------------------
-    SIDEBAR STYLE
+    SIDEBAR
 ----------------------------------------------------- */
 
 #sidebar {
@@ -16,12 +16,6 @@
     background: #2853DC;
     color: white;
 }
-
-/* 
-@media (min-width: 768px) { #sidebar { width: 50% ; 	}  } 
-@media (min-width: 970px) { #sidebar {	width: 40% ;	}  }
-@media (min-width: 1170px){ #sidebar {	width: 30% ;	}  }
-*/
 
 #sidebar .sidebar-header {
     padding: 50px;
@@ -65,46 +59,3 @@
     padding-left: 0;
     padding-right: 0;
 }
-
-@media screen and (max-height: 450px) {
-    .sidebar {padding-top: 15px;}
-    .sidebar a {font-size: 18px;}
-}
-
-/* Options arrow-down*/
-a[data-toggle="collapse"] {
-    position: relative;
-}
-a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
-    display: block;
-    position: absolute;
-    right: 20px;
-    content:"\f078";
-    font-family: FontAwesome;
-}
-
-ul ul a {
-    padding-left: 30px !important;
-}
-
-/*	Button sube tu musica */
-.btn-dark {
-    background: black;
-    color: white;
-}
-
-.btn-dark:hover {
-    color: white;
-    background-color: #DDE5FF;
-    border-color: #C7D1F3;
-}
-
- .btn-default:hover {
-    color: white;
-	background-color: #2853DC;	/* Blue */
-    border-color: #285e8e; /*set the color you want here*/
-}
-
-
-
-
