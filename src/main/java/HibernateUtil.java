@@ -1,5 +1,7 @@
 package main.java;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -16,6 +18,10 @@ public class HibernateUtil {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
+    }
+    public static Session getSession() throws HibernateException {
+        return sessionFactory.openSession();
+        //return main.java.HibernateUtil.getSessionFactory().openSession(); //para conversaciones "largas"
     }
 
     public static SessionFactory getSessionFactory() {

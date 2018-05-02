@@ -3,10 +3,10 @@
             <span id="sidebarCollapse" style="font-size:20px; color:white">
                 &#9776; <!-- Icono de side-menu -->
             </span>
-    <a href="explorar.html">    <!-- Brand/logo -->
-        <img src="images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
+    <a href="${pageContext.request.contextPath}/movil/explorar.jsp">    <!-- Brand/logo -->
+        <img src="${pageContext.request.contextPath}/movil/images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
     </a>
-    <a href="usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
+    <a href="${pageContext.request.contextPath}/movil/usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
 </nav>
 
 <div id="sidebar" class="sidebar d-none">

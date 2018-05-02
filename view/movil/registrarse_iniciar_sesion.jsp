@@ -1,4 +1,5 @@
-<%@page contentType="text/html; ISO-8859-1" %>
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -11,13 +12,13 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
 			<div class="pt-1">
-                <img class="d-block mx-auto" src="images/wolfsound.png" style="max-width: 200px"/>
+                <img class="d-block mx-auto" src="${pageContext.request.contextPath}/movil/images/wolfsound.png" style="max-width: 200px"/>
             </div>
 
 			<!--  https://getbootstrap.com/docs/4.0/components/navs/ -->
 			<ul class="nav nav-pills nav-fill" id="pills-tab" >
 				<li class="nav-item">
-					<a class="nav-link active" id="iniciar-sesion-tab" data-toggle="pill" href="#iniciar-sesion" role="tab" aria-controls="iniciar-sesion" aria-selected="true">Iniciar Sesion</a>
+					<a class="nav-link active show" id="iniciar-sesion-tab" data-toggle="pill" href="#iniciar-sesion" role="tab" aria-controls="iniciar-sesion" aria-selected="true">Iniciar Sesion</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" id="registrarse-tab" data-toggle="pill" href="#registrarse" role="tab" aria-controls="registrarse" aria-selected="false">Registrarse</a>
@@ -26,21 +27,25 @@
 
 			<div class="tab-content" id="myTabContent"> 		<!-- Sino aparece uno debajo de otro -->
 
-				<%--TODO: Mantener campos necesarios en caso de error e indicar el error arpopiado --%>
 				<!-- Iniciar Sesion -->
-				<div class="tab-pane fade show active" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
-					<form class="needs-validation" action="/login" method="post" novalidate>
+				<div class="tab-pane fade active show" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
+					<form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" novalidate>
 						<h4 class="text-center py-3">Iniciar sesión en WolfSound</h4>
 						
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
-							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required>
-							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
+							<input type="text" class="form-control" name="login_user" value="${user}" id="nombre_usuario" placeholder="usuario_123" required>
+
+                            <%--<c:if test="${error}.equals()">--%>
+                                <%--<c:out value="HOLA">QUETAL</c:out>--%>
+                            <%--</c:if>--%>
+                            ${error}
+                            <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 							
 						<div class="form-group">
 							<label for="contrasenya">Contraseña</label>
-							<input type="password" class="form-control" id="contrasenya" placeholder="*****" required>
+							<input type="password" class="form-control" name="login_pass" id="contrasenya" placeholder="*****" required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
                         <div class="row">
@@ -58,17 +63,17 @@
 				<!-- Registrarse -->
 				<div class="tab-pane fade" 	id="registrarse" role="tabpanel" aria-labelledby="registrarse-tab">
 		
-					<form class="needs-validation" action="/registro" method="post" novalidate>
+					<form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" novalidate>
 						<h4 class="text-center py-3">Registrarse en WolfSound</h4>
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
-							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required>
+							<input type="text" class="form-control" name="register_user" id="nombre_usuario" placeholder="usuario_123" required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 						
 						<div class="form-group">
 							<label for="contrasenya">Contraseña</label>
-							<input type="password" class="form-control" id="contrasenya" placeholder="*****" required>
+							<input type="password" class="form-control" name="register_pass" id="contrasenya" placeholder="*****" required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 						
@@ -80,7 +85,7 @@
 
 						<div class="form-group">
 							<label for="correo">Direccion de correo</label>
-							<input type="email" class="form-control" id="correo" placeholder="user@mail .." required>
+							<input type="email" class="form-control" name="register_email" id="correo" placeholder="user@mail .." required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 

@@ -10,6 +10,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import static main.java.HibernateUtil.getSession;
+
 @Entity
 public class Usuario {
     private String idUser;
@@ -19,7 +21,7 @@ public class Usuario {
     private int ultRep;
     private String contrasenya;
     private boolean publico;
-    private Collection<Album> albumsByIdUser;
+    private final ThreadLocal<Collection<Album>> albumsByIdUser = new ThreadLocal<Collection<Album>>();
     private Collection<Cancion> cancionsByIdUser;
     private Collection<Comentario> comentariosByIdUser;
     private Collection<Listarep> listarepsByIdUser;
@@ -130,11 +132,11 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuarioByIdUser")
     public Collection<Album> getAlbumsByIdUser() {
-        return albumsByIdUser;
+        return albumsByIdUser.get();
     }
 
     public void setAlbumsByIdUser(Collection<Album> albumsByIdUser) {
-        this.albumsByIdUser = albumsByIdUser;
+        this.albumsByIdUser.set(albumsByIdUser);
     }
 
     @OneToMany(mappedBy = "usuarioByIdUser")
@@ -183,16 +185,13 @@ public class Usuario {
     }
 
 
-    public static Session getSession() throws HibernateException {
-        return HibernateUtil.getSessionFactory().getCurrentSession();
-        //return main.java.HibernateUtil.getSessionFactory().openSession(); //para conversaciones "largas"
-    }
+
 
     /*
      * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
      * Devuelve el Usuario creado
      */
-    public Usuario addUser(String username, String password, String email) throws Exception{
+    public static Usuario addUser(String username, String password, String email) throws Exception{
         Session session = getSession();
         if (!existsUser(username)){
             Usuario newUser = new Usuario();
@@ -239,11 +238,14 @@ public class Usuario {
      * True -> usuario existe
      * False -> usuario no existe
      */
-    public boolean existsUser(String username){
+    public static boolean existsUser(String username){
         Session session = getSession();
+        boolean exists = false;
         Query query = session.createQuery("from Usuario where idUser = :user ");
         query.setParameter("user", username);
-        boolean exists = (Long) query.uniqueResult() > 0;
+        if (query.uniqueResult() != null){
+           exists = true;
+        }
         session.close();
         return exists;
     }
@@ -251,17 +253,18 @@ public class Usuario {
     /*
      * Devuelve el usuario en caso de que exista y la contraseña sea correcta
      */
-    public Usuario correctUser(String username, String password) throws Exception{
+    public static Usuario correctUser(String username, String password) throws Exception{
         Session session = getSession();
         Query query = session.createQuery("from Usuario where idUser = :user ");
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
-        session.close();
         if (user==null){
             throw new Exception("Usuario no existe");
-        }else if (user.getContrasenya()!=password){
+        }else if (!user.getContrasenya().equals(password)){
             throw new AuthenticationException("Contrasenya erronea");
         }
+        session.close();
         return user;
     }
+
 }
