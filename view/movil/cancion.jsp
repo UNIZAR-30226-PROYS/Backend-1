@@ -1,52 +1,13 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<title>Bienvenido a Wolfic</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1 ">
-
-		<!-- Bootstrap CSS 4.0.0 -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-
-		<!-- CSS -->
-		<link rel="stylesheet" href="css/fonts.css">
-
-        <!-- Font Awesome CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<jsp:include page="includes/header.jsp"></jsp:include>
 	</head>
 	<body>
-        <!-- Cabecera y sidebar fijos -->
-        <nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-                <a href="explorar.jsp">	<!-- Brand/logo -->
-                    <img src="images/wolfsound-white.png" style="height:40px;"  alt="Wolfic">
-                </a>
-            <a href="usuario.html" > <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
-        </nav>
-
-        <div id="sidebar" class="sidebar d-none">
-            <div class="sidebar-header">
-                <p class="text-center mx-auto">Escuchando</p>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <a href="#OpcionesSubmenu" data-toggle="collapse" aria-expanded="false">Opciones</a>
-                    <ul class="collapse list-unstyled" id="OpcionesSubmenu">
-                        <li><a href="#">Opc 1</a></li>
-                        <li><a href="#">Opc 2</a></li>
-                        <li><a href="#">Opc 3</a></li>
-                     </ul>
-                </li>
-				<li><a href="listas.html">Mis listas</a></li>
-				<li><a href="lista.html">Mi audio</a></li>
-				<li><a href="suscripciones.html">Suscripciones</a></li>
-            </ul>
-            <div class="text-white text-center">
-            <button type="button" class="btn btn-dark">Sube tu música</button>
-            </div>
-        </div>
+        <jsp:include page="includes/navbars.jsp"></jsp:include>
 
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
@@ -70,7 +31,7 @@
                     <img class = "img-fluid" src="images/user.svg" alt="Usuario">
                 </div>
 
-                <a href="usuarioPublico.html">
+                <a href="usuarioPublico.jsp">
                 <div class = "col">
                     <h5>Nombre Usuario</h5>
                 </div>
@@ -81,7 +42,7 @@
 
             <div class = "col">
             <div class="row align-items-center">
-                    <form class="needs-validation form-row" action="cancion.html" novalidate >
+                    <form class="needs-validation form-row" action="cancion.jsp" novalidate >
                         <div class="col-auto my-1">
                             <select class="custom-select mr-sm-2"  id="añadirLista" required>
                                 <option value="1">Favoritos</option>
@@ -111,7 +72,7 @@
             </div>
             <div class = "row align-items-center">
                 <div class="col ">
-                    <form class="needs-validation form-row " action="cancion.html" novalidate >
+                    <form class="needs-validation form-row " action="cancion.jsp" novalidate >
                         <div class="col" required>
                             <textarea class="text form-control" id="comentario"  required></textarea>
                         </div>
@@ -125,7 +86,7 @@
 
 
             <div class="list-group pt-2">
-                <a href="usuarioPublico.html" class="list-group-item list-group-item-action">
+                <a href="usuarioPublico.jsp" class="list-group-item list-group-item-action">
                     <div class="media">
                         <div class="media-left" style="padding-right:15px">
                             <img src="images/wolf.jpg" style="width:30px;" alt="...">
@@ -136,7 +97,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="usuarioPublico.html" class="list-group-item list-group-item-action">
+                <a href="usuarioPublico.jsp" class="list-group-item list-group-item-action">
                     <div class="media">
                         <div class="media-left" style="padding-right:15px">
                             <img src="images/wolf.jpg" style="width:30px;" alt="...">
@@ -158,7 +119,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <form action = "cancion.html">
+                        <form action = "cancion.jsp">
                             <div class="form-group">
                                 <label for="nombreSus">Crear Lista y añadir</label>
                                 <div class="input-group">
@@ -173,39 +134,28 @@
         </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   <jsp:include page="includes/footer.jsp"></jsp:include>
     <script>
-        $(document).ready(function () {
-            $('#sidebar').hide();
-            $('#sidebar').toggleClass("d-none");
-            $('#sidebarCollapse').on('click', function () {
-                $("#sidebar").animate({width:'toggle'},200);
-            });
-        });
-    </script>
-        <script>
-            /* Derechos de autor  : https://getbootstrap.com/docs/4.0/components/forms/#validation */
+        /* Derechos de autor  : https://getbootstrap.com/docs/4.0/components/forms/#validation */
 
-            // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
-        </script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
     </body>
 </html>

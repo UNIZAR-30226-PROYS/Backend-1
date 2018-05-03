@@ -15,7 +15,7 @@
             <h2 class="text-left pt-2">Explorar</h2>
             <div class="row pt-1">
                 <div class="col">
-                    <form class="search-button" action="resultados.html">
+                    <form class="search-button" action="resultados.jsp">
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Buscar ...">
@@ -35,7 +35,7 @@
                 <h4>Mis listas</h4>
             </div>
             <div class="float-right mr-3">
-                <a href="listas.html"  class="btn btn-link" role="button" >
+                <a href="mis_listas.jsp" class="btn btn-link" role="button" >
                     <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                 </a>
             </div>
@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.html" target="_self">
+                    <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre lista 1</p>
@@ -53,7 +53,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.html" target="_self">
+                    <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre lista 2</p>
@@ -63,7 +63,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.html" target="_self">
+                    <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre lista 3</p>
@@ -78,7 +78,7 @@
                 <h4>Listas recomendadas</h4>
             </div>
             <div class="float-right mr-3">
-                <a href="listas.html"  class="btn btn-link" role="button" >
+                <a href="mis_listas.jsp" class="btn btn-link" role="button" >
                     <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                 </a>
             </div>
@@ -86,7 +86,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.html" target="_self">
+                    <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre lista rec. 1</p>
@@ -96,7 +96,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.html" target="_self">
+                    <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre lista rec. 2</p>
@@ -106,7 +106,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.html" target="_self">
+                    <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre lista rec. 3</p>
@@ -129,7 +129,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="cancion.html" target="_self">
+                    <a href="cancion.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre Mi audio 1</p>
@@ -139,7 +139,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="cancion.html" target="_self">
+                    <a href="cancion.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre Mi audio 2</p>
@@ -149,7 +149,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="cancion.html" target="_self">
+                    <a href="cancion.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre Mi audio 3</p>
@@ -172,7 +172,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="cancion.html" target="_self">
+                    <a href="cancion.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre audio rec. 1</p>
@@ -182,7 +182,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="cancion.html" target="_self">
+                    <a href="cancion.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre audio rec. 2</p>
@@ -192,7 +192,7 @@
             </div>
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="cancion.html" target="_self">
+                    <a href="cancion.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>Nombre audio rec. 3</p>

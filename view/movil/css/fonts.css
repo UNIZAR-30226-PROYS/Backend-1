@@ -33,4 +33,6 @@
     content: "\e014";
 }
 
-
+.glyphicon-plus:before {
+    content: "\2b";
+}

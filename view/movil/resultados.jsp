@@ -1,45 +1,13 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Bienvenido a Wolfic</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1 ">
-
-    <!-- Bootstrap CSS 4.0.0 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/lista.css">
-
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Resultados de ${sessionScope.consulta}</title>
+    <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
 <body>
-<nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-    <a href="explorar.jsp">    <!-- Brand/logo -->
-        <img src="images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-    </a>
-    <a href="usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
-</nav>
-
-<div id="sidebar" class="d-none">
-    <div class="sidebar-header">
-        <p class="text-center mx-auto">Escuchando</p>
-    </div>
-    <ul class="list-unstyled components">
-
-        <li><a href="listas.html">Mis listas</a></li>
-        <li><a href="lista.html">Mi audio</a></li>
-        <li><a href="suscripciones.html">Suscripciones</a></li>
-    </ul>
-    <div class="text-white text-center">
-        <a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
-    </div>
-</div>
-
+<jsp:include page="includes/navbars.jsp"></jsp:include>
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
 
@@ -50,7 +18,7 @@
     </div>
     <div class="row pt-1">
         <div class="col">
-            <form class="search-button" action="resultados.html">
+            <form class="search-button" action="resultados.jsp">
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Buscar ...">
@@ -124,18 +92,7 @@
     </div>
 </div> <!-- Container -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#sidebar').hide();
-        $('#sidebar').toggleClass("d-none");
-        $('#sidebarCollapse').on('click', function () {
-            $("#sidebar").animate({width:'toggle'},200);
-        });
-    });
-</script>
+<jsp:include page="includes/footer.jsp"></jsp:include>
 </body>
 </html>
 

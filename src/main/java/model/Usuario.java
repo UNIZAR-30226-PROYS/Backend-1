@@ -259,9 +259,9 @@ public class Usuario {
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
         if (user==null){
-            throw new Exception("Usuario no existe");
+            throw new Exception("El usuario no existe");
         }else if (!user.getContrasenya().equals(password)){
-            throw new AuthenticationException("Contrasenya erronea");
+            throw new AuthenticationException("Contraseña errónea");
         }
         session.close();
         return user;

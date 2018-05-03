@@ -24,7 +24,7 @@ public class RegisterController extends HttpServlet {
             response.sendRedirect("/wolfsound/movil/explorar.jsp");
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/registrarse_iniciar_sesion.jsp");
+            rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
             request.setAttribute("error", e.getMessage());
             request.setAttribute("registro_activo", "active");
             rd.forward(request,response);

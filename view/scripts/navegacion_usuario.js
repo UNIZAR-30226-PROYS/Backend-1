@@ -11,7 +11,7 @@ $(document).ready(function(){
                     $("#contenido-perfil").load('includes/usuario_actividad.html');
                     break;
                 case 'listas':
-                    $("#contenido-perfil").load('listas.html');
+                    $("#contenido-perfil").load('mis_listas.jsp');
                     break;
                 case 'canciones':
                     $("#contenido-perfil").load('includes/usuario_canciones.html');

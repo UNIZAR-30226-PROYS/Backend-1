@@ -12,7 +12,7 @@ mkdir tomcat &&
 tar -xvzf apache-tomcat-$version.tar.gz &&
 mv apache-tomcat-$version/* tomcat/. &&
 rmdir apache-tomcat-$version &&
-rm apache-tomcat-$version.tar.gz
+rm apache-tomcat-$version.tar.*
 }
 
 build()
@@ -31,6 +31,9 @@ clean()
 }
 
 case $1 in
+    download)
+        download
+        ;;
     build)
         if [ -d tomcat ]; then
             build

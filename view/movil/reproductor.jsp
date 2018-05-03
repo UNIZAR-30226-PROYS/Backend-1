@@ -1,61 +1,15 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
 		<title>Bienvenido a Wolfic</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1 ">
-		
-		<!-- Auto refresh code    -->
-		<!--  <meta http-equiv="refresh" content="5" >  -->
-		
-		
-		<!-- Bootstrap CSS 4.1.0 -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-		<!-- CSS -->
-		<link rel="stylesheet" href="css/reproductor.css">
-		<link rel="stylesheet" href="css/navbars.css">
-
-        <!-- Font Awesome CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		
-		<script type="text/javascript" src="js/reprodutor_v2.js"></script>
-		 <!--  <script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script> -->
-		 <!-- <script type="text/javascript" src="js/html5slider.js"></script>	-->
+        <jsp:include page="includes/header.jsp"></jsp:include>
 		
 	</head>
 
 <body>
-
-        <!-- Cabecera y sidebar fijos -->
-        <nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-            <a href="explorar.jsp">    <!-- Brand/logo -->
-                <img src="images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-            </a>
-            <a href="usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
-        </nav>
-
-        <div id="sidebar" class="d-none">
-            <div class="sidebar-header">
-                <p class="text-center mx-auto">Escuchando</p>
-            </div>
-            <ul class="list-unstyled components">
-
-                <li><a href="listas.html">Mis listas</a></li>
-                <li><a href="lista.html">Mi audio</a></li>
-                <li><a href="suscripciones.html">Suscripciones</a></li>
-            </ul>
-            <div class="text-white text-center">
-               <a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
-            </div>
-        </div>
-		
+        <jsp:include page="includes/navbars.jsp"></jsp:include>
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
 		
@@ -141,7 +95,10 @@
 				
 			</div>	<!-- FIN CONTENIDO REPRODUCTOR -->	
 		</div>	<!-- FIN CONTENIDO DE LA VISTA -->
-		<script>
+
+        <jsp:include page="includes/footer.jsp"></jsp:include>
+        <script type="text/javascript" src="js/reprodutor_v2.js"></script>
+        <script>
 		$('#btnRepeat, #btnRandom, #like').click(function(){
 			if($(this).hasClass('active')){
 				$(this).removeClass('active')
@@ -162,16 +119,6 @@
 				$(this).addClass('active')
 			}
 		});
-		</script>
-		
-		<script>
-			$(document).ready(function () {
-				$('#sidebar').hide();
-				$('#sidebar').toggleClass("d-none");
-				$('#sidebarCollapse').on('click', function () {
-					$("#sidebar").animate({width: 'toggle'}, 200);
-				});
-			});
 		</script>
 	
 	</body>

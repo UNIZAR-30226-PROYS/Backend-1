@@ -20,12 +20,13 @@ public class LoginController extends HttpServlet {
         Usuario.existsUser(user);
         try {
             Usuario.correctUser(user,pass);
+            HttpSession session = request.getSession(true);
+            session.setAttribute("username", user);
             response.sendRedirect("/wolfsound/movil/explorar.jsp");
-//            rd = request.getRequestDispatcher("/movil/explorar.jsp");
-//            request.setAttribute("user", "Miguel");
+
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/registrarse_iniciar_sesion.jsp");
+            rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
             request.setAttribute("error", e.getMessage());
             request.setAttribute("user", user);
             rd.forward(request,response);
