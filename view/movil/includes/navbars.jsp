@@ -18,6 +18,7 @@
         <li><a href="${pageContext.request.contextPath}/movil/mis_listas.jsp">Mis listas</a></li>
         <li><a href="${pageContext.request.contextPath}/movil/lista.jsp">Mi audio</a></li>
         <li><a href="${pageContext.request.contextPath}/movil/suscripciones.jsp">Suscripciones</a></li>
+        <li><a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a></li>
     </ul>
     <div class="text-white text-center">
         <a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
