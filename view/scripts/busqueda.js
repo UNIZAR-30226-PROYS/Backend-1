@@ -2,7 +2,7 @@
 function buscar(camposUrl){
     try {
         var origen = window.location.href;
-        var destino = 'resultados.html?'+camposUrl;
+        var destino = 'resultados.jsp?'+camposUrl;
 
         // Cargar contenido
         $("#contenido").load(destino);

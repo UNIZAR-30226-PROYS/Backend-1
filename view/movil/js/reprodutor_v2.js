@@ -7,21 +7,12 @@ jQuery(document).ready(function() {
 		    var index = 0;
             playing = false;
 			repeat_option = false;
+			random_option = false;
+			var mouseup = false;
             mediaPath = 'music/';
             extension = '';
 						
-            /* tracks = [{
-                "track": 1,	"name": "All This Is - Joe L.'s Studio",	"duration": "2:46",	 "file": "JLS_ATI"	}
-			];	*/
-			
-				
-			/*	Modificar variables array   */
-			/* $(tracks).each(function(key, value) {
-				   if (value.track == "1") {
-					value.name = "casa";
-				}
-			});
-			tracks[0].name= "nuevo nombre"; */
+
 			
 	
 			var tracks = [];
@@ -43,7 +34,7 @@ jQuery(document).ready(function() {
 
 			// alert(tracks[0].track + tracks[0].name + tracks[0].duration);	alert(tracks[1].track + tracks[1].name + tracks[1].duration);
 
-			/* FALTA CAMBIAR */
+		
             buildPlaylist = $(tracks).each(function(key, value) {
                 var trackNumber = value.track,
                     trackName = value.name,
@@ -51,27 +42,31 @@ jQuery(document).ready(function() {
                 if (trackNumber.toString().length === 1) {
                     trackNumber = '0' + trackNumber;
                 }
-						
-				$('#plList').append('<li class="list-group-item text-white  reprodcutor_list_item d-flex justify-content-between list-group-item-action"> <div>'+trackNumber+'</div>  <div>'+trackName+'</div>  <div>'+ trackDuration +'</div> </li>');
-		
-                //$('#plList').append('<li><div class="plItem"><span class="plNum">' + trackNumber + '.</span><span class="plTitle">' + trackName + '</span><span class="plLength">' + trackDuration + '</span></div></li>');
+				$('#plList').append('<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > <div>'+trackNumber+
+					'</div>  <div>'+trackName+'</div>  <div>'+ trackDuration +'</div> </div>');
             }),
 			 
             trackCount = tracks.length,
             npTitle = $('#npTitle'),
-           
+             
 		   audio = $('#audio1').on('play', function () {
-                playing = true;
+                playing = true;				
             }).on('pause', function () {
                 playing = false;
             }).on('ended', function () {
+				
 				if (repeat_option == true ){
 					loadTrack(index);
-					audio.play();
+					audio.play();				
+				}
+				else if (random_option == true){		
+					var song_to_play = Math.floor(Math.random() * (trackCount ) ) ;
+					loadTrack(song_to_play);
+					audio.play();	
 				}
 				else{
 					if ((index + 1) < trackCount) {
-						index++;
+						index++;					
 						loadTrack(index);
 						audio.play();
 					} else {
@@ -81,22 +76,76 @@ jQuery(document).ready(function() {
 					}
 				}
             }).get(0),	
+		
+		$("#volumen").bind("change", function() {
+			audio.volume =  ($(this).val());	
+		});
+
+		
+		$("#seek").on("mouseup", function () {	 mouseup = false;		});
+		
+		$("#seek").on("mousedown", function () { mouseup = true;		});
+
+		
+		$("#seek").bind("change", function() {	
+			mouseup = true;
+			audio.currentTime = ($(this).val())/10;	
+			 mouseup = false;	
+		});
+
+	
+		$('#audio1').on('timeupdate', function() {
+			var curMins = Math.floor(this.currentTime / 60);
+			var curSecs = Math.floor(this.currentTime - curMins * 60);
+		
+			var mins = Math.floor(this.duration / 60);
+			var secs = Math.floor(this.duration - mins * 60);
+			
+			if (curSecs < 10) { (curSecs = '0' + curSecs); }
+			if (secs < 10) { (secs = '0' + secs); }
+			$("#time_played_id").text(curMins + ':' + curSecs);
+			if (secs >0 || mins > 0)  {
+				$("#full_time_id").text(mins + ':' + secs);
+			}
+			if ( mouseup == true ){
+					return;
+			}
+			
+			if ( mouseup == false ){
+				$("#seek").val(this.currentTime*10);
+			}
+			$("#seek").attr({ "max" : (this.duration)*10 });
+		});
+					
+			
+			 btnPlayStio = $('#btnPlayStio').on('click', function () {
+                if (!playing) {
+					audio.play();
+					$('#btnPlayStio_v2').removeClass('fa-play');
+					$('#btnPlayStio_v2').addClass('fa-pause');
+                } else {
+					 audio.pause();
+					$('#btnPlayStio_v2').removeClass('fa-pause');
+					$('#btnPlayStio_v2').addClass('fa-play');
+                }
+            }),
 			
             btnPrev = $('#btnPrev').on('click', function () {
-                if ((index - 1) > -1) {
-                    index--;
+				    index= (index-1);
+					if (index == -1 ) index = trackCount -1 ;
                     loadTrack(index);
                     if (playing) {
                         audio.play();
                     }
-                } else {
-                    audio.pause();
-                    index = 0;
-                    loadTrack(index);
-                }
             }),
 			
             btnNext = $('#btnNext').on('click', function () {
+				    index= (index+1)%trackCount;
+                    loadTrack(index);
+                    if (playing) {
+                        audio.play();
+                    }
+				/* 
                 if ((index + 1) < trackCount) {
                     index++;
                     loadTrack(index);
@@ -108,12 +157,15 @@ jQuery(document).ready(function() {
                     index = 0;
                     loadTrack(index);
                 }
+				*/
             }),
 			
 			btnRandom = $('#btnRandom').on('click', function () {
-				loadTrack(Math.floor(Math.random() * (tracks.length ) )  );
-				if (playing) {
-					audio.play();
+				if (random_option == true){
+					random_option = false;
+				}
+				else{
+					random_option = true;
 				}
             }),
 			
@@ -126,26 +178,26 @@ jQuery(document).ready(function() {
 				}
             }),
 			
-			/* FALTA CAMBIAR */
+
             li = $('#plList li').on('click', function () {
-				
                 var id = parseInt($(this).index());
                 if (id !== index) {
                     playTrack(id);
                 }
             }),
 			
-			/* FALTA CAMBIAR */
             loadTrack = function (id) {
-                $('.plSel').removeClass('plSel');
-                $('#plList li:eq(' + id + ')').addClass('plSel');
+                $('.list-group  > .active').removeClass('active');
+                $('#plList li:eq(' + id + ')').addClass('active');
+				
                 npTitle.text(tracks[id].name);
                 index = id;
                 audio.src = mediaPath + tracks[id].name;
+				
             },
 			
             playTrack = function (id) {
-                loadTrack(id);
+                loadTrack(id);				
                 audio.play();
             };
 			

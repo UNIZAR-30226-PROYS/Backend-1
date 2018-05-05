@@ -1,56 +1,24 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title>Bienvenido a Wolfic</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1 ">
-
-		<!-- Bootstrap CSS 4.0.0 -->
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
-
-		<!-- CSS -->
-		<link rel="stylesheet" href="css/registrarse_iniciar_sesion.css">
-
-        <!-- Font Awesome CSS -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>WolfSound</title>
+        <jsp:include page="includes/header.jsp"></jsp:include>
 	</head>
 	<body>
-        <!-- Cabecera y sidebar fijos -->
-		<nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-			<a href="explorar.html">    <!-- Brand/logo -->
-				<img src="images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-			</a>
-			<a href="usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
-		</nav>
-
-		<div id="sidebar" class="d-none">
-			<div class="sidebar-header">
-				<p class="text-center mx-auto">Escuchando</p>
-			</div>
-			<ul class="list-unstyled components">
-
-				<li><a href="listas.html">Mis listas</a></li>
-				<li><a href="lista.html">Mi audio</a></li>
-				<li><a href="suscripciones.html">Suscripciones</a></li>
-			</ul>
-			<div class="text-white text-center">
-				<a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
-			</div>
-		</div>
+        <jsp:include page="includes/navbars.jsp"></jsp:include>
 
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
 			<div class="pt-1">
-                <img class="d-block mx-auto" src="images/wolfsound.png" style="max-width: 200px"/>
+                <img class="d-block mx-auto" src="${pageContext.request.contextPath}/movil/images/wolfsound.png" style="max-width: 200px"/>
             </div>
 
 			<!--  https://getbootstrap.com/docs/4.0/components/navs/ -->
 			<ul class="nav nav-pills nav-fill" id="pills-tab" >
 				<li class="nav-item">
-					<a class="nav-link active" id="iniciar-sesion-tab" data-toggle="pill" href="#iniciar-sesion" role="tab" aria-controls="iniciar-sesion" aria-selected="true">Iniciar Sesion</a>
+					<a class="nav-link active show" id="iniciar-sesion-tab" data-toggle="pill" href="#iniciar-sesion" role="tab" aria-controls="iniciar-sesion" aria-selected="true">Iniciar Sesion</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" id="registrarse-tab" data-toggle="pill" href="#registrarse" role="tab" aria-controls="registrarse" aria-selected="false">Registrarse</a>
@@ -58,21 +26,27 @@
 			</ul>
 
 			<div class="tab-content" id="myTabContent"> 		<!-- Sino aparece uno debajo de otro -->
-			
+
 				<!-- Iniciar Sesion -->
-				<div class="tab-pane fade show active" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
-					<form class="needs-validation" action="explorar.html" novalidate>
+				<div class="tab-pane fade active show" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
+					<form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" novalidate>
 						<h4 class="text-center py-3">Iniciar sesión en WolfSound</h4>
 						
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
-							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required>
-							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
+							<input type="text" class="form-control" name="login_user" value="${user}" id="nombre_usuario" placeholder="usuario_123" required>
+							<c:if test="${error == 'El usuario no existe'}">
+								<p class="text-danger">${error}</p>
+							</c:if>
+                            <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 							
 						<div class="form-group">
 							<label for="contrasenya">Contraseña</label>
-							<input type="password" class="form-control" id="contrasenya" placeholder="*****" required>
+							<input type="password" class="form-control" name="login_pass" id="contrasenya" placeholder="*****" required>
+							<c:if test="${error == 'Contraseña errónea'}">
+								<p class="text-danger">${error}</p>
+							</c:if>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
                         <div class="row">
@@ -85,21 +59,22 @@
                         </div>
 					</form>	
 				</div>
-			
+
+                <%--TODO: Mantener campos necesarios en caso de error e indicar el error arpopiado --%>
 				<!-- Registrarse -->
 				<div class="tab-pane fade" 	id="registrarse" role="tabpanel" aria-labelledby="registrarse-tab">
 		
-					<form class="needs-validation" action="explorar.html" novalidate>
+					<form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" novalidate>
 						<h4 class="text-center py-3">Registrarse en WolfSound</h4>
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
-							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required>
+							<input type="text" class="form-control" name="register_user" id="nombre_usuario" placeholder="usuario_123" required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 						
 						<div class="form-group">
 							<label for="contrasenya">Contraseña</label>
-							<input type="password" class="form-control" id="contrasenya" placeholder="*****" required>
+							<input type="password" class="form-control" name="register_pass" id="contrasenya" placeholder="*****" required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 						
@@ -111,7 +86,7 @@
 
 						<div class="form-group">
 							<label for="correo">Direccion de correo</label>
-							<input type="email" class="form-control" id="correo" placeholder="user@mail .." required>
+							<input type="email" class="form-control" name="register_email" id="correo" placeholder="user@mail .." required>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 
@@ -139,18 +114,7 @@
 			</div>
 		</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#sidebar').hide();
-            $('#sidebar').toggleClass("d-none");
-            $('#sidebarCollapse').on('click', function () {
-                $("#sidebar").animate({width:'toggle'},200);
-            });
-        });
-    </script>
+    <jsp:include page="includes/footer.jsp"></jsp:include>
 	
 	<script>	
 		/* Derechos de autor  : https://getbootstrap.com/docs/4.0/components/forms/#validation */

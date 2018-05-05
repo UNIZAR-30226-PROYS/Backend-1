@@ -1,45 +1,14 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <title>Bienvenido a Wolfic</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1 ">
-
-    <!-- Bootstrap CSS 4.0.0 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/lista.css">
-
-    <!-- Font Awesome CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
 
 <body>
-<nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-    <a href="explorar.html">    <!-- Brand/logo -->
-        <img src="images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-    </a>
-    <a href="usuario.html"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i></a>
-</nav>
-
-<div id="sidebar" class="d-none">
-    <div class="sidebar-header">
-        <p class="text-center mx-auto">Escuchando</p>
-    </div>
-    <ul class="list-unstyled components">
-
-        <li><a href="listas.html">Mis listas</a></li>
-        <li><a href="lista.html">Mi audio</a></li>
-        <li><a href="suscripciones.html">Suscripciones</a></li>
-    </ul>
-    <div class="text-white text-center">
-        <a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
-    </div>
-</div>
+    <jsp:include page="includes/navbars.jsp"></jsp:include>
 
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
@@ -49,12 +18,12 @@
             <h4 class="media-heading"> Nombre lista</h4>
         </div>
         <div class="media-right">
-            <a href ="cancion.html">
+            <a href ="cancion.jsp">
             <button type="button" class="btn btn-default ">
                 <span class="glyphicon glyphicon-play" style="font-size:20px; "></span>
             </button>
             </a>
-            <a href ="cancion.html">
+            <a href ="cancion.jsp">
             <button type="button" class="btn btn-default ">
                 <span class="glyphicon glyphicon-random" style="font-size:20px; "></span>
             </button>
@@ -69,7 +38,7 @@
                     <h4 class="media-heading">1</h4>
                 </div>
                 <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.html">
+                    <a href="cancion.jsp">
                         <img src="images/wolf.jpg" style="width:64px;" alt="...">
                     </a>
                 </div>
@@ -94,7 +63,7 @@
                     <h4 class="media-heading">2</h4>
                 </div>
                 <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.html">
+                    <a href="cancion.jsp">
                         <img src="images/wolf.jpg" style="width:64px;" alt="...">
                     </a>
                 </div>
@@ -119,7 +88,7 @@
                 </div>
 
                 <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.html">
+                    <a href="cancion.jsp">
                         <img src="images/wolf.jpg" style="width:64px;" alt="...">
                     </a>
                 </div>
@@ -143,7 +112,7 @@
                     <h4 class="media-heading">4</h4>
                 </div>
                 <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.html">
+                    <a href="cancion.jsp">
                         <img src="images/wolf.jpg" style="width:64px;" alt="...">
                     </a>
                 </div>
@@ -173,7 +142,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <form action = "lista.html">
+                <form action = "lista.jsp">
                     <div class="form-group">
                         <label for="posicion">Nueva posicion de la cancion</label>
                         <div class="input-group">
@@ -186,19 +155,7 @@
         </div>
     </div>
 </div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#sidebar').hide();
-        $('#sidebar').toggleClass("d-none");
-        $('#sidebarCollapse').on('click', function () {
-            $("#sidebar").animate({width:'toggle'},200);
-        });
-    });
-</script>
+    <jsp:include page="includes/footer.jsp"></jsp:include>
 </body>
 </html>
 
