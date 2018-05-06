@@ -40,37 +40,20 @@
                 </a>
             </div>
         </div>
+
         <div class="row">
+        <c:forEach items="${sessionScope.misListas}" var="lista">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
                     <a href="lista.jsp" target="_self">
                         <img src="images/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
-                            <p>Nombre lista 1</p>
+                            <p>${lista}</p>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre lista 2</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre lista 3</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+        </c:forEach>
         </div>
 
         <div class="row pt-3">
@@ -84,36 +67,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre lista rec. 1</p>
-                        </div>
-                    </a>
+            <c:forEach items="${sessionScope.listasRecomendadas}" var="lista">
+                <div class="col-4">
+                    <div class="img-thumbnail h-100">
+                        <a href="lista.jsp" target="_self">
+                            <img src="images/wolf.jpg" alt="" style="width:20%">
+                            <div class="caption">
+                                <p>${lista}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre lista rec. 2</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre lista rec. 3</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </c:forEach>
         </div>
 
         <div class="row pt-3">
@@ -127,36 +92,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="cancion.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre Mi audio 1</p>
-                        </div>
-                    </a>
+            <c:forEach items="${sessionScope.misAudios}" var="lista">
+                <div class="col-4">
+                    <div class="img-thumbnail h-100">
+                        <a href="lista.jsp" target="_self">
+                            <img src="images/wolf.jpg" alt="" style="width:20%">
+                            <div class="caption">
+                                <p>${lista}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="cancion.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre Mi audio 2</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="cancion.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre Mi audio 3</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </c:forEach>
         </div>
 
         <div class="row pt-3">
@@ -170,36 +117,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="cancion.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre audio rec. 1</p>
-                        </div>
-                    </a>
+            <c:forEach items="${sessionScope.audiosRecomendados}" var="lista">
+                <div class="col-4">
+                    <div class="img-thumbnail h-100">
+                        <a href="lista.jsp" target="_self">
+                            <img src="images/wolf.jpg" alt="" style="width:20%">
+                            <div class="caption">
+                                <p>${lista}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="cancion.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre audio rec. 2</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="cancion.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>Nombre audio rec. 3</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
 

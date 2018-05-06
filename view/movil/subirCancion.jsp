@@ -12,7 +12,6 @@
         <div class="container mb-3">
 			
 				<!-- Subir Cancion -->
-
 					<form class="needs-validation" action="lista.jsp" novalidate>
 						<h4 class="text-center py-3">Sube tu canción</h4>
 						<div class="form-group">
@@ -35,7 +34,7 @@
 
 						<div class="form-group">
 							<label for="cancion">Seleccione la cancion(Formato mp3)</label>
-							<input type="file" class="form-control-file" id="cancion" accept=".mp3"required>
+							<input type="file" class="form-control-file" id="cancion" accept=".mp3" required>
                             <div class="invalid-feedback">Seleccione la canción.</div>
 						</div>
 
