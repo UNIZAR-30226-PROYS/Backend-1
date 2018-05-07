@@ -16,7 +16,7 @@ function navegar(e){
 
             if (origen !== destino) { //todo: revisar esto para no insertar nuevas entradas en el historial si vas a la misma pagina
                 // Cargar contenido
-                $("#contenido").load(destino);
+                $("#contenido").load(destino, {ajax:1});
 
                 // Cambiar URL y titulo
                 setTimeout(function () { //todo: mejorar esto para mostrar el titulo directamente y no depender de un timeout de 100ms
@@ -42,7 +42,7 @@ $(document).ready(function(){
 /* Gestion del historial del navegador */
 window.onpopstate = function(e){
     if(e.state){
-        $("#contenido").load(e.state.html);
+        $("#contenido").load(e.state.html, {ajax:1});
         document.title = e.state.titulo;
     }
 };
