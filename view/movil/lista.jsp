@@ -30,107 +30,38 @@
             </a>
         </div>
     </div>
+    <!--TODO: Crear lista con canciones-->
+    <c:forEach items="${sessionScope.misListas}" var="lista">
+        <div class="list-group pt-2">
+            <div  class="list-group-item list-group-item-action">
+                <div class="media">
+                    <div class="media-left" style="padding-right:15px">
+                        <h4 class="media-heading">1</h4>
+                    </div>
+                    <div class="media-left" style="padding-right:15px">
+                        <a href="cancion.jsp">
+                            <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <!--TODO: Nombre cancion-->
+                        <h6 class="media-heading">Nombre Cancion</h6>
+                        <!--TODO: Usuario que ha subido la canción-->
+                        <h6 class="media-heading">usuario</h6>
+                    </div>
+                    <div class="media-right">
+                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
+                            <span class="fa fa-list-ol" style="font-size:20px; "></span>
+                        </button>
+                        <button type="button" class="btn btn-default ">
+                            <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
+                        </button>
 
-    <div class="list-group pt-2">
-        <div  class="list-group-item list-group-item-action">
-            <div class="media">
-                <div class="media-left" style="padding-right:15px">
-                    <h4 class="media-heading">1</h4>
-                </div>
-                <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.jsp">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h6 class="media-heading">Nombre Cancion</h6>
-                    <h6 class="media-heading">usuario</h6>
-                </div>
-                <div class="media-right">
-                    <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                        <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                    </button>
-                    <button type="button" class="btn btn-default ">
-                        <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
-                    </button>
-
+                    </div>
                 </div>
             </div>
         </div>
-        <div  class="list-group-item list-group-item-action">
-            <div class="media">
-                <div class="media-left" style="padding-right:15px">
-                    <h4 class="media-heading">2</h4>
-                </div>
-                <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.jsp">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h6 class="media-heading">Nombre Cancion</h6>
-                    <h6 class="media-heading">usuario</h6>
-                </div>
-                <div class="media-right">
-                    <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                        <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                    </button>
-                    <button type="button" class="btn btn-default ">
-                        <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div  class="list-group-item list-group-item-action">
-            <div class="media">
-                <div class="media-left" style="padding-right:15px">
-                    <h4 class="media-heading">3</h4>
-                </div>
-
-                <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.jsp">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h6 class="media-heading">Nombre Cancion</h6>
-                    <h6 class="media-heading">usuario</h6>
-                </div>
-                <div class="media-right">
-                    <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                        <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                    </button>
-                    <button type="button" class="btn btn-default ">
-                        <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div  class="list-group-item list-group-item-action">
-            <div class="media">
-                <div class="media-left" style="padding-right:15px">
-                    <h4 class="media-heading">4</h4>
-                </div>
-                <div class="media-left" style="padding-right:15px">
-                    <a href="cancion.jsp">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h6 class="media-heading">Nombre Cancion</h6>
-                    <h6 class="media-heading">usuario</h6>
-                </div>
-                <div class="media-right">
-                    <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                        <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                    </button>
-                    <button type="button" class="btn btn-default ">
-                        <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </c:forEach>
 </div> <!-- Container -->
 
 <!-- Modal1 -->
