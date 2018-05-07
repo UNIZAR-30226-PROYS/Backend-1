@@ -8,7 +8,7 @@ $(document).ready(function(){
 
             switch(destino){
                 case 'actividad':
-                    $("#contenido-perfil").load('includes/usuario_actividad.html');
+                    $("#contenido-perfil").load('includes/usuario_actividad.jsp');
                     break;
                 case 'listas':
                     $("#contenido-perfil").load('mis_listas.jsp');
@@ -17,7 +17,8 @@ $(document).ready(function(){
                     $("#contenido-perfil").load('includes/usuario_canciones.html');
                     break;
                 case 'siguiendo':
-                    $("#contenido-perfil").load('includes/usuario_siguiendo.html');
+                    $("#contenido-perfil").load('includes/usuario_s' +
+                        'iguiendo.html');
                     break;
                 case 'seguidores':
                     $("#contenido-perfil").load('includes/usuario_seguidores.html');

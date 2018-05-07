@@ -5,7 +5,7 @@ function buscar(camposUrl){
         var destino = 'resultados.jsp?'+camposUrl;
 
         // Cargar contenido
-        $("#contenido").load(destino);
+        $("#contenido").load(destino, {ajax:1});
 
         // Cambiar URL y titulo
         setTimeout(function () { //todo: mejorar esto para mostrar el titulo directamente y no depender de un timeout de 100ms
