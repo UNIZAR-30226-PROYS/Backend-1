@@ -17,7 +17,7 @@ rm apache-tomcat-$version.tar.*
 
 build()
 {
-./gradlew build &&
+#./gradlew build &&
 gradle build &&
 sh ./tomcat/bin/shutdown.sh
 rm -r ./tomcat/webapps/wolf*
