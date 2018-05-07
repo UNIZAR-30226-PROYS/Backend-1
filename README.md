@@ -6,7 +6,7 @@ Dependencias:
 - gradle  
 - wget
 - java
-- mysql (todavia no)
+- Base de datos mysql wolfic 
 
 `sh deploy.sh build`  
 Descarga automáticamente la versión establecida de Apache Tomcat y configura y despliega el proyecto.  
