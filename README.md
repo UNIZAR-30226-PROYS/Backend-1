@@ -6,7 +6,7 @@
 #### Windows / Linux / MacOS X
 Dependencias:
 -   Java
--   Docker (https://www.docker.com/community-edition)
+-   Docker (https://docs.docker.com/install/)
 
 ###### Cómo desplegar la aplicación la primera vez:
 ```
