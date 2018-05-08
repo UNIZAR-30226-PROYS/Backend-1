@@ -1,20 +1,46 @@
 # Backend
 
 ## Compilación y despliegue
+
+### Despliegue mediante contenedor en Docker
+#### Windows / Linux / MacOS X
+Dependencias:
+-   Java
+-   Docker (https://www.docker.com/community-edition)
+
+###### Cómo desplegar la aplicación la primera vez:
+```
+Backend $ sh deploy.sh docker
+```
+Esto compilará y montará automáticamente la base de datos MySQL y el servidor Tomcat enlazados al puerto 8080.  
+En el navegador, ir a la url `localhost:8080/wolfsound` y cargará automáticamente la vista según dispositivo.
+
+###### Desplegar la aplicación tras haber realizado cambios tras el primer despliegue:
+```
+Backend $ sh deploy.sh reload
+```
+Esto recompilará el proyecto y sustituirá la imagen .war en el contenedor docker y aparecerán los cambios en unos segundos.
+
+### Despliegue mediante script shell 
 #### Linux / MacOS
 Dependencias:  
-- gradle  
-- wget
-- java
-- Base de datos mysql wolfic 
+- Wget
+- Java
+- MySQL (Base de datos montada localmente, instrucciones en Google Drive)
 
-`sh deploy.sh build`  
-Descarga automáticamente la versión establecida de Apache Tomcat y configura y despliega el proyecto.  
-Si el servidor ya está, solo compila y despliega.  
-El despliegue se realiza localmente en `localhost:8080/wolfsound`.
+###### Cómo desplegar la aplicación la primera vez:
+```
+Backend $ sh deploy.sh build
+```
+Esto descargará el servidor Tomcat, compilará el proyecto y montará el .war en el servidor, accesible mediante la url `localhost:8080/wolfsound`.  
+**Este script no monta la base de datos MySQL**. Para poder usarla, tiene que estar configurada previamente según está indicado en Google Drive.
 
-`sh deploy.sh clean`  
-Detiene el servidor si está funcionando y elimina todos los archivos del sistema.  
+###### Desplegar la aplicación tras haber realizado cambios tras el primer despliegue:
+```
+Backend $ sh deploy.sh reload
+```
+Esto recompilará el proyecto y sustituirá la imagen .war en la carpeta de Tomcat y aparecerán los cambios en unos segundos.
+ 
 
 
  

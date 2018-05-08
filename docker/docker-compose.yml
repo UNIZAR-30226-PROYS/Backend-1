@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7.21
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=wolfsound        
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+  tomcat:
+    image: tomcat:9.0.7-jre9-slim
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    links:
+      - "mysql"
+    depends_on:
+      - "mysql"
+    volumes:
+      - ./webapp:/usr/local/tomcat/webapps
