@@ -17,8 +17,7 @@ download()
 
 build()
 {
-    ./gradlew &&
-    gradle build
+    ./gradlew build
 }
 
 clean()
@@ -26,6 +25,8 @@ clean()
     sh ./tomcat/bin/shutdown.sh
     rm -r tomcat*
     rm -r ./docker/webapp/wolf*
+    rm -r ./.gradle/
+    rm -r ./.build/
 }
 
 reload()
@@ -50,9 +51,9 @@ docker()
     build
     reload docker
     cd docker
-    docker-compose restart
+    sudo docker-compose restart
     if [ $? -eq 1 ]; then
-        docker-compose up -d
+        sudo docker-compose up -d
     fi
 }
 

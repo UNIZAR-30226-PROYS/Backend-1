@@ -7,10 +7,11 @@
 Dependencias:
 -   Java
 -   Docker (https://docs.docker.com/install/)
+-   Docker-compose (en gestor de paquetes)
 
 ###### Cómo desplegar la aplicación la primera vez:
 ```
-Backend $ sh deploy.sh docker
+Backend $ sh deploy.sh start-docker
 ```
 Esto compilará y montará automáticamente la base de datos MySQL y el servidor Tomcat enlazados al puerto 8080.  
 En el navegador, ir a la url `localhost:8080/wolfsound` y cargará automáticamente la vista según dispositivo.
