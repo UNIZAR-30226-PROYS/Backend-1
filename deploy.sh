@@ -35,12 +35,12 @@ reload()
     case $1 in
         docker)
             rm -r ./docker/webapp/wolf*
-            cp -r build/libs/wolfsound.war ./docker/webapp/.
+            cp -r build/libs/wolfsound.war ./docker/webapp/wolfsound.war
             ;;
         tomcat)
             sh ./tomcat/bin/shutdown.sh
             rm -r ./tomcat/webapps/wolf*
-            cp -r build/libs/wolfsound.war ./tomcat/webapps/.
+            cp -r build/libs/wolfsound.war ./tomcat/webapps/wolfsound.war
             sh ./tomcat/bin/startup.sh
             ;;
     esac
