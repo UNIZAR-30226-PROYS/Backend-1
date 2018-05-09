@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -31,7 +30,7 @@ public class LoginController extends HttpServlet {
             session.setAttribute("misAudios", listas);
             session.setAttribute("listasRecomendadas", listas);
             session.setAttribute("audiosRecomendados", listas);
-            response.sendRedirect("/wolfsound/movil/explorar.jsp");
+            response.sendRedirect("/movil/explorar.jsp");
 
         } catch (Exception e) {
             e.printStackTrace();

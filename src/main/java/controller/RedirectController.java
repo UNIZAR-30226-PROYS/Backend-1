@@ -13,10 +13,10 @@ public class RedirectController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String UA = request.getHeader("User-Agent");
         if (UA.contains("Mobile")){
-            response.sendRedirect("/wolfsound/movil/wolfsound.jsp");
+            response.sendRedirect("/movil/wolfsound.jsp");
         }
         else {
-            response.sendRedirect("/wolfsound/escritorio/explorar.jsp");
+            response.sendRedirect("/escritorio/explorar.jsp");
         }
     }
 }

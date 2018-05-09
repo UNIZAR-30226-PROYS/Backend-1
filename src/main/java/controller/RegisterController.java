@@ -21,7 +21,7 @@ public class RegisterController extends HttpServlet {
         try {
             Usuario.addUser(user,pass,email);
             rd = request.getRequestDispatcher("/movil/explorar.jsp");
-            response.sendRedirect("/wolfsound/movil/explorar.jsp");
+            response.sendRedirect("/movil/explorar.jsp");
         } catch (Exception e) {
             e.printStackTrace();
             rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
