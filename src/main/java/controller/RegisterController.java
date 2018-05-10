@@ -10,11 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static main.java.BCrypt.gensalt;
+import static main.java.BCrypt.hashpw;
+
 @WebServlet(name = "RegisterController", urlPatterns = "/register")
 public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("register_user");
-        String pass = request.getParameter("register_pass");
+        String pass = hashpw(request.getParameter("login_pass"),gensalt());   //Contraseña hasheada
         String email = request.getParameter("register_email");
         RequestDispatcher rd = null;
         // TODO: Terminar registro con funciones de hibernate, esto es una prueba

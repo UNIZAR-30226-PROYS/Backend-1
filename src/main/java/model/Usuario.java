@@ -10,6 +10,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import static main.java.BCrypt.checkpw;
 import static main.java.HibernateUtil.getSession;
 
 @Entity
@@ -260,7 +261,7 @@ public class Usuario {
         Usuario user = (Usuario) query.uniqueResult();
         if (user==null){
             throw new Exception("El usuario no existe");
-        }else if (!user.getContrasenya().equals(password)){
+        }else if (!checkpw(password,user.getContrasenya())){
             throw new AuthenticationException("Contraseña errónea");
         }
         session.close();
