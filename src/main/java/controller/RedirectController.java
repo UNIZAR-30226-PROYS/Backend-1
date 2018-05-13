@@ -16,7 +16,7 @@ public class RedirectController extends HttpServlet {
             response.sendRedirect("/movil/wolfsound.jsp");
         }
         else {
-            response.sendRedirect("/escritorio/explorar.jsp");
+            response.sendRedirect("/escritorio/marco.jsp");
         }
     }
 }
