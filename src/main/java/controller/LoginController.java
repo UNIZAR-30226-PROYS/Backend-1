@@ -19,9 +19,9 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("login_user");
         String pass = request.getParameter("login_pass");
         RequestDispatcher rd = null;
-        Usuario.existsUser(user);
+       // Usuario.existsUser(user);
         try {
-            Usuario.correctUser(user,pass);
+            Usuario.login(user,pass);
             // TODO: sustituir por listas del usuario
             List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
             HttpSession session = request.getSession(true);

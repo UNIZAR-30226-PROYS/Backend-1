@@ -223,7 +223,7 @@ public class Usuario {
      * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
      * si no, lanza excepcion
      */
-    public Usuario login(String username, String password) throws Exception{
+    public static Usuario login(String username, String password) throws Exception{
         Session session = getSession();
         try {
             Usuario user = correctUser(username, password);

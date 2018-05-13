@@ -17,10 +17,9 @@ import static main.java.BCrypt.hashpw;
 public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("register_user");
-        String pass = hashpw(request.getParameter("login_pass"),gensalt());   //Contraseña hasheada
+        String pass = hashpw(request.getParameter("register_pass"),gensalt());   //Contraseña hasheada
         String email = request.getParameter("register_email");
         RequestDispatcher rd = null;
-        // TODO: Terminar registro con funciones de hibernate, esto es una prueba
         try {
             Usuario.addUser(user,pass,email);
             rd = request.getRequestDispatcher("/movil/explorar.jsp");
