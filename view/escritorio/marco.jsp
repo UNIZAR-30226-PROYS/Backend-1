@@ -34,8 +34,7 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a id="nav-explorar" class="nav-link" href="explorar.jsp">Explorar</a></li>
                         <li class="nav-item"><a id="nav-listas" class="nav-link" href="listas.jsp">Listas</a></li>
-                        <li class="nav-item"><a id="nav-artistas" class="nav-link" href="artistas.jsp">Artistas</a></li>
-                        <li class="nav-item"><a id="nav-podcasts" class="nav-link" href="podcasts.html">Podcasts</a></li>
+                        <li class="nav-item"><a id="nav-artistas" class="nav-link" href="artistas.jsp">Suscripciones</a></li>
                         <li class="nav-item"><a href="subirMusica.jsp"><button type="button" class="btn btn-primary ml-1 mt-1">Sube tu música</button></a></li>
                     </ul>
                 </div>
