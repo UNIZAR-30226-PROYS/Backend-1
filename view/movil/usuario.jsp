@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-4">
                     <div class="img-responsive text-center">
-                        <img src=${"/images/"+sessionScope.username+"_perfil.svg"} style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/images/${sessionScope.username}_perfil.svg" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                         <p>${sessionScope.username}</p>
                     </div>
                 </div>
