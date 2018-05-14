@@ -215,8 +215,8 @@ public class Usuario {
             session.save( newUser );
             session.getTransaction().commit();
             try{
-                File from = new File("../../../../view/movil/user.svg");
-                File to = new File("../../../../view/movil/images/"+username+"_perfil.svg");
+                File from = new File("/view/movil/user.svg");
+                File to = new File("/view/movil/images/"+username+"_perfil.svg");
                 Files.copy(from.toPath(),to.toPath(),StandardCopyOption.REPLACE_EXISTING);
             }
             catch (Exception e){}
