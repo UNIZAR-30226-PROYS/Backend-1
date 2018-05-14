@@ -13,6 +13,10 @@ import org.hibernate.query.Query;
 import static main.java.BCrypt.checkpw;
 import static main.java.HibernateUtil.getSession;
 
+import java.io.File;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Files;
+
 @Entity
 public class Usuario {
     private String idUser;
@@ -210,8 +214,15 @@ public class Usuario {
             session.beginTransaction();
             session.save( newUser );
             session.getTransaction().commit();
-
+            try{
+                File from = new File("/images/user.svg");
+                File to = new File("/images/"+username+"_perfil.svg");
+                Files.copy(from.toPath(),to.toPath(),StandardCopyOption.REPLACE_EXISTING);
+            }
+            catch (Exception e){}
             session.close();
+
+
             return newUser;
         }else{
             session.close();
