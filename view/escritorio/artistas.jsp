@@ -17,99 +17,24 @@
 
                 <div class="media mt-2">
                     <div class="media-body pt-2 pl-4">
-                        <h1 class="media-heading">Suscripciones</h1>
+                        <h2 class="media-heading">Actividad reciente de suscripciones</h2>
                     </div>
                 </div>
 
                 <div class="list-group pl-4 pt-4 pr-2">
-                    <a href="artista.html" class="list-group-item list-group-item-action">
+                    <a href="cancion.jsp" class="list-group-item list-group-item-action">
                         <div class="media pt-1 pb-1">
                             <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
+                                <img src="images/wolf.jpg" style="width:70px;" alt="...">
                             </div>
                             <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Usuario</h6>
+                                <!--TODO: Nombre cancion-->
+                                <h6 class="media-heading">Nombre Cancion</h6>
+                                <!--TODO: Usuario que ha subido la canción-->
+                                <h6 class="media-heading">usuario</h6>
                             </div>
                             <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre artista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre artista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre artista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre artista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre artista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre artista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading">Generos: Jota, desfase</h6>
+                                <h6 class="media-heading pl-3">19-04-2018</h6>
                             </div>
                         </div>
                     </a>

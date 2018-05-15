@@ -16,128 +16,28 @@
 
                 <div class="media mt-2">
                     <div class="media-body pt-2 pl-4">
-                        <h4 class="media-heading">Listas de NombreUsuario</h4>
-                    </div>
-                    <div class="media-right pt-2 pr-2">
-                        <button type="button" class="btn btn-default ">
-                            <span class="fa fa-user-plus" style="font-size:20px; "></span>
-                        </button>
+                        <h2 class="media-heading">Listas de NombreUsuario</h2>
                     </div>
                 </div>
 
                 <div class="list-group pl-4 pt-4 pr-2">
-                    <a href="lista.jsp" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="media">
+                            <div class="media-left" style="padding-right:15px">
+                                <a href="lista.jsp">
+                                    <img src="images/wolf.jpg" style="width:70px;" alt="...">
+                                </a>
                             </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
+                            <div class="media-body">
+                                <h6 class="media-heading">Nombre de lista1</h6>
                             </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
+                            <div class="media-right">
+                                <button type="button" class="btn btn-default ">
+                                    <span class="fa fa-trash" style="font-size:20px; "></span>
+                                </button>
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre lista</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Artistas: Perico, cañete</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Generos: Jota, desfase</h6>
-                            </div>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div> <!-- Container -->
         <% if(request.getParameter("ajax")==null){ %>

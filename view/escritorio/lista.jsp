@@ -26,197 +26,64 @@
                             <button type="button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir</button>
                             <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio</button><br />
                             <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir</button>
-                            <button type="button" class="btn btn-primary mt-1"><i class="fa fa-ellipsis-h"></i>&nbsp;Opciones</button>
                         </div>
                     </div>
                     <div class="col-8">
                         <div class="list-group">
-                            <a href="cancion.jsp" class="list-group-item list-group-item-action">
+                            <div class="list-group-item list-group-item-action">
                                 <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
+                                    <div class="media-left" style="padding-right:15px">
+                                        <a href="cancion.jsp">
+                                            <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                                        </a>
                                     </div>
                                     <div class="media-body mt-auto">
                                         <h6 class="media-heading pl-5">Nombre Cancion</h6>
                                         <h6 class="media-heading pl-5">Usuario</h6>
                                     </div>
                                     <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
                                         <h6 class="media-heading pl-3">Mejores momentos</h6>
                                     </div>
                                     <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
                                         <h6 class="media-heading pl-3">19-04-2018</h6>
                                     </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
+                                    <div class="media-right">
+                                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
+                                            <span class="fa fa-list-ol" style="font-size:20px; "></span>
+                                        </button>
+                                        <button type="button" class="btn btn-default ">
+                                            <span class="fa fa-trash" style="font-size:20px; "></span>
+                                        </button>
+
+                                    </div>
                                 </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left pl-1" style="padding-right:15px">
-                                        <img src="images/wolf.jpg" style="width:50px;" alt="...">
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Artista</h6>
-                                        <h6 class="media-heading pl-3">Perico feat cañete</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Album</h6>
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Fecha</h6>
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-plus mt-auto pt-1" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div> <!-- Container -->
+            <!-- Modal1 -->
+            <div class="modal fade" id="modalOrden" tabindex="-1" role="dialog" aria-labelledby="modalOrden" aria-hidden="true">
+                <div class= "modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <form action = "lista.jsp">
+                                <div class="form-group">
+                                    <label for="posicion">Nueva posicion de la cancion</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="posicion" placeholder="3" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <% if(request.getParameter("ajax")==null){ %>
         </div>
     </div>
