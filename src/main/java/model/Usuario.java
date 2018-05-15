@@ -198,8 +198,7 @@ public class Usuario {
             Usuario newUser = new Usuario();
 
             newUser.setIdUser(username);
-            String hashPwd = password;
-            newUser.setContrasenya(hashPwd);
+            newUser.setContrasenya(password);
             newUser.setEmail(email);
 
             newUser.setNomAp("");
