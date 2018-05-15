@@ -1,0 +1,155 @@
+/* ---------------------------------------------------
+    REPRODCUTOR
+----------------------------------------------------- */
+.reproductor hr{
+	color:white !important;
+    border-top: 1px solid #ccc;
+}
+
+.reproductor, .reprodcutor_list_item{
+	 background: black ; 
+}
+
+.reprodcutor_list_item:hover, .reprodcutor_list_item.active{
+	  background: #CFCBCB !important;
+	  color : black !important;
+	  border : none;
+}
+
+.fa-heart.active{
+  color:red !important;
+}
+
+.btn.active, .botones .btn:hover {
+   background: #2853DC !important;	/* Blue */
+}
+
+
+
+#plList{
+	overflow-y:auto;
+    max-height: 55vh;
+}
+
+::-ms-tooltip { 
+	 display: none;  
+}
+
+/* https://github.com/samuelcarreira/webkit-input-range-fill-lower/blob/master/script.min.js */
+
+/*
+.custom-range::-ms-fill-lower{
+	background-color:#2853DC  !important;
+}
+*/
+.custom-range::-webkit-slider-thumb{
+	background-color:white!important;
+	border-radius:0rem !important;	
+}
+
+.volumen{
+	width : 20vw !important;	
+}
+
+.volumen-web{
+    /*width : 10vw !important;*/
+    width: 10vw !important;
+}
+
+.popover  {
+    background: black!important;
+}
+.popover .arrow {
+    display: none;
+}
+
+/* https://codepen.io/noahblon/pen/OyajvN */
+input[type="range"] {
+
+    overflow: hidden;
+    height: 10px;
+    cursor: pointer;
+	 background: linear-gradient(to right, #0000ff 0%, #cc0066 100%) !important;
+}
+input[type=range]::-webkit-slider-runnable-track {	/* For Chrome */
+   background: linear-gradient(to right, #0000ff 0%, #cc0066 100%) !important;
+}
+
+::-webkit-slider-thumb {
+	/* un poco sucio */
+    /*  box-shadow: -100vw 0 0 100vw #2853DC;	 */
+     box-shadow: 100vw 0px 0px 100vw grey;
+
+}
+
+.borde{
+	border-style: solid;
+	border-color: black;
+	border-width: 2px;
+}
+
+.nopad{
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.nomargin{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#wrapperM, #wrapperL{
+    display: flex;
+    align-items: center;
+}
+
+#contTime{
+    text-align: center;
+    padding-right: 0;
+}
+
+/*#cover{*/
+    /*width: 48px;*/
+    /*height: 48px;*/
+/*}*/
+
+#like{
+    line-height: normal;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#list{
+    vertical-align: middle;
+}
+
+.fa-heart.active {
+    color: #3333cc !important;
+}
+
+#info {
+    /*display: inline-block;
+    vertical-align: middle;
+    margin-bottom: auto;
+    /*padding-left: 10%;*/
+    line-height: 22px;
+}
+
+/*#like-cont{*/
+    /*display: flex;*/
+    /*align-items: center;*/
+/*}*/
+
+#text{
+    position:relative;
+    width: 100%;
+}
+
+.cancion{
+    margin-bottom: 0;
+}
+
+#botones{
+    display: flex;
+    align-items: center;
+}
