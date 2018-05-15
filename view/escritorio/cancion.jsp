@@ -36,8 +36,8 @@
                             <button type="submit" class="btn btn-primary">Añadir</button>
                         </div>
                     </form>
-                    <div class = "col">
-                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalCrear">
+                    <div class = "col-auto my-1">
+                        <button type="button" class="btn btn-default align-bottom" data-toggle="modal" data-target="#modalCrear">
                             <span class="fa fa-plus" style="font-size:20px; "></span>
                         </button>
                     </div>
