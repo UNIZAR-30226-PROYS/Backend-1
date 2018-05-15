@@ -20,12 +20,12 @@
         <div class="media-right">
             <a href ="cancion.jsp">
             <button type="button" class="btn btn-default ">
-                <span class="glyphicon glyphicon-play" style="font-size:20px; "></span>
+                <span class="fa fa-play" style="font-size:20px; "></span>
             </button>
             </a>
             <a href ="cancion.jsp">
             <button type="button" class="btn btn-default ">
-                <span class="glyphicon glyphicon-random" style="font-size:20px; "></span>
+                <span class="fa fa-random" style="font-size:20px; "></span>
             </button>
             </a>
         </div>
@@ -54,7 +54,7 @@
                             <span class="fa fa-list-ol" style="font-size:20px; "></span>
                         </button>
                         <button type="button" class="btn btn-default ">
-                            <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
+                            <span class="fa fa-trash" style="font-size:20px; "></span>
                         </button>
 
                     </div>

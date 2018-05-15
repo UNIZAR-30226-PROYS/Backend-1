@@ -33,7 +33,7 @@
                         </div>
                         <div class="media-right">
                             <button type="button" class="btn btn-default ">
-                                <span class="glyphicon glyphicon-remove" style="font-size:20px; "></span>
+                                <span class="fa fa-trash" style="font-size:20px; "></span>
                             </button>
                         </div>
                 </div>
