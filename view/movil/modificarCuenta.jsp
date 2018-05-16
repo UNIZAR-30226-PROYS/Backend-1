@@ -1,3 +1,4 @@
+<%@ page import="main.java.model.Usuario" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -10,39 +11,40 @@
        <jsp:include page="includes/navbars.jsp"></jsp:include>
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
-			
+				<%
+					String user = (String)session.getAttribute("username");
+					Usuario u = Usuario.getUser(user);
+					String vis1 = u.isPublico() ? "selected" : " ";
+					String vis2 = u.isPublico() ? " " : "selected";
+					String nombre = u.getNomAp();
+				%>
 				<!-- Mosificar Cuenta -->
 					<form class="needs-validation" action="/action_page.php" novalidate>
 						<h4 class="text-center py-3">Modificar Información del perfil</h4>
-						<label for="nombre">Nombre</label>
+						<label for="nombreAp">Nombre y Apellidos</label>
 						<div class="form-group">
 							 <div class="form-row">
-								<div class="col-6">
-									<input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
-								</div>
-								<div class="col">
-									<input type="text" class="form-control" id="apellidos" placeholder="Apellidos" required>
-								</div>
+								 <input type="text" class="form-control" id="nombreAp" placeholder="Nombre" required value =<%=nombre%> >
 							 </div>
 						</div>
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
-							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required>
+							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required value =<%=user%> >
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 
 						<div class="form-group">
 							<label for="correo">Direccion de correo</label>
-							<input type="email" class="form-control" id="correo" placeholder="user@mail .." required>
+							<input type="email" class="form-control" id="correo" placeholder="user@mail .."required  value =<%=u.getEmail()%>>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 
 						<div class="form-group">
 							<label for="visperfil">Visibilidad del perfil</label>
 							<select class="form-control" id="visperfil" required>
-								<option value="" selected disabled>Seleccione la visibilidad de su perfil</option>
-								<option>Privado</option>
-								<option>Público</option>
+								<option   disabled>Seleccione la visibilidad de su perfil</option>
+								<option selected=<%=vis1%>>Privado</option>
+								<option selected=<%=vis1%>>Público</option>
 							</select>
 						</div>
 
