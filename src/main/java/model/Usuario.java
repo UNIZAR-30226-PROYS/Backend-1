@@ -13,6 +13,10 @@ import org.hibernate.query.Query;
 import static main.java.BCrypt.checkpw;
 import static main.java.HibernateUtil.getSession;
 
+import java.io.File;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Files;
+
 @Entity
 public class Usuario {
     private String idUser;
@@ -201,7 +205,7 @@ public class Usuario {
             newUser.setContrasenya(password);
             newUser.setEmail(email);
 
-            newUser.setNomAp("");
+            newUser.setNomAp("Anonimo");
             newUser.setUltRep(0);
             newUser.setPublico(false);
             newUser.setConexion("conectado");
@@ -211,6 +215,8 @@ public class Usuario {
             session.getTransaction().commit();
 
             session.close();
+
+
             return newUser;
         }else{
             session.close();
@@ -248,6 +254,24 @@ public class Usuario {
         }
         session.close();
         return exists;
+    }
+
+
+    /*
+     * True -> usuario existe
+     * False -> usuario no existe
+     */
+    public static Usuario getUser(String username) throws  Exception{
+        Session session = getSession();
+        boolean exists = false;
+        Query query = session.createQuery("from Usuario where idUser = :user ");
+        query.setParameter("user", username);
+        Usuario user = (Usuario) query.uniqueResult();
+        session.close();
+        if (user==null){
+            throw new Exception("El usuario no existe");
+        }
+        return user;
     }
 
     /*
