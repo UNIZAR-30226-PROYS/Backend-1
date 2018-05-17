@@ -231,17 +231,17 @@ public class Usuario {
         Session session = getSession();
         if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
             Usuario User = getUser(usernameOld);
-            if(!usernameOld.equals(usernameNew)) {
+            if(!(usernameOld.equals(usernameNew))) {
                 User.setIdUser(usernameNew);
             }
             User.setEmail(email);
 
             User.setNomAp(nomAp);
-            User.setPublico(true);
+            User.setPublico(publico);
             User.setConexion("conectado");
 
             session.beginTransaction();
-            session.save( User );
+            session.saveOrUpdate( User );
             session.getTransaction().commit();
 
             session.close();
