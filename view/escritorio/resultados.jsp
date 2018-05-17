@@ -17,7 +17,7 @@
 
                 <div class="media mt-2">
                     <div class="media-body">
-                        <h4 class="media-heading">Resultados de "consulta"</h4>
+                        <h4 class="media-heading">Resultados de busqueda "<%=request.getParameter("b")%>" </h4>
                     </div>
                     <div class="media-right">
                         <button type="button" class="btn btn-default ">
