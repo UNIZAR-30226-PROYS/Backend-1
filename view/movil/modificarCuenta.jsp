@@ -19,35 +19,36 @@
 					String nombre = u.getNomAp();
 				%>
 				<!-- Mosificar Cuenta -->
-					<form class="needs-validation" action="/action_page.php" novalidate>
+					<form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post" novalidate>
 						<h4 class="text-center py-3">Modificar Información del perfil</h4>
 						<label for="nombreAp">Nombre y Apellidos</label>
 						<div class="form-group">
 							 <div class="form-row">
-								 <input type="text" class="form-control" id="nombreAp" placeholder="Nombre" required value =<%=nombre%> >
+								 <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value =<%=nombre%> >
 							 </div>
 						</div>
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
-							<input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" required value =<%=user%> >
+							<input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =<%=user%> >
+
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 
 						<div class="form-group">
 							<label for="correo">Direccion de correo</label>
-							<input type="email" class="form-control" id="correo" placeholder="user@mail .."required  value =<%=u.getEmail()%>>
+							<input type="email" class="form-control" name = "mail" id="correo" placeholder="user@mail .."required  value =<%=u.getEmail()%>>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 
 						<div class="form-group">
 							<label for="visperfil">Visibilidad del perfil</label>
-							<select class="form-control" id="visperfil" required>
+							<select class="form-control" name ="visibilidad" id="visperfil" required>
 								<option   disabled>Seleccione la visibilidad de su perfil</option>
 								<option selected=<%=vis1%>>Privado</option>
 								<option selected=<%=vis1%>>Público</option>
 							</select>
 						</div>
-
+						<p class="text-danger">${error}</p>
 
                         <div class="row">
                             <div class="mx-auto col-6">

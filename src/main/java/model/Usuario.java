@@ -226,6 +226,33 @@ public class Usuario {
     }
 
     /*
+     * En caso de que usernameNew no este cojido, modifica a usernameOld con los nuevos atributos.
+     */
+    public static Usuario modUser(String usernameOld, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
+        Session session = getSession();
+        if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
+            Usuario User = getUser(usernameOld);
+
+            User.setIdUser(usernameNew);
+            User.setEmail(email);
+
+            User.setNomAp(nomAp);
+            User.setPublico(publico);
+            User.setConexion("conectado");
+
+            session.beginTransaction();
+            session.save( User );
+            session.getTransaction().commit();
+
+            session.close();
+            return User;
+        }else{
+            session.close();
+            throw new Exception("Nombre de usuario ya existe");
+        }
+    }
+
+    /*
      * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
      * si no, lanza excepcion
      */
