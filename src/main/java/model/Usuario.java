@@ -231,19 +231,24 @@ public class Usuario {
         Session session = getSession();
         if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
             Usuario User = getUser(usernameOld);
-            if(!(usernameOld.equals(usernameNew))) {
-                User.setIdUser(usernameNew);
-            }
             User.setEmail(email);
 
             User.setNomAp(nomAp);
             User.setPublico(publico);
             User.setConexion("conectado");
+            if(!(usernameOld.equals(usernameNew))) {
+                User.setIdUser(usernameNew);
+            }
 
             session.beginTransaction();
             session.saveOrUpdate( User );
             session.getTransaction().commit();
-
+            if(!(usernameOld.equals(usernameNew))) {
+                User = getUser(usernameOld);
+                session.beginTransaction();
+                session.delete( User );
+                session.getTransaction().commit();
+            }
             session.close();
             return User;
         }else{
