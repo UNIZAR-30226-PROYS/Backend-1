@@ -15,10 +15,10 @@
             <h2 class="text-left pt-2">Explorar</h2>
             <div class="row pt-1">
                 <div class="col">
-                    <form class="search-button" action="resultados.jsp">
+                    <form class="search-button" action="${pageContext.request.contextPath}/search" method="post">
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Buscar ...">
+                                <input type="text" class="form-control" name="search_input" placeholder="Buscar ...">
                                 <span class="input-group-btn search-button">
                                     <button type="submit" class="btn btn-secondary">
                                         <span class="fa fa-search" style="font-size:20px;"  ></span>

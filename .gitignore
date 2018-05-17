@@ -1,6 +1,7 @@
 tomcat
 .gradle
 build
+*basura*
 
 # Compiled class file
 *.class
@@ -20,7 +21,7 @@ build
 
 # Package Files #
 # *.jar
-# *.war
+ *.war
 # *.ear
 # *.zip
 # *.tar.gz
