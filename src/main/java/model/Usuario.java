@@ -4,6 +4,7 @@ import javax.naming.AuthenticationException;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.List;
 
 import main.java.HibernateUtil;
 import org.hibernate.HibernateException;
@@ -342,7 +343,7 @@ public class Usuario {
     public static List<Usuario> searchUser(String user){
         Session session = getSession();
         Query query = session.createQuery("from Cancion where nombre like :user ");
-        query.setParameter("song", "%"+user+"%");
+        query.setParameter("user", "%"+user+"%");
         List<Usuario> lista = query.list();
         session.close();
         return lista;

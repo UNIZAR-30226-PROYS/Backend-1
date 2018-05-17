@@ -3,6 +3,11 @@ package main.java.model;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import static main.java.HibernateUtil.getSession;
 
 @Entity
 public class Listarep {
@@ -77,10 +82,10 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    public static List<Listarep> searchUser(String lista){
+    public static List<Listarep> searchUser(String listaS){
         Session session = getSession();
         Query query = session.createQuery("from Cancion where nombre like :lista ");
-        query.setParameter("lista", "%"+user+"%");
+        query.setParameter("lista", "%"+listaS+"%");
         List<Listarep> lista = query.list();
         session.close();
         return lista;

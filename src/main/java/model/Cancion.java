@@ -2,6 +2,7 @@ package main.java.model;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import static main.java.HibernateUtil.getSession;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -9,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import static main.java.HibernateUtil.getSession;
+
 
 @Entity
 public class Cancion {
