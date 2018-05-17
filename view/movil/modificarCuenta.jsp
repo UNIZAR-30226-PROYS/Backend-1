@@ -1,4 +1,5 @@
 <%@ page import="main.java.model.Usuario" %>
+<%@ page import="com.sun.org.apache.xpath.internal.operations.Bool" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -14,8 +15,7 @@
 				<%
 					String user = (String)session.getAttribute("username");
 					Usuario u = Usuario.getUser(user);
-					String vis1 = u.isPublico() ? "selected" : " ";
-					String vis2 = u.isPublico() ? " " : "selected";
+					Boolean publico = u.isPublico();
 					String nombre = u.getNomAp();
 				%>
 				<!-- Mosificar Cuenta -->
@@ -44,8 +44,8 @@
 							<label for="visperfil">Visibilidad del perfil</label>
 							<select class="form-control" name ="visibilidad" id="visperfil" required>
 								<option   disabled>Seleccione la visibilidad de su perfil</option>
-								<option selected=<%=vis1%>>Privado</option>
-								<option selected=<%=vis1%>>Público</option>
+								<option>Público</option>
+								<option>Privado</option>
 							</select>
 						</div>
 						<p class="text-danger">${error}</p>

@@ -232,12 +232,13 @@ public class Usuario {
         Session session = getSession();
         if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
             Usuario User = getUser(usernameOld);
-
-            User.setIdUser(usernameNew);
+            if(!usernameOld.equals(usernameNew)) {
+                User.setIdUser(usernameNew);
+            }
             User.setEmail(email);
 
             User.setNomAp(nomAp);
-            User.setPublico(publico);
+            User.setPublico(true);
             User.setConexion("conectado");
 
             session.beginTransaction();
