@@ -1,6 +1,7 @@
 tomcat
 .gradle
 build
+*basura*
 
 # Compiled class file
 *.class
