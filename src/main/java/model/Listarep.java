@@ -76,4 +76,13 @@ public class Listarep {
     public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
         this.usuarioByIdUser = usuarioByIdUser;
     }
+
+    public static List<Listarep> searchUser(String lista){
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion where nombre like :lista ");
+        query.setParameter("lista", "%"+user+"%");
+        List<Listarep> lista = query.list();
+        session.close();
+        return lista;
+    }
 }

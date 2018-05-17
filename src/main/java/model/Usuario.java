@@ -291,4 +291,16 @@ public class Usuario {
         return user;
     }
 
+    /*
+       Devuelve lista de elementos de Cancion que tengan el string song en el nombre
+    */
+    public static List<Usuario> searchUser(String user){
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion where nombre like :user ");
+        query.setParameter("song", "%"+user+"%");
+        List<Usuario> lista = query.list();
+        session.close();
+        return lista;
+    }
+
 }

@@ -1,9 +1,15 @@
 package main.java.model;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+
+import static main.java.HibernateUtil.getSession;
 
 @Entity
 public class Cancion {
@@ -133,5 +139,17 @@ public class Cancion {
 
     public void setComentariosByIdCancion(Collection<Comentario> comentariosByIdCancion) {
         this.comentariosByIdCancion = comentariosByIdCancion;
+    }
+
+    /*
+        Devuelve lista de elementos de Cancion que tengan el string song en el nombre
+     */
+    public static List<Cancion> searchSong(String song){
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion where nombre like :song ");
+        query.setParameter("song", "%"+song+"%");
+        List<Cancion> lista = query.list();
+        session.close();
+        return lista;
     }
 }
