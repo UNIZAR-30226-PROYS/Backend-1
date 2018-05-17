@@ -86,7 +86,7 @@
                                 </form>
                             </div>
                             <div class = "col align-items-center">
-                                <form action = "explorar.jsp">
+                                <form action="${pageContext.request.contextPath}/deleteUser" method="post" >
                                     <button type="submit" class="btn btn-danger">Aceptar</button>
                                 </form>
                             </div>
