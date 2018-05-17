@@ -223,7 +223,19 @@ public class Usuario {
             throw new Exception("Nombre de usuario ya existe");
         }
     }
-
+    /*
+     * Borra permanentemente un usuario del sistema
+     *
+     */
+    public static void borrarUser(String username) throws Exception{
+        Session session = getSession();
+        Usuario User = getUser(username);
+        session.beginTransaction();
+        session.delete( User );
+        session.getTransaction().commit();
+        session.close();
+        //TODO: borrar canciones, comentarios etc de usuario si, no ¿lo hace por cascada hibernate?
+    }
     /*
      * En caso de que usernameNew no este cojido, modifica a usernameOld con los nuevos atributos.
      */
@@ -231,19 +243,24 @@ public class Usuario {
         Session session = getSession();
         if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
             Usuario User = getUser(usernameOld);
-            if(!(usernameOld.equals(usernameNew))) {
-                User.setIdUser(usernameNew);
-            }
             User.setEmail(email);
 
             User.setNomAp(nomAp);
             User.setPublico(publico);
             User.setConexion("conectado");
+            if(!(usernameOld.equals(usernameNew))) {
+                User.setIdUser(usernameNew);
+            }
 
             session.beginTransaction();
             session.saveOrUpdate( User );
             session.getTransaction().commit();
-
+            if(!(usernameOld.equals(usernameNew))) {
+                User = getUser(usernameOld);
+                session.beginTransaction();
+                session.delete( User );
+                session.getTransaction().commit();
+            }
             session.close();
             return User;
         }else{
