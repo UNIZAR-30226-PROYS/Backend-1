@@ -12,7 +12,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
 			<div class="pt-1">
-                <img class="d-block mx-auto" src="${pageContext.request.contextPath}/contenido/imagenes/wolfsound.png" style="max-width: 200px"/>
+                <img class="d-block mx-auto" src="${pageContext.request.contextPath}/contenido/web/imagenes/wolfsound.png" style="max-width: 200px"/>
             </div>
 
 			<!--  https://getbootstrap.com/docs/4.0/components/navs/ -->
