@@ -19,6 +19,7 @@ public class LoginController extends HttpServlet {
         String user = request.getParameter("login_user");
         String pass = request.getParameter("login_pass");
         RequestDispatcher rd = null;
+        String UA = request.getHeader("User-Agent");
        // Usuario.existsUser(user);
         try {
             Usuario.login(user,pass);
@@ -30,11 +31,20 @@ public class LoginController extends HttpServlet {
             session.setAttribute("misAudios", listas);
             session.setAttribute("listasRecomendadas", listas);
             session.setAttribute("audiosRecomendados", listas);
-            response.sendRedirect("/movil/explorar.jsp");
+            if (UA.contains("Mobile")){
+                response.sendRedirect("/movil/explorar.jsp");
+            }else{
+                response.sendRedirect("/escritorio/explorar.jsp");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
+            if (UA.contains("Mobile")){
+                rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
+            }else{
+                rd = request.getRequestDispatcher("/escritorio/wolfsound.jsp");
+            }
             request.setAttribute("error", e.getMessage());
             request.setAttribute("user", user);
             rd.forward(request,response);
