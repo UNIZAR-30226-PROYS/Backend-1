@@ -7,13 +7,13 @@
 
     <c:if test="${sessionScope.username != null}">
         <a href="${pageContext.request.contextPath}/movil/explorar.jsp">    <!-- Brand/logo -->
-            <img src="${pageContext.request.contextPath}/movil/images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
+            <img src="${pageContext.request.contextPath}/contenido/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
         </a>
         <a href="${pageContext.request.contextPath}/movil/usuario.jsp"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username}</a>
     </c:if>
     <c:if test="${sessionScope.username == null}">
         <a href="${pageContext.request.contextPath}/movil/wolfsound.jsp">    <!-- Brand/logo -->
-            <img src="${pageContext.request.contextPath}/movil/images/wolfsound-white.png" style="height:40px;" alt="Wolfic">
+            <img src="${pageContext.request.contextPath}/contenido/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
         </a>
         <a href="${pageContext.request.contextPath}/movil/wolfsound.jsp">¡Regístrate!</a>
     </c:if>
