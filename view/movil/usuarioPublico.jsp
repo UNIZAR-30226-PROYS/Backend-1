@@ -7,15 +7,16 @@
 		<jsp:include page="includes/header.jsp"></jsp:include>
 	</head>
 	<body>
-    <jsp:include page="includes/navbars.jsp"></jsp:include>
+    <% String username = (String) request.getParameter("name"); %>
 
+    <jsp:include page="includes/navbars.jsp"></jsp:include>
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
             <div class="row pt-3">
                 <div class="col col-md-offset-5">
                     <div class="img-responsive text-center">
                         <img src="images/user.svg" style="height: 80px;" alt="Usuario">
-                        <p>USUARIO</p>
+                        <p><%=username%></p>
                     </div>
                 </div>
             </div>
