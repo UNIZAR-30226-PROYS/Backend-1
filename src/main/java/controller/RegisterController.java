@@ -20,13 +20,22 @@ public class RegisterController extends HttpServlet {
         String pass = hashpw(request.getParameter("register_pass"),gensalt());   //Contraseña hasheada
         String email = request.getParameter("register_email");
         RequestDispatcher rd = null;
+        String UA = request.getHeader("User-Agent");
         try {
             Usuario.addUser(user,pass,email);
-            rd = request.getRequestDispatcher("/movil/explorar.jsp");
+            if (UA.contains("Mobile")){
+                rd = request.getRequestDispatcher("/movil/explorar.jsp");
+            }else{
+                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
+            }
             response.sendRedirect("/movil/explorar.jsp");
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
+            if (UA.contains("Mobile")){
+                rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
+            }else{
+                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
+            }
             request.setAttribute("error", e.getMessage());
             request.setAttribute("registro_activo", "active");
             rd.forward(request,response);

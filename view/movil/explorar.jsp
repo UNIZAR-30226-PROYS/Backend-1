@@ -46,7 +46,7 @@
             <div class="col-4">
                 <div class="img-thumbnail h-100">
                     <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
+                        <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>${lista}</p>
                         </div>
