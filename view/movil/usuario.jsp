@@ -75,6 +75,7 @@
                     </button>
                 </div>
             </div>
+            <p class="text-danger">${error}</p>
 
             <div class="list-group pt-2">
                 <!--TODO: Crear lista con canciones subidas recientemente por suscripciones-->
@@ -105,11 +106,11 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <form action = "usuario.jsp">
+                        <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
                             <div class="form-group">
                                 <label for="nombreSus">Nombre del usuario</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" id="nombreSus" placeholder="Usuario" required>
+                                    <input type="text" class="form-control" id="nombreSus" placeholder="Usuario" name="name" required>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Suscribirse</button>

@@ -16,6 +16,7 @@
 					String user = (String)session.getAttribute("username");
 					Usuario u = Usuario.getUser(user);
 					Boolean publico = u.isPublico();
+					if(publico){pageContext.setAttribute("selected", "selected");}
 					String nombre = u.getNomAp();
 				%>
 				<!-- Mosificar Cuenta -->
@@ -40,14 +41,16 @@
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 
-						<div class="form-group">
-							<label for="visperfil">Visibilidad del perfil</label>
-							<select class="form-control" name ="visibilidad" id="visperfil" required>
-								<option   disabled>Seleccione la visibilidad de su perfil</option>
-								<option>Público</option>
-								<option>Privado</option>
-							</select>
-						</div>
+
+							<div class="form-group">
+								<label for="visperfil">Visibilidad del perfil</label>
+								<select class="form-control" name ="visibilidad" id="visperfil" required>
+									<option   disabled>Seleccione la visibilidad de su perfil</option>
+									<option >Privado</option>
+									<option ${selected}>Público</option>
+								</select>
+							</div>
+
 						<p class="text-danger">${error}</p>
 
                         <div class="row">
@@ -81,7 +84,7 @@
 
                         <div class = "row align-items-center">
                             <div class = "col align-items-center">
-                                <form action = "lista.jsp">
+                                <form action = "#">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                                 </form>
                             </div>

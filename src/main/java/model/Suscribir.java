@@ -2,6 +2,9 @@ package main.java.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
+import static main.java.HibernateUtil.getSession;
 
 @Entity
 public class Suscribir {
@@ -51,5 +54,45 @@ public class Suscribir {
 
     public void setUsuarioByIdSuscriptor(Usuario usuarioByIdSuscriptor) {
         this.usuarioByIdSuscriptor = usuarioByIdSuscriptor;
+    }
+
+
+
+    public static Suscribir addSuscripcion(String suscriptor, String suscrito) throws Exception{
+        Session session = getSession();
+        if(existsSuscribir(suscriptor,suscrito)){
+            session.close();
+            throw new Exception("Ya estas suscrito a dicho usuario.");
+        }
+        Suscribir newSus = new Suscribir();
+        Usuario uSuscriptor = Usuario.getUser(suscriptor);
+        Usuario uSuscrito = Usuario.getUser(suscrito);
+
+        newSus.setUsuarioByIdSuscriptor(uSuscriptor);
+        newSus.setUsuarioByIdSuscrito(uSuscrito);
+
+        session.beginTransaction();
+        session.save( newSus );
+        session.getTransaction().commit();
+
+        session.close();
+        return newSus;
+
+    }
+
+    public static boolean existsSuscribir(String suscriptor, String suscrito) throws Exception{
+        Session session = getSession();
+        Boolean exists = false;
+        Usuario uSuscriptor = Usuario.getUser(suscriptor);
+        Usuario uSuscrito = Usuario.getUser(suscrito);
+        Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor and usuarioByIdSuscrito = :suscrito");
+        query.setParameter("suscriptor", uSuscriptor);
+        query.setParameter("suscrito", uSuscrito);
+        exists = ! query.getResultList().isEmpty();
+
+
+        session.close();
+        return exists;
+
     }
 }
