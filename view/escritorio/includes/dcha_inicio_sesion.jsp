@@ -24,6 +24,6 @@
         <button type="submit" class="col btn btn-primary socialbarM mt-3">Iniciar sesión</button>
     </div>
     <div>
-        <h6 class="socialbarM"><a href="#"> Regístrate ahora </a></h6>
+        <h6 class="socialbarM"><a href="#" onclick="mostrar_registrarse()"> Regístrate ahora </a></h6>
     </div>
 </form>

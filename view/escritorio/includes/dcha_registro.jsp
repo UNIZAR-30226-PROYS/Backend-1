@@ -41,6 +41,6 @@
         <button type="submit" class="col btn btn-primary mt-1 socialbarM" > Registrarse </button>
     </div>
     <div class="mt-3">
-        <h6 class="socialbarM" style="color: black;"> ¿Ya tienes cuenta? <a href="#"> Inicia sesión </a></h6>
+        <h6 class="socialbarM" style="color: black;"> ¿Ya tienes cuenta? <a href="#" onclick="mostrar_iniciar_sesion()"> Inicia sesión </a></h6>
     </div>
 </form>
