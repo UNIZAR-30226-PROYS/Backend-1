@@ -20,7 +20,6 @@ import java.util.List;
 public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search_input");
-        //TODO: Búsqueda en la base de datos.
         RequestDispatcher rd = request.getRequestDispatcher("/movil/resultados.jsp");
         List<Listarep> listas = Listarep.searchList(search);
         List<Cancion> canciones = Cancion.searchSong(search);

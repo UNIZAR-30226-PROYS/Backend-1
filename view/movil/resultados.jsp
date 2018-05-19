@@ -18,10 +18,10 @@
     </div>
     <div class="row pt-1">
         <div class="col">
-            <form class="search-button" action="resultados.jsp">
+            <form class="search-button" action="/search" method="post">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar ...">
+                        <input type="text" class="form-control" name="search_input" placeholder="Buscar ...">
                         <span class="input-group-btn search-button">
                             <button type="submit" class="btn btn-secondary">
                                 <span class="fa fa-search" style="font-size:20px;"  ></span>
@@ -43,54 +43,50 @@
             </div>
         </div>
     </div>
-    ${listas}
-    ${canciones}
-    ${usuarios}
-
-
+    <%--Mensajes de depuracion para saber que resultados devuelve--%>
+    <%--${listas}--%>
+    <%--${canciones}--%>
+    <%--${usuarios}--%>
     <div id="result_canciones" class="list-group pt-2">
-        <!--TODO: Crear lista Resultados (pueden ser canciones/usuarios/o listas)!!!-->
         <c:forEach items="${canciones}" var="resultado">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${resultado}</h6>
-                        <h6 class="media-heading">${resultado}/h6>
+                        <h6 class="media-heading">${resultado}</h6>
                     </div>
                 </div>
             </a>
         </c:forEach>
     </div>
-    <div id="result_usuarios" class="list-group pt-2">
-        <!--TODO: Crear lista Resultados (pueden ser canciones/usuarios/o listas)!!!-->
+    <div id="result_usuarios" class="list-group pt-2 d-none">
         <c:forEach items="${usuarios}" var="resultado">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${resultado}</h6>
-                        <h6 class="media-heading">${resultado}/h6>
+                        <h6 class="media-heading">${resultado}</h6>
                     </div>
                 </div>
             </a>
         </c:forEach>
     </div>
-    <div id="result_listas" class="list-group pt-2">
-        <!--TODO: Crear lista Resultados (pueden ser canciones/usuarios/o listas)!!!-->
+    <div id="result_listas" class="list-group pt-2 d-none">
         <c:forEach items="${listas}" var="resultado">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${resultado}</h6>
-                        <h6 class="media-heading">${resultado}/h6>
+                        <h6 class="media-heading">${resultado}</h6>
                     </div>
                 </div>
             </a>
@@ -101,23 +97,26 @@
 <jsp:include page="includes/footer.jsp"></jsp:include>
 <script>
     $(document).ready(function () {
-        // $('#inputGroupSelect04').onchange(function () {
-        //     if ($('#canciones').hasAttribute("selected")){
-        //         $('#result_canciones').toggleClass("d-none");
-        //         $('#result_listas').toggleClass("d-none");
-        //         $('#result_usuarios').toggleClass("d-none");
-        //     }
-        //     else if ($('#usuarios').hasAttribute("selected")){
-        //         $('#result_canciones').toggleClass("d-none");
-        //         $('#result_listas').toggleClass("d-none");
-        //         $('#result_usuarios').toggleClass("d-none");
-        //     }
-        //     else if ($('#listas').hasAttribute("selected")){
-        //         $('#result_canciones').toggleClass("d-none");
-        //         $('#result_listas').toggleClass("d-none");
-        //         $('#result_usuarios').toggleClass("d-none");
-        //     }
-        // });
+        $('#inputGroupSelect04').on('change',function () {
+            // console.log("Entra en seleccionado");
+            var seleccionado = $('#inputGroupSelect04 option').filter(':selected').text();
+            // console.log(seleccionado);
+            if (seleccionado === "Canciones") {
+                $('#result_canciones').removeClass("d-none");
+                $('#result_usuarios').addClass("d-none");
+                $('#result_listas').addClass("d-none");
+            }
+            if (seleccionado === "Usuarios") {
+                $('#result_canciones').addClass("d-none");
+                $('#result_usuarios').removeClass("d-none");
+                $('#result_listas').addClass("d-none");
+            }
+            if (seleccionado === "Listas") {
+                $('#result_canciones').addClass("d-none");
+                $('#result_usuarios').addClass("d-none");
+                $('#result_listas').removeClass("d-none");
+            }
+        })
     });
 </script>
 </body>

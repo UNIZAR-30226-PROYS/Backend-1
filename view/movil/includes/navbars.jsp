@@ -1,21 +1,30 @@
 <!-- Cabecera y sidebar fijos -->
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav id="topbar" class="navbar sticky-top">
-            <span id="sidebarCollapse" style="font-size:20px; color:white">
-                &#9776; <!-- Icono de side-menu -->
-            </span>
-
+    <div class="col-4 mr-auto text-left">
+        <span id="sidebarCollapse" style="font-size:20px; color:white">
+            &#9776; <!-- Icono de side-menu -->
+        </span>
+    </div>
     <c:if test="${sessionScope.username != null}">
-        <a href="${pageContext.request.contextPath}/movil/explorar.jsp">    <!-- Brand/logo -->
-            <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-        </a>
-        <a href="${pageContext.request.contextPath}/movil/usuario.jsp"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username}</a>
+        <div class="col-4 mx-auto text-center">
+            <a href="${pageContext.request.contextPath}/movil/explorar.jsp">    <!-- Brand/logo -->
+                <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
+            </a>
+        </div>
+        <div class="col-4 ml-auto text-right">
+            <a href="${pageContext.request.contextPath}/movil/usuario.jsp"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username}</a>
+        </div>
     </c:if>
     <c:if test="${sessionScope.username == null}">
-        <a href="${pageContext.request.contextPath}/movil/wolfsound.jsp">    <!-- Brand/logo -->
-            <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
-        </a>
-        <a href="${pageContext.request.contextPath}/movil/wolfsound.jsp">¡Regístrate!</a>
+        <div class="col-4 mx-auto text-center">
+            <a href="${pageContext.request.contextPath}/movil/wolfsound.jsp">    <!-- Brand/logo -->
+                <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
+            </a>
+        </div>
+        <div class="col-4 ml-auto text-right">
+            <a href="${pageContext.request.contextPath}/movil/wolfsound.jsp">¡Regístrate!</a>
+        </div>
     </c:if>
 </nav>
 
