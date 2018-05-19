@@ -57,7 +57,7 @@
 
     <div class="col-4 ml-auto px-0 mx-0">
 		<div class="row">
-			<img src="${pageContext.request.contextPath}/escritorio/images/prueba.JPG" style="max-width: 48px; max-height: 48px">
+			<img src="/contenido/web/imagenes/prueba.JPG" style="max-width: 48px; max-height: 48px">
 
 			<div class="col-4">
 				<p class="cancion" style="color: white">Boom Boom</p>
