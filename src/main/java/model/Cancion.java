@@ -74,10 +74,9 @@ public class Cancion {
         return fechaSubida;
     }
 
-    public void setFechaSubida() {
+    public void setFechaSubida(Date fecha) {
         long millis=System.currentTimeMillis();
         java.sql.Date date=new java.sql.Date(millis);
-
         this.fechaSubida = date;
     }
 
@@ -165,7 +164,7 @@ public class Cancion {
             newCancion.setDuracion(0);
             newCancion.setNumRep(0);
             newCancion.setUsuarioByIdUser(user);
-            newCancion.setFechaSubida();
+            newCancion.setFechaSubida(new Date(0));
 
             session.beginTransaction();
             session.save( newCancion );

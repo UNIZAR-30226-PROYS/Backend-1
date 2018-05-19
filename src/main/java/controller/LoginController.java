@@ -43,7 +43,7 @@ public class LoginController extends HttpServlet {
             if (UA.contains("Mobile")){
                 rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
             }else{
-                rd = request.getRequestDispatcher("/escritorio/wolfsound.jsp");
+                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
             }
             request.setAttribute("error", e.getMessage());
             request.setAttribute("user", user);

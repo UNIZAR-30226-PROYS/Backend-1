@@ -18,7 +18,7 @@ public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("register_user");
         String pass = hashpw(request.getParameter("register_pass"),gensalt());   //Contraseña hasheada
-        String email = request.getParameter("register_email");
+        String email = request.getParameter("register_email"); //
         RequestDispatcher rd = null;
         String UA = request.getHeader("User-Agent");
         try {
