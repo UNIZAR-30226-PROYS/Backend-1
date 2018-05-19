@@ -10,6 +10,9 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 
 
 @Entity
@@ -71,8 +74,11 @@ public class Cancion {
         return fechaSubida;
     }
 
-    public void setFechaSubida(Date fechaSubida) {
-        this.fechaSubida = fechaSubida;
+    public void setFechaSubida() {
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
+
+        this.fechaSubida = date;
     }
 
     @Basic
@@ -140,6 +146,52 @@ public class Cancion {
 
     public void setComentariosByIdCancion(Collection<Comentario> comentariosByIdCancion) {
         this.comentariosByIdCancion = comentariosByIdCancion;
+    }
+
+    /*
+     * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
+     * Devuelve el Usuario creado
+     */
+    public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
+        Session session = getSession();
+
+        if (!existsCancion(user,nombre)){
+            Cancion newCancion = new Cancion();
+
+            newCancion.setNombre(nombre);
+            newCancion.setGenero(genero);
+
+            //TODO: Poner duracion correcta
+            newCancion.setDuracion(0);
+            newCancion.setNumRep(0);
+            newCancion.setUsuarioByIdUser(user);
+            newCancion.setFechaSubida();
+
+            session.beginTransaction();
+            session.save( newCancion );
+            session.getTransaction().commit();
+
+            session.close();
+
+            return newCancion;
+        }else{
+            session.close();
+            throw new Exception("Cancion con el mismo nombre ya existe");
+        }
+    }
+
+    /*
+     * True -> cancion existe para ese user
+     * False -> cancion no existe para ese user
+     */
+    public static boolean existsCancion(Usuario user, String nombre){
+        boolean exists = false;
+        for (Cancion cancion : user.getCancionsByIdUser()){
+            if(cancion.getNombre()==nombre){
+                exists = true;
+            }
+        }
+        return exists;
     }
 
     /*
