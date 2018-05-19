@@ -338,11 +338,11 @@ public class Usuario {
     }
 
     /*
-       Devuelve lista de elementos de Cancion que tengan el string song en el nombre
+       Devuelve lista de elementos de Usuario que tengan el string user en el idUser
     */
     public static List<Usuario> searchUser(String user){
         Session session = getSession();
-        Query query = session.createQuery("from Cancion where nombre like :user ");
+        Query query = session.createQuery("from Usuario where idUser like :user ");
         query.setParameter("user", "%"+user+"%");
         List<Usuario> lista = query.list();
         session.close();

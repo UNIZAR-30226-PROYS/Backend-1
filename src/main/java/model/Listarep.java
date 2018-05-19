@@ -82,9 +82,9 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    public static List<Listarep> searchUser(String listaS){
+    public static List<Listarep> searchList(String listaS){
         Session session = getSession();
-        Query query = session.createQuery("from Cancion where nombre like :lista ");
+        Query query = session.createQuery("from Listarep where nombre like :lista ");
         query.setParameter("lista", "%"+listaS+"%");
         List<Listarep> lista = query.list();
         session.close();

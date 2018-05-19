@@ -43,10 +43,14 @@
             </div>
         </div>
     </div>
+    ${listas}
+    ${canciones}
+    ${usuarios}
+
 
     <div id="result_canciones" class="list-group pt-2">
         <!--TODO: Crear lista Resultados (pueden ser canciones/usuarios/o listas)!!!-->
-        <c:forEach items="${resultados}" var="resultado">
+        <c:forEach items="${canciones}" var="resultado">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
@@ -62,7 +66,7 @@
     </div>
     <div id="result_usuarios" class="list-group pt-2">
         <!--TODO: Crear lista Resultados (pueden ser canciones/usuarios/o listas)!!!-->
-        <c:forEach items="${sessionScope.misListas}" var="resultado">
+        <c:forEach items="${usuarios}" var="resultado">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
@@ -78,7 +82,7 @@
     </div>
     <div id="result_listas" class="list-group pt-2">
         <!--TODO: Crear lista Resultados (pueden ser canciones/usuarios/o listas)!!!-->
-        <c:forEach items="${sessionScope.misAudios}" var="resultado">
+        <c:forEach items="${listas}" var="resultado">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
