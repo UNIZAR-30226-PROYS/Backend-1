@@ -2,6 +2,7 @@ package main.java.model;
 
 import javax.naming.AuthenticationException;
 import javax.persistence.*;
+import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.List;
@@ -216,7 +217,13 @@ public class Usuario {
             session.getTransaction().commit();
 
             session.close();
-
+            File from = new File("/contenido/imagenes/user.svg");
+            File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.svg");
+            try {
+                Files.copy(from.toPath(),to.toPath());
+            }
+            catch (Exception e) {throw new Exception("Cant write lol:"+e.getMessage());}
+            if(!Files.exists(from.toPath())) {throw new Exception("Aqui no "+from.toString());}
 
             return newUser;
         }else{

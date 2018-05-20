@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-4">
                     <div class="img-responsive text-center">
-                        <img src="/images/${sessionScope.username}_perfil.svg" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/contenido/imagenes/usuarios/${sessionScope.username}Perfil.svg" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                         <p>${sessionScope.username}</p>
                     </div>
                 </div>
@@ -85,7 +85,6 @@
             <p class="text-danger">${error}</p>
 
             <div class="list-group pt-2">
-                <!--TODO: Crear lista con canciones subidas recientemente por suscripciones-->
                 <c:forEach items="${suscripciones}" var="sus">
                     <a href="usuarioPublico.jsp?name=${sus.getUsuarioByIdSuscrito().getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
@@ -93,7 +92,6 @@
                                 <img src="images/wolf.jpg" style="width:30px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <!--TODO: Nombre de usuario al que se esta suscrito-->
                                 <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getIdUser()}</h6>
                                 <!--TODO: Estado del usuario, o bien desconectado, o bien el nombre de la cancion que esta escuchando/ha escuchado mas recientemente-->
                                 <h6 class="media-heading">Cancion 1</h6>
@@ -135,14 +133,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <form action = "usuario.jsp">
+                        <form action = "${pageContext.request.contextPath}/changeImage" method="post" enctype = "multipart/form-data">
                             <div class="form-group">
                                 <label for="imagenPerfil">Introduzca su nueva imagen de perfil.</label>
                                 <div class="input-group">
-                                    <input type="file" class="form-control-file" id="imagenPerfil" accept="image/*">
+                                    <input type="file" class="form-control-file" name="imagen_new" id="imagenPerfil" accept="image/*">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <input type = "submit" value = "Upload" />
                         </form>
                     </div>
                 </div>
