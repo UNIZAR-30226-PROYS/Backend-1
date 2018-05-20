@@ -8,7 +8,10 @@
     </head>
 	<body>
         <jsp:include page="includes/navbars.jsp"></jsp:include>
-
+        <%
+            List<Suscribir> suscripciones = Suscribir.searchSuscripciones((String)session.getAttribute("username"));
+            pageContext.setAttribute("suscripciones", suscripciones);
+        %>
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
             <div class="row pt-3">
@@ -79,7 +82,7 @@
 
             <div class="list-group pt-2">
                 <!--TODO: Crear lista con canciones subidas recientemente por suscripciones-->
-                <c:forEach items="${sessionScope.misListas}" var="lista">
+                <c:forEach items="${sessionScope.suscripciones}" var="sus">
                     <a href="usuarioPublico.jsp" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
@@ -87,7 +90,7 @@
                             </div>
                             <div class="media-body">
                                 <!--TODO: Nombre de usuario al que se esta suscrito-->
-                                <h6 class="media-heading">Nombre  1</h6>
+                                <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getIdUser()}</h6>
                                 <!--TODO: Estado del usuario, o bien desconectado, o bien el nombre de la cancion que esta escuchando/ha escuchado mas recientemente-->
                                 <h6 class="media-heading">Cancion 1</h6>
                             </div>

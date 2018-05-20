@@ -2,6 +2,7 @@ package main.java.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
@@ -79,7 +80,9 @@ public class Suscribir {
         return newSus;
 
     }
-
+    /*
+        Devuelve si y solo si suscriptor esta suscrito a suscrito.
+     */
     public static boolean existsSuscribir(String suscriptor, String suscrito) throws Exception{
         Session session = getSession();
         Boolean exists = false;
@@ -94,5 +97,17 @@ public class Suscribir {
         session.close();
         return exists;
 
+    }
+
+    /*
+       Devuelve lista de elementos de Suscribir que tengan el string user como suscriptor
+    */
+    public static List<Suscribir> searchSuscripciones(String user){
+        Session session = getSession();
+        Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor ");
+        query.setParameter("suscriptor", user);
+        List<Suscribir> lista = query.list();
+        session.close();
+        return lista;
     }
 }
