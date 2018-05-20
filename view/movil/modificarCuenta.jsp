@@ -63,11 +63,11 @@
                         </div>
 					</form>
             <br><br>
-				<div class="mx-auto col-6">
-					<button type="submit" class="col btn btn-danger " data-toggle="modal" data-target="#modalBorrar">Borrar Cuenta</button>
-				</div>
+            <div class="mx-auto col-6">
+                <button type="submit" class="col btn btn-danger " data-toggle="modal" data-target="#modalBorrar">Borrar Cuenta</button>
+            </div>
 
-				</div>
+        </div>
 
 		<!-- Modal1 -->
 		<div class="modal fade" id="modalBorrar" tabindex="-1" role="dialog" aria-labelledby="modalBorrar" aria-hidden="true">

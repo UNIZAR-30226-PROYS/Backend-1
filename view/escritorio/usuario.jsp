@@ -1,4 +1,5 @@
 <%@page contentType="text/html; UTF-8" %>
+<%@ page import="main.java.model.Usuario" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
@@ -13,6 +14,12 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
+            <%
+                String user = (String)session.getAttribute("username");
+                Usuario u = Usuario.getUser(user);
+                String nombre = u.getNomAp();
+                String email = u.getEmail();
+            %>
             <div id="tituloNuevo" value="Mi perfil - ${sessionScope.username}" style="display:none;"></div>
             <div class="container mb-3">
                 <div class="row pt-3">
@@ -28,11 +35,8 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;Dato</div>
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;Dato</div>
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;Dato</div>
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;Dato</div>
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;Dato</div>
+                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;<%=nombre%></div>
+                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;<%=email%></div>
                         </div>
                     </div>
                 </div>

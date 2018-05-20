@@ -16,12 +16,17 @@ public class DeleteUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String username = (String)session.getAttribute("username");
-
+        String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
             Usuario.borrarUser(username);
             session.invalidate();
-            response.sendRedirect("/movil/wolfsound.jsp");
+
+            if (UA.contains("Mobile")){
+                response.sendRedirect("/movil/wolfsound.jsp");
+            }else{
+                response.sendRedirect("/escritorio/explorar.jsp");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

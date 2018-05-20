@@ -16,6 +16,7 @@ import java.util.List;
 @WebServlet(urlPatterns = "/modify", name = "ModifyController")
 public class ModifyController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
         String userOld = (String)session.getAttribute("username");
         String userNew = request.getParameter("new_user");
@@ -28,7 +29,12 @@ public class ModifyController extends HttpServlet {
         try {
             Usuario.modUser(userOld,userNew,mail,nombreAp,visiB);
             session.setAttribute("username", userNew);
-            response.sendRedirect("/movil/explorar.jsp");
+            if (UA.contains("Mobile")){
+                response.sendRedirect("/movil/explorar.jsp");
+            }else{
+                response.sendRedirect("/escritorio/explorar.jsp");
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();

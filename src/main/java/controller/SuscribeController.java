@@ -22,10 +22,15 @@ public class SuscribeController extends HttpServlet {
         HttpSession session = request.getSession(true);
         String suscriptor = (String)session.getAttribute("username");
         String suscrito = request.getParameter("name");
+        String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
             Suscribir.addSuscripcion(suscriptor,suscrito);
-            response.sendRedirect("/movil/usuarioPublico.jsp?name="+suscrito);
+            if (UA.contains("Mobile")){
+                response.sendRedirect("/movil/usuarioPublico.jsp?name="+suscrito);
+            }else{
+                response.sendRedirect("/escritorio/explorar.jsp");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

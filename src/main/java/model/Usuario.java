@@ -208,7 +208,7 @@ public class Usuario {
 
             newUser.setNomAp("Anonimo");
             newUser.setUltRep(0);
-            newUser.setPublico(false);
+            newUser.setPublico(true);
             newUser.setConexion("conectado");
 
             session.beginTransaction();

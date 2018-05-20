@@ -1,3 +1,5 @@
+<%@ page import="main.java.model.Usuario" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,7 +18,7 @@
             <div class="col-12 d-block">
 
                 <!-- Titulo de la pantalla -->
-                <h2 class="text-left pl-4 pt-2">Subir una canción</h2>
+                <h2 class="text-left pl-4 pt-2">Modificar el perfil</h2>
                 <div class="row pl-4 pt-2 pb-2">
                     <div class="col-7">
                         <div class="container mb-3">
@@ -24,49 +26,53 @@
                             <!-- Modificar Perfil -->
 
                             <div class="container mb-3">
-
+                                <%
+                                    String user = (String)session.getAttribute("username");
+                                    Usuario u = Usuario.getUser(user);
+                                    Boolean publico = u.isPublico();
+                                    if(publico){pageContext.setAttribute("selected", "selected");}
+                                    String nombre = u.getNomAp();
+                                %>
                                 <!-- Mosificar Cuenta -->
                                 <!-- TODO: ajax para enviar este formulario sin recargar la pagina -->
-                                <form action = "explorar.jsp">
-                                    <label for="nombre">Nombre</label>
+                                <form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post" novalidate>
+                                    <label for="nombreAp">Nombre y Apellidos</label>
                                     <div class="form-group">
                                         <div class="form-row">
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" id="nombre" placeholder="Nombre" value="Nombre actual" required>
-                                            </div>
-                                            <div class="col">
-                                                <input type="text" class="form-control" id="apellidos" placeholder="Apellidos"  value="Apellidos actual" required>
-                                            </div>
+                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value =<%=nombre%> >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre_usuario">Nombre de usuario</label>
-                                        <input type="text" class="form-control" id="nombre_usuario" placeholder="usuario_123" value="User actual" required>
+                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =<%=user%> >
+
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="correo">Direccion de correo</label>
-                                        <input type="email" class="form-control" id="correo" placeholder="user@mail .." value="Correo@actual.com" required>
+                                        <input type="email" class="form-control" name = "mail" id="correo" placeholder="user@mail .."required  value =<%=u.getEmail()%>>
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
 
+
                                     <div class="form-group">
                                         <label for="visperfil">Visibilidad del perfil</label>
-                                        <select class="form-control" id="visperfil"required>
-                                            <option value=""  disabled>Seleccione la visibilidad de su perfil</option>
-                                            <option selected>Privado</option>
-                                            <option>Público</option>
+                                        <select class="form-control" name ="visibilidad" id="visperfil" required>
+                                            <option   disabled>Seleccione la visibilidad de su perfil</option>
+                                            <option >Privado</option>
+                                            <option ${selected}>Público</option>
                                         </select>
                                     </div>
 
+                                    <p class="text-danger">${error}</p>
 
                                     <div class="row">
                                         <div class="mx-auto col-6">
                                             <button type="submit" class="col btn btn-primary ">Modificar</button>
                                         </div>
                                         <div class="mx-auto col-6">
-                                            <button type="reset" class="col btn btn-outline-primary">Deshacer</button>
+                                            <button type="reset" class="col btn btn-outline-primary">Limpiar</button>
                                         </div>
                                     </div>
                                 </form>
