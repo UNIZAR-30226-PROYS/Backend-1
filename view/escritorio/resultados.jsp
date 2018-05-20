@@ -1,84 +1,127 @@
-<!-- TODO (JSP): "busqueda" en el titulo es la busqueda realizada -->
-<% if(request.getParameter("ajax")==null){ %>
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% if (request.getParameter("ajax") == null) { %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Buscar: <%=request.getParameter("b")%></title>
+    <title>Resultados de ${consulta}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
-    <div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
-        <%@include file="includes/topbar.jsp" %>
-        <!-- CONTENIDO DE LA VISTA -->
-        <div id="contenido">
+<div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
+    <%@include file="includes/topbar.jsp" %>
+    <!-- CONTENIDO DE LA VISTA -->
+    <div id="contenido">
 <% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Buscar: <%=request.getParameter("b")%>" style="display:none;"></div>
-            <div class="container mb-3">
-
-                <div class="media mt-2">
-                    <div class="media-body">
-                        <h4 class="media-heading">Resultados de busqueda "<%=request.getParameter("b")%>" </h4>
-                    </div>
-                    <div class="media-right">
-                        <button type="button" class="btn btn-default ">
-                            <span class="fa fa-user-plus" style="font-size:20px; "></span>
-                        </button>
+        <div id="tituloNuevo" value="Resultados de ${consulta}" style="display:none;"></div>
+        <div class="container mb-3">
+            <div class="media mt-2">
+                <div class="media-body">
+                    <h4 class="media-heading">Resultados de "${consulta}" </h4>
+                </div>
+            </div>
+            <div class="row pl-4 pt-2 pb-2">
+                <div class="col-7">
+                    <form class="search-button" action="/search" method="post">
+                        <div class="orm-group">
+                            <div class="input-group">
+                                <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
+                                <span class="input-group-btn search-button">
+                                        <button type="submit" class="btn btn-secondary">
+                                            <span class="fa fa-search" style="font-size:20px;"  ></span>
+                                        </button>
+                                    </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row pl-4 pt-2 pb-2">
+                <div class="col-7">
+                    <div class="input-group">
+                        <select class="custom-select" name="seleccion" id="inputGroupSelect04">
+                            <option id="canciones" selected="selected">Canciones</option>
+                            <option id="usuarios">Usuarios</option>
+                            <option id="listas">Listas</option>
+                        </select>
                     </div>
                 </div>
-
-                <div class="list-group pt-2">
+            </div>
+            <div id="result_canciones" class="list-group pt-2">
+                <c:forEach items="${canciones}" var="resultado">
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">Nombre Cancion</h6>
-                                <h6 class="media-heading">usuario</h6>
+                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${resultado}</h6>
                             </div>
                         </div>
                     </a>
+                </c:forEach>
+            </div>
+            <div id="result_usuarios" class="list-group pt-2 d-none">
+                <c:forEach items="${usuarios}" var="resultado">
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">Nombre Cancion</h6>
-                                <h6 class="media-heading">usuario</h6>
+                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${resultado}</h6>
                             </div>
                         </div>
                     </a>
+                </c:forEach>
+            </div>
+            <div id="result_listas" class="list-group pt-2 d-none">
+                <c:forEach items="${listas}" var="resultado">
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">Nombre Cancion</h6>
-                                <h6 class="media-heading">usuario</h6>
+                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${resultado}</h6>
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
-                        <div class="media">
-                            <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading">Nombre Cancion</h6>
-                                <h6 class="media-heading">usuario</h6>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div> <!-- Container -->
-            <script src="../scripts/busqueda.js"></script>
-    <% if(request.getParameter("ajax")==null){ %>
+                </c:forEach>
+            </div>
         </div>
-    </div>
-    <%@include file="includes/socialbar.jsp" %>
-    <%@include file="includes/reproductor.jsp" %>
+    </div> <!-- Container -->
+    <% if (request.getParameter("ajax") == null) { %>
+</div>
+<%@include file="includes/socialbar.jsp" %>
+<%@include file="includes/reproductor.jsp" %>
+<script>
+    $(document).ready(function () {
+        $('#inputGroupSelect04').on('change',function () {
+            // console.log("Entra en seleccionado");
+            var seleccionado = $('#inputGroupSelect04 option').filter(':selected').text();
+            // console.log(seleccionado);
+            if (seleccionado === "Canciones") {
+                $('#result_canciones').removeClass("d-none");
+                $('#result_usuarios').addClass("d-none");
+                $('#result_listas').addClass("d-none");
+            }
+            if (seleccionado === "Usuarios") {
+                $('#result_canciones').addClass("d-none");
+                $('#result_usuarios').removeClass("d-none");
+                $('#result_listas').addClass("d-none");
+            }
+            if (seleccionado === "Listas") {
+                $('#result_canciones').addClass("d-none");
+                $('#result_usuarios').addClass("d-none");
+                $('#result_listas').removeClass("d-none");
+            }
+        })
+    });
+</script>
 </body>
 </html>
 <% } %>

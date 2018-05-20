@@ -1,9 +1,10 @@
-<!-- TODO (JSP): "Usuario" en el titulo es el nombre del perfil visitado -->
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Usuario</title>
+    <title>Mi perfil - ${sessionScope.username}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -12,15 +13,15 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Usuario" style="display:none;"></div>
+            <div id="tituloNuevo" value="Mi perfil - ${sessionScope.username}" style="display:none;"></div>
             <div class="container mb-3">
                 <div class="row pt-3">
                     <div class="col-4">
-                        <img src="images/user.svg" class="img-thumbnail" style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/contenido/imagenes/user.svg" class="img-thumbnail" style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                     </div>
                     <div class="col-8">
                         <div class="row">
-                            <h2 class="text-left pl-3 pt-2">Nombre de usuario</h2>
+                            <h2 class="text-left pl-3 pt-2">${sessionScope.username}</h2>
                             <!-- TODO (JSP): boton de editar, seguir o dejar de seguir, segun quien visite el perfil -->
                             <a href="modificarPerfil.jsp">
                                 <button type="button" class="btn btn-primary ml-1 mt-2 mb-3"><i class="fa fa-pencil"></i>&nbsp;Editar</button>
@@ -74,7 +75,7 @@
                                 <div class="form-group">
                                     <label for="imagenPerfil">Introduzca su nueva imagen de perfil.</label>
                                     <div class="input-group">
-                                        <input type="file" class="form-control-file" id="imagenPerfil" accept="image/*">
+                                        <input type="file" class="form-control-file" id="imagenPerfil" accept="/contenido/imagenes/usuarios/*">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Aceptar</button>

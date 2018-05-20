@@ -1,3 +1,5 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
 <html lang="es">
@@ -19,11 +21,10 @@
                 <h2 class="text-left pl-4 pt-2">Explorar</h2>
                 <div class="row pl-4 pt-2 pb-2">
                     <div class="col-7">
-                        <!-- TODO: ajax para enviar este formulario sin recargar la pagina -->
-                        <form id="formBuscar" class="search-button" action="resultados.jsp">
+                        <form class="search-button" action="${pageContext.request.contentType}/search" method="post">
                             <div class="orm-group">
                                 <div class="input-group">
-                                    <input id="textoBuscar" name="b" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
+                                    <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
                                     <span class="input-group-btn search-button">
                                         <button type="submit" class="btn btn-secondary">
                                             <span class="fa fa-search" style="font-size:20px;"  ></span>
@@ -247,7 +248,6 @@
                     </div>
                 </div>
             </div>
-            <script src="../scripts/busqueda.js"></script>
         <% if(request.getParameter("ajax")==null){ %>
         </div>
     </div>

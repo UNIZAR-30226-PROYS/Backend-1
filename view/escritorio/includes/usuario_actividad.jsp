@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-2 pt-1">
         <div class="img-responsive text-center">
-            <img src="images/user.svg" style="height: 80px;" alt="Usuario">
+            <img src="/contenido/imagenes/user.svg" style="height: 80px;" alt="Usuario">
         </div>
     </div>
     <div class="col-10">
@@ -22,7 +22,7 @@
                 <div class="media">
                     <div class="col-1">&gt;</div>
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:30px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">Cancion 1</h6>
@@ -33,7 +33,7 @@
                 <!-- TODO: comentarios -->
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/user.svg" style="width:40px;" alt="...">
+                        <img src="/contenido/imagenes/user.svg" style="width:40px;" alt="...">
                     </div>
                     <div class="list-group-item">
                     <div class="media-body">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="media mt-2">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/user.svg" style="width:40px;" alt="...">
+                        <img src="/contenido/imagenes/user.svg" style="width:40px;" alt="...">
                     </div>
                     <div class="media-body">
                         <form class="comentar-actividad" method="get" action="#">

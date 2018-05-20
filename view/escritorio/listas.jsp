@@ -1,3 +1,5 @@
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
 <html lang="es">
@@ -16,16 +18,16 @@
 
                 <div class="media mt-2">
                     <div class="media-body pt-2 pl-4">
-                        <h2 class="media-heading">Listas de NombreUsuario</h2>
+                        <h2 class="media-heading">Listas de ${sessionScope.username}</h2>
                     </div>
                 </div>
-
+                <c:forEach></c:forEach>
                 <div class="list-group pl-4 pt-4 pr-2">
                     <div class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
                                 <a href="lista.jsp">
-                                    <img src="images/wolf.jpg" style="width:70px;" alt="...">
+                                    <img src="/contenido/imagenes/wolf.jpg" style="width:70px;" alt="...">
                                 </a>
                             </div>
                             <div class="media-body">

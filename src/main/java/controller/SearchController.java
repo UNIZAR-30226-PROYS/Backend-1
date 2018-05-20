@@ -12,20 +12,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "SearchController", urlPatterns = "/search")
 public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search_input");
-        RequestDispatcher rd = request.getRequestDispatcher("/movil/resultados.jsp");
+        String UA = request.getHeader("User-Agent");
+        RequestDispatcher rd;
+        if (UA.contains("Mobile")) {
+            rd = request.getRequestDispatcher("/movil/resultados.jsp");
+        }
+        else{
+            rd = request.getRequestDispatcher("/escritorio/resultados.jsp");
+        }
         List<Listarep> listas = Listarep.searchList(search);
         List<Cancion> canciones = Cancion.searchSong(search);
         List<Usuario> usuarios = Usuario.searchUser(search);
         List<String> listasResult = new ArrayList<>();
-        List<String> cancionesResult = new ArrayList<>();
+        Map<String,String> cancionesResult = new HashMap<>();
         List<String> usuariosResult = new ArrayList<>();
         for (Listarep lista : listas) {
             listasResult.add(lista.getNombre());
@@ -34,7 +39,7 @@ public class SearchController extends HttpServlet {
             usuariosResult.add(usuario.getIdUser());
         }
         for (Cancion cancion : canciones) {
-            cancionesResult.add(cancion.getNombre());
+            cancionesResult.put(cancion.getNombre(), String.valueOf(cancion.getIdCancion()));
         }
         request.setAttribute("listas", listasResult);
         request.setAttribute("usuarios", usuariosResult);

@@ -13,5 +13,7 @@
             <li class="nav-item"><a href="subirMusica.jsp"><button type="button" class="btn btn-primary ml-1 mt-1">Sube tu música</button></a></li>
         </ul>
     </div>
-    <a href="usuario.jsp" > <i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>Nombre Usuario</a>
+    <c:if test="${username != null}">
+        <a href="usuario.jsp" > <i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username}</a>
+    </c:if>
 </nav>
