@@ -87,7 +87,7 @@
             <div class="list-group pt-2">
                 <!--TODO: Crear lista con canciones subidas recientemente por suscripciones-->
                 <c:forEach items="${suscripciones}" var="sus">
-                    <a href="usuarioPublico.jsp" class="list-group-item list-group-item-action">
+                    <a href="usuarioPublico.jsp?name=${sus.getUsuarioByIdSuscrito().getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
                                 <img src="images/wolf.jpg" style="width:30px;" alt="...">
