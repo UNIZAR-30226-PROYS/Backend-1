@@ -52,6 +52,7 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
+                        <%String image = "/contenido/web/imagenes/wolf.jpg";%>
                         <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
