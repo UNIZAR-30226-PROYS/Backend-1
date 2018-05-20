@@ -102,11 +102,12 @@ public class Suscribir {
     /*
        Devuelve lista de elementos de Suscribir que tengan el string user como suscriptor
     */
-    public static List<Suscribir> searchSuscripciones(String user){
+    public static List<Suscribir> searchSuscripciones(String user) throws Exception{
         Session session = getSession();
+        Usuario uSuscriptor = Usuario.getUser(user);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor ");
-        query.setParameter("suscriptor", user);
-        List<Suscribir> lista = query.list();
+        query.setParameter("suscriptor", uSuscriptor);
+        List<Suscribir> lista = query.getResultList();
         session.close();
         return lista;
     }

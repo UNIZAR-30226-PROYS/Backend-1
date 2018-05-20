@@ -1,3 +1,5 @@
+<%@ page import="main.java.model.Suscribir" %>
+<%@ page import="java.util.List" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -9,8 +11,10 @@
 	<body>
         <jsp:include page="includes/navbars.jsp"></jsp:include>
         <%
-            List<Suscribir> suscripciones = Suscribir.searchSuscripciones((String)session.getAttribute("username"));
+            String user = (String)session.getAttribute("username");
+            List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user);
             pageContext.setAttribute("suscripciones", suscripciones);
+            pageContext.setAttribute("numSus", suscripciones.size());
         %>
         <!-- CONTENIDO DE LA VISTA -->
         <div class="container mb-3">
@@ -70,7 +74,7 @@
             <div class="border-bottom border-dark w-100 px-3"></div>
             <div class="media mt-2">
                 <div class="media-body">
-                    <h4 class="media-heading"> Suscripciones </h4>
+                    <h4 class="media-heading"> Suscripciones</h4>
                 </div>
                 <div class="media-right">
                     <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalSuscribir">
@@ -82,7 +86,7 @@
 
             <div class="list-group pt-2">
                 <!--TODO: Crear lista con canciones subidas recientemente por suscripciones-->
-                <c:forEach items="${sessionScope.suscripciones}" var="sus">
+                <c:forEach items="${suscripciones}" var="sus">
                     <a href="usuarioPublico.jsp" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
