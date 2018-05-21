@@ -212,13 +212,13 @@ public class Usuario {
             newUser.setUltRep(0);
             newUser.setPublico(true);
             newUser.setConexion("conectado");
-
+            /*
             ArrayList<Listarep> listas = new ArrayList<Listarep>();
             listas.add(Listarep.addLista(newUser,"historial"));
             listas.add(Listarep.addLista(newUser,"mimusica"));
             listas.add(Listarep.addLista(newUser,"favoritos"));
             newUser.setListarepsByIdUser(listas);
-
+            */
             session.beginTransaction();
             session.save( newUser );
             session.getTransaction().commit();

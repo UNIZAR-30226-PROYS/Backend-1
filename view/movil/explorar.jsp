@@ -13,6 +13,7 @@
 
             <!-- Titulo de la pantalla -->
             <h2 class="text-left pt-2">Explorar</h2>
+            <h4>${error}</h4>
             <div class="row pt-1">
                 <div class="col">
                     <form class="search-button" action="${pageContext.request.contextPath}/search" method="post">

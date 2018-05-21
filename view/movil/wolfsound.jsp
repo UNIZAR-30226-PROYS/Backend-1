@@ -31,7 +31,7 @@
 				<div class="tab-pane fade active show" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
 					<form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" novalidate>
 						<h4 class="text-center py-3">Iniciar sesión en WolfSound</h4>
-						
+						<p class="text-danger">${error}</p>
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
 							<input type="text" class="form-control" name="login_user" value="${user}" id="nombre_usuario" placeholder="usuario_123" required>
