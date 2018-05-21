@@ -24,7 +24,7 @@
             <div class="container mb-3">
                 <div class="row pt-3">
                     <div class="col-4">
-                        <img src="/contenido/imagenes/user.svg" class="img-thumbnail" style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/contenido/imagenes/usuarios/${sessionScope.username}Perfil.svg"  style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                     </div>
                     <div class="col-8">
                         <div class="row">
@@ -74,15 +74,14 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                            <!-- TODO: ajax para enviar este formulario sin recargar la pagina -->
-                            <form action = "usuario.jsp">
+                            <form action = "${pageContext.request.contextPath}/changeImage" method="post" enctype = "multipart/form-data">
                                 <div class="form-group">
                                     <label for="imagenPerfil">Introduzca su nueva imagen de perfil.</label>
                                     <div class="input-group">
-                                        <input type="file" class="form-control-file" id="imagenPerfil" accept="/contenido/imagenes/usuarios/*">
+                                        <input type="file" class="form-control-file" name="imagen_new" id="imagenPerfil" accept="image/*">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Aceptar</button>
+                                <input type = "submit" value = "Upload" />
                             </form>
                         </div>
                     </div>

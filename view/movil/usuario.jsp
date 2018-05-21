@@ -89,7 +89,7 @@
                     <a href="usuarioPublico.jsp?name=${sus.getUsuarioByIdSuscrito().getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.svg" style="width:30px;" alt="...">
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getIdUser()}</h6>
