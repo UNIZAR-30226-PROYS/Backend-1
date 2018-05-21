@@ -2,6 +2,7 @@ package main.java.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 
@@ -80,6 +81,41 @@ public class Listarep {
 
     public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
         this.usuarioByIdUser = usuarioByIdUser;
+    }
+
+    public static Listarep addLista(Usuario user, String nombre) throws Exception{
+        Session session = getSession();
+
+        if (!existsLista(user,nombre)){
+            Listarep newLista = new Listarep();
+            newLista.setNombre(nombre);
+            newLista.setCancioneslistasByIdLista(new ArrayList<Cancioneslista>());
+
+            session.beginTransaction();
+            session.save( newLista );
+            session.getTransaction().commit();
+
+            session.close();
+
+            return newLista;
+        }else{
+            session.close();
+            throw new Exception("Lista con el mismo nombre ya existe");
+        }
+    }
+
+    /*
+     * True -> cancion existe para ese user
+     * False -> cancion no existe para ese user
+     */
+    public static boolean existsLista(Usuario user, String nombre){
+        boolean exists = false;
+        for (Listarep lista : user.getListarepsByIdUser()){
+            if(lista.getNombre()==nombre){
+                exists = true;
+            }
+        }
+        return exists;
     }
 
     public static List<Listarep> searchList(String listaS){

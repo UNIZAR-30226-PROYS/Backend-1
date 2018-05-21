@@ -4,6 +4,7 @@ import javax.naming.AuthenticationException;
 import javax.persistence.*;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 
@@ -211,6 +212,12 @@ public class Usuario {
             newUser.setUltRep(0);
             newUser.setPublico(true);
             newUser.setConexion("conectado");
+
+            ArrayList<Listarep> listas = new ArrayList<Listarep>();
+            listas.add(Listarep.addLista(newUser,"historial"));
+            listas.add(Listarep.addLista(newUser,"mimusica"));
+            listas.add(Listarep.addLista(newUser,"favoritos"));
+            newUser.setListarepsByIdUser(listas);
 
             session.beginTransaction();
             session.save( newUser );
