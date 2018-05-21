@@ -83,25 +83,10 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    public static Listarep addLista(Usuario user, String nombre) throws Exception{
-        Session session = getSession();
-
-        if (!existsLista(user,nombre)){
-            Listarep newLista = new Listarep();
-            newLista.setNombre(nombre);
-            newLista.setCancioneslistasByIdLista(new ArrayList<Cancioneslista>());
-
-            session.beginTransaction();
-            session.save( newLista );
-            session.getTransaction().commit();
-
-            session.close();
-
-            return newLista;
-        }else{
-            session.close();
-            throw new Exception("Lista con el mismo nombre ya existe");
-        }
+    public static Listarep initLista(Usuario user, String nombre) throws Exception{
+        Listarep newLista = new Listarep();
+        newLista.setNombre(nombre);
+        return newLista;
     }
 
     /*
