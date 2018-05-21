@@ -218,7 +218,7 @@ public class Usuario {
 
             session.close();
             File from = new File("/contenido/imagenes/user.svg");
-            File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.svg");
+            File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.png");
             try {
                 Files.copy(from.toPath(),to.toPath());
             }

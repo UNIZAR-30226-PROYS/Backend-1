@@ -16,7 +16,7 @@
             <div class="row pt-3">
                 <div class="col col-md-offset-5">
                     <div class="img-responsive text-center">
-                        <img src="/contenido/imagenes/usuarios/<%=username%>Perfil.svg" style="height: 80px;" alt="Usuario">
+                        <img src="/contenido/imagenes/usuarios/<%=username%>Perfil.png" style="height: 80px;" alt="Usuario">
                         <p><%=username%></p>
                     </div>
                 </div>

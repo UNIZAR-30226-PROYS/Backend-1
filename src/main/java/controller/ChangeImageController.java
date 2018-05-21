@@ -54,7 +54,7 @@ public class ChangeImageController extends HttpServlet {
                         String fileName = fi.getName();
                         boolean isInMemory = fi.isInMemory();
                         long sizeInBytes = fi.getSize();
-                        file = new File( filePath  +user+"Perfil.svg") ;
+                        file = new File( filePath  +user+"Perfil.png") ;
                         fi.write( file ) ;
                     }
                 }
@@ -64,7 +64,7 @@ public class ChangeImageController extends HttpServlet {
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/usuario.jsp");
             }else{
-                response.sendRedirect("/escritorio/explorar.jsp");
+                response.sendRedirect("/escritorio/usuario.jsp");
             }
 
         } catch (Exception e) {
