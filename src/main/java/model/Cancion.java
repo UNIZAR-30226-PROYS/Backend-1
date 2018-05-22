@@ -158,7 +158,6 @@ public class Cancion {
      */
     public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
         Session session = getSession();
-        Hibernate.initialize(user.getCancionsByIdUser());
 
         if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
@@ -193,18 +192,16 @@ public class Cancion {
      * True -> cancion existe para ese user
      * False -> cancion no existe para ese user
      */
-    public static boolean existsCancion(Usuario user, String nombre){
+    public static boolean existsCancion(Usuario user, String song){
+        Session session = getSession();
         boolean exists = false;
-        Collection<Cancion> aux = user.getCancionsByIdUser();
-        //List<Cancion> lista = new ArrayList<>(aux);
-        if (aux == null){
-            for (Cancion cancion : aux) {
-                if (cancion.getNombre().equals(nombre)) {
-                    exists = true;
-                    break;
-                }
-            }
+        Query query = session.createQuery("from Cancion where idUser = :user and nombre = :cancion");
+        query.setParameter("user", user.getIdUser());
+        query.setParameter("cancion", song);
+        if (query.uniqueResult() != null){
+            exists = true;
         }
+        session.close();
         return exists;
     }
 
