@@ -9,6 +9,8 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
 public class Listarep {
@@ -83,9 +85,13 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    public static Listarep initLista(Usuario user, String nombre) throws Exception{
+    public static Listarep initLista(Usuario user, String nombre, int id) throws Exception{
         Listarep newLista = new Listarep();
+        newLista.setIdLista(id);
         newLista.setNombre(nombre);
+        newLista.setNumElementos(0);
+        newLista.setUsuarioByIdUser(user);
+
         return newLista;
     }
 
