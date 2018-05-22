@@ -19,6 +19,7 @@
 </div>
 
 <!-- Listado -->
+<br><br><br>
 <ul class="list-group">
     <c:forEach items="${suscripciones}" var="sus">
         <li class="list-group-item media">
@@ -36,3 +37,5 @@
         </li>
     </c:forEach>
 </ul>
+
+

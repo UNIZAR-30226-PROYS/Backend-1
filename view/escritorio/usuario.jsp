@@ -28,6 +28,9 @@
                             <a href="modificarPerfil.jsp">
                                 <button type="button" class="btn btn-primary ml-1 mt-2 mb-3"><i class="fa fa-pencil"></i>&nbsp;Editar</button>
                             </a>
+                            <button type="button" class="btn btn-primary ml-1 mt-2 mb-3" data-toggle="modal" data-target="#modalSuscribir">
+                                <i class="fa fa-user-plus"></i>&nbsp;Añadir Suscripción
+                            </button>
                         </div>
                         <div class="row">
                             <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;${username.getNomAp()}</div>
@@ -59,7 +62,28 @@
                     </script>
                 </div>
             </div> <!-- Container -->
+            <!-- Modal1 -->
+            <div class="modal fade" id="modalSuscribir" tabindex="-1" role="dialog" aria-labelledby="modalSuscribir" aria-hidden="true">
+                <div class= "modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
 
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
+                                <div class="form-group">
+                                    <label for="nombreSus">Nombre del usuario</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="nombreSus" placeholder="Usuario" name="name" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Suscribirse</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Modal2 -->
             <div class="modal fade" id="modalImagen" tabindex="-1" role="dialog" aria-labelledby="modalImagen" aria-hidden="true">
                 <div class= "modal-dialog modal-dialog-centered" role="document">
