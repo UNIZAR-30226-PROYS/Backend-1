@@ -26,20 +26,18 @@ import org.apache.commons.io.output.*;
 public class UploadSongController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String username = (String)session.getAttribute("username");
+        Usuario User = (Usuario)session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
 
         try {
             //Modificaciones en la base de datos.
-            String user = (String)session.getAttribute("username");
             String nombre = "error";
             String genero = "error";
             String album  = "error";
-            Usuario User = Usuario.getUser(username);
 
             //TODO:esto peta.
-            Cancion.addCancion(nombre,genero,User);
+            Cancion cancion = Cancion.addCancion(nombre,genero,User);
 
             //Almacenamiento de ficheros.
             File file ;
@@ -68,14 +66,14 @@ public class UploadSongController extends HttpServlet {
                             filePath ="/contenido/canciones/";
                             boolean isInMemory = fi.isInMemory();
                             long sizeInBytes = fi.getSize();
-                            file = new File(filePath + user +nombre+ ".mp3");
+                            file = new File(filePath + Integer.toString(cancion.getIdCancion()) + ".mp3");
                             fi.write(file);
                         }
                         else{
                             filePath ="/contenido/imagenes/canciones/";
                             boolean isInMemory = fi.isInMemory();
                             long sizeInBytes = fi.getSize();
-                            file = new File(filePath + user +nombre+ ".png");
+                            file = new File(filePath + Integer.toString(cancion.getIdCancion()) + ".png");
                             fi.write(file);
                         }
                     }
