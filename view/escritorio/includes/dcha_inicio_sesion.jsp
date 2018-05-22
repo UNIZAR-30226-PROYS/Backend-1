@@ -8,7 +8,7 @@
 </div>
 
 <div class="socialbar-cuerpo">
-    <form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" novalidate>
+    <form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" >
         <!-- Apartados -->
         <div class="form-group pt-2">
             <label for="nombre_usuario" style="color: black">Nombre de usuario</label>
