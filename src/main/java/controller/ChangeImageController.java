@@ -29,7 +29,7 @@ public class ChangeImageController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
-            String user = (String)session.getAttribute("username");
+            String user = ((Usuario)session.getAttribute("username")).getIdUser();
 
             File file ;
             int maxFileSize = 5000 * 1024;
