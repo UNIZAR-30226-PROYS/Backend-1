@@ -2,6 +2,7 @@
     <div id="listadoEscuchas" class="text-white text-center">
         <% if(session.getAttribute("username")==null){ %>
             <%@include file="dcha_registro.jsp"%>
+            ${sessionScope.error}
         <% }else{ %>
             <%@include file="dcha_amigos_escuchando.html" %>
         <% } %>

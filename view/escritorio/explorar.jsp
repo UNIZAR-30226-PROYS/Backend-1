@@ -35,7 +35,7 @@
                         </form>
                     </div>
                 </div>
-
+                ${sessionScope.error}
                 <div class="row pl-4 pr-2">
                     <div class="col-auto pt-2 pb-3">
                         <h4>Mis listas</h4>

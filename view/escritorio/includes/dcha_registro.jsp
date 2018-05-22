@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html; UTF-8" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -9,7 +10,6 @@
 
 <div class="socialbar-cuerpo">
     <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" novalidate>
-        <h4>${error}</h4>
         <!-- Apartados -->
         <div class="form-group pt-2">
             <label for="nombre_usuario" style="color: black">Nombre de usuario</label>
