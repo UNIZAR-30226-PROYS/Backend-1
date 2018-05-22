@@ -16,7 +16,12 @@ public class LogoutController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        String UA = request.getHeader("User-Agent");
         session.invalidate();
-        response.sendRedirect("/movil/wolfsound.jsp");
+        if (UA.contains("Mobile")){
+            response.sendRedirect("/movil/explorar.jsp");
+        }else{
+            response.sendRedirect("/escritorio/explorar.jsp");
+        }
     }
 }

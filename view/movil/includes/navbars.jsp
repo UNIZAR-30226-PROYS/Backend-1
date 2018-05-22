@@ -41,7 +41,7 @@
             <li><a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a></li>
         </ul>
         <div class="text-white text-center">
-            <a href="subirCancion.html"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
+            <a href="subirCancion.jsp"><button type="button" class="btn btn-dark" >Sube tu música</button></a>
         </div>
     </c:if>
     <c:if test="${sessionScope.username == null}">
