@@ -167,7 +167,7 @@ public class Usuario {
         this.comentariosByIdUser = comentariosByIdUser;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioByIdUser")
+    @OneToMany(mappedBy = "usuarioByIdUser")
     public Collection<Listarep> getListarepsByIdUser() {
         return listarepsByIdUser;
     }
