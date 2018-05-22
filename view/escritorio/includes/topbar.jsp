@@ -16,6 +16,6 @@
         </ul>
     </div>
     <c:if test="${username != null}">
-        <a href="usuario.jsp" > <i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username}</a>
+        <a href="usuario.jsp" > <i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getIdUser()}</a>
     </c:if>
 </nav>

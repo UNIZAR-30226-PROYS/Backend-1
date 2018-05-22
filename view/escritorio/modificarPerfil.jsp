@@ -27,8 +27,7 @@
 
                             <div class="container mb-3">
                                 <%
-                                    String user = (String)session.getAttribute("username");
-                                    Usuario u = Usuario.getUser(user);
+                                    Usuario u = (Usuario)session.getAttribute("username");
                                     Boolean publico = u.isPublico();
                                     if(publico){pageContext.setAttribute("selected", "selected");}
                                     String nombre = u.getNomAp();
@@ -44,7 +43,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre_usuario">Nombre de usuario</label>
-                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =<%=user%> >
+                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =<%=u.getIdUser()%> >
 
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
