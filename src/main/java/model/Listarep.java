@@ -11,6 +11,7 @@ import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Listarep {
@@ -21,6 +22,8 @@ public class Listarep {
     private Usuario usuarioByIdUser;
 
     @Id
+    @GenericGenerator(name="gen" , strategy="increment")
+    @GeneratedValue(generator="gen")
     @Column(name = "idLista")
     public int getIdLista() {
         return idLista;
@@ -85,9 +88,9 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    public static Listarep initLista(Usuario user, String nombre, int id) throws Exception{
+    public static Listarep initLista(Usuario user, String nombre) throws Exception{
         Listarep newLista = new Listarep();
-        newLista.setIdLista(id);
+        newLista.setIdLista(0);
         newLista.setNombre(nombre);
         newLista.setNumElementos(0);
         newLista.setUsuarioByIdUser(user);

@@ -217,9 +217,9 @@ public class Usuario {
 
             List<Listarep> listas = new ArrayList<Listarep>();
 
-            Listarep historial = Listarep.initLista(newUser,"historial",1);
-            Listarep mimusica = Listarep.initLista(newUser,"mimusica",2);
-            Listarep favoritos = Listarep.initLista(newUser,"favoritos",3);
+            Listarep historial = Listarep.initLista(newUser,"historial");
+            Listarep mimusica = Listarep.initLista(newUser,"mimusica");
+            Listarep favoritos = Listarep.initLista(newUser,"favoritos");
             listas.add(historial);
             listas.add(mimusica);
             listas.add(favoritos);
