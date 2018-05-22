@@ -185,11 +185,12 @@ public class Cancion {
      */
     public static boolean existsCancion(Usuario user, String nombre){
         boolean exists = false;
-        for (Cancion cancion : user.getCancionsByIdUser()){
-            if(cancion.getNombre()==nombre){
+        for (Cancion cancion : user.getCancionsByIdUser()) {
+            if (cancion.getNombre().equals(nombre)) {
                 exists = true;
             }
         }
+
         return exists;
     }
 
