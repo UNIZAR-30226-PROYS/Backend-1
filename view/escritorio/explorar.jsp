@@ -36,6 +36,7 @@
                     </div>
                 </div>
                 ${sessionScope.error}
+                <c:remove var="error"></c:remove>
                 <div class="row pl-4 pr-2">
                     <div class="col-auto pt-2 pb-3">
                         <h4>Mis listas</h4>
