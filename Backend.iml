@@ -20,6 +20,7 @@
         <webroots>
           <root url="file://$MODULE_DIR$/view" relative="/" />
         </webroots>
+        <sourceRoots />
       </configuration>
     </facet>
   </component>
