@@ -8,9 +8,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a id="nav-explorar" class="nav-link" href="explorar.jsp">Explorar</a></li>
-            <li class="nav-item"><a id="nav-listas" class="nav-link" href="listas.jsp">Listas</a></li>
-            <li class="nav-item"><a id="nav-artistas" class="nav-link" href="artistas.jsp">Suscripciones</a></li>
-            <li class="nav-item"><a href="subirMusica.jsp"><button type="button" class="btn btn-primary ml-1 mt-1">Sube tu música</button></a></li>
+            <c:if test="${sessionScope.username != null}">
+                <li class="nav-item"><a id="nav-listas" class="nav-link" href="listas.jsp">Listas</a></li>
+                <li class="nav-item"><a id="nav-artistas" class="nav-link" href="artistas.jsp">Suscripciones</a></li>
+                <li class="nav-item"><a href="subirMusica.jsp"><button type="button" class="btn btn-primary ml-1 mt-1">Sube tu música</button></a></li>
+            </c:if>
         </ul>
     </div>
     <c:if test="${username != null}">
