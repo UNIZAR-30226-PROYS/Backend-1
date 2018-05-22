@@ -37,7 +37,7 @@ public class UploadSongController extends HttpServlet {
             String album  = "error";
 
             //TODO:esto peta.
-            //Cancion cancion = Cancion.addCancion(nombre,genero,User);
+            Cancion cancion = Cancion.addCancion(nombre,genero,User);
 
             //Almacenamiento de ficheros.
             File file ;

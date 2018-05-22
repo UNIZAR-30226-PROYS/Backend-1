@@ -31,7 +31,7 @@
         <div class="form-group">
             <label for="correo">Direccion de correo</label>
             <input type="email" class="form-control" name="mail" id="correo" placeholder="user@mail .." required
-                   value=<%=u.getEmail()%>>
+                   value=${username.getEmail()}>
             <div class="invalid-feedback"> No puedes dejar este campo en blanco.</div>
         </div>
 
