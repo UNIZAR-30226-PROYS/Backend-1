@@ -19,6 +19,7 @@ body{
     background-color: black!important;
     color:black;
     font-size: larger;
+    height:50px;
 }
 
 #topbar ul li a {
@@ -40,7 +41,7 @@ body{
     top:0px;
     left:0px;
     bottom:0px;
-    height:calc(100% - 49px); /* menos topbar */
+    height:calc(100% - 50px); /* menos topbar */
     overflow-y:auto;
 }
 
@@ -72,7 +73,7 @@ body{
     background: #040815;
     text-align:left;
     font-size:20px;
-    height:49px;    /*como topbar */
+    height:50px;    /*como topbar */
     position:absolute;
     width:100%;
 }
@@ -83,9 +84,10 @@ body{
     padding-right:4%;
     position:absolute;
     top:50px;
-    height:calc(100% - 49px); /*menos header*/
+    height:calc(100% - 50px); /*menos header*/
     overflow-x:hidden;
     overflow-y:auto;
+    width:100%;
 }
 
 /* socialbar navigation */

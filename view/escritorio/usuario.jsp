@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Mi perfil - ${sessionScope.username}</title>
+    <title>Mi perfil - ${username.getIdUser()}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -14,21 +14,15 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
-            <%
-                String user = (String)session.getAttribute("username");
-                Usuario u = Usuario.getUser(user);
-                String nombre = u.getNomAp();
-                String email = u.getEmail();
-            %>
-            <div id="tituloNuevo" value="Mi perfil - ${sessionScope.username}" style="display:none;"></div>
+            <div id="tituloNuevo" value="Mi perfil - ${username.getIdUser()}" style="display:none;"></div>
             <div class="container mb-3">
                 <div class="row pt-3">
                     <div class="col-4">
-                        <img src="/contenido/imagenes/usuarios/${sessionScope.username}Perfil.png"  style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/contenido/imagenes/usuarios/${username.getIdUser()}Perfil.png"  style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                     </div>
                     <div class="col-8">
                         <div class="row">
-                            <h2 class="text-left pl-3 pt-2">${sessionScope.username}</h2>
+                            <h2 class="text-left pl-3 pt-2">${username.getIdUser()}</h2>
                             <!-- TODO (JSP): boton de editar, seguir o dejar de seguir, segun quien visite el perfil -->
                             <h3> </h3>
                             <a href="modificarPerfil.jsp">
@@ -36,8 +30,8 @@
                             </a>
                         </div>
                         <div class="row">
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;<%=nombre%></div>
-                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;<%=email%></div>
+                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;${username.getNomAp()}</div>
+                            <div class="col-4"><i class="fa fa-address-card"></i>&nbsp;${username.getEmail()}</div>
                         </div>
                     </div>
                 </div>

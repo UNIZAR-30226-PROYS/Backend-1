@@ -26,11 +26,11 @@ public class RegisterController extends HttpServlet {
         RequestDispatcher rd;
         String UA = request.getHeader("User-Agent");
         try {
-            Usuario.addUser(user,pass,email);
+            Usuario username = Usuario.addUser(user,pass,email);
             HttpSession session = request.getSession(true);
             // TODO: sustituir por listas del usuario
             List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
-            session.setAttribute("username", user);
+            session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
             session.setAttribute("misAudios", listas);
             session.setAttribute("listasRecomendadas", listas);
