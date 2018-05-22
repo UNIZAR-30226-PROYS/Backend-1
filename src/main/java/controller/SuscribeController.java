@@ -29,7 +29,7 @@ public class SuscribeController extends HttpServlet {
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/usuarioPublico.jsp?name="+suscrito);
             }else{
-                response.sendRedirect("/escritorio/explorar.jsp");
+                response.sendRedirect("/escritorio/artista.jsp?name="+suscrito);
             }
 
         } catch (Exception e) {

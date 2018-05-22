@@ -37,7 +37,7 @@ public class UploadSongController extends HttpServlet {
             String album  = "error";
 
             //TODO:esto peta.
-            Cancion cancion = Cancion.addCancion(nombre,genero,User);
+
 
             //Almacenamiento de ficheros.
             File file ;
@@ -57,6 +57,20 @@ public class UploadSongController extends HttpServlet {
                 upload.setSizeMax( maxFileSize );
                 List fileItems = upload.parseRequest(request);
                 Iterator i = fileItems.iterator();
+                //Encontramos campos.
+                while ( i.hasNext () )
+                {
+                    FileItem fi = (FileItem)i.next();
+                    String fieldName = fi.getFieldName();
+                    if ( fi.isFormField () )  { //Almacenamos ficheros.
+                        if(fieldName.equals("nombre"))nombre = fi.getString();
+                        if(fieldName.equals("genero"))genero = fi.getString();
+                        if(fieldName.equals("album"))album = fi.getString();
+                    }
+                }
+                Cancion cancion = Cancion.addCancion(nombre,genero,User);
+                i = fileItems.iterator();
+                //Subimos ficheros.
                 while ( i.hasNext () )
                 {
                     FileItem fi = (FileItem)i.next();
@@ -69,18 +83,6 @@ public class UploadSongController extends HttpServlet {
                             file = new File(filePath + "cancion"+Integer.toString(cancion.getIdCancion()) + ".mp3");
                             fi.write(file);
                         }
-                        else{
-                            filePath ="/contenido/imagenes/canciones/";
-                            boolean isInMemory = fi.isInMemory();
-                            long sizeInBytes = fi.getSize();
-                            file = new File(filePath + "portada"+Integer.toString(cancion.getIdCancion()) + ".png");
-                            fi.write(file);
-                        }
-                    }
-                    else {//Recuperamos resto de parametros.
-                        if(fieldName.equals("nombre"))nombre = fi.getString();
-                        if(fieldName.equals("genero"))genero = fi.getString();
-                        if(fieldName.equals("album"))album = fi.getString();
                     }
                 }
             }

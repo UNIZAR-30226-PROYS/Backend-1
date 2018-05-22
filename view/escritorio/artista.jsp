@@ -1,3 +1,5 @@
+<%@ page import="main.java.model.Usuario" %>
+<%@ page import="main.java.model.Suscribir" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
@@ -15,19 +17,31 @@
         <div id="contenido">
             <% } //if%>
             <div id="tituloNuevo" value="Wolfic - Artista" style="display:none;"></div>
+            <%String username = (String) request.getParameter("name");%>
             <!-- CONTENIDO DE LA VISTA -->
             <div class="container mb-3">
 
                 <div class="media mt-2">
                     <div class="row media-body pt-2 pl-4">
                         <div class="media-left pl-1" style="padding-right:15px">
-                            <img src="images/wolf.jpg" style="width:300px;" alt="...">
+                            <img src="/contenido/imagenes/usuarios/<%=username%>Perfil.png" style="width:300px;" alt="...">
                         </div>
                         <div class="row media-body pt-5 pl-5 mt-auto mb-auto">
-                            <h1 class="media-heading">Nombre Artista</h1>
-                            <div class="pl-3 pt-1">
-                                <button type="button" class="btn btn-primary ml-1 mt-1">Seguir</button></li>
-                            </div>
+                            <h1 class="media-heading"><%=username%></h1>
+                            <%
+                                Boolean suscrito = Suscribir.existsSuscribir(((Usuario)session.getAttribute("username")).getIdUser(),username);
+                                pageContext.setAttribute("sus", suscrito);
+                            %>
+                            <c:if test="${!sus}">
+                                <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="hidden" value="<%=username%>" name="name" required>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Suscribirse</button>
+                                </form>
+                            </c:if>
                         </div>
                     </div>
                 </div>
