@@ -12,6 +12,8 @@ import main.java.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import static main.java.BCrypt.checkpw;
 import static main.java.HibernateUtil.getSession;
@@ -165,7 +167,7 @@ public class Usuario {
         this.comentariosByIdUser = comentariosByIdUser;
     }
 
-    @OneToMany(mappedBy = "usuarioByIdUser")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioByIdUser")
     public Collection<Listarep> getListarepsByIdUser() {
         return listarepsByIdUser;
     }
@@ -317,6 +319,19 @@ public class Usuario {
         }
         session.close();
         return exists;
+    }
+
+    public static void guardarInstante(Usuario user, int rep) throws Exception{
+        Session session = getSession();
+        if (existsUser(user.getIdUser())){
+            user.setUltRep(rep);
+            session.beginTransaction();
+            session.saveOrUpdate( user );
+            session.getTransaction().commit();
+        }else{
+            throw new Exception("Usuario no existe");
+        }
+        session.close();
     }
 
 
