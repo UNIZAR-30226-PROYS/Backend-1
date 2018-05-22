@@ -1,6 +1,7 @@
 <%--TODO: Falta revisar codigo java dentro de la pagina--%>
 <%@ page import="main.java.model.Suscribir" %>
 <%@ page import="java.util.List" %>
+<%@ page import="main.java.model.Usuario" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -12,8 +13,8 @@
 	<body>
         <jsp:include page="includes/navbars.jsp"></jsp:include>
         <%
-            String user = (String)session.getAttribute("username");
-            List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user);
+            Usuario user = (Usuario)session.getAttribute("username");
+            List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user.getIdUser());
             pageContext.setAttribute("suscripciones", suscripciones);
             pageContext.setAttribute("numSus", suscripciones.size());
         %>

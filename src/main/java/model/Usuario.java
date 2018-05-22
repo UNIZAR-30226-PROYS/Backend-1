@@ -140,7 +140,7 @@ public class Usuario {
         return Objects.hash(idUser, nomAp, email, conexion, ultRep, contrasenya, publico);
     }
 
-    @OneToMany(mappedBy = "usuarioByIdUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioByIdUser")
     public Collection<Album> getAlbumsByIdUser() {
         return albumsByIdUser.get();
     }
@@ -149,7 +149,7 @@ public class Usuario {
         this.albumsByIdUser.set(albumsByIdUser);
     }
 
-    @OneToMany(mappedBy = "usuarioByIdUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioByIdUser")
     public Collection<Cancion> getCancionsByIdUser() {
         return cancionsByIdUser;
     }
@@ -167,7 +167,7 @@ public class Usuario {
         this.comentariosByIdUser = comentariosByIdUser;
     }
 
-    @OneToMany(mappedBy = "usuarioByIdUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "usuarioByIdUser")
     public Collection<Listarep> getListarepsByIdUser() {
         return listarepsByIdUser;
     }

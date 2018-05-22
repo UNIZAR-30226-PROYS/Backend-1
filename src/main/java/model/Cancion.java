@@ -205,6 +205,21 @@ public class Cancion {
         return exists;
     }
 
+    public static boolean existsCancion2(Usuario user, String song){
+        Collection<Cancion> aux = user.getCancionsByIdUser();
+        List<Cancion> canciones = new ArrayList<>(aux);
+        boolean exists = false;
+        if(canciones!=null){
+            for(Cancion cancion : canciones){
+                if(song==cancion.getNombre()){
+                    exists = true;
+                    break;
+                }
+            }
+        }
+        return exists;
+    }
+
     /*
         Devuelve lista de elementos de Cancion que tengan el string song en el nombre
      */
