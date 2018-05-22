@@ -1,4 +1,5 @@
 <%--TODO: Falta revisar codigo java dentro de la pagina--%>
+<%@ page import="main.java.model.Usuario" %>
 <%@ page import="main.java.model.Suscribir" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -45,7 +46,7 @@
             </div>
             <div class="border-bottom border-dark w-100 px-3"></div> <!-- Separador horizontal -->
             <%
-                Boolean suscrito = Suscribir.existsSuscribir((String)session.getAttribute("username"),username);
+                Boolean suscrito = Suscribir.existsSuscribir(((Usuario)session.getAttribute("username")).getIdUser(),username);
                 pageContext.setAttribute("sus", suscrito);
             %>
             <c:if test="${!sus}">

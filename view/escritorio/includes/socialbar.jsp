@@ -3,7 +3,7 @@
         <% if(session.getAttribute("username")==null){ %>
             <%@include file="dcha_registro.jsp"%>
         <% }else{ %>
-            <%@include file="dcha_amigos_escuchando.html" %>
+            <%@include file="dcha_amigos_escuchando.jsp" %>
         <% } %>
     </div>
     <script>
