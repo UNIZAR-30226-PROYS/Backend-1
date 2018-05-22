@@ -18,7 +18,8 @@ public class ModifyController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
-        String userOld = (String)session.getAttribute("username");
+
+        Usuario userOld = (Usuario) session.getAttribute("username");
         String userNew = request.getParameter("new_user");
         String nombreAp = request.getParameter("nombre_Ap");
         String mail = request.getParameter("mail");
@@ -27,8 +28,8 @@ public class ModifyController extends HttpServlet {
 
         RequestDispatcher rd = null;
         try {
-            Usuario.modUser(userOld,userNew,mail,nombreAp,visiB);
-            session.setAttribute("username", userNew);
+            Usuario nuser = Usuario.modUser(userOld.getIdUser(),userNew,mail,nombreAp,visiB);
+            session.setAttribute("username", nuser);
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{

@@ -15,11 +15,11 @@ import java.io.IOException;
 public class DeleteUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String username = (String)session.getAttribute("username");
+        Usuario username = (Usuario)session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
-            Usuario.borrarUser(username);
+            Usuario.borrarUser(username.getIdUser());
             session.invalidate();
 
             if (UA.contains("Mobile")){
