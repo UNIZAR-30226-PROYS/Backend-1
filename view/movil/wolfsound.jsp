@@ -35,18 +35,18 @@
 						<div class="form-group">
 							<label for="nombre_usuario">Nombre de usuario</label>
 							<input type="text" class="form-control" name="login_user" value="${user}" id="nombre_usuario" placeholder="usuario_123" required>
-							<c:if test="${error == 'El usuario no existe'}">
-								<p class="text-danger">${error}</p>
-							</c:if>
+							<%--<c:if test="${error == 'El usuario no existe'}">--%>
+								<%--<p class="text-danger">${error}</p>--%>
+							<%--</c:if>--%>
                             <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
 							
 						<div class="form-group">
 							<label for="contrasenya">Contraseña</label>
 							<input type="password" class="form-control" name="login_pass" id="contrasenya" placeholder="*****" required>
-							<c:if test="${error == 'Contraseña errónea'}">
-								<p class="text-danger">${error}</p>
-							</c:if>
+							<%--<c:if test="${error == 'Contraseña errónea'}">--%>
+								<%--<p class="text-danger">${error}</p>--%>
+							<%--</c:if>--%>
 							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
 						</div>
                         <div class="row">

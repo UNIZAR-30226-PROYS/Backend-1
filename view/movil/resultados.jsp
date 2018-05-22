@@ -24,7 +24,7 @@
                         <input type="text" class="form-control" name="search_input" placeholder="Buscar ...">
                         <span class="input-group-btn search-button">
                             <button type="submit" class="btn btn-secondary">
-                                <span class="fa fa-search" style="font-size:20px;"  ></span>
+                                <span class="fa fa-search" style="font-size:20px;"></span>
                             </button>
                         </span>
                     </div>
@@ -48,46 +48,46 @@
     <%--${canciones}--%>
     <%--${usuarios}--%>
     <div id="result_canciones" class="list-group pt-2">
-        <c:forEach items="${canciones}" var="resultado">
+        <c:forEach items="${canciones}" var="cancion">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <%String image = "/contenido/web/imagenes/wolf.jpg";%>
-                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.jpg" style="width:64px;"
+                             alt="...">
                     </div>
                     <div class="media-body">
-                        <h6 class="media-heading">${resultado}</h6>
-                        <h6 class="media-heading">${resultado}</h6>
+                        <h6 class="media-heading">${cancion.getNombre()}</h6>
+                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
                     </div>
                 </div>
             </a>
         </c:forEach>
     </div>
     <div id="result_usuarios" class="list-group pt-2 d-none">
-        <c:forEach items="${usuarios}" var="resultado">
+        <c:forEach items="${usuarios}" var="usuario">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}jpg" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
-                        <h6 class="media-heading">${resultado}</h6>
-                        <h6 class="media-heading">${resultado}</h6>
+                        <h6 class="media-heading">${usuario.getNomAp()}</h6>
+                        <h6 class="media-heading">${usuario.getIdUser()}</h6>
                     </div>
                 </div>
             </a>
         </c:forEach>
     </div>
     <div id="result_listas" class="list-group pt-2 d-none">
-        <c:forEach items="${listas}" var="resultado">
+        <c:forEach items="${listas}" var="lista">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/imagenes/${lista.getIdLista()}.jpg" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
-                        <h6 class="media-heading">${resultado}</h6>
-                        <h6 class="media-heading">${resultado}</h6>
+                        <h6 class="media-heading">${lista.getNombre()}</h6>
+                        <h6 class="media-heading">${lista.getNumElementos()} canciones</h6>
                     </div>
                 </div>
             </a>
@@ -98,7 +98,7 @@
 <jsp:include page="includes/footer.jsp"></jsp:include>
 <script>
     $(document).ready(function () {
-        $('#inputGroupSelect04').on('change',function () {
+        $('#inputGroupSelect04').on('change', function () {
             // console.log("Entra en seleccionado");
             var seleccionado = $('#inputGroupSelect04 option').filter(':selected').text();
             // console.log(seleccionado);

@@ -29,21 +29,9 @@ public class SearchController extends HttpServlet {
         List<Listarep> listas = Listarep.searchList(search);
         List<Cancion> canciones = Cancion.searchSong(search);
         List<Usuario> usuarios = Usuario.searchUser(search);
-        List<String> listasResult = new ArrayList<>();
-        Map<String,String> cancionesResult = new HashMap<>();
-        List<String> usuariosResult = new ArrayList<>();
-        for (Listarep lista : listas) {
-            listasResult.add(lista.getNombre());
-        }
-        for (Usuario usuario : usuarios) {
-            usuariosResult.add(usuario.getIdUser());
-        }
-        for (Cancion cancion : canciones) {
-            cancionesResult.put(cancion.getNombre(), String.valueOf(cancion.getIdCancion()));
-        }
-        request.setAttribute("listas", listasResult);
-        request.setAttribute("usuarios", usuariosResult);
-        request.setAttribute("canciones", cancionesResult);
+        request.setAttribute("listas", listas);
+        request.setAttribute("usuarios", usuarios);
+        request.setAttribute("canciones", canciones);
         request.setAttribute("consulta", search);
         rd.forward(request,response);
     }

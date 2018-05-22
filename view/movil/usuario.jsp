@@ -1,3 +1,4 @@
+<%--TODO: Falta revisar codigo java dentro de la pagina--%>
 <%@ page import="main.java.model.Suscribir" %>
 <%@ page import="java.util.List" %>
 <%@page contentType="text/html; UTF-8" %>
@@ -26,8 +27,8 @@
                 </div>
                 <div class="col-4">
                     <div class="img-responsive text-center">
-                        <img src="/contenido/imagenes/usuarios/${sessionScope.username}Perfil.png" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
-                        <p>${sessionScope.username}</p>
+                        <img src="/contenido/imagenes/usuarios/${username.getIdUser()}Perfil.png" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <p>${username.getIdUser()}</p>
                     </div>
                 </div>
                 <div class="col-4">

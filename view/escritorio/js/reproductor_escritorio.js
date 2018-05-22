@@ -10,17 +10,18 @@ jQuery(document).ready(function() {
         random_option = false;
         var mouseup = false;
         mediaPath = 'http://wolfsound.ddns.net:7000/contenido/canciones/';
+        imagePath = 'http://wolfsound.ddns.net:7000/contenido/imagenes/canciones/';
         extension = '';
 
-        var actualizar_reproduccion = 12;  /* Frecuencia de actualización del ultimo momento de reproduccion */
+        var actualizar_reproduccion = 10;  /* Frecuencia de actualización del ultimo momento de reproduccion */
 
         /* Mostrar Path */
         // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); alert(dir);
 
         var tracks = [];
-        tracks.push({ track: 1, name:"1.mp3"  });
-        tracks.push({ track: 2, name:"2.mp3"  });
-        tracks.push({ track: 3, name:"3.mp3"  });
+        tracks.push({ track: 1, name:"1"  });
+        tracks.push({ track: 2, name:"2"  });
+        tracks.push({ track: 3, name:"3"  });
 
         /*
         var file = "music/nombre_canciones.txt";
@@ -49,7 +50,7 @@ jQuery(document).ready(function() {
             $('#plList').append(
                 '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
                 '<div>'+trackNumber+ '</div>  ' +
-                '<div>'+trackName+'</div>  ' +
+                '<div>'+trackName+'.mp3</div>  ' +
                 //	'<div>'+ trackDuration +'</div> ' +
                 '</div>');
         }),
@@ -66,7 +67,6 @@ jQuery(document).ready(function() {
                 if (repeat_option == true ){
                     loadTrack(index);
                     audio.play();
-
                 }
                 else if (random_option == true){
                     var song_to_play = Math.floor(Math.random() * (trackCount ) ) ;
@@ -86,10 +86,13 @@ jQuery(document).ready(function() {
                 }
             }).get(0),
 
+            /*
             $("#volumen").bind("change", function() {
+                alert("a");
                 audio.volume =  ($(this).val());
             });
-
+            *(
+            */
 
         $("#seek").on("mouseup", function () {	 mouseup = false;		});
 
@@ -122,6 +125,7 @@ jQuery(document).ready(function() {
 
             if ( mouseup == false ){
                 $("#seek").val(this.currentTime);
+
                 // var form = document.getElementById("ultimo_instante_reproduccion"); form.submit();
                 actualizar_reproduccion = actualizar_reproduccion - 1;
                 if (actualizar_reproduccion == 0) {
@@ -141,7 +145,7 @@ jQuery(document).ready(function() {
             if (!playing) {
                 audio.play();
 
-                audio.currentTime =  ($("#seek").val() );   //alert("empiezo" + $("#seek").val());
+                audio.currentTime =  $("#seek").val();   //alert("empiezo" + $("#seek").val());
 
                 $('#btnPlayStio_v2').removeClass('fa-play');
                 $('#btnPlayStio_v2').addClass('fa-pause');
@@ -212,9 +216,10 @@ jQuery(document).ready(function() {
                 $('.list-group  > .active').removeClass('active');
                 $('#plList li:eq(' + id + ')').addClass('active');
 
-                npTitle.text(tracks[id].name);
+                npTitle.text(tracks[id].name+'.mp3');
                 index = id;
-                audio.src = mediaPath + tracks[id].name;
+                audio.src = mediaPath + tracks[id].name +'.mp3';
+                $('#imagen_cancion').attr('src', imagePath + tracks[id].name +'.jpg');
 
             },
 
