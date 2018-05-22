@@ -1,13 +1,16 @@
 package main.java.model;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
 
 import java.time.format.DateTimeFormatter;
@@ -30,6 +33,8 @@ public class Cancion {
 
     @Id
     @Column(name = "idCancion")
+    @GenericGenerator(name="genCan" , strategy="increment")
+    @GeneratedValue(generator="genCan")
     public int getIdCancion() {
         return idCancion;
     }
@@ -153,12 +158,14 @@ public class Cancion {
      */
     public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
         Session session = getSession();
+        Hibernate.initialize(user.getCancionsByIdUser());
 
         if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
 
             newCancion.setNombre(nombre);
             newCancion.setGenero(genero);
+            newCancion.setIdCancion(0);
 
             //TODO: Poner duracion correcta
             newCancion.setDuracion(0);
@@ -168,15 +175,18 @@ public class Cancion {
 
             session.beginTransaction();
             session.save( newCancion );
+
             session.getTransaction().commit();
 
             session.close();
 
             return newCancion;
+
         }else{
             session.close();
             throw new Exception("Cancion con el mismo nombre ya existe");
         }
+
     }
 
     /*
@@ -185,12 +195,16 @@ public class Cancion {
      */
     public static boolean existsCancion(Usuario user, String nombre){
         boolean exists = false;
-        for (Cancion cancion : user.getCancionsByIdUser()) {
-            if (cancion.getNombre().equals(nombre)) {
-                exists = true;
+        Collection<Cancion> aux = user.getCancionsByIdUser();
+        //List<Cancion> lista = new ArrayList<>(aux);
+        if (aux == null){
+            for (Cancion cancion : aux) {
+                if (cancion.getNombre().equals(nombre)) {
+                    exists = true;
+                    break;
+                }
             }
         }
-
         return exists;
     }
 

@@ -215,7 +215,11 @@ public class Usuario {
             newUser.setPublico(true);
             newUser.setConexion("conectado");
 
-            List<Listarep> listas = new ArrayList<Listarep>();
+            List<Listarep> listas = new ArrayList<>();
+            List<Cancion> canciones = new ArrayList<>();
+            List<Comentario> comentarios = new ArrayList<>();
+            List<Suscribir> suscritoA = new ArrayList<>();
+            List<Suscribir> subscriptores = new ArrayList<>();
 
             Listarep historial = Listarep.initLista(newUser,"historial");
             Listarep mimusica = Listarep.initLista(newUser,"mimusica");
@@ -230,6 +234,10 @@ public class Usuario {
             session.save( "Listarep", mimusica );
             session.save( "Listarep", favoritos );
             newUser.setListarepsByIdUser(listas);
+            newUser.setCancionsByIdUser(canciones);
+            newUser.setComentariosByIdUser(comentarios);
+            newUser.setSuscribirsByIdUser(suscritoA);
+            newUser.setSuscribirsByIdUser_0(subscriptores);
             session.update( newUser );
             session.getTransaction().commit();
 

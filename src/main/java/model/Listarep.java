@@ -22,8 +22,8 @@ public class Listarep {
     private Usuario usuarioByIdUser;
 
     @Id
-    @GenericGenerator(name="gen" , strategy="increment")
-    @GeneratedValue(generator="gen")
+    @GenericGenerator(name="genLis" , strategy="increment")
+    @GeneratedValue(generator="genLis")
     @Column(name = "idLista")
     public int getIdLista() {
         return idLista;

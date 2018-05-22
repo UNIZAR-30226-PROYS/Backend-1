@@ -39,7 +39,7 @@ public class UploadSongController extends HttpServlet {
             Usuario User = Usuario.getUser(username);
 
             //TODO:esto peta.
-            //Cancion.addCancion(nombre,genero,User);
+            Cancion.addCancion(nombre,genero,User);
 
             //Almacenamiento de ficheros.
             File file ;
