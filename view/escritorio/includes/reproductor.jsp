@@ -22,9 +22,9 @@
     Integer ultimo_momento;
     String user_found;
     try {
-        String user = (String) session.getAttribute("username");
-        Usuario u = Usuario.getUser(user);
-        ultimo_momento = u.getUltRep();
+        String user_rep = (String) session.getAttribute("username");
+        Usuario u_rep = Usuario.getUser(user_rep);
+        ultimo_momento = u_rep.getUltRep();
         user_found = "true";
 
     }   catch (Exception e) {
