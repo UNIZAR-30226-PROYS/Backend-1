@@ -25,7 +25,6 @@ import org.apache.commons.io.output.*;
 public class ChangeImageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        String username = (String)session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
