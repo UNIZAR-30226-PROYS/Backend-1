@@ -48,7 +48,7 @@
                         <img class = "img-fluid" src="images/user.svg" alt="Usuario">
                     </div>
                     <div class = "col-10 text-left">
-                        <a href="artista.html">
+                        <a href="artista.jsp">
                             <h5>Nombre Usuario</h5>
                         </a>
                         <br>
