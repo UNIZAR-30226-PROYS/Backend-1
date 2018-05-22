@@ -22,11 +22,11 @@ public class LoginController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
        // Usuario.existsUser(user);
         try {
-            Usuario.login(user,pass);
+            Usuario username = Usuario.login(user,pass);
             // TODO: sustituir por listas del usuario
             List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
             HttpSession session = request.getSession(true);
-            session.setAttribute("username", user);
+            session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
             session.setAttribute("misAudios", listas);
             session.setAttribute("listasRecomendadas", listas);

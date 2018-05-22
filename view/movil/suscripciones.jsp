@@ -1,3 +1,4 @@
+<%--TODO: Terminar de implementar funcionalidad--%>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -18,18 +19,16 @@
     </div>
 
     <div class="list-group pt-2">
-    <!--TODO: Crear lista con canciones subidas recientemente por suscripciones-->
-    <c:forEach items="${sessionScope.misListas}" var="lista">
+    <c:forEach items="${username.getSuscribirsByIdUser()}" var="usuario">
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                        <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}.jpg" style="width:30px;" alt="...">
                     </div>
                     <div class="media-body">
-                        <!--TODO: Nombre cancion-->
-                        <h6 class="media-heading">Nombre Cancion</h6>
-                        <!--TODO: Usuario que ha subido la canción-->
-                        <h6 class="media-heading">usuario</h6>
+                        <!--TODO: Sustituir por funcion getLastUploads-->
+                        <h6 class="media-heading">${usuario.getNomAp()}</h6>
+                        <h6 class="media-heading">${usuario.getIdUser()}</h6>
                     </div>
                 </div>
             </a>
