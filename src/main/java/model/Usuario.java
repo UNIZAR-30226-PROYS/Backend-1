@@ -242,7 +242,7 @@ public class Usuario {
             session.getTransaction().commit();
 
             session.close();
-            File from = new File("/contenido/imagenes/user.svg");
+            File from = new File("/contenido/imagenes/user.png");
             File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.png");
             try {
                 Files.copy(from.toPath(),to.toPath(),StandardCopyOption.REPLACE_EXISTING);
