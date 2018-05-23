@@ -16,7 +16,7 @@
 
     <div class="media mt-2">
         <div class="media-body">
-            <h4 class="media-heading"> Nombre lista</h4>
+            <h4 class="media-heading"> </h4>
         </div>
         <div class="media-right">
             <a href="cancion.jsp">

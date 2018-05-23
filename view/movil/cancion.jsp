@@ -1,4 +1,6 @@
 <%--TODO: Terminar de implementar funcionalidad--%>
+<%@ page import="main.java.model.Usuario" %>
+<%@ page import="main.java.model.Cancion" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -8,18 +10,26 @@
     <%@include file="includes/header.jsp" %>
 </head>
 <body>
+<%
+    String idS = (String) request.getParameter("id");
+    if (idS==null)idS="1";
+    Integer id = Integer.parseInt(idS);
+    Cancion cancion = (Cancion) Cancion.getCancion(id);
+    pageContext.setAttribute("cancion", cancion);
+%>
+
 <%@include file="includes/navbars.jsp" %>
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
-    <div class="col-10">
+    <div class="col">
         <div class="row">
             <div class="col">
-                <img class="img-fluid align-content-lg-end" src="images/placeholder.png" alt="Placeholder">
+                <img class="img-fluid align-content-lg-end" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <h3>Titulo de la cancion</h3>
+                <h3>${cancion.getNombre()}</h3>
             </div>
             <form class="needs-validation form-row" action="cancion.html" novalidate>
                 <div class="col-auto my-1">
@@ -33,22 +43,22 @@
                     <button type="submit" class="btn btn-primary">Añadir</button>
                 </div>
             </form>
-            <div class="col">
+            <div class="col-auto my-1">
                 <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalCrear">
                     <span class="glyphicon glyphicon-plus" style="font-size:20px; "></span>
                 </button>
             </div>
         </div>
         <div class="row">
-            <div class="col-2 text-left">
-                <img class="img-fluid" src="images/user.svg" alt="Usuario">
+            <div class="col-4 text-left">
+                <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png" alt="Usuario">
             </div>
-            <div class="col-10 text-left">
+            <div class="col-8 text-left">
                 <a href="artista.html">
-                    <h5>Nombre Usuario</h5>
+                    <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
                 </a>
                 <br>
-                <h6>Fecha de subida</h6>
+                <h6>${cancion.getFechaSubida()}</h6>
             </div>
         </div>
         <div class="row">

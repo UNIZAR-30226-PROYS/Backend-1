@@ -23,7 +23,7 @@
         <div class="container mb-3">
             <div class="row pt-3">
                 <div class="col-4">
-                    <a href= "subirCancion.jsp">
+                    <a href= "/movil/subirCancion.jsp">
                         <button type="button" class="btn btn-primary mt-2" style="background: #2853DC;  color:white;">Sube<br/>tu<br/>musica</button>
                     </a>
                 </div>

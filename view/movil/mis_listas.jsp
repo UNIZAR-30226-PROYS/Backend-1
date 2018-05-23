@@ -14,23 +14,24 @@
 
     <div class="media mt-2">
         <div class="media-body">
-            <h4 class="media-heading">Listas de ${sessionScope.username}</h4>
+            <h4 class="media-heading">Listas de ${username.getIdUser()}</h4>
         </div>
 
     </div>
 
     <div class="list-group pt-2">
         <!--TODO: Esto tiene que servir para las listas de otros usuarios tambien no¿?-->
-        <c:forEach items="${sessionScope.misListas}" var="lista">
+        <c:forEach items="${misListas}" var="lista">
             <div class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <a href="lista.jsp">
-                            <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                        <a href="/list?id=${lista.getIdLista()}">
+                            <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
+                            <img src="/contenido/imagenes/canciones/.jpg" style="width:64px;" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h6 class="media-heading">${lista}</h6>
+                        <h6 class="media-heading">${lista.getNombre()}</h6>
                     </div>
                     <div class="media-right">
                         <button type="button" class="btn btn-default ">
