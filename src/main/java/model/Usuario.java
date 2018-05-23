@@ -195,8 +195,15 @@ public class Usuario {
         this.suscribirsByIdUser_0 = suscribirsByIdUser_0;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
-
+    /*------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------CREACION BORRADO Y MODIFICACION---------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     /*
      * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
@@ -236,8 +243,10 @@ public class Usuario {
             session.getTransaction().commit();
 
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            Hibernate.initialize(newUser.getListarepsByIdUser());
-            Hibernate.initialize(newUser.getCancionsByIdUser());
+            //Hibernate.initialize(newUser.getListarepsByIdUser());
+            //Hibernate.initialize(newUser.getCancionsByIdUser());
+            newUser.activarCanciones();
+            newUser.activarListas();
 
             session.close();
             File from = new File("/contenido/imagenes/user.png");
@@ -254,19 +263,7 @@ public class Usuario {
             throw new Exception("Nombre de usuario ya existe");
         }
     }
-    /*
-     * Borra permanentemente un usuario del sistema
-     *
-     */
-    public static void borrarUser(String username) throws Exception{
-        Session session = getSession();
-        Usuario User = getUser(username);
-        session.beginTransaction();
-        session.delete( User );
-        session.getTransaction().commit();
-        session.close();
-        //TODO: borrar canciones, comentarios etc de usuario si, no ¿lo hace por cascada hibernate?
-    }
+
     /*
      * En caso de que usernameNew no este cojido, modifica a usernameOld con los nuevos atributos.
      */
@@ -299,6 +296,36 @@ public class Usuario {
             throw new Exception("Nombre de usuario ya existe");
         }
     }
+
+    /*
+     * Borra permanentemente un usuario del sistema
+     *
+     */
+    public static void borrarUser(String username) throws Exception{
+        Session session = getSession();
+        Usuario User = getUser(username);
+        session.beginTransaction();
+        session.delete( User );
+        session.getTransaction().commit();
+        session.close();
+        //TODO: borrar canciones, comentarios etc de usuario si, no ¿lo hace por cascada hibernate?
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------ACTIVACION FETCH----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+    //Activa Canciones
+    public Usuario activarCanciones(){
+        Hibernate.initialize(this.getCancionsByIdUser());
+        return this;
+    }
+
+    //Activa Listas
+    public Usuario activarListas(){
+        Hibernate.initialize(this.getListarepsByIdUser());
+        return this;
+    }
+
 
     /*
      * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
