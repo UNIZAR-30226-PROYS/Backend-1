@@ -21,7 +21,7 @@
 <%@include file="includes/navbars.jsp" %>
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
-    <div class="col-10">
+    <div class="col">
         <div class="row">
             <div class="col">
                 <img class="img-fluid align-content-lg-end" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
@@ -43,17 +43,17 @@
                     <button type="submit" class="btn btn-primary">Añadir</button>
                 </div>
             </form>
-            <div class="col">
+            <div class="col-auto my-1">
                 <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalCrear">
                     <span class="glyphicon glyphicon-plus" style="font-size:20px; "></span>
                 </button>
             </div>
         </div>
         <div class="row">
-            <div class="col-2 text-left">
+            <div class="col-4 text-left">
                 <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png" alt="Usuario">
             </div>
-            <div class="col-10 text-left">
+            <div class="col-8 text-left">
                 <a href="artista.html">
                     <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
                 </a>
