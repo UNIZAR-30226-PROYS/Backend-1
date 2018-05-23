@@ -1,5 +1,7 @@
 package main.java.controller;
 
+import main.java.model.Cancion;
+import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
 
 import javax.servlet.ServletException;
@@ -8,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 
 @WebServlet(name = "ListController", urlPatterns = "/list")
@@ -19,8 +23,9 @@ public class ListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idlista = request.getParameter("id");
         Listarep lista = (Listarep) Listarep.searchList(String.valueOf(idlista));
+        // lista.activarCancioneslista();
+        // Collection<Cancioneslista> cancioneslista = lista.getCancioneslistasByIdLista();
 
-
-
+        // Collection<Cancion> canciones = cancioneslista.getCancionByIdCancion();
     }
 }

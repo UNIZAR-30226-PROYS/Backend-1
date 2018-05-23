@@ -47,7 +47,8 @@
         <c:forEach items="${misListas}" var="lista">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.jsp?${lista.getIdLista()}" target="_self">
+                    <a href="/list?id=${lista.getIdLista()}" target="_self">
+                        <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
                         <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>${lista.getNombre()}</p>
