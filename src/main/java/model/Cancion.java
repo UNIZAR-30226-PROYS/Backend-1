@@ -158,8 +158,8 @@ public class Cancion {
      */
     public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
         Session session = getSession();
-
-        if (!existsCancion2(user,nombre)){
+        //user.activarCanciones(session);
+        if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
 
             newCancion.setNombre(nombre);
@@ -174,9 +174,7 @@ public class Cancion {
 
             session.beginTransaction();
             session.save( newCancion );
-
             session.getTransaction().commit();
-
             session.close();
 
             return newCancion;
@@ -188,30 +186,13 @@ public class Cancion {
 
     }
 
-    /*
-     * True -> cancion existe para ese user
-     * False -> cancion no existe para ese user
-     */
     public static boolean existsCancion(Usuario user, String song){
-        Session session = getSession();
-        boolean exists = false;
-        Query query = session.createQuery("from Cancion where idUser = :user and nombre = :cancion");
-        query.setParameter("user", user.getIdUser());
-        query.setParameter("cancion", song);
-        if (query.uniqueResult() != null){
-            exists = true;
-        }
-        session.close();
-        return exists;
-    }
-
-    public static boolean existsCancion2(Usuario user, String song){
         Collection<Cancion> aux = user.getCancionsByIdUser();
         boolean exists = false;
         if(aux!=null){
             List<Cancion> canciones = new ArrayList<>(aux);
             for(Cancion cancion : canciones){
-                if(song==cancion.getNombre()){
+                if(song.equals(cancion.getNombre())){
                     exists = true;
                     break;
                 }

@@ -88,25 +88,66 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
-    public static Listarep initLista(Usuario user, String nombre) throws Exception{
-        Listarep newLista = new Listarep();
-        newLista.setIdLista(0);
-        newLista.setNombre(nombre);
-        newLista.setNumElementos(0);
-        newLista.setUsuarioByIdUser(user);
+    public static Listarep addLista(Usuario user, String nombre) throws Exception{
+        Session session = getSession();
+        //user.activarListas(session);
+        if(!existsListaBool(user,nombre)){
+            Listarep newLista = new Listarep();
+            newLista.setIdLista(0);
+            newLista.setNombre(nombre);
+            newLista.setNumElementos(0);
+            newLista.setUsuarioByIdUser(user);
 
-        return newLista;
+            session.beginTransaction();
+            session.save( newLista );
+            session.getTransaction().commit();
+            session.close();
+
+            Collection<Listarep> aux = user.getListarepsByIdUser();
+            if(aux!=null){
+                List<Listarep> listas = new ArrayList<>(aux);
+                listas.add(newLista);
+                user.setListarepsByIdUser(listas);
+            }else{
+                List<Listarep> listas = new ArrayList<>();
+                listas.add(newLista);
+                user.setListarepsByIdUser(listas);
+            }
+
+            return newLista;
+        }else{
+            session.close();
+            throw new Exception("Lista con el mismo nombre ya existe");
+        }
+
+    }
+
+    /*
+     * Borra la lista nombre de usuario user si esta existe, si no excepcion
+     */
+    public static void borrarLista(int id) throws Exception{
+        Session session = getSession();
+        Listarep lista = searchList(id);
+        session.beginTransaction();
+        session.delete( lista );
+        session.getTransaction().commit();
+        session.close();
     }
 
     /*
      * True -> cancion existe para ese user
      * False -> cancion no existe para ese user
      */
-    public static boolean existsLista(Usuario user, String nombre){
+    public static boolean existsListaBool(Usuario user, String nombre){
+        Collection<Listarep> aux = user.getListarepsByIdUser();
         boolean exists = false;
-        for (Listarep lista : user.getListarepsByIdUser()){
-            if(lista.getNombre()==nombre){
-                exists = true;
+        if(aux!=null){
+            List<Listarep> canciones = new ArrayList<>(aux);
+            for(Listarep lista : canciones){
+                if(nombre.equals(lista.getNombre())){
+                    exists = true;
+                    break;
+                }
             }
         }
         return exists;
@@ -118,6 +159,18 @@ public class Listarep {
         query.setParameter("lista", "%"+listaS+"%");
         List<Listarep> lista = query.list();
         session.close();
+        return lista;
+    }
+
+    public static Listarep searchList(int id) throws Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Listarep where idLista = :lista ");
+        query.setParameter("lista", id);
+        Listarep lista = (Listarep) query.uniqueResult();
+        session.close();
+        if (lista==null){
+            throw new Exception("La lista no existe");
+        }
         return lista;
     }
 }

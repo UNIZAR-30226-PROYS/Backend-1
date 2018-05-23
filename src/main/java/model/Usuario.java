@@ -223,30 +223,19 @@ public class Usuario {
             newUser.setPublico(true);
             newUser.setConexion("conectado");
 
-            //Creacion de listas predefinidas
-            List<Listarep> listas = new ArrayList<>();
-            Listarep historial = Listarep.initLista(newUser,"historial");
-            Listarep mimusica = Listarep.initLista(newUser,"mimusica");
-            Listarep favoritos = Listarep.initLista(newUser,"favoritos");
-            listas.add(historial);
-            listas.add(mimusica);
-            listas.add(favoritos);
-
             //Almacenamiento en BBDD
             session.beginTransaction();
             session.save( newUser );
-            session.save( "Listarep", historial );
-            session.save( "Listarep", mimusica );
-            session.save( "Listarep", favoritos );
-            newUser.setListarepsByIdUser(listas);
-            //session.update( newUser );
             session.getTransaction().commit();
 
+            //Creacion de listas predefinidas
+            Listarep.addLista(newUser,"historial");
+            Listarep.addLista(newUser,"mimusica");
+            Listarep.addLista(newUser,"favoritos");
+
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            //Hibernate.initialize(newUser.getListarepsByIdUser());
-            //Hibernate.initialize(newUser.getCancionsByIdUser());
-            newUser.activarCanciones();
-            newUser.activarListas();
+            newUser.activarCanciones(session);
+            newUser.activarListas(session);
 
             session.close();
             File from = new File("/contenido/imagenes/user.png");
@@ -314,18 +303,20 @@ public class Usuario {
     /*------------------------------------------------------------------------------------------------------------------
      *----------------------------------------------ACTIVACION FETCH----------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
+
     //Activa Canciones
-    public Usuario activarCanciones(){
+    public Usuario activarCanciones(Session session){
+        session.refresh(this);
         Hibernate.initialize(this.getCancionsByIdUser());
         return this;
     }
 
     //Activa Listas
-    public Usuario activarListas(){
+    public Usuario activarListas(Session session){
+        session.refresh(this);
         Hibernate.initialize(this.getListarepsByIdUser());
         return this;
     }
-
 
     /*
      * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
@@ -336,8 +327,8 @@ public class Usuario {
         try {
             Usuario user = correctUser(username, password, session);
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            user.activarCanciones();
-            user.activarListas();
+            //user.activarCanciones();
+            user.activarListas(session);
             return user;
         }catch (Exception e){
             throw e;
@@ -382,7 +373,6 @@ public class Usuario {
      */
     public static Usuario getUser(String username) throws  Exception{
         Session session = getSession();
-        boolean exists = false;
         Query query = session.createQuery("from Usuario where idUser = :user ");
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
