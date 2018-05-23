@@ -24,13 +24,14 @@ public class LoginController extends HttpServlet {
         try {
             Usuario username = Usuario.login(user,pass);
             // TODO: sustituir por listas del usuario
-            List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
+            // List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
+            List<Listarep> listas = (List<Listarep>) username.getListarepsByIdUser();
             HttpSession session = request.getSession(true);
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
-            session.setAttribute("misAudios", listas);
-            session.setAttribute("listasRecomendadas", listas);
-            session.setAttribute("audiosRecomendados", listas);
+            // session.setAttribute("misAudios", listas);
+            // session.setAttribute("listasRecomendadas", listas);
+            // session.setAttribute("audiosRecomendados", listas);
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{

@@ -238,8 +238,8 @@ public class Usuario {
             session.save( "Listarep", historial );
             session.save( "Listarep", mimusica );
             session.save( "Listarep", favoritos );
-            //newUser.setListarepsByIdUser(listas);
-            //session.update( newUser );
+            newUser.setListarepsByIdUser(listas);
+            // session.update( newUser );
             session.getTransaction().commit();
 
             //Inicializacion de Lazy-Fetch de Listas y Canciones

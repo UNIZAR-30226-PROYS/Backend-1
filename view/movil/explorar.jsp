@@ -43,14 +43,14 @@
     </div>
 
     <div class="row">
-        <c:forEach items="${sessionScope.misListas}" var="lista">
+        <%--${misListas}--%>
+        <c:forEach items="${misListas}" var="lista">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
                     <a href="lista.jsp" target="_self">
-                        <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg" alt=""
-                             style="width:20%">
+                        <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" alt="" style="width:20%">
                         <div class="caption">
-                            <p>${lista}</p>
+                            <p>${lista.getNombre()}</p>
                         </div>
                     </a>
                 </div>
