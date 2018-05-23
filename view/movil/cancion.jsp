@@ -11,24 +11,25 @@
 </head>
 <body>
 <%
-    String username = (String) request.getParameter("id");
-    Usuario user = (Usuario)session.getAttribute("username");
-    List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user.getIdUser());
-    pageContext.setAttribute("suscripciones", suscripciones);
-    pageContext.setAttribute("numSus", suscripciones.size());
+    String idS = (String) request.getParameter("id");
+    if (idS==null)idS="1";
+    Integer id = Integer.parseInt(idS);
+    Cancion cancion = (Cancion) Cancion.getCancion(id);
+    pageContext.setAttribute("cancion", cancion);
 %>
+
 <%@include file="includes/navbars.jsp" %>
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
     <div class="col-10">
         <div class="row">
             <div class="col">
-                <img class="img-fluid align-content-lg-end" src="images/placeholder.png" alt="Placeholder">
+                <img class="img-fluid align-content-lg-end" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <h3>Titulo de la cancion</h3>
+                <h3>${cancion.getNombre()}</h3>
             </div>
             <form class="needs-validation form-row" action="cancion.html" novalidate>
                 <div class="col-auto my-1">
@@ -50,14 +51,14 @@
         </div>
         <div class="row">
             <div class="col-2 text-left">
-                <img class="img-fluid" src="images/user.svg" alt="Usuario">
+                <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png" alt="Usuario">
             </div>
             <div class="col-10 text-left">
                 <a href="artista.html">
-                    <h5>Nombre Usuario</h5>
+                    <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
                 </a>
                 <br>
-                <h6>Fecha de subida</h6>
+                <h6>${cancion.getFechaSubida()}</h6>
             </div>
         </div>
         <div class="row">
