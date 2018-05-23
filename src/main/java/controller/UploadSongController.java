@@ -84,6 +84,13 @@ public class UploadSongController extends HttpServlet {
                             fi.write(file);
                         }
                     }
+                    else{
+                        filePath ="/contenido/imagenes/canciones/";
+                        boolean isInMemory = fi.isInMemory();
+                        long sizeInBytes = fi.getSize();
+                        file = new File(filePath + "portada"+Integer.toString(cancion.getIdCancion()) + ".png");
+                        fi.write(file);
+                    }
                 }
             }
 
