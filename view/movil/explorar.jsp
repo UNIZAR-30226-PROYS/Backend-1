@@ -47,7 +47,7 @@
         <c:forEach items="${misListas}" var="lista">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
+                    <a href="lista.jsp?${lista.getIdLista()}" target="_self">
                         <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" alt="" style="width:20%">
                         <div class="caption">
                             <p>${lista.getNombre()}</p>

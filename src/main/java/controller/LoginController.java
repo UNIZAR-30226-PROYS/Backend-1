@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import main.java.model.*;
@@ -25,12 +27,17 @@ public class LoginController extends HttpServlet {
         try {
             Usuario username = Usuario.login(user,pass);
             // TODO: sustituir por listas del usuario
-            List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
+            // List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
+            session.setAttribute("username", username);
+            Collection<Listarep> aux = username.getListarepsByIdUser();
+            List<Listarep> listas = new ArrayList<>(aux);
+            System.out.println(listas);
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
-            session.setAttribute("misAudios", listas);
-            session.setAttribute("listasRecomendadas", listas);
-            session.setAttribute("audiosRecomendados", listas);
+            //session.setAttribute("misListas", listas);
+            //session.setAttribute("misAudios", listas);
+            //session.setAttribute("listasRecomendadas", listas);
+            //session.setAttribute("audiosRecomendados", listas);
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{
