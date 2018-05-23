@@ -2,6 +2,7 @@
 <%@page contentType="text/html; UTF-8" %>
 <%@ page import="main.java.model.Usuario" %>
 <%@ page import="main.java.model.Cancion" %>
+<%@ page import="main.java.model.Comentario" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
@@ -17,7 +18,9 @@
     Integer id = Integer.parseInt(idS);
     Cancion cancion = (Cancion) Cancion.getCancion(id);
     String nombre = cancion.getNombre();
-    String desc = main.java.controller.SongDescriptionController.getText(nombre);
+    String desc = "hola";//main.java.controller.SongDescriptionController.getText(nombre);
+    List<Comentario> comentarios = Comentario.searchComentarios(cancion);
+    pageContext.setAttribute("comentarios", comentarios);
     pageContext.setAttribute("cancion", cancion);
     pageContext.setAttribute("desc", desc);
 
@@ -86,9 +89,10 @@
                 </div>
                 <div class = "row align-items-center">
                     <div class="col ">
-                        <form class="needs-validation form-row " action="cancion.html" novalidate >
+                        <form class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post" novalidate>
                             <div class="col" required>
-                                <textarea class="text form-control" id="comentario"  required></textarea>
+                                <textarea class="text form-control" id="comentario"  name="texto" required></textarea>
+                                <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
                             </div>
                             <div class="col-auto my-1">
                                 <button type="submit" class="btn btn-primary">Comentar</button>
@@ -99,29 +103,21 @@
 
 
                 <div class="list-group pt-2">
-                    <a href="usuarioPublico.html" class="list-group-item list-group-item-action">
+                <c:forEach items="${comentarios}" var="com">
+                    <a href="artista.jsp?name=${com.getUsuarioByIdUser().getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getIdUser()}Perfil.png" style="width:30px;height:30px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading">Nombre  User</h5>
-                                <h6 class="media-heading">Hola probando Probando soy un comentario lalalalalalalalalalalala</h6>
+                                <h5 class="media-heading">${com.getUsuarioByIdUser().getIdUser()}</h5>
+                                <h6 class="media-heading">${com.getCuerpo()}</h6>
                             </div>
                         </div>
                     </a>
-                    <a href="usuarioPublico.html" class="list-group-item list-group-item-action">
-                        <div class="media">
-                            <div class="media-left" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:30px;" alt="...">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="media-heading">Nombre User 2</h5>
-                                <h6 class="media-heading">En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los domingos, consumían las tres partes de su hacienda. El resto della concluían sayo de velarte, calzas de velludo para las fiestas con sus pantuflos de lo mismo, los días de entre semana se honraba con su vellori de lo más fino. Tenía en su casa una ama que pasaba de los cuarenta, y una sobrina que no llegaba a los veinte, y un mozo de campo y plaza, que así ensillaba el rocín como tomaba la podadera. Frisaba la edad de nuestro hidalgo con los cincuenta años, era de complexión recia, seco de carnes, enjuto de rostro; gran madrugador y amigo de la caza. Quieren decir que tenía el sobrenombre de Quijada o Quesada (que en esto hay alguna diferencia en los autores que deste caso escriben), aunque por conjeturas verosímiles se deja entender que se llama Quijana; pero esto importa poco a nuestro cuento; basta que en la narración dél no se salga un punto de la verdad.</h6>
-                            </div>
-                        </div>
-                    </a>
+                </c:forEach>
                 </div>
+
             </div>
         </div> <!-- Container -->
 <!-- Modal1 -->
