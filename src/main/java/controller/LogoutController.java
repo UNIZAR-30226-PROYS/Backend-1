@@ -11,7 +11,14 @@ import java.io.IOException;
 @WebServlet(name = "LogoutController", urlPatterns = "/logout")
 public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
+        String UA = request.getHeader("User-Agent");
+        session.removeAttribute("username");
+        if (UA.contains("Mobile")){
+            response.sendRedirect("/movil/explorar.jsp");
+        }else{
+            response.sendRedirect("/escritorio/explorar.jsp");
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
