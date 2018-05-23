@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath}/movil/js/reprodutor_v2.js"></script>
 
 
@@ -40,6 +43,74 @@
 	<div class="collapse container-fluid " id="reprodcutor_list">
 		<ul class="list-group " id="plList">	</ul>
 		<hr>
+
+		<div class="container-fluid">
+			<div class="row ">
+
+				<div class="col">
+					<span class="time_played" id="time_played_id" >00:00</span>
+				</div>
+
+
+				<div class="col text-right">
+					<span class="full_time" id="full_time_id">00:00</span>
+				</div>
+
+			</div>
+		</div>
+
+		<form class="clase_ultimo_instante_reproduccion" id="ultimo_instante_reproduccion" action="${pageContext.request.contextPath}/reproductor_cont" method="post" novalidate>
+			<div class="container-fluid">
+				<%--
+                <c:if test="${not empty sessionScope.ultimo_instante_reproduccion}">
+                    <input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="${sessionScope.ultimo_instante_reproduccion}" max=""/>
+                </c:if>
+                <c:if test="${empty sessionScope.ultimo_instante_reproduccion}">
+                    <input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="0" max=""/>
+                </c:if>
+                --%>
+				<% if ( user_found.equals("false") )  { %>
+				<%-- <h1>sin ultimo instante <%=ultimo_momento%> <%=user_found%> </h1> --%>
+				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="0" max=""/>
+				<% } else {%>
+				<%-- <h1>con ultimo instante <%=ultimo_momento%> <%=user_found%></h1> --%>
+				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="<%=ultimo_momento%>" max="${sessionScope.max_instante_reproduccion}"/>
+				<% } %>
+			</div>
+		</form>
+
+		<div class="container-fluid botones pt-1">
+			<div class="row" >
+				<div class="col">
+					<div class="btn" id="btnRandom">
+						<!-- <i class="fa fa-random" id="btnRandom" style="font-size:15px;" ></i> -->
+						<i class="fa fa-random"  style="font-size:15px;" ></i>
+					</div>
+				</div>
+
+				<div class="col ">
+					<div class="btn" id="btnPrev">
+						<i class="fa fa-step-backward"  style="font-size:16px;" ></i>
+					</div>
+				</div>
+				<div class="col text-center">
+					<button type="button" class="btn btn-light" href="cancion.jsp">info</button>
+				</div>
+
+				<div class="col text-center">
+					<div class="btn" id="btnNext">
+						<i class="fa fa-step-forward"  style="font-size:16px;" ></i>
+					</div>
+				</div>
+				<div class="col " >
+					<div class="btn" id="btnRepeat">
+						<i class="fa fa-repeat"  style="font-size:15px;" ></i>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr>
 	</div>
 
 	<!-- VOLUMEN, SE PUEDE AÑADIR
@@ -51,89 +122,29 @@
 
 	<audio id="audio1"></audio>
 
+
+
 	<div class="container-fluid">
 		<div class="row ">
-
 			<div class="col col-2">
-				<span class="time_played" id="time_played_id" >00:00</span>
+				<div class="btn" id="btnPlayStio">
+					<i class="fa fa-play"  id="btnPlayStio_v2" style="font-size:18px;" ></i>
+				</div>
 			</div>
-
+			<div class="col col-8 text-center pt-2">
+				<div id="nowPlay">
+					<h6> <span class="npTitle" id="npTitle"></span> </h6>
+				</div>
+			</div>
 			<div class="col col-2">
 				<div class="btn ">
 					<i class="fa fa-heart" id="like" style="font-size:16px;" ></i>
 				</div>
 			</div>
 
-			<div class="col col-4 text-center">
-				<div id="nowPlay">
-					<h6> <span class="npTitle" id="npTitle"></span> </h6>
-				</div>
-			</div>
-
-			<div class="col col-2">
-				<a class="btn">
-					<i class="fa fa-align-justify" aria-controls="#reprodcutor_list" data-toggle="collapse" aria-expanded="false" href="#reprodcutor_list" style="font-size:16px;" ></i>
-				</a>
-			</div>
-
-			<div class="col col-2">
-				<span class="full_time" id="full_time_id">00:00</span>
-			</div>
-
 		</div>
 	</div>
 
-    <form class="clase_ultimo_instante_reproduccion" id="ultimo_instante_reproduccion" action="${pageContext.request.contextPath}/reproductor_cont" method="post" novalidate>
-        <div class="container-fluid">
-			<%--
-			<c:if test="${not empty sessionScope.ultimo_instante_reproduccion}">
-            	<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="${sessionScope.ultimo_instante_reproduccion}" max=""/>
-			</c:if>
-			<c:if test="${empty sessionScope.ultimo_instante_reproduccion}">
-				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="0" max=""/>
-			</c:if>
-			--%>
-			<% if ( user_found.equals("false") )  { %>
-				<%-- <h1>sin ultimo instante <%=ultimo_momento%> <%=user_found%> </h1> --%>
-				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="0" max=""/>
-			<% } else {%>
-				<%-- <h1>con ultimo instante <%=ultimo_momento%> <%=user_found%></h1> --%>
-				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="<%=ultimo_momento%>" max="${sessionScope.max_instante_reproduccion}"/>
-			<% } %>
-        </div>
-    </form>
-
-	<div class="container-fluid botones ">
-		<div class="row" >
-			<div class="col offset-1 col-2">
-				<div class="btn" id="btnRandom">
-					<!-- <i class="fa fa-random" id="btnRandom" style="font-size:15px;" ></i> -->
-					<i class="fa fa-random"  style="font-size:15px;" ></i>
-				</div>
-
-			</div>
-			<div class="col col-2">
-				<div class="btn" id="btnPrev">
-					<i class="fa fa-step-backward"  style="font-size:16px;" ></i>
-				</div>
-			</div>
-			<div class="col col-2">
-				<div class="btn" id="btnPlayStio">
-					<i class="fa fa-play"  id="btnPlayStio_v2" style="font-size:18px;" ></i>
-				</div>
-			</div>
-			<div class="col col-2">
-				<div class="btn" id="btnNext">
-					<i class="fa fa-step-forward"  style="font-size:16px;" ></i>
-				</div>
-			</div>
-			<div class="col col-2" >
-				<div class="btn" id="btnRepeat">
-					<i class="fa fa-repeat"  style="font-size:15px;" ></i>
-				</div>
-			</div>
-		</div>
-	</div>
 
 </div>	<!-- FIN CONTENIDO REPRODUCTOR -->
 
@@ -159,7 +170,19 @@
         }
     });
 </script>
+<script>
+    $(document).ready(function () {
+        $(".npTitle").click(function() {
+            if ($('.collapse').hasClass('show')){
+                $('.collapse').collapse('hide');
+            }
+            else{
+                $('.collapse').collapse('show');
+            }
 
+        });
+    });
+</script>
 <script>
     // document.getElementById("seek").submit();
     //    data: 'momento_cancion='+ $('#seek').val(),
