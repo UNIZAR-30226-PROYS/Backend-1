@@ -16,7 +16,7 @@
     <h2 class="text-left pt-2">Explorar</h2>
     <div class="row pt-1">
         <div class="col">
-            <form class="search-button" action="${pageContext.request.contextPath}/search" method="post">
+            <form id="formBuscar" class="search-button" action="${pageContext.request.contextPath}/search" method="get">
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control" name="search_input" placeholder="Buscar ...">
