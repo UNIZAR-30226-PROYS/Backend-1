@@ -80,7 +80,7 @@ public class UploadSongController extends HttpServlet {
                             filePath ="/contenido/canciones/";
                             boolean isInMemory = fi.isInMemory();
                             long sizeInBytes = fi.getSize();
-                            file = new File(filePath + "cancion"+Integer.toString(cancion.getIdCancion()) + ".mp3");
+                            file = new File(filePath +Integer.toString(cancion.getIdCancion()) + ".mp3");
                             fi.write(file);
                         }
                     }
@@ -88,7 +88,7 @@ public class UploadSongController extends HttpServlet {
                         filePath ="/contenido/imagenes/canciones/";
                         boolean isInMemory = fi.isInMemory();
                         long sizeInBytes = fi.getSize();
-                        file = new File(filePath + "portada"+Integer.toString(cancion.getIdCancion()) + ".png");
+                        file = new File(filePath +Integer.toString(cancion.getIdCancion()) + ".png");
                         fi.write(file);
                     }
                 }
