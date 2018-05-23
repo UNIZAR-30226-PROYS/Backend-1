@@ -1,4 +1,6 @@
 <%--TODO: Terminar de implementar funcionalidad--%>
+<%@ page import="main.java.model.Usuario" %>
+<%@ page import="main.java.model.Cancion" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -8,6 +10,13 @@
     <%@include file="includes/header.jsp" %>
 </head>
 <body>
+<%
+    String username = (String) request.getParameter("id");
+    Usuario user = (Usuario)session.getAttribute("username");
+    List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user.getIdUser());
+    pageContext.setAttribute("suscripciones", suscripciones);
+    pageContext.setAttribute("numSus", suscripciones.size());
+%>
 <%@include file="includes/navbars.jsp" %>
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
