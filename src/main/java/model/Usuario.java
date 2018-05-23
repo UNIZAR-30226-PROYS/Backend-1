@@ -234,7 +234,7 @@ public class Usuario {
             Listarep.addLista(newUser,"favoritos");
 
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            //newUser.activarCanciones(session);
+            newUser.activarCanciones(session);
             newUser.activarListas(session);
 
             session.close();
@@ -373,7 +373,6 @@ public class Usuario {
      */
     public static Usuario getUser(String username) throws  Exception{
         Session session = getSession();
-        boolean exists = false;
         Query query = session.createQuery("from Usuario where idUser = :user ");
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
