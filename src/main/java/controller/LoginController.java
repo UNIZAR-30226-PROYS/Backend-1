@@ -20,18 +20,17 @@ public class LoginController extends HttpServlet {
         String pass = request.getParameter("login_pass");
         RequestDispatcher rd = null;
         String UA = request.getHeader("User-Agent");
+        HttpSession session = request.getSession(true);
        // Usuario.existsUser(user);
         try {
             Usuario username = Usuario.login(user,pass);
             // TODO: sustituir por listas del usuario
-            // List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
-            List<Listarep> listas = (List<Listarep>) username.getListarepsByIdUser();
-            HttpSession session = request.getSession(true);
+            List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
-            // session.setAttribute("misAudios", listas);
-            // session.setAttribute("listasRecomendadas", listas);
-            // session.setAttribute("audiosRecomendados", listas);
+            session.setAttribute("misAudios", listas);
+            session.setAttribute("listasRecomendadas", listas);
+            session.setAttribute("audiosRecomendados", listas);
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{
@@ -41,14 +40,12 @@ public class LoginController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
+            session.setAttribute("error",e.getMessage());
             if (UA.contains("Mobile")){
-                rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
+                response.sendRedirect("/movil/wolfsound.jsp");
             }else{
-                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
+                response.sendRedirect("/escritorio/explorar.jsp");
             }
-            request.setAttribute("error", e.getMessage());
-            request.setAttribute("user", user);
-            rd.forward(request,response);
         }
     }
 

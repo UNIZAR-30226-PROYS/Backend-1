@@ -239,7 +239,7 @@ public class Usuario {
             session.save( "Listarep", mimusica );
             session.save( "Listarep", favoritos );
             newUser.setListarepsByIdUser(listas);
-            // session.update( newUser );
+            //session.update( newUser );
             session.getTransaction().commit();
 
             //Inicializacion de Lazy-Fetch de Listas y Canciones
@@ -334,10 +334,10 @@ public class Usuario {
     public static Usuario login(String username, String password) throws Exception{
         Session session = getSession();
         try {
-            Usuario user = correctUser(username, password);
+            Usuario user = correctUser(username, password, session);
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            //Hibernate.initialize(user.getListarepsByIdUser());
-            //Hibernate.initialize(user.getCancionsByIdUser());
+            user.activarCanciones();
+            user.activarListas();
             return user;
         }catch (Exception e){
             throw e;
@@ -396,17 +396,15 @@ public class Usuario {
     /*
      * Devuelve el usuario en caso de que exista y la contraseña sea correcta
      */
-    public static Usuario correctUser(String username, String password) throws Exception{
-        Session session = getSession();
+    public static Usuario correctUser(String username, String password, Session session) throws Exception{
         Query query = session.createQuery("from Usuario where idUser = :user ");
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
         if (user==null){
             throw new Exception("El usuario no existe");
-        }else if (!checkpw(password,user.getContrasenya())){
+        }else if (!checkpw(password,user.getContrasenya())) {
             throw new AuthenticationException("Contraseña errónea");
         }
-        session.close();
         return user;
     }
 
