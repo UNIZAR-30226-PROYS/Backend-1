@@ -1,5 +1,7 @@
 <!-- TODO (JSP): "Lista" en el titulo es el nombre de la lista visitada -->
 <%@page contentType="text/html; UTF-8" %>
+<%@ page import="main.java.model.Usuario" %>
+<%@ page import="main.java.model.Cancion" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
@@ -9,6 +11,17 @@
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
+<%
+    String idS = (String) request.getParameter("id");
+    if (idS==null)idS="1";
+    Integer id = Integer.parseInt(idS);
+    Cancion cancion = (Cancion) Cancion.getCancion(id);
+    String nombre = cancion.getNombre();
+    String desc = main.java.controller.SongDescriptionController.getText(nombre);
+    pageContext.setAttribute("cancion", cancion);
+    pageContext.setAttribute("desc", desc);
+
+%>
 <div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
     <%@include file="includes/topbar.jsp" %>
     <!-- CONTENIDO DE LA VISTA -->
@@ -19,12 +32,12 @@
             <div class = "col-10">
                 <div class = "row" >
                     <div class = "col">
-                        <img class = "img-fluid align-content-lg-end" src="images/placeholder.png" alt="Placeholder">
+                        <img class="img-fluid align-content-lg-end" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
                     </div>
                 </div>
                 <div class ="row">
                     <div class = "col-6">
-                        <h3>Titulo de la cancion</h3>
+                        <h3>${cancion.getNombre()}</h3>
                     </div>
                     <form class="needs-validation form-row" action="cancion.html" novalidate >
                         <div class="col-auto my-1">
@@ -47,20 +60,20 @@
                 <div class="border-bottom border-dark w-100 px-3"></div>
                 <div class = "row">
                     <div class = "col-2 text-left">
-                        <img class = "img-fluid" src="images/user.svg" alt="Usuario">
+                        <img class = "img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png" alt="Usuario">
                     </div>
                     <div class = "col-10 text-left">
-                        <a href="artista.jsp">
-                            <h5>Nombre Usuario</h5>
+                        <a href="artista.jsp?name=${cancion.getUsuarioByIdUser().getIdUser()}">
+                            <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
                         </a>
                         <br>
-                        <h6>Fecha de subida</h6>
+                        <h6>${cancion.getFechaSubida()}</h6>
                     </div>
                 </div>
                 <div class = "row">
                     <br>
                     <div class = "col">
-                        <h6 class="media-heading"><%= main.java.controller.SongDescriptionController.getText("Bohemian Rhapsody") %></h6> <!-- PASAR EL TITULO DE LA CANCION-->
+                        <h6 class="media-heading">${desc}</h6> <!-- PASAR EL TITULO DE LA CANCION-->
                     </div>
                 </div>
                 <div class="border-bottom border-dark w-100 px-3"></div>
