@@ -32,8 +32,8 @@ public class UploadSongController extends HttpServlet {
 
         try {
             //Modificaciones en la base de datos.
-            String nombre = "error";
-            String genero = "error";
+            String nombre = request.getParameter("nombre");
+            String genero = request.getParameter("album");
             String album  = "error";
 
             //TODO:esto peta.
@@ -44,7 +44,6 @@ public class UploadSongController extends HttpServlet {
             int maxFileSize = 10000 * 1024;
             int maxMemSize = 10000 * 1024;
             String filePath ="/contenido/imagenes/usuarios/";
-
 
             String contentType = request.getContentType();
 
@@ -96,9 +95,12 @@ public class UploadSongController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/usuario.jsp");
-            request.setAttribute("error", e.getMessage());
-            rd.forward(request,response);
+            session.setAttribute("error", e.getMessage());
+            if (UA.contains("Mobile")){
+                response.sendRedirect("/movil/wolfsound.jsp");
+            }else{
+                response.sendRedirect("/escritorio/explorar.jsp");
+            }
         }
     }
 
