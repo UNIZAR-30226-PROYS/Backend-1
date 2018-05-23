@@ -159,7 +159,7 @@ public class Cancion {
      */
     public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
         Session session = getSession();
-        //user.activarCanciones(session);
+        user.activarCanciones(session);
         if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
 
