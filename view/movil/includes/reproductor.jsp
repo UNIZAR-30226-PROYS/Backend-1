@@ -23,8 +23,7 @@
 	Integer ultimo_momento;
 	String user_found;
 	try {
-		String user = (String) session.getAttribute("username");
-		Usuario u = Usuario.getUser(user);
+		Usuario u = (Usuario) session.getAttribute("username");
 		ultimo_momento = u.getUltRep();
 		user_found = "true";
 
@@ -81,28 +80,28 @@
 
 		<div class="container-fluid botones pt-1">
 			<div class="row" >
-				<div class="col">
+				<div class="col col-2 ">
 					<div class="btn" id="btnRandom">
 						<!-- <i class="fa fa-random" id="btnRandom" style="font-size:15px;" ></i> -->
 						<i class="fa fa-random"  style="font-size:15px;" ></i>
 					</div>
 				</div>
-
-				<div class="col ">
+				
+				<div class="col col-2">
 					<div class="btn" id="btnPrev">
 						<i class="fa fa-step-backward"  style="font-size:16px;" ></i>
 					</div>
 				</div>
-				<div class="col text-center">
+				<div class="col col-4 text-center">
 					<button type="button" class="btn btn-light" href="cancion.jsp">info</button>
 				</div>
 
-				<div class="col text-center">
+				<div class="col col-2 text-center">
 					<div class="btn" id="btnNext">
 						<i class="fa fa-step-forward"  style="font-size:16px;" ></i>
 					</div>
 				</div>
-				<div class="col " >
+				<div class="col col-2" >
 					<div class="btn" id="btnRepeat">
 						<i class="fa fa-repeat"  style="font-size:15px;" ></i>
 					</div>
