@@ -12,6 +12,7 @@ import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.FetchType;
 
 @Entity
 public class Listarep {
@@ -69,7 +70,7 @@ public class Listarep {
         return Objects.hash(idLista, nombre, numElementos);
     }
 
-    @OneToMany(mappedBy = "listarepByListaRep")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
     }

@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.FetchType;
 
 import javax.persistence.*;
 import java.sql.Date;

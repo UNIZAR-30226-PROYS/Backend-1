@@ -3,6 +3,7 @@ package main.java.model;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
+import javax.persistence.FetchType;
 
 @Entity
 public class Cancioneslista {
@@ -46,7 +47,7 @@ public class Cancioneslista {
         return Objects.hash(idCancLista, fechaIntroduccion);
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "listaRep", referencedColumnName = "idLista", nullable = false)
     public Listarep getListarepByListaRep() {
         return listarepByListaRep;
@@ -56,7 +57,7 @@ public class Cancioneslista {
         this.listarepByListaRep = listarepByListaRep;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
