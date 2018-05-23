@@ -19,6 +19,7 @@
             pageContext.setAttribute("numSus", suscripciones.size());
         %>
         <!-- CONTENIDO DE LA VISTA -->
+
         <div class="container mb-3">
             <div class="row pt-3">
                 <div class="col-4">
@@ -43,6 +44,7 @@
             <div class="border-bottom border-dark w-100 my-2 px-3"></div> <!-- Separador horizontal -->
             <div class="row">
                 <div class="col-auto mr-auto">
+                    ${error}
                     <h4>Mis listas</h4>
                 </div>
                 <div class="float-right mr-3">

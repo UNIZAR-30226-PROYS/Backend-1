@@ -207,9 +207,9 @@ public class Cancion {
 
     public static boolean existsCancion2(Usuario user, String song){
         Collection<Cancion> aux = user.getCancionsByIdUser();
-        List<Cancion> canciones = new ArrayList<>(aux);
         boolean exists = false;
-        if(canciones!=null){
+        if(aux!=null){
+            List<Cancion> canciones = new ArrayList<>(aux);
             for(Cancion cancion : canciones){
                 if(song==cancion.getNombre()){
                     exists = true;
