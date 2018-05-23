@@ -4,6 +4,7 @@ import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +20,13 @@ import java.util.List;
 @WebServlet(name = "ListController", urlPatterns = "/list")
 public class ListController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String UA = request.getHeader("User-Agent");
         String idlista = request.getParameter("id");
         Integer id = Integer.parseInt(idlista);
-        String UA = request.getHeader("User-Agent");
         Listarep lista = null;
         try {
             lista = Listarep.searchList(id);

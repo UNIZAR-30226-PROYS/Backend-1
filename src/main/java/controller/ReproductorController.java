@@ -21,9 +21,10 @@ public class ReproductorController extends HttpServlet {
 
         try {
             /* Cambiamos el instate de reproducción del usuario */
-            String user = (String) session.getAttribute("username");
-            Usuario u = Usuario.getUser(user);
+                //String user = (String) session.getAttribute("username");
+                // Usuario u = Usuario.getUser(user);
 
+            Usuario u = (Usuario) session.getAttribute("username");
             String mi_momento = request.getParameter("momento_cancion");
             Double mi_momento_double = Double.parseDouble(mi_momento);
 

@@ -2,7 +2,10 @@ package main.java.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
+import org.hibernate.Session;
+import static main.java.HibernateUtil.getSession;
 
 @Entity
 public class Comentario {
@@ -38,8 +41,10 @@ public class Comentario {
         return fechaSubida;
     }
 
-    public void setFechaSubida(Date fechaSubida) {
-        this.fechaSubida = fechaSubida;
+    public void setFechaSubida(Date fecha) {
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
+        this.fechaSubida = date;
     }
 
     @Override
@@ -76,5 +81,34 @@ public class Comentario {
 
     public void setUsuarioByIdUser(Usuario usuarioByIdUser) {
         this.usuarioByIdUser = usuarioByIdUser;
+    }
+
+
+    public static Comentario addComentario(Usuario user, Cancion cancion,String texto) throws Exception{
+        Session session = getSession();
+
+        Comentario newCom = new Comentario();
+
+        newCom.setCuerpo(texto);
+        newCom.setUsuarioByIdUser(user);
+        newCom.setCancionByIdCancion(cancion);
+        newCom.setFechaSubida(new Date(0));
+
+        session.beginTransaction();
+        session.save( newCom );
+        session.getTransaction().commit();
+
+        session.close();
+        return newCom;
+
+    }
+
+    public static List<Comentario> searchComentarios(Cancion cancion) throws Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Comentario where cancionByIdCancion = :cancion ");
+        query.setParameter("cancion", cancion);
+        List<Comentario> lista = query.getResultList();
+        session.close();
+        return lista;
     }
 }

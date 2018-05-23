@@ -10,13 +10,6 @@
     <%@include file="includes/header.jsp" %>
 </head>
 <body>
-<%
-    String idS = (String) request.getParameter("id");
-    if (idS==null)idS="1";
-    Integer id = Integer.parseInt(idS);
-    Cancion cancion = (Cancion) Cancion.getCancion(id);
-    pageContext.setAttribute("cancion", cancion);
-%>
 
 <%@include file="includes/navbars.jsp" %>
 <!-- CONTENIDO DE LA VISTA -->
@@ -54,30 +47,11 @@
                 <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png" alt="Usuario">
             </div>
             <div class="col-8 text-left">
-                <a href="artista.html">
+                <a href="usuarioPublico.jsp?name=${cancion.getUsuarioByIdUser().getIdUser()}">
                     <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
                 </a>
                 <br>
                 <h6>${cancion.getFechaSubida()}</h6>
-            </div>
-        </div>
-        <div class="row">
-            <br>
-            <div class="col">
-                <h6 class="media-heading">AQUI VA LA DESCRIPCION SACADA DE WIKIPEDIA/SPOTIFY ETC.En un lugar de la
-                    Mancha, de cuyo nombre no quiero acordarme, no ha mucho tiempo que vivía un hidalgo de los de
-                    lanza en astillero, adarga antigua, rocín flaco y galgo corredor. Una olla de algo más vaca que
-                    carnero, salpicón las más noches, duelos y quebrantos los sábados, lentejas los viernes, algún
-                    palomino de añadidura los domingos, consumían las tres partes de su hacienda. El resto della
-                    concluían sayo de velarte, calzas de velludo para las fiestas con sus pantuflos de lo mismo, los
-                    días de entre semana se honraba con su vellori de lo más fino. Tenía en su casa una ama que
-                    pasaba de los cuarenta, y una sobrina que no llegaba a los veinte, y un mozo de campo y plaza,
-                    que así ensillaba el rocín como tomaba la podadera. Frisaba la edad de nuestro hidalgo con los
-                    cincuenta años, era de complexión recia, seco de carnes, enjuto de rostro; gran madrugador y
-                    amigo de la caza. Quieren decir que tenía el sobrenombre de Quijada o Quesada (que en esto hay
-                    alguna diferencia en los autores que deste caso escriben), aunque por conjeturas verosímiles se
-                    deja entender que se llama Quijana; pero esto importa poco a nuestro cuento; basta que en la
-                    narración dél no se salga un punto de la verdad.</h6>
             </div>
         </div>
         <!--comentarios-->
@@ -87,13 +61,14 @@
             </div>
 
         </div>
-        <div class="row align-items-center">
+        <div class = "row align-items-center">
             <div class="col ">
-                <form class="needs-validation form-row " action="cancion.html" novalidate>
+                <form class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post" novalidate>
                     <div class="col" required>
-                        <textarea class="text form-control" id="comentario" required></textarea>
+                        <textarea class="text form-control" id="comentario"  name="texto" required></textarea>
+                        <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
                     </div>
-                    <div class="col-auto my-1">
+                    <div class="col">
                         <button type="submit" class="btn btn-primary">Comentar</button>
                     </div>
                 </form>
@@ -101,45 +76,25 @@
         </div>
 
 
-        <div class="list-group pt-2">
-            <a href="usuarioPublico.html" class="list-group-item list-group-item-action">
-                <div class="media">
-                    <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:30px;" alt="...">
+        <ul class="list-unstyled">
+            <c:forEach items="${comentarios}" var="com">
+
+                <li class="media">
+                    <div class="media-left">
+                        <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getIdUser()}Perfil.png" style="width:64px;height:64px;" alt="...">
                     </div>
                     <div class="media-body">
-                        <h5 class="media-heading">Nombre User</h5>
-                        <h6 class="media-heading">Hola probando Probando soy un comentario
-                            lalalalalalalalalalalala</h6>
+                        <h4 class ="media-heading">
+                            <a href="artista.jsp?name=${com.getUsuarioByIdUser().getIdUser()}" >
+                                <h5>${com.getUsuarioByIdUser().getIdUser()}</h5>
+                            </a>
+                        </h4>
+                        <p>${com.getCuerpo()}</p>
                     </div>
-                </div>
-            </a>
-            <a href="usuarioPublico.html" class="list-group-item list-group-item-action">
-                <div class="media">
-                    <div class="media-left" style="padding-right:15px">
-                        <img src="images/wolf.jpg" style="width:30px;" alt="...">
-                    </div>
-                    <div class="media-body">
-                        <h5 class="media-heading">Nombre User 2</h5>
-                        <h6 class="media-heading">En un lugar de la Mancha, de cuyo nombre no quiero acordarme, no
-                            ha mucho tiempo que vivía un hidalgo de los de lanza en astillero, adarga antigua, rocín
-                            flaco y galgo corredor. Una olla de algo más vaca que carnero, salpicón las más noches,
-                            duelos y quebrantos los sábados, lentejas los viernes, algún palomino de añadidura los
-                            domingos, consumían las tres partes de su hacienda. El resto della concluían sayo de
-                            velarte, calzas de velludo para las fiestas con sus pantuflos de lo mismo, los días de
-                            entre semana se honraba con su vellori de lo más fino. Tenía en su casa una ama que
-                            pasaba de los cuarenta, y una sobrina que no llegaba a los veinte, y un mozo de campo y
-                            plaza, que así ensillaba el rocín como tomaba la podadera. Frisaba la edad de nuestro
-                            hidalgo con los cincuenta años, era de complexión recia, seco de carnes, enjuto de
-                            rostro; gran madrugador y amigo de la caza. Quieren decir que tenía el sobrenombre de
-                            Quijada o Quesada (que en esto hay alguna diferencia en los autores que deste caso
-                            escriben), aunque por conjeturas verosímiles se deja entender que se llama Quijana; pero
-                            esto importa poco a nuestro cuento; basta que en la narración dél no se salga un punto
-                            de la verdad.</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
+                </li>
+
+            </c:forEach>
+        </ul>
     </div>
 </div><!-- Container -->
 

@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.FetchType;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -158,7 +159,7 @@ public class Cancion {
      */
     public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
         Session session = getSession();
-        //user.activarCanciones(session);
+        user.activarCanciones(session);
         if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
 

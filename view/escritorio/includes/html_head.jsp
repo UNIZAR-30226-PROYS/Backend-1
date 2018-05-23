@@ -16,5 +16,5 @@
 <script src="${pageContext.request.contextPath}/scripts/navegacion.js"></script>
 
 <script>
-    window.history.pushState({"html":window.location.pathname,"titulo":$(document).attr('title')}, "", window.location.pathname);
+    window.history.pushState({"html":window.location.pathname+window.location.search,"titulo":$(document).attr('title')}, "", window.location.pathname+window.location.search);
 </script>

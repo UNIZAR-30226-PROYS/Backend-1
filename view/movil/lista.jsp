@@ -32,23 +32,20 @@
         </div>
     </div>
     <!--TODO: Crear lista con canciones-->
-    <c:forEach items="${sessionScope.misListas}" var="lista">
+    <c:forEach items="${canciones}" var="cancion">
         <div class="list-group pt-2">
             <div class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <h4 class="media-heading">1</h4>
-                    </div>
-                    <div class="media-left" style="padding-right:15px">
                         <a href="cancion.jsp">
-                            <img src="images/wolf.jpg" style="width:64px;" alt="...">
+                            <img src="/contenido/canciones/imagenes/${cancion.getIdCancion()}.jpg" style="width:64px;" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
                         <!--TODO: Nombre cancion-->
-                        <h6 class="media-heading">Nombre Cancion</h6>
+                        <h6 class="media-heading">${cancion.getNombre()}</h6>
                         <!--TODO: Usuario que ha subido la canción-->
-                        <h6 class="media-heading">usuario</h6>
+                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
                     </div>
                     <div class="media-right">
                         <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">

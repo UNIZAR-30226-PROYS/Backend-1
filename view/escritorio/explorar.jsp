@@ -21,7 +21,7 @@
                 <h2 class="text-left pl-4 pt-2">Explorar</h2>
                 <div class="row pl-4 pt-2 pb-2">
                     <div class="col-7">
-                        <form class="search-button" action="${pageContext.request.contentType}/search" method="post">
+                        <form class="search-button" action="${pageContext.request.contextPath}/search" method="post">
                             <div class="orm-group">
                                 <div class="input-group">
                                     <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
@@ -37,58 +37,32 @@
                 </div>
                 ${sessionScope.error}
                 <c:remove var="error"></c:remove>
-                <div class="row pl-4 pr-2">
-                    <div class="col-auto pt-2 pb-3">
-                        <h4>Mis listas</h4>
-                    </div>
-                    <div class="float-right mr-3 pt-2">
-                        <a href="listas.jsp" class="btn btn-link" role="button" >
-                            <span class="fa fa-chevron-right" style="font-size:20px;"></span>
-                        </a>
-                    </div>
-                </div>
-                <div class="row pl-4 pr-2">
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 1</p>
-                                </div>
+                <c:if test="${not empty sessionScope.username}">
+                    <div class="row pl-4 pr-2">
+                        <div class="col-auto pt-2 pb-3">
+                            <h4>Mis listas</h4>
+                        </div>
+                        <div class="float-right mr-3 pt-2">
+                            <a href="listas.jsp" class="btn btn-link" role="button" >
+                                <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                             </a>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 2</p>
+                    <div class="row pl-4 pr-2">
+                        <c:forEach items="${misListas}" var="lista" begin="0" end="3">
+                            <div class="col-3">
+                                <div class="img-thumbnail h-100">
+                                    <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                        <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" class="pt-3" alt="" style="width:20%">
+                                        <div class="caption pt-3 pb-2">
+                                            <p>${lista.getNombre()}</p>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </c:forEach>
                     </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 3</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 4</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </c:if>
 
                 <div class="row pt-3 pl-4 pr-2">
                     <div class="col-auto pt-2 pb-3">
@@ -143,58 +117,60 @@
                     </div>
                 </div>
 
-                <div class="row pl-4 pt-3 pb-1 pr-2">
-                    <div class="col-auto pt-2 pb-3">
-                        <h4>Mi audio</h4>
-                    </div>
-                    <div class="float-right mr-3 pb-3 pt-2">
-                        <button type="submit" class="btn btn-link">
-                            <span class="fa fa-chevron-right" style="font-size:20px;"></span>
-                        </button>
-                    </div>
-                </div>
-                <div class="row pl-4 pr-2">
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre Mi audio 1</p>
-                                </div>
-                            </a>
+                <c:if test="${not empty sessionScope.username}">
+                    <div class="row pl-4 pt-3 pb-1 pr-2">
+                        <div class="col-auto pt-2 pb-3">
+                            <h4>Mi audio</h4>
+                        </div>
+                        <div class="float-right mr-3 pb-3 pt-2">
+                            <button type="submit" class="btn btn-link">
+                                <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+                            </button>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre Mi audio 2</p>
-                                </div>
-                            </a>
+                    <div class="row pl-4 pr-2">
+                        <div class="col-3">
+                            <div class="img-thumbnail h-100">
+                                <a href="" target="_self">
+                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
+                                    <div class="caption pt-3 pb-2">
+                                        <p>Nombre Mi audio 1</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="img-thumbnail h-100">
+                                <a href="" target="_self">
+                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
+                                    <div class="caption pt-3 pb-2">
+                                        <p>Nombre Mi audio 2</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="img-thumbnail h-100">
+                                <a href="" target="_self">
+                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
+                                    <div class="caption pt-3 pb-2">
+                                        <p>Nombre Mi audio 3</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="img-thumbnail h-100">
+                                <a href="" target="_self">
+                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
+                                    <div class="caption pt-3 pb-2">
+                                        <p>Nombre Mi audio 4</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre Mi audio 3</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre Mi audio 4</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                </c:if>
 
                 <div class="row pl-4 pt-3 pr-2">
                     <div class="col-auto pt-2 pb-3">

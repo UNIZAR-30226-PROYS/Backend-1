@@ -17,6 +17,7 @@ function navegar(e){
             if (origen !== destino) { //todo: revisar esto para no insertar nuevas entradas en el historial si vas a la misma pagina
                 // Cargar contenido
                 $("#contenido").load(destino, {ajax:1});
+                //$.get(destino,{ajax:1},function(data){$('#contenido').html(data)});
 
                 // Cambiar URL y titulo
                 setTimeout(function () { //todo: mejorar esto para mostrar el titulo directamente y no depender de un timeout de 100ms
