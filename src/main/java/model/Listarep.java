@@ -135,6 +135,18 @@ public class Listarep {
         session.close();
     }
 
+    public static Listarep addCancion(Listarep lista, Cancion cancion){
+        Session session = getSession();
+        Collection<Cancion> aux = lista.getCancioneslistasByIdLista();
+        if(aux!=null) {
+            List<Cancion> canciones = new ArrayList<>(aux);
+        }else{
+            List<Cancion> canciones = new ArrayList<>();
+        }
+
+        session.close();
+    }
+
     /*
      * True -> cancion existe para ese user
      * False -> cancion no existe para ese user
