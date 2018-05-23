@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.List;
 
 import main.java.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -206,17 +207,17 @@ public class Usuario {
         if (!existsUser(username)){
             Usuario newUser = new Usuario();
 
+            //Asignacion de atributos
             newUser.setIdUser(username);
             newUser.setContrasenya(password);
             newUser.setEmail(email);
-
             newUser.setNomAp("Anonimo");
             newUser.setUltRep(0);
             newUser.setPublico(true);
             newUser.setConexion("conectado");
 
+            //Creacion de listas predefinidas
             List<Listarep> listas = new ArrayList<>();
-
             Listarep historial = Listarep.initLista(newUser,"historial");
             Listarep mimusica = Listarep.initLista(newUser,"mimusica");
             Listarep favoritos = Listarep.initLista(newUser,"favoritos");
@@ -224,14 +225,19 @@ public class Usuario {
             listas.add(mimusica);
             listas.add(favoritos);
 
+            //Almacenamiento en BBDD
             session.beginTransaction();
             session.save( newUser );
             session.save( "Listarep", historial );
             session.save( "Listarep", mimusica );
             session.save( "Listarep", favoritos );
-            newUser.setListarepsByIdUser(listas);
-            session.update( newUser );
+            //newUser.setListarepsByIdUser(listas);
+            //session.update( newUser );
             session.getTransaction().commit();
+
+            //Inicializacion de Lazy-Fetch de Listas y Canciones
+            Hibernate.initialize(newUser.getListarepsByIdUser());
+            Hibernate.initialize(newUser.getCancionsByIdUser());
 
             session.close();
             File from = new File("/contenido/imagenes/user.png");
@@ -302,6 +308,9 @@ public class Usuario {
         Session session = getSession();
         try {
             Usuario user = correctUser(username, password);
+            //Inicializacion de Lazy-Fetch de Listas y Canciones
+            //Hibernate.initialize(user.getListarepsByIdUser());
+            //Hibernate.initialize(user.getCancionsByIdUser());
             return user;
         }catch (Exception e){
             throw e;
