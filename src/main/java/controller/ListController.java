@@ -4,6 +4,7 @@ import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +20,7 @@ import java.util.List;
 @WebServlet(name = "ListController", urlPatterns = "/list")
 public class ListController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +28,15 @@ public class ListController extends HttpServlet {
         String idlista = request.getParameter("id");
         Integer id = Integer.parseInt(idlista);
         Listarep lista = null;
+
+        RequestDispatcher rd;
+        if (UA.contains("Mobile")) {
+            rd = request.getRequestDispatcher("/movil/cancion.jsp");
+        }
+        else{
+            rd = request.getRequestDispatcher("/escritorio/cancion.jsp");
+        }
+
         try {
             lista = Listarep.searchList(id);
         } catch (Exception e) {
@@ -38,13 +48,9 @@ public class ListController extends HttpServlet {
             canciones.add(x.getCancionByIdCancion());
         }
         // System.out.println(canciones);
-        HttpSession session = request.getSession(true);
-        session.setAttribute("canciones", canciones);
-        if (UA.contains("Mobile")){
-            response.sendRedirect("/movil/lista.jsp");
-        }else{
-            response.sendRedirect("/escritorio/lista.jsp");
-        }
+        request.setAttribute("canciones", canciones);
+
+        rd.forward(request,response);
         // lista.activarCancioneslista();
         // Collection<Cancioneslista> cancioneslista = lista.getCancioneslistasByIdLista();
 
