@@ -18,7 +18,11 @@
     Integer id = Integer.parseInt(idS);
     Cancion cancion = (Cancion) Cancion.getCancion(id);
     String nombre = cancion.getNombre();
-    String desc = "hola";//main.java.controller.SongDescriptionController.getText(nombre);
+    String desc = "hola";
+    try {
+        desc = main.java.controller.SongDescriptionController.getText(nombre);
+    }
+    catch (Exception e){desc = "Peto lo tuyo Oscar";}
     List<Comentario> comentarios = Comentario.searchComentarios(cancion);
     pageContext.setAttribute("comentarios", comentarios);
     pageContext.setAttribute("cancion", cancion);
@@ -94,7 +98,7 @@
                                 <textarea class="text form-control" id="comentario"  name="texto" required></textarea>
                                 <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
                             </div>
-                            <div class="col-auto my-1">
+                            <div class="col">
                                 <button type="submit" class="btn btn-primary">Comentar</button>
                             </div>
                         </form>
@@ -102,21 +106,25 @@
                 </div>
 
 
-                <div class="list-group pt-2">
+                <ul class="list-unstyled">
                 <c:forEach items="${comentarios}" var="com">
-                    <a href="artista.jsp?name=${com.getUsuarioByIdUser().getIdUser()}" class="list-group-item list-group-item-action">
-                        <div class="media">
-                            <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getIdUser()}Perfil.png" style="width:30px;height:30px;" alt="...">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="media-heading">${com.getUsuarioByIdUser().getIdUser()}</h5>
-                                <h6 class="media-heading">${com.getCuerpo()}</h6>
-                            </div>
+
+                    <li class="media">
+                        <div class="media-left">
+                            <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getIdUser()}Perfil.png" style="width:64px;height:64px;" alt="...">
                         </div>
-                    </a>
+                        <div class="media-body">
+                            <h4 class ="media-heading">
+                                <a href="artista.jsp?name=${com.getUsuarioByIdUser().getIdUser()}" >
+                                    <h5>${com.getUsuarioByIdUser().getIdUser()}</h5>
+                                </a>
+                            </h4>
+                            <p>${com.getCuerpo()}</p>
+                        </div>
+                    </li>
+
                 </c:forEach>
-                </div>
+                </ul>
 
             </div>
         </div> <!-- Container -->
