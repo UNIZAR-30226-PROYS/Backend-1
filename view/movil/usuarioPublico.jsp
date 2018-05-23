@@ -1,81 +1,131 @@
 <%--TODO: Falta revisar codigo java dentro de la pagina--%>
-<%@ page import="main.java.model.Usuario" %>
-<%@ page import="main.java.model.Suscribir" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
-	<head>
-		<title>Bienvenido a Wolfic</title>
-		<jsp:include page="includes/header.jsp"></jsp:include>
-	</head>
-	<body>
-    <%String username = (String) request.getParameter("name");%>
+<head>
+    <title>Bienvenido a Wolfic</title>
+    <jsp:include page="includes/header.jsp"></jsp:include>
+</head>
+<body>
 
-    <jsp:include page="includes/navbars.jsp"></jsp:include>
-        <!-- CONTENIDO DE LA VISTA -->
-        <div class="container mb-3">
-            <div class="row pt-3">
-                <div class="col col-md-offset-5">
-                    <div class="img-responsive text-center">
-                        <img src="/contenido/imagenes/usuarios/<%=username%>Perfil.png" style="height: 80px;" alt="Usuario">
-                        <p><%=username%></p>
-                    </div>
-                </div>
+<jsp:include page="includes/navbars.jsp"></jsp:include>
+<!-- CONTENIDO DE LA VISTA -->
+<div class="container mb-3">
+    <div class="row pt-3">
+        <div class="col col-md-offset-5">
+            <div class="img-responsive text-center">
+                <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}Perfil.png" style="height: 80px;" alt="Usuario">
+                <p>${usuario.getIdUser()}</p>
             </div>
-            <div class="border-bottom border-dark w-100 my-2 px-3"></div> <!-- Separador horizontal -->
-            <div class="row">
-                <div class="col-auto mr-auto">
-                    <h4>Listas de <%=username%></h4>
+        </div>
+    </div>
+    <div class="border-bottom border-dark w-100 my-2 px-3"></div> <!-- Separador horizontal -->
+    <c:if test="${publico}">
+        <div class="row">
+            <div class="col-auto mr-auto">
+                <h4>Listas de ${usuario.getIdUser()}</h4>
+            </div>
+            <div class="float-right mr-3">
+                <a href="/list?id=${listas.getIdLista()}" class="btn btn-link" role="button">
+                    <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-auto mr-auto">
+                <h4>Audio de ${usuario.getIdUser()}</h4>
+            </div>
+            <div class="float-right mr-3">
+                <a href="/list?id=${musica.getIdLista()}" class="btn btn-link" role="button">
+                    <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+                </a>
+            </div>
+        </div>
+        <div class="border-bottom border-dark w-100 px-3"></div>
+        <!-- Separador horizontal -->
+        <c:if test="${!suscrito}">
+            <div class="media mt-2">
+                <div class="media-body">
+                    <h4 class="media-heading"> Suscribirse a ${usuario.getIdUser()}</h4>
                 </div>
-                <div class="float-right mr-3">
-                    <a href="mis_listas.jsp" class="btn btn-link" role="button" >
-                        <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+                <div class="media-left">
+                    <a href="${pageContext.request.contextPath}/Suscribe?name=${usuario.getIdUser()}">
+                        <button type="button" class="btn btn-default ">
+                            <span class="fa fa-user-plus" style="font-size:20px; "></span>
+                        </button>
                     </a>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-auto mr-auto">
-                    <h4>Audio de <%=username%></h4>
+        </c:if>
+        <c:if test="${suscrito}">
+            <div class="media mt-2">
+                <div class="media-body">
+                    <h4 class="media-heading"> Suscrito a ${usuario.getIdUser()}</h4>
                 </div>
-                <div class="float-right mr-3">
-                    <a href="lista.jsp" class="btn btn-link" role="button" >
-                        <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+            </div>
+        </c:if>
+        <div class="media mt-2">
+            <div class="media-body">
+                <h4 class="media-heading"> Suscripciones de ${usuario.getIdUser()}</h4>
+            </div>
+            <div class="media-right">
+                <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalSuscribir">
+                    <span class="fa fa-user-plus" style="font-size:20px; "></span>
+                </button>
+            </div>
+        </div>
+        <%--<p class="text-danger">${error}</p>--%>
+
+        <div class="list-group pt-2">
+            <c:forEach items="${suscripciones}" var="sus">
+                <a href="usuarioPublico.jsp?name=${sus.getUsuarioByIdSuscrito().getIdUser()}"
+                   class="list-group-item list-group-item-action">
+                    <div class="media">
+                        <div class="media-left" style="padding-right:15px">
+                            <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png"
+                                 style="width:30px;" alt="...">
+                        </div>
+                        <div class="media-body">
+                            <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getIdUser()}</h6>
+                            <!--TODO: Estado del usuario, o bien desconectado, o bien el nombre de la cancion que esta escuchando/ha escuchado mas recientemente-->
+                            <h6 class="media-heading">Cancion 1</h6>
+                        </div>
+                    </div>
+                </a>
+            </c:forEach>
+        </div>
+    </c:if>
+    <c:if test="${!publico}">
+        <p>${usuario.getIdUser()} tiene el perfil bloqueado.</p>
+        <c:if test="${!suscrito}">
+            <div class="media mt-2">
+                <div class="media-body">
+                    <h4 class="media-heading"> Suscribirse a ${usuario.getIdUser()}</h4>
+                </div>
+                <div class="media-left">
+                    <a href="${pageContext.request.contextPath}/Suscribe?name=${usuario.getIdUser()}">
+                        <button type="button" class="btn btn-default ">
+                            <span class="fa fa-user-plus" style="font-size:20px; "></span>
+                        </button>
                     </a>
                 </div>
             </div>
-            <div class="border-bottom border-dark w-100 px-3"></div> <!-- Separador horizontal -->
-            <%
-                Boolean suscrito = Suscribir.existsSuscribir(((Usuario)session.getAttribute("username")).getIdUser(),username);
-                pageContext.setAttribute("sus", suscrito);
-            %>
-            <c:if test="${!sus}">
-                <div class="media mt-2">
-                    <div class="media-body">
-                        <h4 class="media-heading"> Suscribirse a <%=username%></h4>
-                    </div>
-                    <div class="media-left">
-                        <a href ="${pageContext.request.contextPath}/Suscribe?name=<%=username%>">
-                            <button type="button" class="btn btn-default ">
-                                <span class="fa fa-user-plus" style="font-size:20px; "></span>
-                            </button>
-                        </a>
-                    </div>
+        </c:if>
+        <c:if test="${suscrito}">
+            <div class="media mt-2">
+                <div class="media-body">
+                    <h4 class="media-heading"> Suscrito a ${usuario.getIdUser()}</h4>
                 </div>
-            </c:if>
-            <c:if test="${sus}">
-                <div class="media mt-2">
-                    <div class="media-body">
-                        <h4 class="media-heading"> Suscrito a <%=username%></h4>
-                    </div>
-                </div>
-            </c:if>
+            </div>
+        </c:if>
+    </c:if>
 
 
-        </div> <!-- Container -->
+</div> <!-- Container -->
 
-        <jsp:include page="includes/footer.jsp"></jsp:include>
-    </body>
+<jsp:include page="includes/footer.jsp"></jsp:include>
+</body>
 </html>
 
 

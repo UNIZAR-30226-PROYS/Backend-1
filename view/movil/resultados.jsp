@@ -65,7 +65,7 @@
     </div>
     <div id="result_usuarios" class="list-group pt-2 d-none">
         <c:forEach items="${usuarios}" var="usuario">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="/user?id=${usuario.getIdUser()}" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
                         <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}jpg" style="width:64px;" alt="...">
@@ -80,7 +80,7 @@
     </div>
     <div id="result_listas" class="list-group pt-2 d-none">
         <c:forEach items="${listas}" var="lista">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="/list?id=${lista.getIdLista()}" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
                         <img src="/contenido/imagenes/${lista.getIdLista()}.jpg" style="width:64px;" alt="...">
