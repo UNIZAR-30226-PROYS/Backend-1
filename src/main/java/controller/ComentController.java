@@ -31,9 +31,9 @@ public class ComentController extends HttpServlet {
             }
 
             if (UA.contains("Mobile")){
-                response.sendRedirect("/movil/cancion.jsp?id="+Integer.toString(cancionI));
+                response.sendRedirect("/cancion?id="+Integer.toString(cancionI));
             }else{
-                response.sendRedirect("/escritorio/cancion.jsp?id="+Integer.toString(cancionI));
+                response.sendRedirect("/cancion?id="+Integer.toString(cancionI));
             }
 
         } catch (Exception e) {
