@@ -219,6 +219,21 @@ public class Cancion {
         }
         return exists;
     }
+    /*
+     * True -> usuario existe
+     * False -> usuario no existe
+     */
+    public static Cancion getCancion(Integer id) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion where idCancion = :id ");
+        query.setParameter("id", id);
+        Cancion ca = (Cancion) query.uniqueResult();
+        session.close();
+        if (ca==null){
+            throw new Exception("La canción no existe");
+        }
+        return ca;
+    }
 
     /*
         Devuelve lista de elementos de Cancion que tengan el string song en el nombre
