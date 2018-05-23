@@ -16,7 +16,7 @@
         </ul>
     </div>
     <c:if test="${username != null}">
-        <a href="usuario.jsp" > <i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getIdUser()}  </a>
+        <a href="usuario.jsp" >&nbsp;<i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getIdUser()}</a>&nbsp;
         <form action="${pageContext.request.contextPath}/logout" method="get" >
             <button type="submit" class="btn btn-primary">Cerrar sesión</button>
         </form>
