@@ -21,7 +21,7 @@
                 <h2 class="text-left pl-4 pt-2">Explorar</h2>
                 <div class="row pl-4 pt-2 pb-2">
                     <div class="col-7">
-                        <form class="search-button" action="${pageContext.request.contentType}/search" method="post">
+                        <form class="search-button" action="${pageContext.request.contextPath}/search" method="post">
                             <div class="orm-group">
                                 <div class="input-group">
                                     <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
