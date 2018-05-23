@@ -327,7 +327,7 @@ public class Usuario {
         try {
             Usuario user = correctUser(username, password, session);
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            //user.activarCanciones();
+            user.activarCanciones(session);
             user.activarListas(session);
             return user;
         }catch (Exception e){

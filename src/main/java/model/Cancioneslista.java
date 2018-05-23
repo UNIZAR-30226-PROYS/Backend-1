@@ -2,8 +2,20 @@ package main.java.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.FetchType;
+
+import org.hibernate.Session;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.sql.Date;
+
+import static main.java.HibernateUtil.getSession;
 
 @Entity
 public class Cancioneslista {
@@ -13,6 +25,8 @@ public class Cancioneslista {
     private Cancion cancionByIdCancion;
 
     @Id
+    @GenericGenerator(name="genCanLis" , strategy="increment")
+    @GeneratedValue(generator="genCanLis")
     @Column(name = "idCancLista")
     public int getIdCancLista() {
         return idCancLista;
@@ -65,5 +79,69 @@ public class Cancioneslista {
 
     public void setCancionByIdCancion(Cancion cancionByIdCancion) {
         this.cancionByIdCancion = cancionByIdCancion;
+    }
+
+    public static Listarep addCancALista(Listarep lista, Cancion cancion) throws Exception{
+        Session session = getSession();
+        if(!existsCancList(lista,cancion)){
+            Cancioneslista objeto = new Cancioneslista();
+            objeto.setIdCancLista(0);
+            objeto.setFechaIntroduccion(new Date(0));
+            objeto.setCancionByIdCancion(cancion);
+            objeto.setListarepByListaRep(lista);
+
+            session.beginTransaction();
+            session.save( objeto );
+            session.getTransaction().commit();
+            session.close();
+
+            session.refresh(lista);
+            return lista;
+        }else{
+            session.close();
+            throw new Exception("Cancion ya existe en dicha lista");
+        }
+    }
+
+    public static Listarep borrarCancDeLista(Listarep lista, Cancion cancion) throws Exception{
+        Session session = getSession();
+        Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
+        if(aux!=null) {
+            List<Cancioneslista> canciones = new ArrayList<>(aux);
+            int pos = canciones.lastIndexOf(cancion);
+            if(pos!=-1){
+                Cancioneslista borrar = canciones.remove(pos);
+                session.beginTransaction();
+                session.delete( borrar );
+                session.getTransaction().commit();
+                session.refresh(lista);
+                session.close();
+                return lista;
+            }else{
+                session.close();
+                throw new Exception("La lista no contiene dicha cancion");
+            }
+        }else{
+            session.close();
+            throw new Exception("La lista es vacia");
+        }
+    }
+
+    public static boolean existsCancList(Listarep lista, Cancion song){
+        Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
+        boolean exists = false;
+        if(aux!=null){
+            List<Cancioneslista> canciones = new ArrayList<>(aux);
+            for(Cancioneslista cancion : canciones){
+                try{
+                    Cancion temp = Cancion.getCancion(cancion.getIdCancLista());
+                    if(song.getNombre().equals(temp.getNombre())){
+                        exists = true;
+                        break;
+                    }
+                }catch (Exception e){}
+            }
+        }
+        return exists;
     }
 }
