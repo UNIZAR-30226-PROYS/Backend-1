@@ -12,23 +12,7 @@
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
-<%
-    String idS = (String) request.getParameter("id");
-    if (idS==null)idS="1";
-    Integer id = Integer.parseInt(idS);
-    Cancion cancion = (Cancion) Cancion.getCancion(id);
-    String nombre = cancion.getNombre();
-    String desc = "hola";
-    try {
-        desc = main.java.controller.SongDescriptionController.getText(nombre);
-    }
-    catch (Exception e){desc = "Peto lo tuyo Oscar";}
-    List<Comentario> comentarios = Comentario.searchComentarios(cancion);
-    pageContext.setAttribute("comentarios", comentarios);
-    pageContext.setAttribute("cancion", cancion);
-    pageContext.setAttribute("desc", desc);
 
-%>
 <div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
     <%@include file="includes/topbar.jsp" %>
     <!-- CONTENIDO DE LA VISTA -->
@@ -80,7 +64,7 @@
                 <div class = "row">
                     <br>
                     <div class = "col">
-                        <h6 class="media-heading">${desc}</h6> <!-- PASAR EL TITULO DE LA CANCION-->
+                        <h6 class="media-heading">${descripcion}</h6> <!-- PASAR EL TITULO DE LA CANCION-->
                     </div>
                 </div>
                 <div class="border-bottom border-dark w-100 px-3"></div>
