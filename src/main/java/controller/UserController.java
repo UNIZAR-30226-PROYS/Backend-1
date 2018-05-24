@@ -101,7 +101,7 @@ public class UserController extends HttpServlet {
         }
         else{
             if (!usuario.getIdUser().equals(username.getIdUser())) {
-                response.sendRedirect("/escritorio/usuarioPublico.jsp");
+                response.sendRedirect("/escritorio/artista.jsp");
             }
             else {
                 response.sendRedirect("/escritorio/usuario.jsp");

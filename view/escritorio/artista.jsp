@@ -17,26 +17,21 @@
         <div id="contenido">
             <% } //if%>
             <div id="tituloNuevo" value="Wolfic - Artista" style="display:none;"></div>
-            <%String username = (String) request.getParameter("name");%>
             <!-- CONTENIDO DE LA VISTA -->
             <div class="container mb-3">
 
                 <div class="media mt-2">
                     <div class="row media-body pt-2 pl-4">
                         <div class="media-left pl-1" style="padding-right:15px">
-                            <img src="/contenido/imagenes/usuarios/<%=username%>Perfil.png" style="width:300px;" alt="...">
+                            <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}Perfil.png" style="width:300px;" alt="...">
                         </div>
                         <div class="row media-body pt-5 pl-5 mt-auto mb-auto">
-                            <h1 class="media-heading"><%=username%></h1>
-                            <%
-                                Boolean suscrito = Suscribir.existsSuscribir(((Usuario)session.getAttribute("username")).getIdUser(),username);
-                                pageContext.setAttribute("sus", suscrito);
-                            %>
-                            <c:if test="${!sus}">
+                            <h1 class="media-heading">${usuario.getIdUser()}</h1>
+                            <c:if test="${!suscrito}">
                                 <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="hidden" value="<%=username%>" name="name" required>
+                                            <input type="hidden" value="${usuario.getIdUser()}" name="name" required>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Suscribirse</button>

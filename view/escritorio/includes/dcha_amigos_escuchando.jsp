@@ -25,12 +25,12 @@
         <li class="list-group-item media">
             <div class="media">
                 <div class="media-left">
-                    <a href="artista.jsp?name=${sus.getUsuarioByIdSuscrito().getIdUser()}">    <!-- Link a la canción -->
+                    <a href="/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">
                         <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png" href="#" style="width:50px;" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getIdUser()}</a></h6>              <!-- Link al usuario -->
+                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getIdUser()}</a></h6>
                     <h6 class="media-heading"><a href="#">Nombre Canción</a></h6>  <!-- Link a la canción -->
                 </div>
             </div>
