@@ -34,11 +34,10 @@
             <div class="border-bottom border-dark w-100 my-2 px-3"></div> <!-- Separador horizontal -->
             <div class="row">
                 <div class="col-auto mr-auto">
-                    ${error}
                     <h4>Mis listas</h4>
                 </div>
                 <div class="float-right mr-3">
-                    <a href="mis_listas.jsp" class="btn btn-link" role="button" >
+                    <a href="/lists?id=${username.getIdUser()}" class="btn btn-link" role="button" >
                         <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                     </a>
                 </div>

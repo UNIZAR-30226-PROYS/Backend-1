@@ -1,4 +1,3 @@
-<%--TODO: Falta revisar codigo java dentro de la pagina--%>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -28,8 +27,7 @@
                 <h4>Listas de ${usuario.getIdUser()}</h4>
             </div>
             <div class="float-right mr-3">
-                    <%--TODO: sustituir por mis_listas pero bien cargada--%>
-                <a href="/mis_listas.jsp" class="btn btn-link" role="button">
+                <a href="/lists?id=${usuario.getIdUser()}" class="btn btn-link" role="button">
                     <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                 </a>
             </div>

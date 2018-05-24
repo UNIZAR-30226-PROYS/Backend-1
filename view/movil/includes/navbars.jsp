@@ -35,7 +35,7 @@
         </div>
         <ul class="list-unstyled components">
 
-            <li><a href="${pageContext.request.contextPath}/movil/mis_listas.jsp">Mis listas</a></li>
+            <li><a href="${pageContext.request.contextPath}/movil/listas.jsp">Mis listas</a></li>
             <li><a href="${pageContext.request.contextPath}/movil/lista.jsp">Mi audio</a></li>
             <li><a href="${pageContext.request.contextPath}/movil/suscripciones.jsp">Suscripciones</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a></li>
