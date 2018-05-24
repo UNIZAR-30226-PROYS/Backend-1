@@ -28,53 +28,7 @@ public class Main {
     }
 
     public static void main(final String[] args) throws Exception {
-        final Session session = getSession();
-        Scanner sc = new Scanner(System.in);
-        try {
-            /*
-            System.out.println("querying all the managed entities...");
-            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-            for (EntityType<?> entityType : metamodel.getEntities()) {
-                final String entityName = entityType.getName();
-                final Query query = session.createQuery("from " + entityName);
-                System.out.println("executing: " + query.getQueryString());
-                for (Object o : query.list()) {
-                    System.out.println("  " + o);
-                }
-            }
-            */
-            Usuario pablo = new Usuario();
 
-            pablo.setIdUser("pablo");
-            pablo.setNomAp("Pablo");
-            pablo.setContrasenya(" ");
-            pablo.setUltRep(10);
-            pablo.setPublico(false);
-            pablo.setConexion("conectado");
-            pablo.setEmail("email");
-
-            System.out.println(pablo);
-
-            session.beginTransaction();
-            session.save( pablo );
-            session.getTransaction().commit();
-                /*
-                System.out.println("Enter your username: ");
-                Scanner sc = new Scanner(System.in);
-                String username = sc.nextLine();
-                System.out.println("Your username is " + username);
-
-
-                session.beginTransaction();
-                session.save( new Usuario(  ) );
-                session.getTransaction().commit();
-                session.close();
-                */
-
-        } finally {
-            session.close();
-            sc.close();
-        }
     }
 
 

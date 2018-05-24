@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="col-4">
-                    <a href="modificarCuenta.jsp">
+                    <a href="/movil/modificarCuenta.jsp">
                         <button type="button" class="btn btn-default float-right mt-3" >
                             <span class="fa fa-cog" style="font-size:25px; padding:15px;" ></span>
                         </button>

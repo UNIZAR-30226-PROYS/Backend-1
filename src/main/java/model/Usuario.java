@@ -28,7 +28,7 @@ public class Usuario {
     private String idUser;
     private String nomAp;
     private String email;
-    private String conexion;
+    private boolean conexion;
     private int ultRep;
     private String contrasenya;
     private boolean publico;
@@ -45,7 +45,7 @@ public class Usuario {
         this.idUser = idUser;
         this.nomAp = nomAp;
         this.email = email;
-        this.conexion = "desconectado";
+        this.conexion = false;
         this.ultRep = 0;
         this.contrasenya = contrasenya;
         this.publico = false;
@@ -83,11 +83,11 @@ public class Usuario {
 
     @Basic
     @Column(name = "Conexion")
-    public String getConexion() {
+    public boolean getConexion() {
         return conexion;
     }
 
-    public void setConexion(String conexion) {
+    public void setConexion(boolean conexion) {
         this.conexion = conexion;
     }
 
@@ -221,7 +221,7 @@ public class Usuario {
             newUser.setNomAp("Anonimo");
             newUser.setUltRep(0);
             newUser.setPublico(true);
-            newUser.setConexion("conectado");
+            newUser.setConexion(true);
 
             //Almacenamiento en BBDD
             session.beginTransaction();
@@ -256,35 +256,55 @@ public class Usuario {
     /*
      * En caso de que usernameNew no este cojido, modifica a usernameOld con los nuevos atributos.
      */
+    /*
     public static Usuario modUser(String usernameOld, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
         Session session = getSession();
         if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
             Usuario User = getUser(usernameOld);
             User.setEmail(email);
-
             User.setNomAp(nomAp);
             User.setPublico(publico);
-            User.setConexion("conectado");
             if(!(usernameOld.equals(usernameNew))) {
                 User.setIdUser(usernameNew);
             }
 
             session.beginTransaction();
             session.saveOrUpdate( User );
-            session.getTransaction().commit();
             if(!(usernameOld.equals(usernameNew))) {
                 User = getUser(usernameOld);
-                session.beginTransaction();
                 session.delete( User );
-                session.getTransaction().commit();
             }
+            session.getTransaction().commit();
             session.close();
             return User;
         }else{
             session.close();
             throw new Exception("Nombre de usuario ya existe");
         }
+    }*/
+
+    public Usuario modUser(String email,String nomAp,Boolean publico) throws Exception{
+        Session session = getSession();
+        this.setEmail(email);
+        this.setNomAp(nomAp);
+        this.setPublico(publico);
+        session.beginTransaction();
+        session.update( this );
+        session.getTransaction().commit();
+        session.close();
+        return this;
     }
+
+
+    //TODO: cambiar username -> depende de Cascade delete y saveupdate
+    /*
+    public static Usuario modUserName(Usuario usuario, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
+        Session session = getSession();
+        Usuario newUser = usuario;
+        newUser.setIdUser(usernameNew);
+
+        return newUser;
+    }*/
 
     /*
      * Borra permanentemente un usuario del sistema
@@ -341,6 +361,7 @@ public class Usuario {
         try {
             Usuario user = correctUser(username, password, session);
             //Inicializacion de Lazy-Fetch de Listas y Canciones
+            user.setConexion(true);
             user.activarCanciones(session);
             user.activarListas(session);
             // user.activarSuscripciones(session);
@@ -396,6 +417,22 @@ public class Usuario {
             throw new Exception("El usuario no existe");
         }
         return user;
+    }
+
+    public static Listarep getLista(Usuario user, String nombre) throws Exception{
+        Collection<Listarep> aux = user.getListarepsByIdUser();
+        boolean exists = false;
+        if(aux!=null){
+            List<Listarep> listas = new ArrayList<>(aux);
+            for(Listarep lista : listas){
+                try{
+                    if(nombre.equals(lista.getNombre())){
+                        return lista;
+                    }
+                }catch (Exception e){}
+            }
+        }
+        throw new Exception("El usuario no contiene dicha lista");
     }
 
     /*

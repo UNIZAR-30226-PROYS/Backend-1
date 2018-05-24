@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 
 import org.hibernate.Session;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.query.Query;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -95,12 +96,18 @@ public class Cancioneslista {
             session.getTransaction().commit();
             session.close();
 
-            session.refresh(lista);
+            //session.refresh(lista);
             return lista;
         }else{
             session.close();
             throw new Exception("Cancion ya existe en dicha lista");
         }
+    }
+
+    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        addCancALista(listarep, cancion);
+        return listarep;
     }
 
     public static Listarep borrarCancDeLista(Listarep lista, Cancion cancion) throws Exception{
