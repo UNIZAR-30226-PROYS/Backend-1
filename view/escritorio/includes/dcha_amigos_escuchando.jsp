@@ -2,7 +2,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="main.java.model.Usuario" %>
 <%@page contentType="text/html; UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
     <%
