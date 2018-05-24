@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Bienvenido a Wolfic</title>
+    <title>Perfil de ${usuario.getIdUser()}</title>
     <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
 <body>
@@ -77,6 +77,8 @@
     </c:if>
     <c:if test="${!publico && !suscrito}">
         <p>${usuario.getIdUser()} tiene el perfil bloqueado.</p>
+    </c:if>
+    <c:if test="${!suscrito}">
         <div class="media mt-2">
             <div class="media-body">
                 <h4 class="media-heading"> Suscribirse a ${usuario.getIdUser()}</h4>

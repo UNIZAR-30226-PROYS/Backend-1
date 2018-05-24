@@ -20,7 +20,7 @@ public class ModifyController extends HttpServlet {
         HttpSession session = request.getSession(true);
 
         Usuario userOld = (Usuario) session.getAttribute("username");
-        String userNew = request.getParameter("new_user");
+        String iduserNew = request.getParameter("new_user");
         String nombreAp = request.getParameter("nombre_Ap");
         String mail = request.getParameter("mail");
         String visiS = request.getParameter("visibilidad");
@@ -28,18 +28,30 @@ public class ModifyController extends HttpServlet {
 
         RequestDispatcher rd = null;
         try {
-            Usuario nuser = Usuario.modUser(userOld.getIdUser(),userNew,mail,nombreAp,visiB);
-            session.setAttribute("username", nuser);
+            Usuario nuser;
+            // TODO: Esperar a poder borrar usuarios y updates del ORM
+//            if (iduserNew.equals(userOld.getIdUser())){
+//                nuser = Usuario.modUserName(userOld,iduserNew,mail,nombreAp,visiB);
+//                session.removeAttribute("username");
+//                session.setAttribute("username", nuser);
+//            }
+//            else {
+//                Usuario.modUser(userOld,mail,nombreAp,visiB);
+//            }
+            userOld.modUser(mail,nombreAp,visiB);
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{
                 response.sendRedirect("/escritorio/explorar.jsp");
             }
 
-
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/modificarCuenta.jsp");
+            if (UA.contains("Mobile")){
+                rd = request.getRequestDispatcher("/movil/modificarCuenta.jsp");
+            }else{
+                rd = request.getRequestDispatcher("/escritorio/modificarCuenta.jsp");
+            }
             request.setAttribute("error", e.getMessage());
             request.setAttribute("user", userOld);
             rd.forward(request,response);
