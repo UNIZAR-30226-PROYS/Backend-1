@@ -21,7 +21,7 @@
                 <h2 class="text-left pl-4 pt-2">Explorar</h2>
                 <div class="row pl-4 pt-2 pb-2">
                     <div class="col-7">
-                        <form class="search-button" action="${pageContext.request.contextPath}/search" method="post">
+                        <form id="formBuscar" class="search-button" action="${pageContext.request.contextPath}/search" method="get">
                             <div class="orm-group">
                                 <div class="input-group">
                                     <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
@@ -77,7 +77,7 @@
                 <div class="row pl-4 pr-2">
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
+                            <a href="/list?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre lista rec. 1</p>
@@ -87,7 +87,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
+                            <a href="/list?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre lista rec. 2</p>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
+                            <a href="/list?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre lista rec. 3</p>
@@ -107,7 +107,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
+                            <a href="/list?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre lista rec. 4</p>
@@ -131,7 +131,7 @@
                     <div class="row pl-4 pr-2">
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="" target="_self">
+                                <a href="/cancion?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 1</p>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="" target="_self">
+                                <a href="/cancion?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 2</p>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="" target="_self">
+                                <a href="/cancion?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 3</p>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="" target="_self">
+                                <a href="/cancion?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 4</p>
@@ -185,7 +185,7 @@
                 <div class="row pl-4 pb-4 pr-2">
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
+                            <a href="/cancion?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 1</p>
@@ -195,7 +195,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
+                            <a href="/cancion?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 2</p>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
+                            <a href="/cancion?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 3</p>
@@ -215,7 +215,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="" target="_self">
+                            <a href="/cancion?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 4</p>
@@ -230,6 +230,7 @@
     </div>
     <%@include file="includes/socialbar.jsp" %>
     <%@include file="includes/reproductor.jsp" %>
+    <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
 </body>
 </html>
 <% } %>

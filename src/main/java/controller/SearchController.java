@@ -17,6 +17,10 @@ import java.util.*;
 @WebServlet(name = "SearchController", urlPatterns = "/search")
 public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search_input");
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd;
@@ -34,9 +38,5 @@ public class SearchController extends HttpServlet {
         request.setAttribute("canciones", canciones);
         request.setAttribute("consulta", search);
         rd.forward(request,response);
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

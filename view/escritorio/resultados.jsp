@@ -22,7 +22,7 @@
             </div>
             <div class="row pl-4 pt-2 pb-2">
                 <div class="col-7">
-                    <form class="search-button" action="/search" method="post">
+                    <form id="formBuscar" class="search-button" action="/search" method="get">
                         <div class="orm-group">
                             <div class="input-group">
                                 <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
@@ -94,34 +94,35 @@
             </div>
         </div>
     </div> <!-- Container -->
+    <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#inputGroupSelect04').on('change',function () {
+                // console.log("Entra en seleccionado");
+                var seleccionado = $('#inputGroupSelect04 option').filter(':selected').text();
+                // console.log(seleccionado);
+                if (seleccionado === "Canciones") {
+                    $('#result_canciones').removeClass("d-none");
+                    $('#result_usuarios').addClass("d-none");
+                    $('#result_listas').addClass("d-none");
+                }
+                if (seleccionado === "Usuarios") {
+                    $('#result_canciones').addClass("d-none");
+                    $('#result_usuarios').removeClass("d-none");
+                    $('#result_listas').addClass("d-none");
+                }
+                if (seleccionado === "Listas") {
+                    $('#result_canciones').addClass("d-none");
+                    $('#result_usuarios').addClass("d-none");
+                    $('#result_listas').removeClass("d-none");
+                }
+            })
+        });
+    </script>
     <% if (request.getParameter("ajax") == null) { %>
 </div>
 <%@include file="includes/socialbar.jsp" %>
 <%@include file="includes/reproductor.jsp" %>
-<script>
-    $(document).ready(function () {
-        $('#inputGroupSelect04').on('change',function () {
-            // console.log("Entra en seleccionado");
-            var seleccionado = $('#inputGroupSelect04 option').filter(':selected').text();
-            // console.log(seleccionado);
-            if (seleccionado === "Canciones") {
-                $('#result_canciones').removeClass("d-none");
-                $('#result_usuarios').addClass("d-none");
-                $('#result_listas').addClass("d-none");
-            }
-            if (seleccionado === "Usuarios") {
-                $('#result_canciones').addClass("d-none");
-                $('#result_usuarios').removeClass("d-none");
-                $('#result_listas').addClass("d-none");
-            }
-            if (seleccionado === "Listas") {
-                $('#result_canciones').addClass("d-none");
-                $('#result_usuarios').addClass("d-none");
-                $('#result_listas').removeClass("d-none");
-            }
-        })
-    });
-</script>
 </body>
 </html>
 <% } %>
