@@ -26,44 +26,43 @@
                             <!-- Modificar Perfil -->
 
                             <div class="container mb-3">
-                                <%
-                                    Usuario u = (Usuario)session.getAttribute("username");
-                                    Boolean publico = u.isPublico();
-                                    if(publico){pageContext.setAttribute("selected", "selected");}
-                                    String nombre = u.getNomAp();
-                                %>
                                 <!-- Mosificar Cuenta -->
                                 <!-- TODO: ajax para enviar este formulario sin recargar la pagina -->
                                 <form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post" novalidate>
                                     <label for="nombreAp">Nombre y Apellidos</label>
                                     <div class="form-group">
                                         <div class="form-row">
-                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value =<%=nombre%> >
+                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value =${username.getNomAp()} >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre_usuario">Nombre de usuario</label>
-                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =<%=u.getIdUser()%> >
+                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =${username.getIdUser()} >
 
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="correo">Direccion de correo</label>
-                                        <input type="email" class="form-control" name = "mail" id="correo" placeholder="user@mail .."required  value =<%=u.getEmail()%>>
+                                        <input type="email" class="form-control" name = "mail" id="correo" placeholder="user@mail .."required  value =${username.getEmail()}>
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
 
 
                                     <div class="form-group">
                                         <label for="visperfil">Visibilidad del perfil</label>
-                                        <select class="form-control" name ="visibilidad" id="visperfil" required>
-                                            <option   disabled>Seleccione la visibilidad de su perfil</option>
-                                            <option >Privado</option>
-                                            <option ${selected}>Público</option>
+                                        <select class="form-control" name="visibilidad" id="visperfil" required>
+                                            <option disabled> Seleccione la visibilidad de su perfil</option>
+                                            <c:if test="${username.isPublico()}">
+                                                <option>Privado</option>
+                                                <option selected>Público</option>
+                                            </c:if>
+                                            <c:if test="${!username.isPublico()}">
+                                                <option selected>Privado</option>
+                                                <option>Público</option>
+                                            </c:if>
                                         </select>
                                     </div>
-
                                     <p class="text-danger">${error}</p>
 
                                     <div class="row">

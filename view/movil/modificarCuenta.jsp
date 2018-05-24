@@ -44,7 +44,7 @@
                     <option>Privado</option>
                     <option selected>Público</option>
                 </c:if>
-                <c:if test="!${username.isPublico()}">
+                <c:if test="${!username.isPublico()}">
                     <option selected>Privado</option>
                     <option>Público</option>
                 </c:if>
