@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@WebServlet(name = "CancionController", urlPatterns = "/cancion")
-public class CancionController extends HttpServlet {
+@WebServlet(name = "SongController", urlPatterns = "/song")
+public class SongController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }

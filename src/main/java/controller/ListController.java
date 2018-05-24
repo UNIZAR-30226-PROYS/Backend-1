@@ -27,6 +27,9 @@ public class ListController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         String idlista = request.getParameter("id");
         Integer id = Integer.parseInt(idlista);
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("canciones");
+        session.removeAttribute("lista");
         Listarep lista = null;
         try {
             lista = Listarep.searchList(id);
@@ -39,8 +42,9 @@ public class ListController extends HttpServlet {
             canciones.add(x.getCancionByIdCancion());
         }
         // System.out.println(canciones);
-        HttpSession session = request.getSession(true);
+
         session.setAttribute("canciones", canciones);
+        session.setAttribute("lista", lista);
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/lista.jsp");
         }else{

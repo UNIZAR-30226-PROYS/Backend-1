@@ -28,16 +28,11 @@ public class UploadSongController extends HttpServlet {
         HttpSession session = request.getSession(true);
         Usuario User = (Usuario)session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
-        RequestDispatcher rd = null;
-
         try {
             //Modificaciones en la base de datos.
             String nombre = request.getParameter("nombre");
             String genero = request.getParameter("album");
             String album  = "error";
-
-            //TODO:esto peta.
-
 
             //Almacenamiento de ficheros.
             File file ;
@@ -86,14 +81,12 @@ public class UploadSongController extends HttpServlet {
                             filePath ="/contenido/imagenes/canciones/";
                             boolean isInMemory = fi.isInMemory();
                             long sizeInBytes = fi.getSize();
-                            file = new File(filePath +Integer.toString(cancion.getIdCancion()) + ".png");
+                            file = new File(filePath +Integer.toString(cancion.getIdCancion()) + ".jpg");
                             fi.write(file);
                         }
                     }
-
                 }
             }
-
 
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/usuario.jsp");
@@ -102,13 +95,15 @@ public class UploadSongController extends HttpServlet {
             }
 
         } catch (Exception e) {
+            RequestDispatcher rd;
             e.printStackTrace();
-            session.setAttribute("error", e.getMessage());
+            request.setAttribute("error", e.getMessage());
             if (UA.contains("Mobile")){
-                response.sendRedirect("/movil/wolfsound.jsp");
+                rd = request.getRequestDispatcher("/movil/subirCancion.jsp");
             }else{
-                response.sendRedirect("/escritorio/explorar.jsp");
+                rd = request.getRequestDispatcher("/escritorio/subirCancion.jsp");
             }
+            rd.forward(request,response);
         }
     }
 

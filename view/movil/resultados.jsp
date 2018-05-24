@@ -49,7 +49,7 @@
     <%--${usuarios}--%>
     <div id="result_canciones" class="list-group pt-2">
         <c:forEach items="${canciones}" var="cancion">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="/" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
                         <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.jpg" style="width:64px;"

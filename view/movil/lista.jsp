@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Lista de reproducción</title>
+    <title>Lista ${lista.getNombre()}</title>
     <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
 
@@ -14,37 +14,57 @@
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
 
-    <div class="media mt-2">
-        <div class="media-body">
-            <h4 class="media-heading"> </h4>
+    <%--<div class="media mt-2">--%>
+        <%--<div class="media-body">--%>
+            <%--<h4 class="media-heading">${lista.getNombre()}</h4>--%>
+        <%--</div>--%>
+        <%--<div class="media-right">--%>
+            <%--<a href="cancion.jsp">--%>
+                <%--<button type="button" class="btn btn-default ">--%>
+                    <%--<span class="fa fa-play" style="font-size:20px; "></span>--%>
+                <%--</button>--%>
+            <%--</a>--%>
+            <%--<a href="cancion.jsp">--%>
+                <%--<button type="button" class="btn btn-default ">--%>
+                    <%--<span class="fa fa-random" style="font-size:20px; "></span>--%>
+                <%--</button>--%>
+            <%--</a>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+
+    <div class="row pt-3">
+        <div class="col-8">
+            <h4>${lista.getNombre()}</h4>
         </div>
-        <div class="media-right">
-            <a href="cancion.jsp">
+        <div class="col-4">
+            <%--TODO: reproducir normal--%>
+            <a href="#">
                 <button type="button" class="btn btn-default ">
                     <span class="fa fa-play" style="font-size:20px; "></span>
                 </button>
             </a>
-            <a href="cancion.jsp">
+            <%--TODO: reproducir aleatorio--%>
+            <a href="#">
                 <button type="button" class="btn btn-default ">
                     <span class="fa fa-random" style="font-size:20px; "></span>
                 </button>
             </a>
         </div>
     </div>
-    <!--TODO: Crear lista con canciones-->
+
     <c:forEach items="${canciones}" var="cancion">
         <div class="list-group pt-2">
             <div class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <a href="cancion.jsp">
-                            <img src="/contenido/canciones/imagenes/${cancion.getIdCancion()}.jpg" style="width:64px;" alt="...">
+                        <a href="/song?id?${cancion.getIdCancion()}">
+                            <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.jpg" style="width:64px;" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <!--TODO: Nombre cancion-->
+                        <!-- Nombre cancion-->
                         <h6 class="media-heading">${cancion.getNombre()}</h6>
-                        <!--TODO: Usuario que ha subido la canción-->
+                        <!-- Usuario que ha subido la canción-->
                         <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
                     </div>
                     <div class="media-right">
