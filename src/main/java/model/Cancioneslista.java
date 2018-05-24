@@ -25,6 +25,7 @@ public class Cancioneslista {
     private Date fechaIntroduccion;
     private Listarep listarepByListaRep;
     private Cancion cancionByIdCancion;
+    private Listarep listarepByListarep;
 
     @Id
     @GenericGenerator(name="genCanLis" , strategy="increment")
@@ -73,7 +74,7 @@ public class Cancioneslista {
         this.listarepByListaRep = listarepByListaRep;
     }
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
@@ -81,6 +82,38 @@ public class Cancioneslista {
 
     public void setCancionByIdCancion(Cancion cancionByIdCancion) {
         this.cancionByIdCancion = cancionByIdCancion;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "Listarep", referencedColumnName = "idLista", nullable = false)
+    public Listarep getListarepByListarep() {
+        return listarepByListarep;
+    }
+
+    public void setListarepByListarep(Listarep listarepByListarep) {
+        this.listarepByListarep = listarepByListarep;
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        addCancALista(listarep, cancion);
+        return listarep;
+    }
+
+    public static Listarep borrarCancDeLista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        borrarCancDeLista(listarep, cancion);
+        return listarep;
     }
 
     public static Listarep addCancALista(Listarep lista, Cancion cancion) throws Exception{
@@ -103,12 +136,6 @@ public class Cancioneslista {
             session.close();
             throw new Exception("Cancion ya existe en dicha lista");
         }
-    }
-
-    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
-        Listarep listarep = Usuario.getLista(user,lista);
-        addCancALista(listarep, cancion);
-        return listarep;
     }
 
     public static Listarep borrarCancDeLista(Listarep lista, Cancion cancion) throws Exception{
@@ -134,6 +161,10 @@ public class Cancioneslista {
             throw new Exception("La lista es vacia");
         }
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     public static boolean existsCancList(Listarep lista, Cancion song){
         Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
