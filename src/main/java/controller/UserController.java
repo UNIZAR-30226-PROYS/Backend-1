@@ -3,6 +3,7 @@ package main.java.controller;
 import main.java.HibernateUtil;
 import main.java.model.*;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -79,6 +80,8 @@ public class UserController extends HttpServlet {
         System.out.println(mimusica);
         System.out.println(favoritos);
 
+
+
         // Si el usuario no esta llamandose a si mismo
         if (!usuario.getIdUser().equals(username.getIdUser())){
             // Si el usuario logueado esta suscrito al que esta buscando.
@@ -95,21 +98,29 @@ public class UserController extends HttpServlet {
             }
         }
 
+        //Cambiar si peta
+        RequestDispatcher rd;
+
         if (UA.contains("Mobile")){
             if (!usuario.getIdUser().equals(username.getIdUser())) {
-                response.sendRedirect("/movil/usuarioPublico.jsp");
+                //response.sendRedirect("/movil/usuarioPublico.jsp");
+                rd = request.getRequestDispatcher("/movil/usuarioPublico.jsp");
             }
             else {
-                response.sendRedirect("/movil/usuario.jsp");
+                //response.sendRedirect("/movil/usuario.jsp");
+                rd = request.getRequestDispatcher("/movil/usuario.jsp");
             }
         }
         else{
             if (!usuario.getIdUser().equals(username.getIdUser())) {
-                response.sendRedirect("/escritorio/artista.jsp");
+                //response.sendRedirect("/escritorio/artista.jsp");
+                rd = request.getRequestDispatcher("/escritorio/artista.jsp");
             }
             else {
-                response.sendRedirect("/escritorio/usuario.jsp");
+                //response.sendRedirect("/escritorio/usuario.jsp");
+                rd = request.getRequestDispatcher("/escritorio/usuario.jsp");
             }
         }
+        rd.forward(request,response);
     }
 }
