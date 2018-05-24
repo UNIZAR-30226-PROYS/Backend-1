@@ -303,14 +303,19 @@ public class Usuario {
 
 
     //TODO: cambiar username -> depende de Cascade delete y saveupdate
-    /*
-    public static Usuario modUserName(Usuario usuario, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
+    public static Usuario modUserName(Usuario user, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
         Session session = getSession();
-        Usuario newUser = usuario;
-        newUser.setIdUser(usernameNew);
-
-        return newUser;
-    }*/
+        Usuario oldUsuario = getUser(user.getIdUser());
+        user.setIdUser(usernameNew);
+        user.setEmail(email);
+        user.setNomAp(nomAp);
+        user.setPublico(publico);
+        session.beginTransaction();
+        session.saveOrUpdate(user );
+        session.getTransaction().commit();
+        session.close();
+        return user;
+    }
 
     /*
      * Borra permanentemente un usuario del sistema

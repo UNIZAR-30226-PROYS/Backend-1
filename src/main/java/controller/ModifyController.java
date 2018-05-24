@@ -30,7 +30,7 @@ public class ModifyController extends HttpServlet {
         try {
             Usuario nuser;
             // TODO: Esperar a poder borrar usuarios y updates del ORM
-            if (iduserNew.equals(userOld.getIdUser())){
+            if (!iduserNew.equals(userOld.getIdUser())){
                 userOld.modUserName(iduserNew,mail,nombreAp,visiB);
             }
             else {
@@ -38,7 +38,7 @@ public class ModifyController extends HttpServlet {
             }
             // userOld.modUser(mail,nombreAp,visiB);
             session.removeAttribute("username");
-            session.setAttribute("username", userOld.getIdUser());
+            session.setAttribute("username", userOld);
 
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
