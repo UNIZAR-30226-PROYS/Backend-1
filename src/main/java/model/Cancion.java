@@ -2,10 +2,11 @@ package main.java.model;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.FetchType;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -136,6 +137,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
+    @Cascade(CascadeType.ALL)
     public Collection<Cancioneslista> getCancioneslistasByIdCancion() {
         return cancioneslistasByIdCancion;
     }
@@ -145,6 +147,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
+    @Cascade(CascadeType.ALL)
     public Collection<Comentario> getComentariosByIdCancion() {
         return comentariosByIdCancion;
     }

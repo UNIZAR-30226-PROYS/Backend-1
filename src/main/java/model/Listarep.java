@@ -9,10 +9,9 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.FetchType;
 
 @Entity
 public class Listarep {
@@ -71,6 +70,7 @@ public class Listarep {
     }
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
+    @Cascade(CascadeType.ALL)
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
     }

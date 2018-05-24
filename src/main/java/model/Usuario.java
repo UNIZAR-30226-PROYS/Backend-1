@@ -142,6 +142,7 @@ public class Usuario {
     }
 
     @OneToMany( mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Album> getAlbumsByIdUser() {
         return albumsByIdUser.get();
     }
@@ -151,6 +152,7 @@ public class Usuario {
     }
 
     @OneToMany( mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Cancion> getCancionsByIdUser() {
         return cancionsByIdUser;
     }
@@ -160,6 +162,7 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Comentario> getComentariosByIdUser() {
         return comentariosByIdUser;
     }
@@ -169,6 +172,7 @@ public class Usuario {
     }
 
     @OneToMany( mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Listarep> getListarepsByIdUser() {
         return listarepsByIdUser;
     }
@@ -178,6 +182,7 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioByIdSuscrito")
+    @Cascade(CascadeType.ALL)
     public Collection<Suscribir> getSuscribirsByIdUser() {
         return suscribirsByIdUser;
     }
@@ -187,6 +192,7 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioByIdSuscriptor")
+    @Cascade(CascadeType.ALL)
     public Collection<Suscribir> getSuscribirsByIdUser_0() {
         return suscribirsByIdUser_0;
     }
@@ -312,9 +318,9 @@ public class Usuario {
      */
     public static void borrarUser(String username) throws Exception{
         Session session = getSession();
-        Usuario User = getUser(username);
+        Usuario user = getUser(username);
         session.beginTransaction();
-        session.delete( User );
+        session.delete( user );
         session.getTransaction().commit();
         session.close();
         //TODO: borrar canciones, comentarios etc de usuario si, no ¿lo hace por cascada hibernate?

@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import static main.java.HibernateUtil.getSession;
 
 @Entity
@@ -64,6 +67,7 @@ public class Comentario {
     }
 
     @ManyToOne
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
@@ -74,6 +78,7 @@ public class Comentario {
     }
 
     @ManyToOne
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
