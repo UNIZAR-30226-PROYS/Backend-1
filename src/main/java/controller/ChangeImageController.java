@@ -61,9 +61,9 @@ public class ChangeImageController extends HttpServlet {
 
 
             if (UA.contains("Mobile")){
-                response.sendRedirect("/movil/usuario.jsp");
+                response.sendRedirect("/user?id="+user);
             }else{
-                response.sendRedirect("/escritorio/usuario.jsp");
+                response.sendRedirect("/user?id="+user);
             }
 
         } catch (Exception e) {

@@ -13,11 +13,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @WebServlet(name = "UserController", urlPatterns = "/user")
 public class UserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +35,7 @@ public class UserController extends HttpServlet {
         session.removeAttribute("musica");
         session.removeAttribute("favoritos");
         session.removeAttribute("publico");
+        session.removeAttribute("rand");
 
         // Extraer datos necesarios
         Usuario usuario = null;
@@ -44,6 +46,7 @@ public class UserController extends HttpServlet {
         Listarep favoritos = null;
         List<Listarep> misListas = null;
         boolean publico = false;
+        String rand = null;
 
         try {
             usuario = Usuario.getUser(idUser);
@@ -67,6 +70,7 @@ public class UserController extends HttpServlet {
         session.setAttribute("musica", mimusica);
         session.setAttribute("favoritos", favoritos);
         session.setAttribute("publico", publico);
+        session.setAttribute("rand", Integer.toString(ThreadLocalRandom.current().nextInt(0, 100000)));
 
         System.out.println(usuario);
         System.out.println(misListas);

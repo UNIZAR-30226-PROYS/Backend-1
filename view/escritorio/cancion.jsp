@@ -99,7 +99,7 @@
                         </div>
                         <div class="media-body">
                             <h4 class ="media-heading">
-                                <a href="artista.jsp?name=${com.getUsuarioByIdUser().getIdUser()}" >
+                                <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}" >
                                     <h5>${com.getUsuarioByIdUser().getIdUser()}</h5>
                                 </a>
                             </h4>
