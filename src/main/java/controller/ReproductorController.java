@@ -34,7 +34,7 @@ public class ReproductorController extends HttpServlet {
            /*  rd.forward(request,response); */
         } catch (Exception e) {
             /* e.printStackTrace(); */
-            response.sendRedirect("/movil/lista.jsp");
+           
 
         }
     }
