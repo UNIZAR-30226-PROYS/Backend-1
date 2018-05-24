@@ -1,4 +1,5 @@
 <!-- TODO (JSP): "Lista" en el titulo es el nombre de la lista visitada -->
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,47 +19,45 @@
                     <div class="col-4">
                         <img src="images/wolfsound.png" class="img-thumbnail" style="max-width: 100%;max-height: 500px" alt="Usuario">
                         <div class="pt-2 pl-2">
-                            <h3 class="media-heading">NombreLista</h3>
-                            <h5>De <a href="artista.jsp" style="color: black; text-underline: none;"> NombreUsuario </a></h5>
+                            <h3 class="media-heading">${lista.getNombre()}</h3>
+                            <!--TODO: get imagen de la primera cancion-->
+                            <h5>De <a href="artista.jsp" style="color: black; text-underline: none;"> ${lista.getUsuarioByIdUser().getIdUser()} </a></h5>
                             Descripci&oacute;n
                         </div>
                         <div class="pl-2">
                             <button type="button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir</button>
                             <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio</button><br />
-                            <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir</button>
                         </div>
                     </div>
                     <div class="col-8">
-                        <div class="list-group">
-                            <div class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left" style="padding-right:15px">
-                                        <a href="cancion.jsp">
-                                            <img src="images/wolf.jpg" style="width:64px;" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <div class="media-right">
-                                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                                            <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default ">
-                                            <span class="fa fa-trash" style="font-size:20px; "></span>
-                                        </button>
+                        <c:forEach items="${canciones}" var="cancion">
+                            <div class="list-group pt-2">
+                                <div class="list-group-item list-group-item-action">
+                                    <div class="media">
+                                        <div class="media-left" style="padding-right:15px">
+                                            <a href="/song?id=${cancion.getIdCancion()}">
+                                                <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;" alt="...">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <!-- Nombre cancion-->
+                                            <h6 class="media-heading">${cancion.getNombre()}</h6>
+                                            <!-- Usuario que ha subido la canción-->
+                                            <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                                        </div>
+                                        <div class="media-right">
+                                            <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
+                                                <span class="fa fa-list-ol" style="font-size:20px; "></span>
+                                            </button>
+                                            <button type="button" class="btn btn-default ">
+                                                <span class="fa fa-trash" style="font-size:20px; "></span>
+                                            </button>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div> <!-- Container -->
