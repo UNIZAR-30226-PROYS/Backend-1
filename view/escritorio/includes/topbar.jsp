@@ -18,7 +18,8 @@
     <c:if test="${username != null}">
         <a href="${pageContext.request.contextPath}/escritorio/usuario.jsp" >&nbsp;<i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getIdUser()}</a>&nbsp;
         <form action="${pageContext.request.contextPath}/logout" method="get" >
-            <button type="submit" class="btn btn-primary">Cerrar sesión</button>
+            <button type="submit" class="btn btn-primary" style="border-color:#C81E37;background-color:#C81E37;"><i class="fa fa-power-off"></i></button>
         </form>
     </c:if>
 </nav>
+<center><img id="gifLoad" class="d-none" src="${pageContext.request.contextPath}/contenido/imagenes/load.gif" style="position:fixed;z-index:5000;" /></center>

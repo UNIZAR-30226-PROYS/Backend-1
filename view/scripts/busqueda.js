@@ -4,8 +4,10 @@ function buscar(action,camposUrl){
         var origen = window.location.href;
         var destino = action+'?'+camposUrl;
 
+        $('#gifLoad').removeClass("d-none");
+
         // Cargar contenido
-        $("#contenido").load(destino, {ajax:1});
+        $("#contenido").load(destino, {ajax:1}, function(){$('#gifLoad').addClass("d-none")});
 
         // Cambiar URL y titulo
         setTimeout(function () { //todo: mejorar esto para mostrar el titulo directamente y no depender de un timeout de 100ms

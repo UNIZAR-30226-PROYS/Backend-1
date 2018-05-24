@@ -15,8 +15,9 @@ function navegar(e){
             var destino = $(this).attr('href');
 
             if (origen !== destino) { //todo: revisar esto para no insertar nuevas entradas en el historial si vas a la misma pagina
+                $('#gifLoad').removeClass("d-none");
                 // Cargar contenido
-                $("#contenido").load(destino, {ajax:1});
+                $("#contenido").load(destino, {ajax:1}, function(){$('#gifLoad').addClass("d-none")});
                 //$.get(destino,{ajax:1},function(data){$('#contenido').html(data)});
 
                 // Cambiar URL y titulo
@@ -43,7 +44,8 @@ $(document).ready(function(){
 /* Gestion del historial del navegador */
 window.onpopstate = function(e){
     if(e.state){
-        $("#contenido").load(e.state.html, {ajax:1});
+        $('#gifLoad').removeClass("d-none");
+        $("#contenido").load(e.state.html, {ajax:1}, function(){$('#gifLoad').addClass("d-none")});
         document.title = e.state.titulo;
     }
 };
