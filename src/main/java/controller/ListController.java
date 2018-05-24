@@ -44,7 +44,7 @@ public class ListController extends HttpServlet {
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/lista.jsp");
         }else{
-            response.sendRedirect("/escritorio/lista.jsp");
+            request.getRequestDispatcher("/escritorio/lista.jsp").forward(request,response);
         }
     }
 }
