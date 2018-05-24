@@ -71,6 +71,7 @@
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getIdUser()}</h6>
+                                <h6 class="media-heading">${usuario.getNomAp()}</h6>
                             </div>
                         </div>
                     </a>
