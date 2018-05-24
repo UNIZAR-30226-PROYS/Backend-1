@@ -15,7 +15,7 @@
     <div class="row pt-3">
         <div class="col col-md-offset-5">
             <div class="img-responsive text-center">
-                <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}Perfil.png" style="height: 80px;"
+                <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}Perfil.png?x=${rand}" style="height: 80px;"
                      alt="Usuario">
                 <p>${usuario.getIdUser()}</p>
             </div>
@@ -62,7 +62,7 @@
                    class="list-group-item list-group-item-action">
                     <div class="media">
                         <div class="media-left" style="padding-right:15px">
-                            <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png"
+                            <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png?x=${rand}"
                                  style="width:30px;" alt="...">
                         </div>
                         <div class="media-body">

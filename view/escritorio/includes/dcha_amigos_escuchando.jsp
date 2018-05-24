@@ -26,7 +26,7 @@
             <div class="media">
                 <div class="media-left">
                     <a href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}" class ="a">
-                        <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png"  style="width:50px;" alt="...">
+                        <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png?x=${rand}"  style="width:50px;" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
