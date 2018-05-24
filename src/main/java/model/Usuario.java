@@ -318,6 +318,20 @@ public class Usuario {
         return this;
     }
 
+    //Activa Listas
+    public Usuario activarSuscriptores(Session session){
+        session.refresh(this);
+        Hibernate.initialize(this.getSuscribirsByIdUser());
+        return this;
+    }
+
+    //Activa Listas
+    public Usuario activarSuscripciones(Session session){
+        session.refresh(this);
+        Hibernate.initialize(this.getSuscribirsByIdUser_0());
+        return this;
+    }
+
     /*
      * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
      * si no, lanza excepcion
@@ -329,6 +343,7 @@ public class Usuario {
             //Inicializacion de Lazy-Fetch de Listas y Canciones
             user.activarCanciones(session);
             user.activarListas(session);
+            // user.activarSuscripciones(session);
             return user;
         }catch (Exception e){
             throw e;

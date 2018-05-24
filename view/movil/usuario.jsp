@@ -1,25 +1,15 @@
 <%--TODO: Falta revisar codigo java dentro de la pagina--%>
-<%@ page import="main.java.model.Suscribir" %>
-<%@ page import="java.util.List" %>
-<%@ page import="main.java.model.Usuario" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title>Mi perfil - ${sessionScope.username}</title>
+		<title>Mi perfil - ${sessionScope.username.getIdUser()}</title>
         <jsp:include page="includes/header.jsp"></jsp:include>
     </head>
 	<body>
         <jsp:include page="includes/navbars.jsp"></jsp:include>
-        <%
-            Usuario user = (Usuario)session.getAttribute("username");
-            List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user.getIdUser());
-            pageContext.setAttribute("suscripciones", suscripciones);
-            pageContext.setAttribute("numSus", suscripciones.size());
-        %>
         <!-- CONTENIDO DE LA VISTA -->
-
         <div class="container mb-3">
             <div class="row pt-3">
                 <div class="col-4">
@@ -58,7 +48,7 @@
                     <h4>Audio favorito</h4>
                 </div>
                 <div class="float-right mr-3">
-                    <a href="lista.jsp" class="btn btn-link" role="button" >
+                    <a href="/list?id=${favoritos.getIdLista()}" class="btn btn-link" role="button" >
                         <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                     </a>
                 </div>
@@ -68,7 +58,7 @@
                     <h4>Mi audio</h4>
                 </div>
                 <div class="float-right mr-3">
-                    <a href="lista.jsp" class="btn btn-link" role="button" >
+                    <a href="/list?id=${musica.getIdLista()}" class="btn btn-link" role="button" >
                         <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                     </a>
                 </div>
@@ -90,7 +80,7 @@
 
             <div class="list-group pt-2">
                 <c:forEach items="${suscripciones}" var="sus">
-                    <a href="usuarioPublico.jsp?name=${sus.getUsuarioByIdSuscrito().getIdUser()}" class="list-group-item list-group-item-action">
+                    <a href="/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
                                 <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png" style="width:30px;" alt="...">
