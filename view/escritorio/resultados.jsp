@@ -71,7 +71,6 @@
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getIdUser()}</h6>
-                                <h6 class="media-heading">${resultado}</h6>
                             </div>
                         </div>
                     </a>
@@ -85,8 +84,8 @@
                                 <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${resultado}</h6>
-                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${lista.getNombre()}</h6>
+                                <h6 class="media-heading">${lista.getNumElementos()} canciones</h6>
                             </div>
                         </div>
                     </a>
