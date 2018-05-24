@@ -25,8 +25,8 @@
         <li class="list-group-item media">
             <div class="media">
                 <div class="media-left">
-                    <a href="/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">
-                        <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png" href="#" style="width:50px;" alt="...">
+                    <a href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}" class ="a">
+                        <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png"  style="width:50px;" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
