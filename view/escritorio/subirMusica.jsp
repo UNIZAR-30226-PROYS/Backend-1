@@ -56,7 +56,7 @@
                                     <input type="file" class="form-control-file" name="portada" id="portada" accept=image/*" required>
                                     <div class="invalid-feedback">Seleccione la canción.</div>
                                 </div>
-
+                                <p class="text-danger">${requestScope.error}</p>
                                 <div class="row">
                                     <div class="mx-auto col-6">
                                         <input type = "submit" value = "Upload Files" />

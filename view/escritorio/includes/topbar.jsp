@@ -9,7 +9,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a id="nav-explorar" class="nav-link" href="${pageContext.request.contextPath}/escritorio/explorar.jsp">Explorar</a></li>
             <c:if test="${sessionScope.username != null}">
-                <li class="nav-item"><a id="nav-listas" class="nav-link" href="${pageContext.request.contextPath}/escritorio/listas.jsp">Listas</a></li>
+                <li class="nav-item"><a id="nav-listas" class="nav-link" href="${pageContext.request.contextPath}/lists?id=${username.getIdUser()}">Listas</a></li>
                 <li class="nav-item"><a id="nav-artistas" class="nav-link" href="${pageContext.request.contextPath}/escritorio/artistas.jsp">Suscripciones</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/escritorio/subirMusica.jsp"><button type="button" class="btn btn-primary ml-1 mt-1">Sube tu música</button></a></li>
             </c:if>

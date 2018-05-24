@@ -56,7 +56,7 @@ public class UploadSongController extends HttpServlet {
                 {
                     FileItem fi = (FileItem)i.next();
                     String fieldName = fi.getFieldName();
-                    if ( fi.isFormField () )  { //Almacenamos ficheros.
+                    if ( fi.isFormField () )  { //Recuperamos parametros.
                         if(fieldName.equals("nombre"))nombre = fi.getString();
                         if(fieldName.equals("genero"))genero = fi.getString();
                         if(fieldName.equals("album"))album = fi.getString();
