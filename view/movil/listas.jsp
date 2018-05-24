@@ -4,7 +4,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Mis listas - ${sessionScope.username}</title>
+    <c:if test="${usuario.getIdUser() == username.getIdUser()}">
+        <title>Mis listas - ${username.getIdUser()}</title>
+    </c:if>
+    <c:if test="${usuario.getIdUser() != username.getIdUser()}">
+        <title> Listas de ${usuario.getIdUser()}</title>
+    </c:if>
     <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
 <body>
@@ -14,14 +19,14 @@
 
     <div class="media mt-2">
         <div class="media-body">
-            <h4 class="media-heading">Listas de ${username.getIdUser()}</h4>
+            <h4 class="media-heading">Listas de ${usuario.getIdUser()}</h4>
         </div>
 
     </div>
 
     <div class="list-group pt-2">
         <!--TODO: Esto tiene que servir para las listas de otros usuarios tambien no¿?-->
-        <c:forEach items="${misListas}" var="lista">
+        <c:forEach items="${listas}" var="lista">
             <div class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">

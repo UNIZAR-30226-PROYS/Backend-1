@@ -36,7 +36,7 @@
             <h4>Mis listas</h4>
         </div>
         <div class="float-right mr-3">
-            <a href="mis_listas.jsp" class="btn btn-link" role="button">
+            <a href="/lists?id=${username.getIdUser()}" class="btn btn-link" role="button">
                 <span class="fa fa-chevron-right" style="font-size:20px;"></span>
             </a>
         </div>
@@ -64,7 +64,7 @@
             <h4>Listas recomendadas</h4>
         </div>
         <div class="float-right mr-3">
-            <a href="mis_listas.jsp" class="btn btn-link" role="button">
+            <a href="listas.jsp" class="btn btn-link" role="button">
                 <span class="fa fa-chevron-right" style="font-size:20px;"></span>
             </a>
         </div>
