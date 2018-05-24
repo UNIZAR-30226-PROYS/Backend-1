@@ -43,6 +43,7 @@ public class UserController extends HttpServlet {
         Listarep mimusica = null;
         Listarep favoritos = null;
         List<Listarep> misListas = null;
+        boolean publico = false;
 
         try {
             usuario = Usuario.getUser(idUser);
@@ -53,6 +54,7 @@ public class UserController extends HttpServlet {
             historial = misListas.get(0);
             mimusica = misListas.get(1);
             favoritos = misListas.get(2);
+            publico = usuario.isPublico();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +66,7 @@ public class UserController extends HttpServlet {
         session.setAttribute("historial", historial);
         session.setAttribute("musica", mimusica);
         session.setAttribute("favoritos", favoritos);
-        session.setAttribute("publico", usuario.isPublico());
+        session.setAttribute("publico", publico);
 
         System.out.println(usuario);
         System.out.println(misListas);
