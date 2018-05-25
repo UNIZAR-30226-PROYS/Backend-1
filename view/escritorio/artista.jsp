@@ -66,83 +66,15 @@
                             </button>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action pt-1 pb-0">
-                        <div class="media mt-auto">
-                            <div class="media-left pl-1 mt-auto mb-auto pb-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                <h6 class="media-heading pl-5">Usuario</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Album</h6>
-                                <h6 class="media-heading pl-3">Mejores momentos</h6>
-                            </div>
-                            <button type="button" class="btn btn-default mt-auto mb-auto">
-                                <span class="fa fa-plus mt-auto mb-auto pt-1" style="font-size:20px; "></span>
-                            </button>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action pt-1 pb-0">
-                        <div class="media mt-auto">
-                            <div class="media-left pl-1 mt-auto mb-auto pb-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                <h6 class="media-heading pl-5">Usuario</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Album</h6>
-                                <h6 class="media-heading pl-3">Mejores momentos</h6>
-                            </div>
-                            <button type="button" class="btn btn-default mt-auto mb-auto">
-                                <span class="fa fa-plus mt-auto mb-auto pt-1" style="font-size:20px; "></span>
-                            </button>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action pt-1 pb-0">
-                        <div class="media mt-auto">
-                            <div class="media-left pl-1 mt-auto mb-auto pb-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                <h6 class="media-heading pl-5">Usuario</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Album</h6>
-                                <h6 class="media-heading pl-3">Mejores momentos</h6>
-                            </div>
-                            <button type="button" class="btn btn-default mt-auto mb-auto">
-                                <span class="fa fa-plus mt-auto mb-auto pt-1" style="font-size:20px; "></span>
-                            </button>
-                        </div>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action pt-1 pb-0">
-                        <div class="media mt-auto">
-                            <div class="media-left pl-1 mt-auto mb-auto pb-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                <h6 class="media-heading pl-5">Usuario</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Album</h6>
-                                <h6 class="media-heading pl-3">Mejores momentos</h6>
-                            </div>
-                            <button type="button" class="btn btn-default mt-auto mb-auto">
-                                <span class="fa fa-plus mt-auto mb-auto pt-1" style="font-size:20px; "></span>
-                            </button>
-                        </div>
-                    </a>
+
+
+
+
                 </div>
 
                 <div class="row pt-2 pl-4 pr-2">
                     <div class="col-auto pt-2 pb-1">
-                        <h4>Albumes</h4>
+                        <a href = "/lists?id=${usuario.getIdUser()}"><h4>Listas</h4></a>
                     </div>
                 </div>
 
@@ -153,36 +85,6 @@
                                 <img src="images/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre lista 1</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="images/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 2</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="images/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 3</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="images/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 4</p>
                                 </div>
                             </a>
                         </div>

@@ -49,14 +49,14 @@
             </div>
             <div id="result_canciones" class="list-group pt-2">
                 <c:forEach items="${canciones}" var="resultado">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="/song?id=${resultado.getIdCancion()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                                <img src="/contenido/imagenes/canciones/${resultado.getIdCancion()}.png" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${resultado}</h6>
-                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${resultado.getNombre()}</h6>
+                                <h6 class="media-heading">${resultado.getUsuarioByIdUser().getIdUser()}</h6>
                             </div>
                         </div>
                     </a>
@@ -64,14 +64,14 @@
             </div>
             <div id="result_usuarios" class="list-group pt-2 d-none">
                 <c:forEach items="${usuarios}" var="resultado">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="/user?id=${resultado.getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${resultado.getIdUser()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${resultado}</h6>
-                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${resultado.getIdUser()}</h6>
+                                <h6 class="media-heading">${resultado.getNomAp()}</h6>
                             </div>
                         </div>
                     </a>
@@ -79,14 +79,14 @@
             </div>
             <div id="result_listas" class="list-group pt-2 d-none">
                 <c:forEach items="${listas}" var="resultado">
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="/list?id=${resultado.getIdLista()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
                                 <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${resultado}</h6>
-                                <h6 class="media-heading">${resultado}</h6>
+                                <h6 class="media-heading">${resultado.getNombre()}</h6>
+                                <h6 class="media-heading">${resultado.getNumElementos()} canciones</h6>
                             </div>
                         </div>
                     </a>

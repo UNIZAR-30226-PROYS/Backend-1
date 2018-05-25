@@ -6,7 +6,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Listas</title>
+    <c:if test="${usuario.getIdUser() == username.getIdUser()}">
+        <title>Mis listas - ${username.getIdUser()}</title>
+    </c:if>
+    <c:if test="${usuario.getIdUser() != username.getIdUser()}">
+        <title> Listas de ${usuario.getIdUser()}</title>
+    </c:if>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -19,16 +24,18 @@
             <div class="container mb-3">
 
                 <div class="media mt-2">
-                    <div class="media-body pt-2 pl-4">
-                        <h2 class="media-heading">Listas de ${sessionScope.username.getIdUser()}</h2>
+                    <div class="media-body">
+                        <h4 class="media-heading">Listas de ${usuario.getIdUser()}</h4>
                     </div>
+
                 </div>
                 <div class="list-group pl-4 pt-4 pr-2">
-                    <c:forEach items="${misListas}" var="lista">
+                    <c:forEach items="${listas}" var="lista">
                         <div class="list-group-item list-group-item-action">
                             <div class="media">
                                 <div class="media-left" style="padding-right:15px">
                                     <a href="/list?id=${lista.getIdLista()}">
+                                            <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
                                         <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" style="width:70px;" alt="...">
                                     </a>
                                 </div>

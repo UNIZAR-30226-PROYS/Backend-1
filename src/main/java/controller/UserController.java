@@ -81,9 +81,8 @@ public class UserController extends HttpServlet {
         System.out.println(favoritos);
 
 
-
         // Si el usuario no esta llamandose a si mismo
-        if (!usuario.getIdUser().equals(username.getIdUser())){
+        if (username!=null && usuario !=null && !usuario.getIdUser().equals(username.getIdUser())){
             // Si el usuario logueado esta suscrito al que esta buscando.
             try {
                 if (Suscribir.existsSuscribir(username.getIdUser(),usuario.getIdUser())){
@@ -102,7 +101,7 @@ public class UserController extends HttpServlet {
         RequestDispatcher rd;
 
         if (UA.contains("Mobile")){
-            if (!usuario.getIdUser().equals(username.getIdUser())) {
+            if (username==null || (usuario !=null && !usuario.getIdUser().equals(username.getIdUser())) ) {
                 //response.sendRedirect("/movil/usuarioPublico.jsp");
                 rd = request.getRequestDispatcher("/movil/usuarioPublico.jsp");
             }
@@ -112,7 +111,7 @@ public class UserController extends HttpServlet {
             }
         }
         else{
-            if (!usuario.getIdUser().equals(username.getIdUser())) {
+            if (username==null || (usuario !=null && !usuario.getIdUser().equals(username.getIdUser())) ) {
                 //response.sendRedirect("/escritorio/artista.jsp");
                 rd = request.getRequestDispatcher("/escritorio/artista.jsp");
             }

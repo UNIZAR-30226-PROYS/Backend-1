@@ -1,6 +1,7 @@
 package main.java.controller;
 
 import main.java.HibernateUtil;
+import javax.servlet.RequestDispatcher;
 import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
@@ -51,7 +52,9 @@ public class ListsController extends HttpServlet {
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/listas.jsp");
         }else{
-            response.sendRedirect("/escritorio/listas.jsp");
+            RequestDispatcher rd;
+            rd = request.getRequestDispatcher("/escritorio/listas.jsp");
+            rd.forward(request,response);
         }
     }
 }

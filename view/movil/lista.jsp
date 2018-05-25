@@ -38,9 +38,8 @@
             <div class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <a href="/song?id?${cancion.getIdCancion()}">
-                            <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.jpg" style="width:64px;"
-                                 alt="...">
+                        <a href="/song?id=${cancion.getIdCancion()}">
+                            <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;" alt="...">
                         </a>
                     </div>
                     <div class="media-body">

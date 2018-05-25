@@ -56,7 +56,7 @@ public class UploadSongController extends HttpServlet {
                 {
                     FileItem fi = (FileItem)i.next();
                     String fieldName = fi.getFieldName();
-                    if ( fi.isFormField () )  { //Almacenamos ficheros.
+                    if ( fi.isFormField () )  { //Recuperamos parametros.
                         if(fieldName.equals("nombre"))nombre = fi.getString();
                         if(fieldName.equals("genero"))genero = fi.getString();
                         if(fieldName.equals("album"))album = fi.getString();
@@ -81,7 +81,7 @@ public class UploadSongController extends HttpServlet {
                             filePath ="/contenido/imagenes/canciones/";
                             boolean isInMemory = fi.isInMemory();
                             long sizeInBytes = fi.getSize();
-                            file = new File(filePath +Integer.toString(cancion.getIdCancion()) + ".jpg");
+                            file = new File(filePath +Integer.toString(cancion.getIdCancion()) + ".png");
                             fi.write(file);
                         }
                     }
