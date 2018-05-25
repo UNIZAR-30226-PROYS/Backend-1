@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>WolfSound - Lista</title>
+    <title>WolfSound - ${cancion.getNombre()}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -18,30 +18,33 @@
     <!-- CONTENIDO DE LA VISTA -->
     <div id="contenido">
         <% } //if%>
-        <div id="tituloNuevo" value="WolfSound - Lista" style="display:none;"></div>
+        <div id="tituloNuevo" value="WolfSound - ${cancion.getNombre()}" style="display:none;"></div>
         <div class="container mb-3">
             <div class = "col-10">
                 <div class = "row" >
                     <div class = "col">
-                        <img class="img-fluid align-content-lg-end" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
+                        <img class="img-fluid align-content-lg-end" src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
                     </div>
                 </div>
                 <div class ="row">
                     <div class = "col-6">
                         <h3>${cancion.getNombre()}</h3>
                     </div>
-                    <form class="needs-validation form-row" action="cancion.html" novalidate >
-                        <div class="col-auto my-1">
-                            <select class="custom-select mr-sm-2"  id="añadirLista" required>
-                                <option value="1">Favoritos</option>
-                                <option value="2">Lista 1</option>
-                                <option value="3">Lista 2</option>
-                            </select>
-                        </div>
-                        <div class="col-auto my-1">
-                            <button type="submit" class="btn btn-primary">Añadir</button>
-                        </div>
-                    </form>
+                    <c:if test="${sessionScope.username != null}">
+                        <form id="addToListForm" class="needs-validation form-row" action="${pageContext.request.contextPath}/addSongToList">
+                            <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
+                            <div class="col-auto my-1">
+                                <select name="list" class="custom-select mr-sm-2"  id="anyadirLista" required>
+                                    <c:forEach items="${sessionScope.misListas}" var="lista">
+                                        <option value="${lista.getIdLista()}">${lista.getNombre()}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="col-auto my-1">
+                                <button type="submit" class="btn btn-primary">Añadir</button>
+                            </div>
+                        </form>
+                    </c:if>
                     <div class = "col-auto my-1">
                         <button type="button" class="btn btn-default align-bottom" data-toggle="modal" data-target="#modalCrear">
                             <span class="fa fa-plus" style="font-size:20px; "></span>
@@ -134,6 +137,20 @@
         </div>
     </div>
 </div>
+        <!-- Exito al añadir a lista -->
+        <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAdd" aria-hidden="true">
+            <div class= "modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        Canci&oacute;n a&ntilde;adida correctamente.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="${pageContext.request.contextPath}/scripts/addToList.js"></script>
         <% if(request.getParameter("ajax")==null){ %>
     </div>
 </div>
