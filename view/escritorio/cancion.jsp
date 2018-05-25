@@ -124,11 +124,12 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <form action = "cancion.html">
+                <form id="createAndAdd" class="needs-validation form-row" action="${pageContext.request.contextPath}/createList">
                     <div class="form-group">
-                        <label for="nombreSus">Crear Lista y añadir</label>
+                        <label for="listName">Crear Lista y añadir</label>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="nombreSus" placeholder="Nueva Lista" required>
+                            <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
+                            <input type="text" class="form-control" name="listName" id="listName" placeholder="Nueva Lista" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Añadir</button>
