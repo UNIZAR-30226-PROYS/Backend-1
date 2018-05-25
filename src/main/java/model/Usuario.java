@@ -43,18 +43,6 @@ public class Usuario {
     private Collection<Suscribir> suscribirsByIdUser_0;
 
 
-    public Usuario() {}
-
-    public Usuario(String username, String nomAp, String email, String contrasenya) {
-        this.username = username;
-        this.nomAp = nomAp;
-        this.email = email;
-        this.conexion = false;
-        this.ultRep = 0;
-        this.contrasenya = contrasenya;
-        this.publico = false;
-    }
-
     @Id
     @GenericGenerator(name="genUsr" , strategy="increment")
     @GeneratedValue(generator="genUsr")
@@ -493,5 +481,15 @@ public class Usuario {
             throw new Exception("Usuario no existe");
         }
         session.close();
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUser=" + idUser +
+                ", username='" + username + '\'' +
+                ", conexion=" + conexion +
+                ", publico=" + publico +
+                '}';
     }
 }

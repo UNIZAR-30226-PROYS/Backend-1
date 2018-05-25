@@ -37,7 +37,7 @@ public class Suscribir {
         return Objects.hash(idSuscripcion);
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idSuscrito", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdSuscrito() {
         return usuarioByIdSuscrito;
@@ -47,7 +47,7 @@ public class Suscribir {
         this.usuarioByIdSuscrito = usuarioByIdSuscrito;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idSuscriptor", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdSuscriptor() {
         return usuarioByIdSuscriptor;
@@ -69,24 +69,24 @@ public class Suscribir {
 
     public static Suscribir addSuscripcion(int suscriptor, int suscrito) throws Exception{
         Session session = getSession();
-        if(existsSuscribir(suscriptor,suscrito)){
+        if(!existsSuscribir(suscriptor,suscrito)){
+            Suscribir newSus = new Suscribir();
+            Usuario uSuscriptor = Usuario.getUser(suscriptor);
+            Usuario uSuscrito = Usuario.getUser(suscrito);
+
+            newSus.setUsuarioByIdSuscriptor(uSuscriptor);
+            newSus.setUsuarioByIdSuscrito(uSuscrito);
+
+            session.beginTransaction();
+            session.save( newSus );
+            session.getTransaction().commit();
+
+            session.close();
+            return newSus;
+        }else{
             session.close();
             throw new Exception("Ya estas suscrito a dicho usuario.");
         }
-        Suscribir newSus = new Suscribir();
-        Usuario uSuscriptor = Usuario.getUser(suscriptor);
-        Usuario uSuscrito = Usuario.getUser(suscrito);
-
-        newSus.setUsuarioByIdSuscriptor(uSuscriptor);
-        newSus.setUsuarioByIdSuscrito(uSuscrito);
-
-        session.beginTransaction();
-        session.save( newSus );
-        session.getTransaction().commit();
-
-        session.close();
-        return newSus;
-
     }
 
     /*------------------------------------------------------------------------------------------------------------------
@@ -99,14 +99,16 @@ public class Suscribir {
     public static boolean existsSuscribir(int suscriptor, int suscrito) throws Exception{
         Session session = getSession();
         Boolean exists = false;
+        Usuario uSuscrito = Usuario.getUser(suscrito);
+        Usuario uSuscriptor = Usuario.getUser(suscriptor);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor and usuarioByIdSuscrito = :suscrito");
-        query.setParameter("suscriptor", suscriptor);
-        query.setParameter("suscrito", suscrito);
-        exists = ! query.getResultList().isEmpty();
-
+        query.setParameter("suscriptor", uSuscriptor);
+        query.setParameter("suscrito", uSuscrito);
+        if (query.uniqueResult() != null){
+            exists = true;
+        }
         session.close();
         return exists;
-
     }
 
     /*------------------------------------------------------------------------------------------------------------------

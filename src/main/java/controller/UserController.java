@@ -2,6 +2,7 @@ package main.java.controller;
 
 import main.java.HibernateUtil;
 import main.java.model.*;
+import org.hibernate.Hibernate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,7 +52,9 @@ public class UserController extends HttpServlet {
 
         try {
             usuario = Usuario.getUser(idUser);
+            System.out.println(usuario);
             usuario.activarSuscripciones(HibernateUtil.getSession());
+            usuario.activarListas(HibernateUtil.getSession());
             suscripciones = usuario.getSuscribirsByIdUser_0();
             listas = usuario.getListarepsByIdUser();
             misListas = new ArrayList<>(listas);
