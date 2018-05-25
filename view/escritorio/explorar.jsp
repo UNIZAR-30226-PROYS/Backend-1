@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Explorar</title>
+    <title>WolfSound - Explorar</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -14,7 +14,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Explorar" style="display:none;"></div>
+            <div id="tituloNuevo" value="WolfSound - Explorar" style="display:none;"></div>
             <div class="col-12 d-block">
 
                 <!-- Titulo de la pantalla -->
@@ -131,7 +131,7 @@
                     <div class="row pl-4 pr-2">
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="/cancion?id=1" target="_self">
+                                <a href="/song?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 1</p>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="/cancion?id=1" target="_self">
+                                <a href="/song?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 2</p>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="/cancion?id=1" target="_self">
+                                <a href="/song?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 3</p>
@@ -161,7 +161,7 @@
                         </div>
                         <div class="col-3">
                             <div class="img-thumbnail h-100">
-                                <a href="/cancion?id=1" target="_self">
+                                <a href="/song?id=1" target="_self">
                                     <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                     <div class="caption pt-3 pb-2">
                                         <p>Nombre Mi audio 4</p>
@@ -185,7 +185,7 @@
                 <div class="row pl-4 pb-4 pr-2">
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="/cancion?id=1" target="_self">
+                            <a href="/song?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 1</p>
@@ -195,7 +195,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="/cancion?id=1" target="_self">
+                            <a href="/song?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 2</p>
@@ -205,7 +205,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="/cancion?id=1" target="_self">
+                            <a href="/song?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 3</p>
@@ -215,7 +215,7 @@
                     </div>
                     <div class="col-3">
                         <div class="img-thumbnail h-100">
-                            <a href="/cancion?id=1" target="_self">
+                            <a href="/song?id=1" target="_self">
                                 <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
                                 <div class="caption pt-3 pb-2">
                                     <p>Nombre audio rec. 4</p>

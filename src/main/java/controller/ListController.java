@@ -29,6 +29,11 @@ public class ListController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         String idlista = request.getParameter("id");
         Integer id = Integer.parseInt(idlista);
+        HttpSession session = request.getSession(true);
+        Usuario username = (Usuario) session.getAttribute("username");
+        session.removeAttribute("canciones");
+        session.removeAttribute("lista");
+        session.removeAttribute("propietario");
         Listarep lista = null;
         Usuario user = null;
         try {
@@ -44,12 +49,22 @@ public class ListController extends HttpServlet {
             canciones.add(x.getCancionByIdCancion());
         }
         // System.out.println(canciones);
-        HttpSession session = request.getSession(true);
+
         session.setAttribute("canciones", canciones);
+        session.setAttribute("lista", lista);
+
+        // Si soy el propietario de la lista
+        if(lista.getUsuarioByIdUser().getIdUser().equals(username.getIdUser())){
+            session.setAttribute("propietario", true);
+        }
+        else {
+            session.setAttribute("propietario", false);
+        }
+
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/lista.jsp");
         }else{
-            response.sendRedirect("/escritorio/lista.jsp");
+            request.getRequestDispatcher("/escritorio/lista.jsp").forward(request,response);
         }
     }
 }

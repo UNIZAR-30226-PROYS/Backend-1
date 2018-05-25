@@ -49,10 +49,10 @@
     <%--${usuarios}--%>
     <div id="result_canciones" class="list-group pt-2">
         <c:forEach items="${canciones}" var="cancion">
-            <a href="#" class="list-group-item list-group-item-action">
+            <a href="/song?id=${cancion.getIdCancion()}" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.jpg" style="width:64px;"
+                        <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;"
                              alt="...">
                     </div>
                     <div class="media-body">
@@ -68,7 +68,7 @@
             <a href="/user?id=${usuario.getIdUser()}" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/usuarios/${usuario.getUsername()}jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}.png?x=${rand}" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${usuario.getNomAp()}</h6>
@@ -83,7 +83,7 @@
             <a href="/list?id=${lista.getIdLista()}" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/${lista.getIdLista()}.jpg" style="width:64px;" alt="...">
+                        <img src="/contenido/imagenes/${lista.getIdLista()}.png" style="width:64px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${lista.getNombre()}</h6>

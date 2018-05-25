@@ -1,67 +1,80 @@
-<!-- TODO (JSP): "Lista" en el titulo es el nombre de la lista visitada -->
+<%@page contentType="text/html; UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Lista</title>
+    <title>WolfSound - ${lista.getNombre()}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
-    <div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
+<div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
     <%@include file="includes/topbar.jsp" %>
     <!-- CONTENIDO DE LA VISTA -->
-        <div id="contenido">
-<% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Lista" style="display:none;"></div>
-            <div class="container mb-3">
-                <div class="row pt-3">
-                    <div class="col-4">
-                        <img src="images/wolfsound.png" class="img-thumbnail" style="max-width: 100%;max-height: 500px" alt="Usuario">
-                        <div class="pt-2 pl-2">
-                            <h3 class="media-heading">NombreLista</h3>
-                            <h5>De <a href="artista.jsp" style="color: black; text-underline: none;"> NombreUsuario </a></h5>
-                            Descripci&oacute;n
-                        </div>
-                        <div class="pl-2">
-                            <button type="button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir</button>
-                            <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio</button><br />
-                            <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir</button>
-                        </div>
+    <div id="contenido">
+        <% } //if%>
+        <div id="tituloNuevo" value="WolfSound - ${lista.getNombre()}" style="display:none;"></div>
+        <div class="container mb-3">
+            <div class="row pt-3">
+                <div class="col-4">
+                    <img src="<c:choose>
+                        <c:when test="${canciones.isEmpty()}">
+                            ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                        </c:when>
+                        <c:otherwise>
+                            ${pageContext.request.contextPath}/contenido/imagenes/canciones/${canciones.get(0).getIdCancion()}.png
+                        </c:otherwise>
+                    </c:choose>
+                    " class="img-thumbnail" style="max-width: 100%;max-height: 500px" alt="Imagen lista">
+                    <div class="pt-2 pl-2">
+                        <h3 class="media-heading">${lista.getNombre()}</h3>
+                        <h5>De&nbsp;<a href="${pageContext.request.contextPath}/user?id=${lista.getUsuarioByIdUser().getIdUser()}" style="color: black; text-underline: none;">${lista.getUsuarioByIdUser().getIdUser()}</a></h5>
+                        ${canciones.size()} elementos
                     </div>
-                    <div class="col-8">
-                        <div class="list-group">
-                            <div class="list-group-item list-group-item-action">
-                                <div class="media pt-2 pb-1 mt-auto">
-                                    <div class="media-left" style="padding-right:15px">
-                                        <a href="cancion.jsp">
-                                            <img src="images/wolf.jpg" style="width:64px;" alt="...">
-                                        </a>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                        <h6 class="media-heading pl-5">Usuario</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">Mejores momentos</h6>
-                                    </div>
-                                    <div class="media-body mt-auto">
-                                        <h6 class="media-heading pl-3">19-04-2018</h6>
-                                    </div>
-                                    <div class="media-right">
-                                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                                            <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                                        </button>
-                                        <button type="button" class="btn btn-default ">
-                                            <span class="fa fa-trash" style="font-size:20px; "></span>
-                                        </button>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="pl-2">
+                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir</button>
+                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio</button><br />
+                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir</button>
                     </div>
                 </div>
-            </div> <!-- Container -->
+                <div class="col-8">
+                    <div class="list-group">
+                        <c:forEach items="${canciones}" var="cancion">
+                            <a href="${pageContext.request.contextPath}/song?id=${cancion.getIdCancion()}">
+                                <div class="list-group-item list-group-item-action">
+                                    <div class="media pt-2 pb-1 mt-auto">
+                                        <div class="media-left" style="padding-right:15px">
+                                            <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;" alt="...">
+                                        </div>
+                                        <div class="media-body mt-auto">
+                                            <h6 class="media-heading pl-5">${cancion.getNombre()}</h6>
+                                            <h6 class="media-heading pl-5">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                                        </div>
+                                        <div class="media-body mt-auto">
+                                            <h6 class="media-heading pl-3">${cancion.getAlbumByIdAlbum().getNombre()}</h6>
+                                        </div>
+                                        <div class="media-body mt-auto">
+                                            <h6 class="media-heading pl-3">${cancion.getFechaSubida()}</h6>
+                                        </div>
+                                        <div class="media-right">
+                                            <c:if test="${sessionScope.username.getIdUser() == lista.getUsuarioByIdUser().getIdUser()}">
+                                                <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
+                                                    <span class="fa fa-list-ol" style="font-size:20px; "></span>
+                                                </button>
+                                                <button type="button" class="btn btn-default ">
+                                                    <span class="fa fa-trash" style="font-size:20px; "></span>
+                                                </button>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Container -->
+        <c:if test="${sessionScope.username.getIdUser() == lista.getUsuarioByIdUser().getIdUser()}">
             <!-- Modal1 -->
             <div class="modal fade" id="modalOrden" tabindex="-1" role="dialog" aria-labelledby="modalOrden" aria-hidden="true">
                 <div class= "modal-dialog modal-dialog-centered" role="document">
@@ -84,11 +97,12 @@
                     </div>
                 </div>
             </div>
-    <% if(request.getParameter("ajax")==null){ %>
-        </div>
+        </c:if>
+        <% if(request.getParameter("ajax")==null){ %>
     </div>
-    <%@include file="includes/socialbar.jsp" %>
-    <%@include file="includes/reproductor.jsp" %>
+</div>
+<%@include file="includes/socialbar.jsp" %>
+<%@include file="includes/reproductor.jsp" %>
 </body>
 </html>
 <% } %>

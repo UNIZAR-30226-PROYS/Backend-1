@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Lista de reproducción</title>
+    <title>Lista ${lista.getNombre()}</title>
     <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
 
@@ -13,57 +13,81 @@
 
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
-
-    <div class="media mt-2">
-        <div class="media-body">
-            <h4 class="media-heading"> </h4>
-        </div>
-        <div class="media-right">
-            <a href="cancion.jsp">
-                <button type="button" class="btn btn-default ">
-                    <span class="fa fa-play" style="font-size:20px; "></span>
-                </button>
-            </a>
-            <a href="cancion.jsp">
-                <button type="button" class="btn btn-default ">
-                    <span class="fa fa-random" style="font-size:20px; "></span>
-                </button>
-            </a>
+    <div class="row pt-3">
+        <%--TODO: reproducir normal--%>
+        <div class="col-5 mr-auto">
+            <div class="row">
+                <div class="col-1 mr-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-default ">
+                            <span class="fa fa-play" style="font-size:20px; "></span>
+                        </button>
+                    </a>
+                </div>
+                <%--TODO: reproducir aleatorio--%>
+                <div class="col-1 mx-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-default ">
+                            <span class="fa fa-random" style="font-size:20px; "></span>
+                        </button>
+                    </a>
+                </div>
+                <%--TODO: seguir la lista--%>
+                <div class="col-1 ml-auto">
+                    <a href="#">
+                        <button type="button" class="btn btn-default ">
+                            <span class="fa fa-rss" style="font-size:20px; "></span>
+                        </button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-    <!--TODO: Crear lista con canciones-->
+    <div class="pt-1">
+        <h4 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${lista.getNombre()}jhfjhgcjhgcjhgcjhgcjhgcjhgcjgchgcfcu</h4>
+    </div>
+
+
     <c:forEach items="${canciones}" var="cancion">
         <div class="list-group pt-2">
             <div class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <a href="cancion.jsp">
-                            <img src="/contenido/canciones/imagenes/${cancion.getIdCancion()}.jpg" style="width:64px;" alt="...">
+                        <a href="/song?id=${cancion.getIdCancion()}">
+                            <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png"
+                                 style="width:64px;"
+                                 alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <!--TODO: Nombre cancion-->
+                        <!-- Nombre cancion-->
                         <h6 class="media-heading">${cancion.getNombre()}</h6>
-                        <!--TODO: Usuario que ha subido la canción-->
+                        <!-- Usuario que ha subido la canción-->
                         <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                     </div>
-                    <div class="media-right">
-                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
-                            <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                        </button>
-                        <button type="button" class="btn btn-default ">
-                            <span class="fa fa-trash" style="font-size:20px; "></span>
-                        </button>
-
-                    </div>
+                    <c:if test="${propietario}">
+                        <div class="media-right">
+                            <button type="button" class="btn btn-default " data-toggle="modal"
+                                    data-target="#modalOrden">
+                                <span class="fa fa-list-ol" style="font-size:20px; "></span>
+                            </button>
+                            <a href="/deleteSongFromList?user=${lista.getUsuarioByIdUser().getIdUser()}&list=${lista.getNombre()}&song=${cancion.getIdCancion()}">
+                                <button type="button" class="btn btn-default ">
+                                    <span class="fa fa-trash" style="font-size:20px; "></span>
+                                </button>
+                            </a>
+                        </div>
+                    </c:if>
                 </div>
             </div>
         </div>
     </c:forEach>
+    ${requestScope.error}
 </div> <!-- Container -->
 
 <!-- Modal1 -->
-<div class="modal fade" id="modalOrden" tabindex="-1" role="dialog" aria-labelledby="modalOrden" aria-hidden="true">
+<div class="modal fade" id="modalOrden" tabindex="-1" role="dialog" aria-labelledby="modalOrden"
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 

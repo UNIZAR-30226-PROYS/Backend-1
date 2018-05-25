@@ -129,14 +129,20 @@ public class Cancioneslista {
 
     public static Listarep borrarCancDeLista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
-        Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
-        if(aux!=null) {
-            List<Cancioneslista> canciones = new ArrayList<>(aux);
-            int pos = canciones.lastIndexOf(cancion);
-            if(pos!=-1){
-                Cancioneslista borrar = canciones.remove(pos);
+        Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
+        if(listacanciones!=null) {
+            Cancioneslista borrar = null;
+            listacanciones.contains(cancion);
+            for (Cancioneslista x : listacanciones) {
+                if (x.getCancionByIdCancion().getIdCancion() == cancion.getIdCancion() &&
+                        x.getListarepByListaRep().getIdLista() == lista.getIdLista()){
+                    borrar = x;
+                    break;
+                }
+            }
+            if(borrar != null){
                 session.beginTransaction();
-                session.delete( borrar );
+                session.delete(borrar);
                 session.getTransaction().commit();
                 session.refresh(lista);
                 session.close();

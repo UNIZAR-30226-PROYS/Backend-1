@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Lista</title>
+    <title>WolfSound - Lista</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -18,7 +18,7 @@
     <!-- CONTENIDO DE LA VISTA -->
     <div id="contenido">
         <% } //if%>
-        <div id="tituloNuevo" value="Wolfic - Lista" style="display:none;"></div>
+        <div id="tituloNuevo" value="WolfSound - Lista" style="display:none;"></div>
         <div class="container mb-3">
             <div class = "col-10">
                 <div class = "row" >
@@ -54,7 +54,7 @@
                         <img class = "img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png?x=${rand}" alt="Usuario">
                     </div>
                     <div class = "col-10 text-left">
-                        <a href="artista.jsp?name=${cancion.getUsuarioByIdUser().getIdUser()}">
+                        <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
                             <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
                         </a>
                         <br>

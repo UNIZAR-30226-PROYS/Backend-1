@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Subir m&uacute;sica</title>
+    <title>WolfSound - Subir m&uacute;sica</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -13,7 +13,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Subir m&uacute;sica" style="display:none;"></div>
+            <div id="tituloNuevo" value="WolfSound - Subir m&uacute;sica" style="display:none;"></div>
             <!-- CONTENIDO DE LA VISTA -->
             <div class="col-12 d-block">
 
@@ -56,7 +56,7 @@
                                     <input type="file" class="form-control-file" name="portada" id="portada" accept=image/*" required>
                                     <div class="invalid-feedback">Seleccione la canción.</div>
                                 </div>
-
+                                <p class="text-danger">${requestScope.error}</p>
                                 <div class="row">
                                     <div class="mx-auto col-6">
                                         <input type = "submit" value = "Upload Files" />
