@@ -395,7 +395,7 @@ public class Usuario {
      * Devuelve el usuario en caso de que exista y la contraseña sea correcta
      */
     public static Usuario correctUser(String username, String password, Session session) throws Exception{
-        Query query = session.createQuery("from Usuario where idUser = :user ");
+        Query query = session.createQuery("from Usuario where username = :user ");
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
         if (user==null){
