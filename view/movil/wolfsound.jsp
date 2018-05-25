@@ -87,7 +87,7 @@
 						<div class="form-group">
 							<label for="correo">Direccion de correo</label>
 							<input type="email" class="form-control" name="register_email" id="correo" placeholder="user@mail .." required>
-							<div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
+							<div class="invalid-feedback"> Se debe introducir una direccion valida. </div>
 						</div>
 
 

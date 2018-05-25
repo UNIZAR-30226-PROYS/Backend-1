@@ -443,6 +443,7 @@ public class Usuario {
         Query query = session.createQuery("from Usuario where idUser = :user ");
         query.setParameter("user", idUser);
         Usuario user = (Usuario) query.uniqueResult();
+        System.out.println(user);
         session.close();
         if (user==null){
             throw new Exception("El usuario no existe");
