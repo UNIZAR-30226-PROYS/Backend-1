@@ -17,11 +17,8 @@ public class changeFileName {
         try {
             Files.move(from.toPath(),to.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
-        catch (Exception e ){throw new Exception("no se ha podido mover el fichero:"+e.getMessage());}
+        catch (Exception e) {
+            throw new Exception("no se ha podido mover el fichero:"+e.getMessage());
         }
-
-
-
     }
-
 }
