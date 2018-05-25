@@ -7,7 +7,7 @@
 <html lang="es">
     <%
             Usuario user = (Usuario)session.getAttribute("username");
-            List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user.getUsername());
+            List<Suscribir> suscripciones = Suscribir.searchSuscripciones(user.getIdUser());
             pageContext.setAttribute("suscripciones", suscripciones);
             pageContext.setAttribute("numSus", suscripciones.size());
         %>
