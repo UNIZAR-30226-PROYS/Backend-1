@@ -395,12 +395,8 @@ public class Usuario {
      * Devuelve el usuario en caso de que exista y la contraseña sea correcta
      */
     public static Usuario correctUser(String username, String password, Session session) throws Exception{
-        Query query = session.createQuery("from Usuario where username = :user ");
-        query.setParameter("user", username);
-        Usuario user = (Usuario) query.uniqueResult();
-        if (user==null){
-            throw new Exception("El usuario no existe");
-        }else if (!checkpw(password,user.getContrasenya())) {
+        Usuario user = getUser(username);
+        if (!checkpw(password,user.getContrasenya())) {
             throw new AuthenticationException("Contraseña errónea");
         }
         return user;

@@ -89,6 +89,10 @@ public class Suscribir {
         }
     }
 
+    public static Suscribir addSuscripcion(int suscriptor, String suscrito) throws Exception{
+        return addSuscripcion(suscriptor, Usuario.getUser(suscrito).getIdUser());
+    }
+
     /*------------------------------------------------------------------------------------------------------------------
      *---------------------------------------------      EXIST      ----------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
