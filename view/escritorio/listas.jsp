@@ -32,22 +32,29 @@
                 <div class="list-group pl-4 pt-4 pr-2">
                     <c:forEach items="${listas}" var="lista">
                         <div class="list-group-item list-group-item-action">
-                            <div class="media">
-                                <div class="media-left" style="padding-right:15px">
-                                    <a href="/list?id=${lista.getIdLista()}">
-                                            <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
-                                        <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" style="width:70px;" alt="...">
-                                    </a>
+                            <a href="/list?id=${lista.getIdLista()}">
+                                <div class="media">
+                                    <div class="media-left" style="padding-right:15px">
+                                        <img src="<c:choose>
+                                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                            </c:otherwise>
+                                        </c:choose>
+                                        " class="img-thumbnail" style="width:70px;" alt="Imagen lista">
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">${lista.getNombre()}</h6>
+                                    </div>
+                                    <div class="media-right">
+                                        <button type="button" class="btn btn-default ">
+                                            <span class="fa fa-trash" style="font-size:20px; "></span>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="media-body">
-                                    <h6 class="media-heading">${lista.getNombre()}</h6>
-                                </div>
-                                <div class="media-right">
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-trash" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </c:forEach>
                 </div>

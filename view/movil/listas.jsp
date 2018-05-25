@@ -31,8 +31,15 @@
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
                         <a href="/list?id=${lista.getIdLista()}">
-                            <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
-                            <img src="/contenido/imagenes/canciones/.jpg" style="width:64px;" alt="...">
+                            <img src="<c:choose>
+                                <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                    ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                </c:when>
+                                <c:otherwise>
+                                    ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                </c:otherwise>
+                            </c:choose>
+                            " style="width:64px;" alt="Imagen lista">
                         </a>
                     </div>
                     <div class="media-body">

@@ -49,7 +49,15 @@
                 <div class="img-thumbnail h-100">
                     <a href="/list?id=${lista.getIdLista()}" target="_self">
                         <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
-                        <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" alt="" style="width:20%">
+                        <img src="<c:choose>
+                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                            </c:when>
+                            <c:otherwise>
+                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                            </c:otherwise>
+                        </c:choose>
+                        " alt="Imagen lista" style="width:20%">
                         <div class="caption">
                             <p>${lista.getNombre()}</p>
                         </div>
@@ -74,7 +82,15 @@
             <div class="col-4">
                 <div class="img-thumbnail h-100">
                     <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
+                        <img src="<c:choose>
+                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                            </c:when>
+                            <c:otherwise>
+                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                            </c:otherwise>
+                        </c:choose>
+                        " alt="Imagen lista" style="width:20%">
                         <div class="caption">
                             <p>${lista}</p>
                         </div>

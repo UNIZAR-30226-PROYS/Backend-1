@@ -51,14 +51,22 @@
                     <div class="row pl-4 pr-2">
                         <c:forEach items="${misListas}" var="lista" begin="0" end="3">
                             <div class="col-3">
-                                <div class="img-thumbnail h-100">
-                                    <a href="/list?id=${lista.getIdLista()}" target="_self">
-                                        <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" class="pt-3" alt="" style="width:20%">
+                                <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                    <div class="img-thumbnail h-100">
+                                        <img src="<c:choose>
+                                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                            </c:otherwise>
+                                        </c:choose>
+                                        " alt="Imagen lista" class="pt-3" style="width:20%">
                                         <div class="caption pt-3 pb-2">
                                             <p>${lista.getNombre()}</p>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </c:forEach>
                     </div>
