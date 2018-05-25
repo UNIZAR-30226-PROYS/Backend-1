@@ -57,7 +57,7 @@
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${cancion.getNombre()}</h6>
-                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                     </div>
                 </div>
             </a>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${usuario.getNomAp()}</h6>
-                        <h6 class="media-heading">${usuario.getIdUser()}</h6>
+                        <h6 class="media-heading">${usuario.getUsername()}</h6>
                     </div>
                 </div>
             </a>

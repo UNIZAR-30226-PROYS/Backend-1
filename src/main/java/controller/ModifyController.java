@@ -30,13 +30,7 @@ public class ModifyController extends HttpServlet {
         try {
             Usuario nuser;
             // TODO: Esperar a poder borrar usuarios y updates del ORM
-//            if (!iduserNew.equals(userOld.getIdUser())){
-//                userOld.modUserName(iduserNew,mail,nombreAp,visiB);
-//            }
-//            else {
-//                userOld.modUser(mail,nombreAp,visiB);
-//            }
-            userOld.modUser(mail,nombreAp,visiB);
+            userOld.modUser(iduserNew,mail,nombreAp,visiB);
             session.removeAttribute("username");
             session.setAttribute("username", userOld);
 

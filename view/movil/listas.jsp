@@ -5,10 +5,10 @@
 <html lang="es">
 <head>
     <c:if test="${usuario.getIdUser() == username.getIdUser()}">
-        <title>Mis listas - ${username.getIdUser()}</title>
+        <title>Mis listas - ${username.getUsername()}</title>
     </c:if>
     <c:if test="${usuario.getIdUser() != username.getIdUser()}">
-        <title> Listas de ${usuario.getIdUser()}</title>
+        <title> Listas de ${usuario.getUsername()}</title>
     </c:if>
     <jsp:include page="includes/header.jsp"></jsp:include>
 </head>
@@ -19,7 +19,7 @@
 
     <div class="media mt-2">
         <div class="media-body">
-            <h4 class="media-heading">Listas de ${usuario.getIdUser()}</h4>
+            <h4 class="media-heading">Listas de ${usuario.getUsername()}</h4>
         </div>
 
     </div>

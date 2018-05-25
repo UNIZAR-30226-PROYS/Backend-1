@@ -1,6 +1,8 @@
 package main.java.controller;
 
 import java.util.*;
+
+import main.java.HibernateUtil;
 import main.java.model.Usuario;
 import main.java.model.Cancion;
 import java.io.File;

@@ -2,10 +2,11 @@ package main.java.model;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.FetchType;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -82,7 +83,7 @@ public class Cancion {
 
     public void setFechaSubida(Date fecha) {
         long millis=System.currentTimeMillis();
-        java.sql.Date date=new java.sql.Date(millis);
+        Date date=new Date(millis);
         this.fechaSubida = date;
     }
 
@@ -136,6 +137,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
+    @Cascade(CascadeType.ALL)
     public Collection<Cancioneslista> getCancioneslistasByIdCancion() {
         return cancioneslistasByIdCancion;
     }
@@ -145,6 +147,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
+    @Cascade(CascadeType.ALL)
     public Collection<Comentario> getComentariosByIdCancion() {
         return comentariosByIdCancion;
     }
@@ -152,6 +155,16 @@ public class Cancion {
     public void setComentariosByIdCancion(Collection<Comentario> comentariosByIdCancion) {
         this.comentariosByIdCancion = comentariosByIdCancion;
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     /*
      * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
@@ -191,6 +204,10 @@ public class Cancion {
 
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     public static boolean existsCancion(Usuario user, String song){
         Collection<Cancion> aux = user.getCancionsByIdUser();
         boolean exists = false;
@@ -205,6 +222,11 @@ public class Cancion {
         }
         return exists;
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------       GET       ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     /*
      * True -> usuario existe
      * False -> usuario no existe
@@ -220,6 +242,10 @@ public class Cancion {
         }
         return ca;
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     /*
         Devuelve lista de elementos de Cancion que tengan el string song en el nombre

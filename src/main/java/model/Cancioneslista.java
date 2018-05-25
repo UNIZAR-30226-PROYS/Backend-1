@@ -6,9 +6,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.FetchType;
 
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.query.Query;
 
@@ -82,6 +83,29 @@ public class Cancioneslista {
         this.cancionByIdCancion = cancionByIdCancion;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        addCancALista(listarep, cancion);
+        return listarep;
+    }
+
+    public static Listarep borrarCancDeLista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        borrarCancDeLista(listarep, cancion);
+        return listarep;
+    }
+
+    //TODO: si es historial ver que se añada al final, y si ya existe en historial actualizar fecha
     public static Listarep addCancALista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
         if(!existsCancList(lista,cancion)){
@@ -103,18 +127,6 @@ public class Cancioneslista {
             throw new Exception("Cancion ya existe en dicha lista");
         }
     }
-
-    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
-        Listarep listarep = Usuario.getLista(user,lista);
-        addCancALista(listarep, cancion);
-        return listarep;
-    }
-
-//    public static Listarep borrarCancDeLista(Usuario user, Listarep lista, Cancion cancion) throws Exception{
-//        // Listarep listarep = Usuario.getLista(user,lista);
-//        borrarCancDeLista(lista, cancion);
-//        return lista;
-//    }
 
     public static Listarep borrarCancDeLista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
@@ -145,6 +157,10 @@ public class Cancioneslista {
             throw new Exception("La lista es vacia");
         }
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     public static boolean existsCancList(Listarep lista, Cancion song){
         Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();

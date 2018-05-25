@@ -23,12 +23,12 @@
             <a href="#" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}.jpg" style="width:30px;" alt="...">
+                        <img src="/contenido/imagenes/usuarios/${usuario.getUsername()}.jpg" style="width:30px;" alt="...">
                     </div>
                     <div class="media-body">
                         <!--TODO: Sustituir por funcion getLastUploads-->
                         <h6 class="media-heading">${usuario.getNomAp()}</h6>
-                        <h6 class="media-heading">${usuario.getIdUser()}</h6>
+                        <h6 class="media-heading">${usuario.getUsername()}</h6>
                     </div>
                 </div>
             </a>

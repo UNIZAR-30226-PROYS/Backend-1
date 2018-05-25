@@ -9,10 +9,9 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import static main.java.HibernateUtil.getSession;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.FetchType;
 
 @Entity
 public class Listarep {
@@ -66,11 +65,11 @@ public class Listarep {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(idLista, nombre, numElementos);
     }
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
+    @Cascade(CascadeType.ALL)
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
     }
@@ -89,9 +88,19 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     public static Listarep addLista(Usuario user, String nombre) throws Exception{
         Session session = getSession();
-        //user.activarListas(session);
+        user.activarListas(session);
         if(!existsListaBool(user,nombre)){
             Listarep newLista = new Listarep();
             newLista.setIdLista(0);
@@ -154,6 +163,10 @@ public class Listarep {
         return exists;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     public static List<Listarep> searchList(String listaS){
         Session session = getSession();
         Query query = session.createQuery("from Listarep where nombre like :lista ");
@@ -174,4 +187,6 @@ public class Listarep {
         }
         return lista;
     }
+
+
 }

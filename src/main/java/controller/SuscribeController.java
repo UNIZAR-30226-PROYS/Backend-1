@@ -21,7 +21,7 @@ public class SuscribeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Usuario suscriptor = (Usuario)session.getAttribute("username");
-        String suscrito = request.getParameter("name");
+        int suscrito = Integer.parseInt(request.getParameter("name"));
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {

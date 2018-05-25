@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import main.java.HibernateUtil;
 import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
@@ -34,11 +35,14 @@ public class ListController extends HttpServlet {
         session.removeAttribute("lista");
         session.removeAttribute("propietario");
         Listarep lista = null;
+        Usuario user = null;
         try {
             lista = Listarep.searchList(id);
+            user = lista.getUsuarioByIdUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        user.activarListas(HibernateUtil.getSession());
         Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
         List<Cancion> canciones = new ArrayList<>();
         for (Cancioneslista x : listacanciones) {
@@ -50,7 +54,7 @@ public class ListController extends HttpServlet {
         session.setAttribute("lista", lista);
 
         // Si soy el propietario de la lista
-        if(lista.getUsuarioByIdUser().getIdUser().equals(username.getIdUser())){
+        if(lista.getUsuarioByIdUser().getIdUser() == (username.getIdUser())){
             session.setAttribute("propietario", true);
         }
         else {

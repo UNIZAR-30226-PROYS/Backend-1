@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title>Mi perfil - ${sessionScope.username.getIdUser()}</title>
+		<title>Mi perfil - ${sessionScope.username.getUsername()}</title>
         <jsp:include page="includes/header.jsp"></jsp:include>
     </head>
 	<body>
@@ -19,8 +19,8 @@
                 </div>
                 <div class="col-4">
                     <div class="img-responsive text-center">
-                        <img src="/contenido/imagenes/usuarios/${username.getIdUser()}Perfil.png?x=${rand}" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
-                        <p>${username.getIdUser()}</p>
+                        <img src="/contenido/imagenes/usuarios/${username.getUsername()}Perfil.png?x=${rand}" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <p>${username.getUsername()}</p>
                     </div>
                 </div>
                 <div class="col-4">
@@ -82,10 +82,10 @@
                     <a href="/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getIdUser()}Perfil.png?x=${rand}" style="width:30px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getUsername()}Perfil.png?x=${rand}" style="width:30px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getIdUser()}</h6>
+                                <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getUsername()}</h6>
                                 <!--TODO: Estado del usuario, o bien desconectado, o bien el nombre de la cancion que esta escuchando/ha escuchado mas recientemente-->
                                 <h6 class="media-heading">Cancion 1</h6>
                             </div>

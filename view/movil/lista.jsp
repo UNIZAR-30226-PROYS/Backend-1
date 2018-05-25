@@ -63,7 +63,7 @@
                         <!-- Nombre cancion-->
                         <h6 class="media-heading">${cancion.getNombre()}</h6>
                         <!-- Usuario que ha subido la canción-->
-                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                     </div>
                     <c:if test="${propietario}">
                         <div class="media-right">
