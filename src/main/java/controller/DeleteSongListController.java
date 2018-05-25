@@ -24,7 +24,7 @@ public class DeleteSongListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String UA = request.getHeader("User-Agent");
-        String user = request.getParameter("user");
+        int user = Integer.parseInt(request.getParameter("user"));
         String list = request.getParameter("list");
         String song = request.getParameter("song");
         Integer idSong = Integer.parseInt(song);

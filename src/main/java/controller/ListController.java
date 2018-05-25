@@ -37,7 +37,7 @@ public class ListController extends HttpServlet {
         Listarep lista = null;
         Usuario user = null;
         try {
-            lista = Listarep.searchList(id);
+            lista = Listarep.getList(id);
             user = lista.getUsuarioByIdUser();
         } catch (Exception e) {
             e.printStackTrace();
