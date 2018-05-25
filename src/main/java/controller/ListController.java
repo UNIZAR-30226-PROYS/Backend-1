@@ -54,7 +54,7 @@ public class ListController extends HttpServlet {
         session.setAttribute("lista", lista);
 
         // Si soy el propietario de la lista
-        if(lista.getUsuarioByIdUser().getIdUser().equals(username.getIdUser())){
+        if(lista.getUsuarioByIdUser().getIdUser() == (username.getIdUser())){
             session.setAttribute("propietario", true);
         }
         else {
