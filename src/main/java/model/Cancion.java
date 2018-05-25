@@ -83,7 +83,7 @@ public class Cancion {
 
     public void setFechaSubida(Date fecha) {
         long millis=System.currentTimeMillis();
-        Date date=new Date(millis);
+        java.sql.Date date=new java.sql.Date(millis);
         this.fechaSubida = date;
     }
 
@@ -167,13 +167,16 @@ public class Cancion {
      *----------------------------------------------------------------------------------------------------------------*/
 
     /*
+     * TODO: activar canciones sin fetchear el objeto otra vez
      * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
      * Devuelve el Usuario creado
      */
-    public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
+    public static Cancion addCancion(String nombre, String genero, Usuario usuario) throws Exception{
         Session session = getSession();
+        Usuario user = Usuario.getUser(usuario.getIdUser());
         user.activarCanciones(session);
         user.activarListas(session);
+
         if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
 

@@ -164,19 +164,10 @@ public class Listarep {
     }
 
     /*------------------------------------------------------------------------------------------------------------------
-     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *---------------------------------------------       GET       ----------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
-    public static List<Listarep> searchList(String listaS){
-        Session session = getSession();
-        Query query = session.createQuery("from Listarep where nombre like :lista ");
-        query.setParameter("lista", "%"+listaS+"%");
-        List<Listarep> lista = query.list();
-        session.close();
-        return lista;
-    }
-
-    public static Listarep searchList(int id) throws Exception{
+    public static Listarep getList(int id) throws Exception{
         Session session = getSession();
         Query query = session.createQuery("from Listarep where idLista = :lista ");
         query.setParameter("lista", id);
@@ -188,5 +179,16 @@ public class Listarep {
         return lista;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
+    public static List<Listarep> searchList(String listas) {
+        Session session = getSession();
+        Query query = session.createQuery("from Listarep where nombre like :lista ");
+        query.setParameter("lista", "%" + listas + "%");
+        List<Listarep> lista = query.list();
+        session.close();
+        return lista;
+    }
 }

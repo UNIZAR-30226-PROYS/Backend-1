@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="pt-1">
-        <h4 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${lista.getNombre()}jhfjhgcjhgcjhgcjhgcjhgcjhgcjgchgcfcu</h4>
+        <h4 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${lista.getNombre()}</h4>
     </div>
 
 
