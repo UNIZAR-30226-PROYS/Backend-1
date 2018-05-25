@@ -44,11 +44,11 @@
         </div>
         <div class="row">
             <div class="col-4 text-left">
-                <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png?x=${rand}" alt="Usuario">
+                <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" alt="Usuario">
             </div>
             <div class="col-8 text-left">
-                <a href="usuarioPublico.jsp?name=${cancion.getUsuarioByIdUser().getIdUser()}">
-                    <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
+                <a href="usuarioPublico.jsp?name=${cancion.getUsuarioByIdUser().getUsername()}">
+                    <h5>${cancion.getUsuarioByIdUser().getUsername()}</h5>
                 </a>
                 <br>
                 <h6>${cancion.getFechaSubida()}</h6>

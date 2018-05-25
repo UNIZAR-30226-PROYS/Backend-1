@@ -29,18 +29,19 @@ public class ListsController extends HttpServlet {
         session.removeAttribute("listas");
         Usuario username = (Usuario) session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
-        String idUser = request.getParameter("id");
+        int idUser = Integer.parseInt(request.getParameter("id"));
         Usuario usuario = null;
         Collection<Listarep> listas = null;
         try {
             usuario = Usuario.getUser(idUser);
             usuario.activarListas(HibernateUtil.getSession());
             listas = usuario.getListarepsByIdUser();
+            System.out.println(listas);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if(usuario.getIdUser().equals(username.getIdUser())){
+        if(usuario.getIdUser() == username.getIdUser()){
             session.setAttribute("usuario", username);
         }
         else{

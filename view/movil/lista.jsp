@@ -45,7 +45,7 @@
                         <!--TODO: Nombre cancion-->
                         <h6 class="media-heading">${cancion.getNombre()}</h6>
                         <!--TODO: Usuario que ha subido la canción-->
-                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                     </div>
                     <div class="media-right">
                         <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">

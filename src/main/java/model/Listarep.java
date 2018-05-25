@@ -68,7 +68,7 @@ public class Listarep {
         return Objects.hash(idLista, nombre, numElementos);
     }
 
-    @OneToMany(mappedBy = "listarepByListarep")
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
     @Cascade(CascadeType.ALL)
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
@@ -100,7 +100,7 @@ public class Listarep {
 
     public static Listarep addLista(Usuario user, String nombre) throws Exception{
         Session session = getSession();
-        //user.activarListas(session);
+        user.activarListas(session);
         if(!existsListaBool(user,nombre)){
             Listarep newLista = new Listarep();
             newLista.setIdLista(0);

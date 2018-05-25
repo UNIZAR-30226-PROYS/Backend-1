@@ -13,7 +13,7 @@
             </a>
         </div>
         <div class="col-4 ml-auto text-right">
-            <a href="${pageContext.request.contextPath}/user?id=${username.getIdUser()}"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username.getIdUser()}</a>
+            <a href="${pageContext.request.contextPath}/user?id=${username.getIdUser()}"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username.getUsername()}</a>
         </div>
     </c:if>
     <c:if test="${sessionScope.username == null}">

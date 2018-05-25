@@ -289,6 +289,18 @@ public class Usuario {
         session.close();
     }
 
+    /*
+     * Borra permanentemente un usuario del sistema
+     */
+    public static void borrarUser(int idUser) throws Exception{
+        Session session = getSession();
+        Usuario user = getUser(idUser);
+        session.beginTransaction();
+        session.delete( user );
+        session.getTransaction().commit();
+        session.close();
+    }
+
     public Usuario modUser(String nombre, String email,String nomAp,Boolean publico) throws Exception{
         Session session = getSession();
         this.setUsername(nombre);
@@ -411,7 +423,7 @@ public class Usuario {
     */
     public static List<Usuario> searchUser(String user){
         Session session = getSession();
-        Query query = session.createQuery("from Usuario where idUser like :user ");
+        Query query = session.createQuery("from Usuario where username like :user ");
         query.setParameter("user", "%"+user+"%");
         List<Usuario> lista = query.list();
         session.close();

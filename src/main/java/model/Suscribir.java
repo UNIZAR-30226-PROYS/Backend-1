@@ -67,7 +67,7 @@ public class Suscribir {
      *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
-    public static Suscribir addSuscripcion(String suscriptor, String suscrito) throws Exception{
+    public static Suscribir addSuscripcion(int suscriptor, int suscrito) throws Exception{
         Session session = getSession();
         if(existsSuscribir(suscriptor,suscrito)){
             session.close();
@@ -96,16 +96,13 @@ public class Suscribir {
     /*
         Devuelve si y solo si suscriptor esta suscrito a suscrito.
      */
-    public static boolean existsSuscribir(String suscriptor, String suscrito) throws Exception{
+    public static boolean existsSuscribir(int suscriptor, int suscrito) throws Exception{
         Session session = getSession();
         Boolean exists = false;
-        Usuario uSuscriptor = Usuario.getUser(suscriptor);
-        Usuario uSuscrito = Usuario.getUser(suscrito);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor and usuarioByIdSuscrito = :suscrito");
-        query.setParameter("suscriptor", uSuscriptor);
-        query.setParameter("suscrito", uSuscrito);
+        query.setParameter("suscriptor", suscriptor);
+        query.setParameter("suscrito", suscrito);
         exists = ! query.getResultList().isEmpty();
-
 
         session.close();
         return exists;
@@ -119,11 +116,10 @@ public class Suscribir {
     /*
        Devuelve lista de elementos de Suscribir que tengan el string user como suscriptor
     */
-    public static List<Suscribir> searchSuscripciones(String user) throws Exception{
+    public static List<Suscribir> searchSuscripciones(int user) throws Exception{
         Session session = getSession();
-        Usuario uSuscriptor = Usuario.getUser(user);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor ");
-        query.setParameter("suscriptor", uSuscriptor);
+        query.setParameter("suscriptor", user);
         List<Suscribir> lista = query.getResultList();
         session.close();
         return lista;

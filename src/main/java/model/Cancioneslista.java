@@ -25,7 +25,6 @@ public class Cancioneslista {
     private Date fechaIntroduccion;
     private Listarep listarepByListaRep;
     private Cancion cancionByIdCancion;
-    private Listarep listarepByListarep;
 
     @Id
     @GenericGenerator(name="genCanLis" , strategy="increment")
@@ -74,7 +73,7 @@ public class Cancioneslista {
         this.listarepByListaRep = listarepByListaRep;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
@@ -82,16 +81,6 @@ public class Cancioneslista {
 
     public void setCancionByIdCancion(Cancion cancionByIdCancion) {
         this.cancionByIdCancion = cancionByIdCancion;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "Listarep", referencedColumnName = "idLista", nullable = false)
-    public Listarep getListarepByListarep() {
-        return listarepByListarep;
-    }
-
-    public void setListarepByListarep(Listarep listarepByListarep) {
-        this.listarepByListarep = listarepByListarep;
     }
 
     /*------------------------------------------------------------------------------------------------------------------

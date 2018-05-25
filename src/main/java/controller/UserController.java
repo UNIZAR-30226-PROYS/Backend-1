@@ -26,7 +26,7 @@ public class UserController extends HttpServlet {
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
-        String idUser = request.getParameter("id");
+        int idUser = Integer.parseInt(request.getParameter("id"));
 
         // Limpieza de valores antiguos
         session.removeAttribute("usuario");
@@ -58,7 +58,7 @@ public class UserController extends HttpServlet {
             historial = misListas.get(0);
             mimusica = misListas.get(1);
             favoritos = misListas.get(2);
-            publico = usuario.isPublico();
+            publico = usuario.getPublico();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +83,7 @@ public class UserController extends HttpServlet {
 
 
         // Si el usuario no esta llamandose a si mismo
-        if (!usuario.getIdUser().equals(username.getIdUser())){
+        if (usuario.getIdUser()!=username.getIdUser()){
             // Si el usuario logueado esta suscrito al que esta buscando.
             try {
                 if (Suscribir.existsSuscribir(username.getIdUser(),usuario.getIdUser())){
@@ -102,7 +102,7 @@ public class UserController extends HttpServlet {
         RequestDispatcher rd;
 
         if (UA.contains("Mobile")){
-            if (!usuario.getIdUser().equals(username.getIdUser())) {
+            if (usuario.getIdUser()!=username.getIdUser()) {
                 //response.sendRedirect("/movil/usuarioPublico.jsp");
                 rd = request.getRequestDispatcher("/movil/usuarioPublico.jsp");
             }
@@ -112,7 +112,7 @@ public class UserController extends HttpServlet {
             }
         }
         else{
-            if (!usuario.getIdUser().equals(username.getIdUser())) {
+            if (usuario.getIdUser()!=username.getIdUser()) {
                 //response.sendRedirect("/escritorio/artista.jsp");
                 rd = request.getRequestDispatcher("/escritorio/artista.jsp");
             }
