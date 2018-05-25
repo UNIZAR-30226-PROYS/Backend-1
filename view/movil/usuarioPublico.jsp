@@ -82,7 +82,7 @@
                 <h4 class="media-heading"> Suscribirse a ${usuario.getUsername()}</h4>
             </div>
             <div class="media-left">
-                <a href="${pageContext.request.contextPath}/Suscribe?name=${usuario.getIdUser()}">
+                <a href="${pageContext.request.contextPath}/Suscribe?name=${usuario.getUsername()}">
                     <button type="button" class="btn btn-default ">
                         <span class="fa fa-user-plus" style="font-size:20px; "></span>
                     </button>

@@ -69,7 +69,7 @@ public class Listarep {
     }
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
     }
@@ -137,7 +137,7 @@ public class Listarep {
      */
     public static void borrarLista(int id) throws Exception{
         Session session = getSession();
-        Listarep lista = searchList(id);
+        Listarep lista = getList(id);
         session.beginTransaction();
         session.delete( lista );
         session.getTransaction().commit();

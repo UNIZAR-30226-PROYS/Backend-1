@@ -44,8 +44,10 @@ public class Cancioneslista {
         return fechaIntroduccion;
     }
 
-    public void setFechaIntroduccion(Date fechaIntroduccion) {
-        this.fechaIntroduccion = fechaIntroduccion;
+    public void setFechaIntroduccion(Date fecha) {
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
+        this.fechaIntroduccion = date;
     }
 
     @Override
@@ -133,7 +135,6 @@ public class Cancioneslista {
         Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
         if(listacanciones!=null) {
             Cancioneslista borrar = null;
-            listacanciones.contains(cancion);
             for (Cancioneslista x : listacanciones) {
                 if (x.getCancionByIdCancion().getIdCancion() == cancion.getIdCancion() &&
                         x.getListarepByListaRep().getIdLista() == lista.getIdLista()){
@@ -143,7 +144,11 @@ public class Cancioneslista {
             }
             if(borrar != null){
                 session.beginTransaction();
-                session.delete(borrar);
+                if(lista.getNombre().equals("mimusica")){
+                    session.delete(cancion);
+                }else{
+                    session.delete(borrar);
+                }
                 session.getTransaction().commit();
                 session.refresh(lista);
                 session.close();

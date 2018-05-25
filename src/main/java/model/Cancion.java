@@ -137,7 +137,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     public Collection<Cancioneslista> getCancioneslistasByIdCancion() {
         return cancioneslistasByIdCancion;
     }
@@ -147,7 +147,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
-    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.DELETE)
     public Collection<Comentario> getComentariosByIdCancion() {
         return comentariosByIdCancion;
     }
