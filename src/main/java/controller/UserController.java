@@ -54,7 +54,7 @@ public class UserController extends HttpServlet {
             usuario = Usuario.getUser(idUser);
             System.out.println(usuario);
             usuario.activarSuscripciones(HibernateUtil.getSession());
-            usuario.activarListas(HibernateUtil.getSession());
+            // usuario.activarListas(HibernateUtil.getSession());
             suscripciones = usuario.getSuscribirsByIdUser_0();
             listas = usuario.getListarepsByIdUser();
             misListas = new ArrayList<>(listas);
