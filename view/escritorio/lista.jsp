@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - ${lista.getNombre()}</title>
+    <title>WolfSound - ${lista.getNombre()}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <!-- CONTENIDO DE LA VISTA -->
     <div id="contenido">
         <% } //if%>
-        <div id="tituloNuevo" value="Wolfic - ${lista.getNombre()}" style="display:none;"></div>
+        <div id="tituloNuevo" value="WolfSound - ${lista.getNombre()}" style="display:none;"></div>
         <div class="container mb-3">
             <div class="row pt-3">
                 <div class="col-4">

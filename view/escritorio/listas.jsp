@@ -20,7 +20,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
                 <% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Listas" style="display:none;"></div>
+            <div id="tituloNuevo" value="WolfSound - Listas" style="display:none;"></div>
             <div class="container mb-3">
 
                 <div class="media mt-2">

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="es">
 	<head>
-		<title>Bienvenido a Wolfic</title>
+		<title>Reproductor</title>
         <jsp:include page="includes/header.jsp"></jsp:include>
 		
 	</head>
