@@ -120,8 +120,9 @@ public class Suscribir {
     */
     public static List<Suscribir> searchSuscripciones(int user) throws Exception{
         Session session = getSession();
+        Usuario usuario = Usuario.getUser(user);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor ");
-        query.setParameter("suscriptor", user);
+        query.setParameter("suscriptor", usuario);
         List<Suscribir> lista = query.getResultList();
         session.close();
         return lista;

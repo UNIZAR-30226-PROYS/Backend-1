@@ -105,6 +105,7 @@ public class Cancioneslista {
         return listarep;
     }
 
+    //TODO: si es historial ver que se añada al final, y si ya existe en historial actualizar fecha
     public static Listarep addCancALista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
         if(!existsCancList(lista,cancion)){
