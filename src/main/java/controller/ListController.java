@@ -3,6 +3,7 @@ package main.java.controller;
 import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
+import main.java.model.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,8 +29,10 @@ public class ListController extends HttpServlet {
         String idlista = request.getParameter("id");
         Integer id = Integer.parseInt(idlista);
         HttpSession session = request.getSession(true);
+        Usuario username = (Usuario) session.getAttribute("username");
         session.removeAttribute("canciones");
         session.removeAttribute("lista");
+        session.removeAttribute("propietario");
         Listarep lista = null;
         try {
             lista = Listarep.searchList(id);
@@ -45,6 +48,15 @@ public class ListController extends HttpServlet {
 
         session.setAttribute("canciones", canciones);
         session.setAttribute("lista", lista);
+
+        // Si soy el propietario de la lista
+        if(lista.getUsuarioByIdUser().getIdUser().equals(username.getIdUser())){
+            session.setAttribute("propietario", true);
+        }
+        else {
+            session.setAttribute("propietario", false);
+        }
+
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/lista.jsp");
         }else{
