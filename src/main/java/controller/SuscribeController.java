@@ -21,15 +21,16 @@ public class SuscribeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Usuario suscriptor = (Usuario)session.getAttribute("username");
-        int suscrito = Integer.parseInt(request.getParameter("name"));
+        String  suscrito = request.getParameter("name");
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
             Suscribir.addSuscripcion(suscriptor.getIdUser(),suscrito);
+            int idUser = Usuario.getUser(suscrito).getIdUser();
             if (UA.contains("Mobile")){
-                response.sendRedirect("/user?id="+suscrito);
+                response.sendRedirect("/user?id="+idUser);
             }else{
-                response.sendRedirect("/user?id="+suscrito);
+                response.sendRedirect("/user?id="+idUser);
             }
 
         } catch (Exception e) {
