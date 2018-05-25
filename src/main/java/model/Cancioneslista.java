@@ -121,6 +121,7 @@ public class Cancioneslista {
         Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
         if(listacanciones!=null) {
             Cancioneslista borrar = null;
+            listacanciones.contains(cancion);
             for (Cancioneslista x : listacanciones) {
                 if (x.getCancionByIdCancion().getIdCancion() == cancion.getIdCancion() &&
                         x.getListarepByListaRep().getIdLista() == lista.getIdLista()){

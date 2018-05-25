@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Wolfic - Lista</title>
+    <title>WolfSound - Lista</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -13,7 +13,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
-            <div id="tituloNuevo" value="Wolfic - Editar perfil" style="display:none;"></div>
+            <div id="tituloNuevo" value="WolfSound - Editar perfil" style="display:none;"></div>
             <!-- CONTENIDO DE LA VISTA -->
             <div class="col-12 d-block">
 
