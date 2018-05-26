@@ -25,7 +25,7 @@
                             <h2 class="text-left pl-3 pt-2">${username.getUsername()}</h2>
                             <!-- TODO (JSP): boton de editar, seguir o dejar de seguir, segun quien visite el perfil -->
                             <h3> </h3>
-                            <a href="modificarPerfil.jsp">
+                            <a href="modificarCuenta.jsp">
                                 <button type="button" class="btn btn-primary ml-1 mt-2 mb-3"><i class="fa fa-pencil"></i>&nbsp;Editar</button>
                             </a>
                             <button type="button" class="btn btn-primary ml-1 mt-2 mb-3" data-toggle="modal" data-target="#modalSuscribir">
