@@ -304,10 +304,15 @@ public class Usuario {
 
     public Usuario modUser(String nombre, String email,String nomAp,Boolean publico) throws Exception{
         Session session = getSession();
+        String oldNombre = this.getUsername();
         this.setUsername(nombre);
         this.setEmail(email);
         this.setNomAp(nomAp);
         this.setPublico(publico);
+        if(!oldNombre.equals(nombre)){
+            FileOperations.rename("/contenido/imagenes/usuarios/"+oldNombre+"Perfil.png",
+                    "/contenido/imagenes/usuarios/"+nombre+"Perfil.png");
+        }
         session.beginTransaction();
         session.update( this );
         session.getTransaction().commit();

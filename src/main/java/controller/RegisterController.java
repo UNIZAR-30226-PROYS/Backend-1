@@ -39,7 +39,7 @@ public class RegisterController extends HttpServlet {
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
             Random rand = new Random();
-            int  num = rand.nextInt(10) + 1;
+            int  num = rand.nextInt(9) + 1;
             FileOperations.dup("/contenido/web/imagenes/wolf"+Integer.toString(num)+".png",
                     "/contenido/imagenes/usuarios/"+user+"Perfil.png" );
             // session.setAttribute("misAudios", listas);

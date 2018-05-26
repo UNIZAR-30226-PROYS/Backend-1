@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import main.java.FileOperations;
 import main.java.model.Usuario;
 
 import javax.servlet.RequestDispatcher;
@@ -27,13 +28,12 @@ public class ModifyController extends HttpServlet {
         Boolean visiB = visiS.equals("Público");
 
         RequestDispatcher rd = null;
+        String iduserOld = userOld.getUsername();
         try {
-            Usuario nuser;
             // TODO: Esperar a poder borrar usuarios y updates del ORM
             userOld.modUser(iduserNew,mail,nombreAp,visiB);
             session.removeAttribute("username");
             session.setAttribute("username", userOld);
-
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{
