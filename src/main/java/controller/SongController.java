@@ -33,13 +33,13 @@ public class SongController extends HttpServlet {
             rd = request.getRequestDispatcher("/escritorio/cancion.jsp");
         }
         //TODO: añadir Recuperacion de listas.
-        String desc = "";
+        String desc = "Error al recuperar la descripción de wikipedia.";
         Cancion cancion = null;
         List<Comentario> comentarios = null;
         try {
             cancion = (Cancion) Cancion.getCancion(id);
-            desc = main.java.controller.SongDescriptionController.getText(cancion.getNombre());
             comentarios = Comentario.searchComentarios(cancion);
+            desc = main.java.controller.SongDescriptionController.getText(cancion.getNombre());
 
         }
         catch (Exception e){e.printStackTrace();}
