@@ -67,7 +67,7 @@
                     <a href="/user?id=${resultado.getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/imagenes/usuarios/${resultado.getIdUser()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${resultado.getUsername()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getUsername()}</h6>

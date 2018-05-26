@@ -18,7 +18,7 @@
             <div class="container mb-3">
                 <div class="row pt-3">
                     <div class="col-4">
-                        <img src="/contenido/imagenes/usuarios/${username.getIdUser()}Perfil.png?x=${rand}"  style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/contenido/imagenes/usuarios/${username.getUsername()}Perfil.png?x=${rand}"  style="width: 100%;max-height: 300px" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                     </div>
                     <div class="col-8">
                         <div class="row">

@@ -54,11 +54,11 @@
                 <div class="border-bottom border-dark w-100 px-3"></div>
                 <div class = "row">
                     <div class = "col-2 text-left">
-                        <img class = "img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getIdUser()}Perfil.png?x=${rand}" alt="Usuario">
+                        <img class = "img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" alt="Usuario">
                     </div>
                     <div class = "col-10 text-left">
                         <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
-                            <h5>${cancion.getUsuarioByIdUser().getIdUser()}</h5>
+                            <h5>${cancion.getUsuarioByIdUser().getUsername()}</h5>
                         </a>
                         <br>
                         <h6>${cancion.getFechaSubida()}</h6>
@@ -98,7 +98,7 @@
 
                     <li class="media">
                         <div class="media-left">
-                            <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getIdUser()}Perfil.png?x=${rand}" style="width:64px;height:64px;" alt="...">
+                            <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" style="width:64px;height:64px;" alt="...">
                         </div>
                         <div class="media-body">
                             <h4 class ="media-heading">
