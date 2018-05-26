@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-4">
                     <div class="img-responsive text-center">
-                        <img src="/contenido/imagenes/usuarios/${username.getUsername()}Perfil.png" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
+                        <img src="/contenido/imagenes/usuarios/${username.getUsername()}Perfil.png?x=${rand}" style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
                         <p>${username.getUsername()}</p>
                     </div>
                 </div>
