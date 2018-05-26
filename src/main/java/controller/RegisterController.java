@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import main.java.changeFileName;
 import main.java.model.Listarep;
 import main.java.model.Usuario;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import static main.java.BCrypt.gensalt;
 import static main.java.BCrypt.hashpw;
@@ -38,6 +40,10 @@ public class RegisterController extends HttpServlet {
             System.out.println(listas);
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
+            Random rand = new Random();
+            int  num = rand.nextInt(10) + 1;
+            changeFileName.dup("/contenido/web/imagenes/wolf"+Integer.toString(num)+".png",
+                    "/contenido/imagenes/usuarios/"+user+"Perfil.png" );
             // session.setAttribute("misAudios", listas);
             // session.setAttribute("listasRecomendadas", listas);
             // session.setAttribute("audiosRecomendados", listas);

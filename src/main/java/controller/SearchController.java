@@ -24,19 +24,34 @@ public class SearchController extends HttpServlet {
         String search = request.getParameter("search_input");
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd;
-        if (UA.contains("Mobile")) {
-            rd = request.getRequestDispatcher("/movil/resultados.jsp");
+
+        List<Listarep> listas = null;
+        List<Cancion> canciones = null;
+        List<Usuario> usuarios = null;
+        if(!search.equals("")){
+            System.out.println("Cadena no vacia");
+            listas = Listarep.searchList(search);
+            canciones = Cancion.searchSong(search);
+            usuarios = Usuario.searchUser(search);
+            request.setAttribute("listas", listas);
+            request.setAttribute("usuarios", usuarios);
+            request.setAttribute("canciones", canciones);
+            request.setAttribute("consulta", search);
+            if (UA.contains("Mobile")) {
+                rd = request.getRequestDispatcher("/movil/resultados.jsp");
+            }
+            else{
+                rd = request.getRequestDispatcher("/escritorio/resultados.jsp");
+            }
+            rd.forward(request,response);
+        }else{
+            System.out.println("Cadena vacia");
+            if (UA.contains("Mobile")) {
+                response.sendRedirect("/movil/explorar.jsp");
+            }
+            else{
+                response.sendRedirect("/escritorio/explorar.jsp");
+            }
         }
-        else{
-            rd = request.getRequestDispatcher("/escritorio/resultados.jsp");
-        }
-        List<Listarep> listas = Listarep.searchList(search);
-        List<Cancion> canciones = Cancion.searchSong(search);
-        List<Usuario> usuarios = Usuario.searchUser(search);
-        request.setAttribute("listas", listas);
-        request.setAttribute("usuarios", usuarios);
-        request.setAttribute("canciones", canciones);
-        request.setAttribute("consulta", search);
-        rd.forward(request,response);
     }
 }

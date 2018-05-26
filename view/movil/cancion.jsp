@@ -84,12 +84,12 @@
 
                 <li class="media">
                     <div class="media-left">
-                        <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getIdUser()}Perfil.png" style="width:64px;height:64px;" alt="...">
+                        <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png" style="width:64px;height:64px;" alt="...">
                     </div>
                     <div class="media-body">
                         <h4 class ="media-heading">
-                            <a href="artista.jsp?name=${com.getUsuarioByIdUser().getIdUser()}" >
-                                <h5>${com.getUsuarioByIdUser().getIdUser()}</h5>
+                            <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}" >
+                                <h5>${com.getUsuarioByIdUser().getUsername()}</h5>
                             </a>
                         </h4>
                         <p>${com.getCuerpo()}</p>

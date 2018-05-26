@@ -25,7 +25,7 @@ public class ComentController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
-            if(! (usuario == null)) {
+            if(usuario != null) {
                 Cancion cancion = Cancion.getCancion(cancionI);
                 Comentario.addComentario(usuario, cancion, texto);
             }
