@@ -48,7 +48,7 @@
                                         </div>
                                         <div class="media-body mt-auto">
                                             <h6 class="media-heading pl-5">${cancion.getNombre()}</h6>
-                                            <h6 class="media-heading pl-5">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                                            <h6 class="media-heading pl-5">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                                         </div>
                                         <div class="media-body mt-auto">
                                             <h6 class="media-heading pl-3">${cancion.getAlbumByIdAlbum().getNombre()}</h6>
