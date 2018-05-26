@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
 
+import main.java.FileOperations;
 import main.java.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
@@ -271,6 +272,8 @@ public class Usuario {
     public static void borrarUser(String username) throws Exception{
         Session session = getSession();
         Usuario user = getUser(username);
+        FileOperations.delete("/contenido/imagenes/usuarios/"+username+"Perfil.png");
+        borrarCanciones(user.getIdUser());
         session.beginTransaction();
         session.delete( user );
         session.getTransaction().commit();
@@ -283,18 +286,33 @@ public class Usuario {
     public static void borrarUser(int idUser) throws Exception{
         Session session = getSession();
         Usuario user = getUser(idUser);
+        FileOperations.delete("/contenido/imagenes/usuarios/"+user.getUsername()+"Perfil.png");
+        borrarCanciones(idUser);
         session.beginTransaction();
         session.delete( user );
         session.getTransaction().commit();
         session.close();
     }
 
+    public static void borrarCanciones(int idUser) throws Exception {
+        List<Integer> lista = getSongs(idUser);
+        for(Integer idCancion : lista){
+            FileOperations.delete("/contenido/canciones/"+Integer.toString(idCancion)+".mp3");
+            FileOperations.delete("/contenido/imagenes/canciones/"+Integer.toString(idCancion)+".png");
+        }
+    }
+
     public Usuario modUser(String nombre, String email,String nomAp,Boolean publico) throws Exception{
         Session session = getSession();
+        String oldNombre = this.getUsername();
         this.setUsername(nombre);
         this.setEmail(email);
         this.setNomAp(nomAp);
         this.setPublico(publico);
+        if(!oldNombre.equals(nombre)){
+            FileOperations.rename("/contenido/imagenes/usuarios/"+oldNombre+"Perfil.png",
+                    "/contenido/imagenes/usuarios/"+nombre+"Perfil.png");
+        }
         session.beginTransaction();
         session.update( this );
         session.getTransaction().commit();
@@ -448,6 +466,14 @@ public class Usuario {
             throw new Exception("El usuario no existe");
         }
         return user;
+    }
+
+    public static List<Integer> getSongs(int idUser) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("select idCancion from Cancion where idUser = :user ");
+        query.setParameter("user", idUser);
+        List<Integer> lista = query.list();
+        return lista;
     }
 
     public static Listarep getLista(Usuario user, String nombre) throws Exception{
