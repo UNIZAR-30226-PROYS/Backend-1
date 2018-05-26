@@ -43,18 +43,32 @@
 
                 <div class="media mt-2">
                     <div class="media-body pt-2 pl-4">
-                        <h5 class="media-heading">Populares</h5>
+                        <h5 class="media-heading">Canciones</h5>
                     </div>
                 </div>
 
+                <div class="row pl-4 pr-2">
+                <c:forEach items="${musica.getCancioneslistasByIdLista()}" var="rel">
+                    <div class="col-3">
+                        <div class="img-thumbnail h-100">
+                            <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
+                                <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${rel.getCancionByIdCancion().getIdCancion()}.png" class="pt-3" alt="" style="width:20%">
+                                <div class="caption pt-3 pb-2">
+                                    <p>${rel.getCancionByIdCancion().getNombre()}</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </c:forEach>
+                </div>
                 <div class="row pt-2 pl-4 pr-2">
                     <div class="col-auto pt-2 pb-1">
                         <a href = "/lists?id=${usuario.getIdUser()}"><h4>Listas</h4></a>
                     </div>
                 </div>
-<!--
+
                 <div class="row pl-4 pr-2">
-                    <c:forEach items="${listas}" var="lista" begin="0" end="3">
+                    <c:forEach items="${listas}" var="lista" begin="0" end="5">
                         <div class="col-3">
                             <a href="/list?id=${lista.getIdLista()}" target="_self">
                                 <div class="img-thumbnail h-100">
@@ -75,7 +89,7 @@
                         </div>
                     </c:forEach>
                 </div>
-                -->
+
             </div> <!-- Container -->
             <% if(request.getParameter("ajax")==null){ %>
         </div>
