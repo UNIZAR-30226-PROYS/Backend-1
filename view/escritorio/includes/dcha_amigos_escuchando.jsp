@@ -24,12 +24,12 @@
         <li class="list-group-item media">
             <div class="media">
                 <div class="media-left">
-                    <a href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getUsername()}" class ="a">
+                    <a href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}" class ="a">
                         <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getUsername()}Perfil.png?x=${rand}"  style="width:50px;" alt="...">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getIdUser()}</a></h6>
+                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getUsername()}</a></h6>
                     <h6 class="media-heading"><a href="#">Nombre Canción</a></h6>  <!-- Link a la canción -->
                 </div>
             </div>
