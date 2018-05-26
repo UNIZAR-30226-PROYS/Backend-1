@@ -14,7 +14,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
 <% } //if%>
-            <div id="tituloNuevo" value="Mi perfil - ${username.getIdUser()}" style="display:none;"></div>
+            <div id="tituloNuevo" value="Mi perfil - ${username.getUsername()}" style="display:none;"></div>
             <div class="container mb-3">
                 <div class="row pt-3">
                     <div class="col-4">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-8">
                         <div class="row">
-                            <h2 class="text-left pl-3 pt-2">${username.getIdUser()}</h2>
+                            <h2 class="text-left pl-3 pt-2">${username.getUsername()}</h2>
                             <!-- TODO (JSP): boton de editar, seguir o dejar de seguir, segun quien visite el perfil -->
                             <h3> </h3>
                             <a href="modificarPerfil.jsp">

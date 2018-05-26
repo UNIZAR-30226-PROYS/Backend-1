@@ -26,7 +26,7 @@
                             <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}Perfil.png?x=${rand}" style="width:300px;" alt="...">
                         </div>
                         <div class="row media-body pt-5 pl-5 mt-auto mb-auto">
-                            <h1 class="media-heading">${usuario.getIdUser()}</h1>
+                            <h1 class="media-heading">${usuario.getUsername()}</h1>
                             <c:if test="${!suscrito}">
                                 <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
                                     <div class="form-group">

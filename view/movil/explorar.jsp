@@ -31,41 +31,41 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-auto mr-auto">
-            <h4>Mis listas</h4>
-        </div>
-        <div class="float-right mr-3">
-            <a href="/lists?id=${username.getIdUser()}" class="btn btn-link" role="button">
-                <span class="fa fa-chevron-right" style="font-size:20px;"></span>
-            </a>
-        </div>
-    </div>
-
-    <div class="row">
-        <%--${misListas}--%>
-        <c:forEach items="${misListas}" var="lista">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="/list?id=${lista.getIdLista()}" target="_self">
-                        <%--TODO: poner aqui imagen de la primera cancion de la lista--%>
-                        <img src="<c:choose>
-                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
-                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
-                            </c:when>
-                            <c:otherwise>
-                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
-                            </c:otherwise>
-                        </c:choose>
-                        " alt="Imagen lista" style="width:20%">
-                        <div class="caption">
-                            <p>${lista.getNombre()}</p>
-                        </div>
-                    </a>
-                </div>
+    <c:if test="${not empty sessionScope.username}">
+        <div class="row">
+            <div class="col-auto mr-auto">
+                <h4>Mis listas</h4>
             </div>
-        </c:forEach>
-    </div>
+            <div class="float-right mr-3">
+                <a href="/lists?id=${username.getIdUser()}" class="btn btn-link" role="button">
+                    <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <%--${misListas}--%>
+            <c:forEach items="${misListas}" var="lista">
+                <div class="col-4">
+                    <div class="img-thumbnail h-100">
+                        <a href="/list?id=${lista.getIdLista()}" target="_self">
+                            <img src="<c:choose>
+                                <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                    ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                </c:when>
+                                <c:otherwise>
+                                    ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                </c:otherwise>
+                            </c:choose>
+                            " alt="Imagen lista" style="width:20%">
+                            <div class="caption">
+                                <p>${lista.getNombre()}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </c:if>
 
     <div class="row pt-3">
         <div class="col-auto mr-auto">
@@ -92,7 +92,7 @@
                         </c:choose>
                         " alt="Imagen lista" style="width:20%">
                         <div class="caption">
-                            <p>${lista}</p>
+                            <p>${lista.getNombre()}</p>
                         </div>
                     </a>
                 </div>
@@ -100,30 +100,32 @@
         </c:forEach>
     </div>
 
-    <div class="row pt-3">
-        <div class="col-auto mr-auto">
-            <h4>Mi audio</h4>
-        </div>
-        <div class="float-right mr-3">
-            <button type="submit" class="btn btn-link">
-                <span class="fa fa-chevron-right" style="font-size:20px;"></span>
-            </button>
-        </div>
-    </div>
-    <div class="row">
-        <c:forEach items="${sessionScope.misAudios}" var="lista">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>${lista}</p>
-                        </div>
-                    </a>
-                </div>
+    <c:if test="${not empty sessionScope.username}">
+        <div class="row pt-3">
+            <div class="col-auto mr-auto">
+                <h4>Mi audio</h4>
             </div>
-        </c:forEach>
-    </div>
+            <div class="float-right mr-3">
+                <button type="submit" class="btn btn-link">
+                    <span class="fa fa-chevron-right" style="font-size:20px;"></span>
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <c:forEach items="${sessionScope.misAudios}" var="audio">
+                <div class="col-4">
+                    <div class="img-thumbnail h-100">
+                        <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                            <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" alt="" style="width:20%">
+                            <div class="caption">
+                                <p>${audio.getNombre()}</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </c:if>
 
     <div class="row pt-3">
         <div class="col-auto mr-auto">
@@ -136,13 +138,13 @@
         </div>
     </div>
     <div class="row">
-        <c:forEach items="${sessionScope.audiosRecomendados}" var="lista">
+        <c:forEach items="${sessionScope.audiosRecomendados}" var="audio">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
-                        <img src="images/wolf.jpg" alt="" style="width:20%">
+                    <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                        <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" alt="" style="width:20%">
                         <div class="caption">
-                            <p>${lista}</p>
+                            <p>${audio.getNombre()}</p>
                         </div>
                     </a>
                 </div>

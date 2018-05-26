@@ -25,7 +25,7 @@
 
                 <div class="media mt-2">
                     <div class="media-body">
-                        <h4 class="media-heading">Listas de ${usuario.getIdUser()}</h4>
+                        <h4 class="media-heading">Listas de ${usuario.getUsername()}</h4>
                     </div>
 
                 </div>

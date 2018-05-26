@@ -56,7 +56,7 @@
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getNombre()}</h6>
-                                <h6 class="media-heading">${resultado.getUsuarioByIdUser().getIdUser()}</h6>
+                                <h6 class="media-heading">${resultado.getUsuarioByIdUser().getUsername()}</h6>
                             </div>
                         </div>
                     </a>
@@ -70,7 +70,7 @@
                                 <img src="/contenido/imagenes/usuarios/${resultado.getIdUser()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${resultado.getIdUser()}</h6>
+                                <h6 class="media-heading">${resultado.getUsername()}</h6>
                                 <h6 class="media-heading">${resultado.getNomAp()}</h6>
                             </div>
                         </div>

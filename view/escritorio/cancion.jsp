@@ -103,7 +103,7 @@
                         <div class="media-body">
                             <h4 class ="media-heading">
                                 <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}" >
-                                    <h5>${com.getUsuarioByIdUser().getIdUser()}</h5>
+                                    <h5>${com.getUsuarioByIdUser().getUsername()}</h5>
                                 </a>
                             </h4>
                             <p>${com.getCuerpo()}</p>

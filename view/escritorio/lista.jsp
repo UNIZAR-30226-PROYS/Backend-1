@@ -28,7 +28,7 @@
                     " class="img-thumbnail" style="max-width: 100%;max-height: 500px" alt="Imagen lista">
                     <div class="pt-2 pl-2">
                         <h3 class="media-heading">${lista.getNombre()}</h3>
-                        <h5>De&nbsp;<a href="${pageContext.request.contextPath}/user?id=${lista.getUsuarioByIdUser().getIdUser()}" style="color: black; text-underline: none;">${lista.getUsuarioByIdUser().getIdUser()}</a></h5>
+                        <h5>De&nbsp;<a href="${pageContext.request.contextPath}/user?id=${lista.getUsuarioByIdUser().getIdUser()}" style="color: black; text-underline: none;">${lista.getUsuarioByIdUser().getUsername()}</a></h5>
                         ${canciones.size()} elementos
                     </div>
                     <div class="pl-2">
