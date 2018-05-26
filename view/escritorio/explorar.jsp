@@ -233,12 +233,12 @@
                     </div>
                 </div>
             </div>
+            <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
         <% if(request.getParameter("ajax")==null){ %>
         </div>
     </div>
     <%@include file="includes/socialbar.jsp" %>
     <%@include file="includes/reproductor.jsp" %>
-    <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
 </body>
 </html>
 <% } %>

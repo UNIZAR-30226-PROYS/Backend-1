@@ -82,7 +82,15 @@
                     <a href="/list?id=${resultado.getIdLista()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                                <img src="<c:choose>
+                                    <c:when test="${resultado.getCancioneslistasByIdLista().isEmpty()}">
+                                        ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${pageContext.request.contextPath}/contenido/imagenes/canciones/${resultado.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                    </c:otherwise>
+                                </c:choose>
+                                " alt="Imagen lista" style="width:64px">
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getNombre()}</h6>
