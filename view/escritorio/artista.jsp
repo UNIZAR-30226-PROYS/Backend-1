@@ -31,7 +31,7 @@
                                 <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="hidden" value="${usuario.getIdUser()}" name="name" required>
+                                            <input type="hidden" value="${usuario.getUsername()}" name="name" required>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Suscribirse</button>
@@ -47,49 +47,35 @@
                     </div>
                 </div>
 
-                <div class="list-group pl-4 pt-1 pr-2">
-                    <a href="#" class="list-group-item list-group-item-action pt-1 pb-0">
-                        <div class="media mt-auto">
-                            <div class="media-left pl-1 mt-auto mb-auto pb-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                <h6 class="media-heading pl-5">Usuario</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Album</h6>
-                                <h6 class="media-heading pl-3">Mejores momentos</h6>
-                            </div>
-                            <button type="button" class="btn btn-default mt-auto mb-auto">
-                                <span class="fa fa-plus mt-auto mb-auto pt-1" style="font-size:20px; "></span>
-                            </button>
-                        </div>
-                    </a>
-
-
-
-
-                </div>
-
                 <div class="row pt-2 pl-4 pr-2">
                     <div class="col-auto pt-2 pb-1">
                         <a href = "/lists?id=${usuario.getIdUser()}"><h4>Listas</h4></a>
                     </div>
                 </div>
-
+<!--
                 <div class="row pl-4 pr-2">
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="images/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 1</p>
+                    <c:forEach items="${listas}" var="lista" begin="0" end="3">
+                        <div class="col-3">
+                            <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                <div class="img-thumbnail h-100">
+                                    <img src="<c:choose>
+                                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                            </c:otherwise>
+                                        </c:choose>
+                                        " alt="Imagen lista" class="pt-3" style="width:20%">
+                                    <div class="caption pt-3 pb-2">
+                                        <p>${lista.getNombre()}</p>
+                                    </div>
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
+                -->
             </div> <!-- Container -->
             <% if(request.getParameter("ajax")==null){ %>
         </div>
