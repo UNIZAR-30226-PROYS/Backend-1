@@ -1,4 +1,3 @@
-<!-- TODO (JSP): "Lista" en el titulo es el nombre de la lista visitada -->
 <%@page contentType="text/html; UTF-8" %>
 <%@ page import="main.java.model.Usuario" %>
 <%@ page import="main.java.model.Cancion" %>
