@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
+import main.java.FileOperations;
 import org.hibernate.Session;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -145,6 +146,8 @@ public class Cancioneslista {
             if(borrar != null){
                 session.beginTransaction();
                 if(lista.getNombre().equals("mimusica")){
+                    FileOperations.delete("/contenido/canciones/"+Integer.toString(cancion.getIdCancion())+".mp3");
+                    FileOperations.delete("/contenido/imagenes/canciones/"+Integer.toString(cancion.getIdCancion())+".png");
                     session.delete(cancion);
                 }else{
                     session.delete(borrar);

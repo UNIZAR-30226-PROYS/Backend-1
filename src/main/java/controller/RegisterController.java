@@ -1,6 +1,6 @@
 package main.java.controller;
 
-import main.java.changeFileName;
+import main.java.FileOperations;
 import main.java.model.Listarep;
 import main.java.model.Usuario;
 
@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
@@ -42,7 +40,7 @@ public class RegisterController extends HttpServlet {
             session.setAttribute("misListas", listas);
             Random rand = new Random();
             int  num = rand.nextInt(10) + 1;
-            changeFileName.dup("/contenido/web/imagenes/wolf"+Integer.toString(num)+".png",
+            FileOperations.dup("/contenido/web/imagenes/wolf"+Integer.toString(num)+".png",
                     "/contenido/imagenes/usuarios/"+user+"Perfil.png" );
             // session.setAttribute("misAudios", listas);
             // session.setAttribute("listasRecomendadas", listas);
