@@ -1,8 +1,5 @@
 /* Reemplazar enlaces por carga asíncrona */
 
-// TODO: decidir como van a ser las URLs
-// TODO: no poder acceder a ficheros de contenido (sin marco)
-
 var dominio = 'http://localhost/';
 
 /* Invocada cada vez que hay que cambiar el contenido de la pagina */

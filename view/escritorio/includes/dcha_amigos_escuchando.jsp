@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getIdUser()}</a></h6>
+                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getUsername()}</a></h6>
                     <h6 class="media-heading"><a href="#">Nombre Canción</a></h6>  <!-- Link a la canción -->
                 </div>
             </div>

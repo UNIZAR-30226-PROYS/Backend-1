@@ -41,7 +41,7 @@ public class DeleteSongListController extends HttpServlet {
             if (UA.contains("Mobile")){
                 response.sendRedirect("/list?id="+lista.getIdLista());
             }else{
-                response.sendRedirect("/list?id="+lista.getIdLista());
+                request.getRequestDispatcher("/list?id="+lista.getIdLista()).forward(request,response);
             }
         } catch (Exception e) {
             e.printStackTrace();

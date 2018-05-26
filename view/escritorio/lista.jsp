@@ -40,15 +40,16 @@
                 <div class="col-8">
                     <div class="list-group">
                         <c:forEach items="${canciones}" var="cancion">
-                            <a href="${pageContext.request.contextPath}/song?id=${cancion.getIdCancion()}">
                                 <div class="list-group-item list-group-item-action">
                                     <div class="media pt-2 pb-1 mt-auto">
                                         <div class="media-left" style="padding-right:15px">
-                                            <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;" alt="...">
+                                            <a href="${pageContext.request.contextPath}/song?id=${cancion.getIdCancion()}">
+                                                <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;" alt="...">
+                                            </a>
                                         </div>
                                         <div class="media-body mt-auto">
                                             <h6 class="media-heading pl-5">${cancion.getNombre()}</h6>
-                                            <h6 class="media-heading pl-5">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                                            <h6 class="media-heading pl-5">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                                         </div>
                                         <div class="media-body mt-auto">
                                             <h6 class="media-heading pl-3">${cancion.getAlbumByIdAlbum().getNombre()}</h6>
@@ -61,14 +62,15 @@
                                                 <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalOrden">
                                                     <span class="fa fa-list-ol" style="font-size:20px; "></span>
                                                 </button>
-                                                <button type="button" class="btn btn-default ">
-                                                    <span class="fa fa-trash" style="font-size:20px; "></span>
-                                                </button>
+                                                <a href="/deleteSongFromList?user=${lista.getUsuarioByIdUser().getIdUser()}&list=${lista.getNombre()}&song=${cancion.getIdCancion()}">
+                                                    <button type="button" class="btn btn-default ">
+                                                        <span class="fa fa-trash" style="font-size:20px; "></span>
+                                                    </button>
+                                                </a>
                                             </c:if>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
                         </c:forEach>
                     </div>
                 </div>
