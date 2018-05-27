@@ -7,7 +7,31 @@ import static org.junit.Assert.assertTrue;
 
 public class SuscribirTest {
 
+    private main.java.model.Usuario u;
     //@Test
 
+    @BeforeClass
+    public void antes(){
+        try {
+            main.java.model.Usuario.addUser("UsuarioTest1", "987654321", "usuario@usuario.com");
+        }
+        catch (Exception e){
+            System.out.println("No se puede insertar");
+        }
+    }
 
+    @Test
+    public void Test(){
+        try {
+            main.java.model.Suscribir.addSuscripcion("UsuarioTest2", "UsuarioTest1");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            assertTrue("Deberia existir la subscripcion",
+                    main.java.model.Suscribir.existsSuscribir("UsuarioTest2", "UsuarioTest1"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -11,25 +11,29 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class CancionTest {
-    private main.java.model.Cancion c;
+    private Usuario u;
 
     @BeforeClass
     public void beforeTest(){
-        c = new main.java.model.Cancion();
+        try {
+            this.u = Usuario.getUser("UsuarioTest2");
+            main.java.model.Cancion.addCancion("1,2,3","infantil",u);
+        }
+        catch(Exception e){
+            System.out.println("Ese usuario no existe");
+        }
     }
 
     @Test
     public void Test(){
-        main.java.model.Usuario u = new main.java.model.Usuario("Nico", "Nicolas Lera",
-                "hello@mail.com", "1234");
-        c = main.java.model.Cancion.addCancion("hola","rock",u);
-        assertTrue("Cancion deberia existir", main.java.model.Cancion.existsCancion(u,"hola"));
 
-        List<main.java.model.Cancion> l = main.java.model.Cancion.searchSong("hola");
+        assertTrue("Cancion deberia existir", main.java.model.Cancion.existsCancion(this.u,"1,2,3"));
+
+        List<main.java.model.Cancion> l = main.java.model.Cancion.searchSong("1,2,3");
 
         boolean existe = false;
         for(main.java.model.Cancion aux: l){
-            if(aux.getNombre()=="hola"){
+            if(aux.getNombre()=="1,2,3"){
                 existe = true;
             }
         }
