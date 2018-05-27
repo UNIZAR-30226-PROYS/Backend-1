@@ -1,5 +1,5 @@
 
-import main.java.model.Usuario;
+import Usuario;
 import org.junit.Test;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -17,7 +17,7 @@ public class CancionTest {
     public void beforeTest(){
         try {
             this.u = Usuario.getUser("UsuarioTest2");
-            main.java.model.Cancion.addCancion("1,2,3","infantil",u);
+            Cancion.addCancion("1,2,3","infantil",u);
         }
         catch(Exception e){
             System.out.println("Ese usuario no existe");
@@ -27,12 +27,12 @@ public class CancionTest {
     @Test
     public void Test(){
 
-        assertTrue("Cancion deberia existir", main.java.model.Cancion.existsCancion(this.u,"1,2,3"));
+        assertTrue("Cancion deberia existir", Cancion.existsCancion(this.u,"1,2,3"));
 
-        List<main.java.model.Cancion> l = main.java.model.Cancion.searchSong("1,2,3");
+        List<Cancion> l = Cancion.searchSong("1,2,3");
 
         boolean existe = false;
-        for(main.java.model.Cancion aux: l){
+        for(Cancion aux: l){
             if(aux.getNombre()=="1,2,3"){
                 existe = true;
             }

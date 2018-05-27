@@ -7,12 +7,12 @@ import static org.junit.Assert.assertTrue;
 
 public class ListarepTest {
 
-    private main.java.model.Usuario user;
+    private Usuario user;
 
     @BeforeClass
     public void antesTest(){
         try {
-            this.user = main.java.model.Usuario.getUser("UsuarioTest2");
+            this.user = Usuario.getUser("UsuarioTest2");
         }
         catch (Exception e){
             System.out.println("No se encuentra el usuario");
@@ -21,8 +21,8 @@ public class ListarepTest {
 
     @Test
     public void test(){
-        main.java.model.Listarep.addLista(this.user,"NuevisimaLista");
+        Listarep.addLista(this.user,"NuevisimaLista");
         assertTrue("La lista tendria que existir",
-                main.java.model.Listarep.existsListaBool(this.user,"NuevisimaLista"));
+                Listarep.existsListaBool(this.user,"NuevisimaLista"));
     }
 }
