@@ -476,6 +476,14 @@ public class Usuario {
         return lista;
     }
 
+    public static List<Cancion> getSongsObject(int idUser) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion where idUser = :user ");
+        query.setParameter("user", idUser);
+        List<Cancion> lista = query.list();
+        return lista;
+    }
+
     public static Listarep getLista(Usuario user, String nombre) throws Exception{
         Collection<Listarep> aux = user.getListarepsByIdUser();
         boolean exists = false;

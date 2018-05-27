@@ -22,25 +22,29 @@
                         <h2 class="media-heading">Actividad reciente de suscripciones</h2>
                     </div>
                 </div>
-
-                <div class="list-group pl-4 pt-4 pr-2">
-                    <a href="cancion.jsp" class="list-group-item list-group-item-action">
-                        <div class="media pt-1 pb-1">
-                            <div class="media-left pl-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:70px;" alt="...">
+                ${error}
+                <c:forEach items="${novedades}" var="cancion">
+                    <div class="list-group-item list-group-item-action">
+                        <div class="media pt-2 pb-1 mt-auto">
+                            <div class="media-left" style="padding-right:15px">
+                                <a href="${pageContext.request.contextPath}/song?id=${cancion.getIdCancion()}">
+                                    <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" style="width:64px;" alt="...">
+                                </a>
                             </div>
                             <div class="media-body mt-auto">
-                                <!--TODO: Nombre cancion-->
-                                <h6 class="media-heading">Nombre Cancion</h6>
-                                <!--TODO: Usuario que ha subido la canción-->
-                                <h6 class="media-heading">usuario</h6>
+                                <h6 class="media-heading pl-5">${cancion.getNombre()}</h6>
+                                <h6 class="media-heading pl-5">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                             </div>
                             <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">19-04-2018</h6>
+                                <h6 class="media-heading pl-3">${cancion.getAlbumByIdAlbum().getNombre()}</h6>
+                            </div>
+                            <div class="media-body mt-auto">
+                                <h6 class="media-heading pl-3">${cancion.getFechaSubida()}</h6>
                             </div>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </c:forEach>
+
             </div> <!-- Container -->
     <% if(request.getParameter("ajax")==null){ %>
         </div>
