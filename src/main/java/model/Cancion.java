@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-public class Cancion {
+public class Cancion implements Comparable<Cancion> {
     private int idCancion;
     private String nombre;
     private String genero;
@@ -260,5 +260,10 @@ public class Cancion {
         List<Cancion> lista = query.list();
         session.close();
         return lista;
+    }
+
+    @Override
+    public int compareTo(Cancion cancion) {
+        return Integer.compare(idCancion, cancion.idCancion);
     }
 }
