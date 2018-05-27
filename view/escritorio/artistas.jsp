@@ -22,7 +22,7 @@
                         <h2 class="media-heading">Actividad reciente de suscripciones</h2>
                     </div>
                 </div>
-                ${error}
+
                 <c:forEach items="${novedades}" var="cancion">
                     <div class="list-group-item list-group-item-action">
                         <div class="media pt-2 pb-1 mt-auto">

@@ -50,7 +50,7 @@
                 <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" alt="Usuario">
             </div>
             <div class="col-8 text-left">
-                <a href="usuarioPublico.jsp?name=${cancion.getUsuarioByIdUser().getUsername()}">
+                <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
                     <h5>${cancion.getUsuarioByIdUser().getUsername()}</h5>
                 </a>
                 <br>

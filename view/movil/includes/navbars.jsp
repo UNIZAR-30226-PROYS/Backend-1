@@ -37,7 +37,7 @@
 
             <li><a href="${pageContext.request.contextPath}/movil/listas.jsp">Mis listas</a></li>
             <li><a href="${pageContext.request.contextPath}/movil/lista.jsp">Mi audio</a></li>
-            <li><a href="${pageContext.request.contextPath}/movil/suscripciones.jsp">Suscripciones</a></li>
+            <li><a href="${pageContext.request.contextPath}/suscriptions">Suscripciones</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a></li>
         </ul>
         <div class="text-white text-center">
