@@ -51,7 +51,7 @@
             </select>
         </div>
 
-        <p class="text-danger">${error}</p>
+        <%--<p class="text-danger">${error}</p>--%>
 
         <div class="row">
             <div class="mx-auto col-6">
