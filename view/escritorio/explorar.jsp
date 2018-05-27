@@ -24,7 +24,7 @@
                         <form id="formBuscar" class="search-button" action="${pageContext.request.contextPath}/search" method="get">
                             <div class="orm-group">
                                 <div class="input-group">
-                                    <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
+                                    <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off" required>
                                     <span class="input-group-btn search-button">
                                         <button type="submit" class="btn btn-secondary">
                                             <span class="fa fa-search" style="font-size:20px;"  ></span>

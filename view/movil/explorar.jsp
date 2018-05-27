@@ -19,7 +19,7 @@
             <form id="formBuscar" class="search-button" action="${pageContext.request.contextPath}/search" method="get">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search_input" placeholder="Buscar ...">
+                        <input type="text" class="form-control" name="search_input" placeholder="Buscar ..." required>
                         <span class="input-group-btn search-button">
                                     <button type="submit" class="btn btn-secondary">
                                         <span class="fa fa-search" style="font-size:20px;"></span>
