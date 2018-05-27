@@ -14,10 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @WebServlet(name = "ListController", urlPatterns = "/list")
 public class ListController extends HttpServlet {
@@ -45,9 +42,17 @@ public class ListController extends HttpServlet {
         user.activarListas(HibernateUtil.getSession());
         Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
         List<Cancion> canciones = new ArrayList<>();
+
+        // Si la lista es historial, se muestra de forma invertida, es decir, la ultima reproduccion primero
         for (Cancioneslista x : listacanciones) {
             canciones.add(x.getCancionByIdCancion());
         }
+
+        if(lista.getNombre().equals("historial")){
+            Collections.reverse(canciones);
+        }
+        System.out.println(canciones);
+
         // System.out.println(canciones);
 
         session.setAttribute("canciones", canciones);

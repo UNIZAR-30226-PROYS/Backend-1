@@ -72,7 +72,8 @@
             <h4>Listas recomendadas</h4>
         </div>
         <div class="float-right mr-3">
-            <a href="listas.jsp" class="btn btn-link" role="button">
+            <%--TODO: añadir listas de suscriptores aqui--%>
+            <a href="#" class="btn btn-link" role="button">
                 <span class="fa fa-chevron-right" style="font-size:20px;"></span>
             </a>
         </div>
@@ -81,7 +82,7 @@
         <c:forEach items="${sessionScope.listasRecomendadas}" var="lista">
             <div class="col-4">
                 <div class="img-thumbnail h-100">
-                    <a href="lista.jsp" target="_self">
+                    <a href="#" target="_self">
                         <img src="<c:choose>
                             <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
                                 ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
