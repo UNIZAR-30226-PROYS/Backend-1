@@ -18,9 +18,21 @@ jQuery(document).ready(function() {
         // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); alert(dir);
 
         var tracks = [];
-        tracks.push({ track: 1, name:"1.mp3"  });
-        tracks.push({ track: 2, name:"2.mp3"  });
-        tracks.push({ track: 3, name:"3.mp3"  });
+        // Si no envias un parametro por algun extraño motivo no funciona */
+        $.ajaxSetup({async: false});
+        $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+            alert("aqui -> "+caca);
+            var componentes = caca.split(",");
+            // alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
+            for (var i = 0, len = componentes.length; i < len; ) {
+                tracks.push({ track: ((i/2)+1), name: componentes[i], id: componentes[i+1] });
+
+                i=i+2;
+                // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
+            }
+        });
+        $.ajaxSetup({async: true});
+        tracks.pop();
 
         /*
         var file = "music/nombre_canciones.txt";

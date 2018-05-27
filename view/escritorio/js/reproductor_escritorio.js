@@ -17,13 +17,31 @@ jQuery(document).ready(function() {
 
         /* Mostrar Path */
         // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); alert(dir);
-
         var tracks = [];
-        tracks.push({ track: 1, name:"1"  });
-        tracks.push({ track: 2, name:"2"  });
-        tracks.push({ track: 3, name:"3"  });
+        function actualizar_tracks() {
+
+            // Si no envias un parametro por algun extraño motivo no funciona */
+            $.ajaxSetup({async: false});
+            $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+                alert("aqui -> " + caca);
+                var componentes = caca.split(",");
+                alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
+                for (var i = 0, len = componentes.length; i < len;) {
+                    tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
+
+                    i = i + 2;
+                    // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
+                }
+            });
+            $.ajaxSetup({async: true});
+            tracks.pop();
+        }
+        actualizar_tracks();
+
+        //alert("aqui-v3 ->"+tracks[0].name +" "+ tracks[0].id);
 
         /*
+         $.ajaxSetup({async: true});
         var file = "music/nombre_canciones.txt";
         var tracks_aux = [];
         $.ajaxSetup({async: false});
@@ -94,7 +112,7 @@ jQuery(document).ready(function() {
             *(
             */
 
-        $("#seek").on("mouseup", function () {	 mouseup = false;		});
+            $("#seek").on("mouseup", function () {	 mouseup = false;		});
 
         $("#seek").on("mousedown", function () { mouseup = true;		});
 
@@ -218,8 +236,9 @@ jQuery(document).ready(function() {
 
                 npTitle.text(tracks[id].name+'.mp3');
                 index = id;
-                audio.src = mediaPath + tracks[id].name +'.mp3';
-                $('#imagen_cancion').attr('src', imagePath + tracks[id].name +'.jpg');
+                audio.src = mediaPath + tracks[id].id +'.mp3';
+                //alert("src "+audio.src);
+                $('#imagen_cancion').attr('src', imagePath + tracks[id].id +'.jpg');
 
             },
 
