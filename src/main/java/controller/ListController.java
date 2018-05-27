@@ -51,9 +51,6 @@ public class ListController extends HttpServlet {
         if(lista.getNombre().equals("historial")){
             Collections.reverse(canciones);
         }
-        System.out.println(canciones);
-
-        // System.out.println(canciones);
 
         session.setAttribute("canciones", canciones);
         session.setAttribute("lista", lista);

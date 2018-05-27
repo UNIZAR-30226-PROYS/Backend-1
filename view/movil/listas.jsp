@@ -43,7 +43,8 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h6 class="media-heading">${lista.getNombre()}</h6>
+                        <h6 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                            class="media-heading">${lista.getNombre()}</h6>
                     </div>
                     <div class="media-right">
                         <button type="button" class="btn btn-default ">

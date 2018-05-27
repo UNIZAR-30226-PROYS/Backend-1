@@ -42,13 +42,13 @@
                 </a>
             </div>
         </div>
-        <div class="row">
-            <%--${misListas}--%>
-            <c:forEach items="${misListas}" var="lista">
-                <div class="col-4">
-                    <div class="img-thumbnail h-100">
-                        <a href="/list?id=${lista.getIdLista()}" target="_self">
-                            <img src="<c:choose>
+        <div class="row h-100">
+            <c:forEach items="${misListas}" var="lista" varStatus="status">
+                <c:if test="${status.count <= 3}">
+                    <div class="col-4 h-100 align-content-center align-items-center">
+                        <div class="img-thumbnail h-100">
+                            <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                <img src="<c:choose>
                                 <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
                                     ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
                                 </c:when>
@@ -56,13 +56,15 @@
                                     ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                                 </c:otherwise>
                             </c:choose>
-                            " alt="Imagen lista" style="width:20%">
-                            <div class="caption">
-                                <p>${lista.getNombre()}</p>
-                            </div>
-                        </a>
+                            " alt="Imagen lista" style="height: 68px">
+                                <div class="caption">
+                                    <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                       class="mx-0 my-0">${lista.getNombre()}</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </c:if>
             </c:forEach>
         </div>
     </c:if>
@@ -78,12 +80,13 @@
             </a>
         </div>
     </div>
-    <div class="row">
-        <c:forEach items="${sessionScope.listasRecomendadas}" var="lista">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="#" target="_self">
-                        <img src="<c:choose>
+    <div class="row h-100">
+        <c:forEach items="${sessionScope.listasRecomendadas}" var="lista" varStatus="status">
+            <c:if test="${status.count <= 3}">
+                <div class="col-4 h-100 align-content-center align-items-center">
+                    <div class="img-thumbnail h-100">
+                        <a href="#" target="_self">
+                            <img src="<c:choose>
                             <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
                                 ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
                             </c:when>
@@ -91,13 +94,15 @@
                                 ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                             </c:otherwise>
                         </c:choose>
-                        " alt="Imagen lista" style="width:20%">
-                        <div class="caption">
-                            <p>${lista.getNombre()}</p>
-                        </div>
-                    </a>
+                        " alt="Imagen lista" style="height: 68px">
+                            <div class="caption">
+                                <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                   class="mx-0 my-0">${lista.getNombre()}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </c:if>
         </c:forEach>
     </div>
 
@@ -107,23 +112,27 @@
                 <h4>Mi audio</h4>
             </div>
             <div class="float-right mr-3">
-                <button type="submit" class="btn btn-link">
+                <a href="/list?id=${misListas.get(1).getIdLista()}" class="btn btn-link" role="button">
                     <span class="fa fa-chevron-right" style="font-size:20px;"></span>
-                </button>
+                </a>
             </div>
         </div>
-        <div class="row">
-            <c:forEach items="${sessionScope.misAudios}" var="audio">
-                <div class="col-4">
-                    <div class="img-thumbnail h-100">
-                        <a href="/song?id=${audio.getIdCancion()}" target="_self">
-                            <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" alt="" style="width:20%">
-                            <div class="caption">
-                                <p>${audio.getNombre()}</p>
-                            </div>
-                        </a>
+        <div class="row h-100">
+            <c:forEach items="${misAudios}" var="audio" varStatus="status">
+                <c:if test="${status.count <= 3}">
+                    <div class="col-4 h-100 align-content-center align-items-center">
+                        <div class="img-thumbnail h-100">
+                            <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                                <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png"
+                                     alt="" style="height: 68px">
+                                <div class="caption">
+                                    <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                       class="mx-0 my-0">${audio.getNombre()}</p>
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </c:if>
             </c:forEach>
         </div>
     </c:if>
@@ -133,23 +142,28 @@
             <h4>Audio recomendado</h4>
         </div>
         <div class="float-right mr-3">
-            <button type="submit" class="btn btn-link">
+            <%--TODO: Añadir lista de audio recomendado--%>
+            <a href="#" class="btn btn-link" role="button">
                 <span class="fa fa-chevron-right" style="font-size:20px;"></span>
-            </button>
+            </a>
         </div>
     </div>
-    <div class="row">
-        <c:forEach items="${sessionScope.audiosRecomendados}" var="audio">
-            <div class="col-4">
-                <div class="img-thumbnail h-100">
-                    <a href="/song?id=${audio.getIdCancion()}" target="_self">
-                        <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" alt="" style="width:20%">
-                        <div class="caption">
-                            <p>${audio.getNombre()}</p>
-                        </div>
-                    </a>
+    <div class="row h-100">
+        <c:forEach items="${sessionScope.audiosRecomendados}" var="audio" varStatus="status">
+            <c:if test="${status.count <= 3}">
+                <div class="col-4 h-100 align-content-center align-items-center">
+                    <div class="img-thumbnail h-100">
+                        <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                            <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png"
+                                 alt="" style="height: 68px">
+                            <div class="caption">
+                                <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                   class="mx-0 my-0">${audio.getNombre()}</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </c:if>
         </c:forEach>
     </div>
 </div>

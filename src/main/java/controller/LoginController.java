@@ -20,22 +20,23 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("login_user");
         String pass = request.getParameter("login_pass");
-        RequestDispatcher rd = null;
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
-       // Usuario.existsUser(user);
         try {
             Usuario username = Usuario.login(user,pass);
-            // TODO: sustituir por listas del usuario
-            // List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
             session.setAttribute("username", username);
             Collection<Listarep> aux = username.getListarepsByIdUser();
             List<Listarep> listas = new ArrayList<>(aux);
-            System.out.println(listas);
+
+            List<Cancion> misAudios =  new ArrayList<>();
+            for (Cancioneslista cancion : listas.get(1).getCancioneslistasByIdLista()) {
+                misAudios.add(cancion.getCancionByIdCancion());
+            }
+            
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
-            //session.setAttribute("misListas", listas);
-            //session.setAttribute("misAudios", listas);
+            session.setAttribute("misAudios", misAudios);
+
             //session.setAttribute("listasRecomendadas", listas);
             //session.setAttribute("audiosRecomendados", listas);
             if (UA.contains("Mobile")){
@@ -47,12 +48,14 @@ public class LoginController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            session.setAttribute("error",e.getMessage());
+            request.setAttribute("error",e.getMessage());
+            RequestDispatcher rd;
             if (UA.contains("Mobile")){
-                response.sendRedirect("/movil/wolfsound.jsp");
+                rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
             }else{
-                response.sendRedirect("/escritorio/explorar.jsp");
+                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
             }
+            rd.forward(request,response);
         }
     }
 
