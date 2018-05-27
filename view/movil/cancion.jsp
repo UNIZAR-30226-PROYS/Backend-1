@@ -24,6 +24,13 @@
             <div class="col-6">
                 <h3>${cancion.getNombre()}</h3>
             </div>
+            <div class = "col-auto my-1">
+                <a href="#">
+                    <button type="button" class="btn btn-default align-bottom">
+                        <span class="fa fa-play" style="font-size:20px; "></span>
+                    </button>
+                </a>
+            </div>
             <c:if test="${sessionScope.username != null}">
                 <form id="addToListForm" class="needs-validation form-row" action="${pageContext.request.contextPath}/addSongToList">
                     <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
