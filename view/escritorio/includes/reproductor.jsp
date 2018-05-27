@@ -180,13 +180,28 @@
         });
         $('body').delegate(volumeBar, 'change', function(evt) {
             //console.log($(".popover #volume-bar-value").val());
-            // alert("llamando"); myfunc("value");
+            // alert("llamanasdfdo"); myfunc("value");
 
             var aud_volume =  $('#input_audio').val();
             document.getElementById("audio1").volume = aud_volume;
             $("#input_audio").val( document.getElementById("audio1").volume);
-            //alert("cambiado" + aud_volume);
+            //alert("cambiadzcvzxcvzxco" + aud_volume);
 
         });
     });
 </script>
+
+<script>
+    $("#play_button").click( function()
+        {
+            alert('button clicked');
+            actualizar_tracks();
+            //$("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 5}, function (caca) {
+            //   alert('cancion loaded');
+            //});
+        }
+    );
+</script>
+
+
+
