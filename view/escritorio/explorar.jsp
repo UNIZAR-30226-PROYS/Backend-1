@@ -61,7 +61,7 @@
                                                 ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                                             </c:otherwise>
                                         </c:choose>
-                                        " alt="Imagen lista" class="pt-3" style="height: 78px">
+                                        " alt="Imagen lista" class="pt-3" style="max-width:100%;height: 78px">
                                         <div class="caption pt-3 pb-2">
                                             <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${lista.getNombre()}</p>
                                         </div>
@@ -95,7 +95,7 @@
                                             ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                                         </c:otherwise>
                                     </c:choose>
-                                    " alt="Imagen lista" class="pt-3" style="height: 78px;">
+                                    " alt="Imagen lista" class="pt-3" style="max-width:100%;height: 78px;">
                                     <div class="caption pt-3 pb-2">
                                         <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${lista.getNombre()}</p>
                                     </div>
@@ -121,7 +121,7 @@
                             <div class="col-3 h-100 align-content-center align-items-center">
                                 <div class="img-thumbnail h-100">
                                     <a href="/song?id=${audio.getIdCancion()}" target="_self">
-                                        <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="pt-3" alt="" style="height: 78px;">
+                                        <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="pt-3" alt="" style="max-width:100%;height: 78px;">
                                         <div class="caption pt-3 pb-2">
                                             <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${audio.getNombre()}</p>
                                         </div>
@@ -147,7 +147,7 @@
                         <div class="col-3 h-100 align-content-center align-items-center">
                             <div class="img-thumbnail h-100">
                                 <a href="/song?id=${audio.getIdCancion()}" target="_self">
-                                    <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="pt-3" alt="" style="height: 78px;">
+                                    <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="pt-3" alt="" style="max-width:100%;height: 78px;">
                                     <div class="caption pt-3 pb-2">
                                         <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                            class="mx-0 my-0">${audio.getNombre()}</p>
