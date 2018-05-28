@@ -1,6 +1,4 @@
 <%--TODO: Terminar de implementar funcionalidad--%>
-<%@ page import="main.java.model.Usuario" %>
-<%@ page import="main.java.model.Cancion" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -17,7 +15,8 @@
     <div class="col my-2">
         <div class="row">
             <div class="col-12 w-100 align-self-center align-items-center align-content-center">
-                <img class="img-fluid align-self-center text-center" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
+                <img class="img-fluid align-self-center text-center"
+                     src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
             </div>
         </div>
         <div class="row pt-3 align-self-center align-items-center align-content-center">
@@ -34,12 +33,15 @@
         </div>
         <div class="row">
             <c:if test="${sessionScope.username != null}">
-                <form id="addToListForm" class="needs-validation form-row" action="${pageContext.request.contextPath}/addSongToList">
-                    <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
+                <form id="addToListForm" class="needs-validation form-row"
+                      action="${pageContext.request.contextPath}/addSongToList">
+                    <input type="hidden" name="song" value="${cancion.getIdCancion()}"/>
                     <div class="col mr-auto">
                         <select name="list" class="custom-select mr-sm-2" id="anyadirLista" required>
                             <c:forEach items="${sessionScope.misListas}" var="lista">
-                                <option value="${lista.getIdLista()}">${lista.getNombre()}</option>
+                                <c:if test="${lista.getNombre() != 'mimusica'}">
+                                    <option value="${lista.getIdLista()}">${lista.getNombre()}</option>
+                                </c:if>
                             </c:forEach>
                         </select>
                     </div>
@@ -56,7 +58,9 @@
         </div>
         <div class="row">
             <div class="col-4 text-left">
-                <img class="img-fluid" src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" alt="Usuario">
+                <img class="img-fluid"
+                     src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}"
+                     alt="Usuario">
             </div>
             <div class="col-8 text-left">
                 <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
@@ -72,11 +76,12 @@
             </div>
 
         </div>
-        <div class = "row align-items-center">
+        <div class="row align-items-center">
             <div class="col ">
-                <form class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post" novalidate>
+                <form class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post"
+                      novalidate>
                     <div class="col" required>
-                        <textarea class="text form-control" id="comentario"  name="texto" required></textarea>
+                        <textarea class="text form-control" id="comentario" name="texto" required></textarea>
                         <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
                     </div>
                     <div class="col">
@@ -91,11 +96,13 @@
             <c:forEach items="${comentarios}" var="com">
                 <li class="media">
                     <div class="media-left">
-                        <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png" style="width:64px;height:64px;" alt="...">
+                        <img class="align-self-center mr-3"
+                             src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png"
+                             style="width:64px;height:64px;" alt="...">
                     </div>
                     <div class="media-body">
-                        <h4 class ="media-heading">
-                            <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}" >
+                        <h4 class="media-heading">
+                            <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}">
                                 <h5>${com.getUsuarioByIdUser().getUsername()}</h5>
                             </a>
                         </h4>
@@ -117,12 +124,14 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <form id="createAndAdd" class="needs-validation form-row" action="${pageContext.request.contextPath}/createList">
+                <form id="createAndAdd" class="needs-validation form-row"
+                      action="${pageContext.request.contextPath}/createList">
                     <div class="form-group">
                         <label for="listName">Crear Lista y añadir</label>
                         <div class="input-group">
-                            <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
-                            <input type="text" class="form-control" name="listName" id="listName" placeholder="Nueva Lista" required>
+                            <input type="hidden" name="song" value="${cancion.getIdCancion()}"/>
+                            <input type="text" class="form-control" name="listName" id="listName"
+                                   placeholder="Nueva Lista" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Añadir</button>
@@ -133,7 +142,7 @@
 </div>
 <!-- Exito al añadir a lista -->
 <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAdd" aria-hidden="true">
-    <div class= "modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

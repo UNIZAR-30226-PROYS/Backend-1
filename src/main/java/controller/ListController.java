@@ -49,8 +49,9 @@ public class ListController extends HttpServlet {
         for (Cancioneslista x : listacanciones) {
             canciones.add(x.getCancionByIdCancion());
         }
+        Collections.sort(canciones);
 
-        if(lista.getNombre().equals("historial")){
+        if(lista.getNombre().equals("historial") || lista.getNombre().equals("favoritos")){
             Collections.reverse(canciones);
         }
 

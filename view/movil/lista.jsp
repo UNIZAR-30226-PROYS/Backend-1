@@ -1,5 +1,5 @@
 <%--TODO: Terminar de implementar funcionalidad--%>
-<%@page contentType="text/html; UTF-8" %>
+<%@page contentType="text/html; UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -51,7 +51,7 @@
     <c:forEach items="${canciones}" var="cancion">
         <div class="list-group pt-2">
             <div class="list-group-item list-group-item-action">
-                <div class="media">
+                <div class="media" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                     <div class="media-left" style="padding-right:15px">
                         <a href="/song?id=${cancion.getIdCancion()}">
                             <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png"
@@ -59,12 +59,18 @@
                                  alt="...">
                         </a>
                     </div>
-                    <div class="media-body">
+                    <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                         <!-- Nombre cancion-->
-                        <h6 class="media-heading"
-                            style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>
-                        <!-- Usuario que ha subido la canción-->
-                        <h6 class="media-heading" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getUsuarioByIdUser().getUsername()}</h6>
+                        <a href="/song?id=${cancion.getIdCancion()}">
+                            <h6 class="media-heading"
+                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>
+                        </a>
+                            <!-- Usuario que ha subido la canción-->
+                        <a href="/user?id=${cancion.getUsuarioByIdUser().getUsername()}">
+                            <h6 class="media-heading"
+                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getUsuarioByIdUser().getUsername()}</h6>
+                        </a>
+
                     </div>
                     <c:if test="${propietario}">
                         <div class="media-right">
