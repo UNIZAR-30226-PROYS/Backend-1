@@ -113,6 +113,7 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
         Session session = getSession();
         Cancioneslista aux = existsCancList(lista,cancion);
         if(aux==null){
+            System.out.println("Entro en el if");
             Cancioneslista objeto = new Cancioneslista();
             objeto.setIdCancLista(0);
             objeto.setFechaIntroduccion(new Timestamp(0));
@@ -127,6 +128,7 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
             //session.refresh(lista);
             return lista;
         }else{
+            System.out.println("Entro en el else");
             aux.setFechaIntroduccion(new Timestamp(0));
             session.beginTransaction();
             session.update( aux );
@@ -180,11 +182,11 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
         Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
         if(aux!=null){
             List<Cancioneslista> canciones = new ArrayList<>(aux);
-            for(Cancioneslista cancion : canciones){
+            for(Cancioneslista cancionlista : canciones){
                 try{
-                    Cancion temp = Cancion.getCancion(cancion.getIdCancLista());
-                    if(song.getNombre().equals(temp.getNombre())){
-                        return cancion;
+                    Cancion cancion = cancionlista.getCancionByIdCancion();
+                    if(song.getIdCancion()==cancion.getIdCancion()){
+                        return cancionlista;
                     }
                 }catch (Exception e){}
             }
