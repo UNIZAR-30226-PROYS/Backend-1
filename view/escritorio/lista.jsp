@@ -37,6 +37,7 @@
                             $("#play_button").click( function()
                                 {
                                     actualizar_lista();
+                                    location.reload();
                                     alert("se ha actualizado la lista");
                                 }
                             );

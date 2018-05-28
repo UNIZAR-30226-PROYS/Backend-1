@@ -2,53 +2,15 @@
 /* Last Modified : 22/04/2018 Jorge	*/
 var tracks = [];
 
-    function actualizar_tracks() {
-        $( "#plList" ).empty();
-        //alert("actualizando historial despues de limpiar");
-        tracks=[];
-
-        $.ajaxSetup({async: false});
-        $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
-            alert("Actualizando tracks -> " + caca);
-            var componentes = caca.split(",");
-            //alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
-            for (var i = 0, len = componentes.length; i < len;) {
-                tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
-
-                i = i + 2;
-                // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
-            }
-        });
-        $.ajaxSetup({async: true});
-        tracks.pop();
-
-        buildPlaylist = $(tracks).each(function(key, value) {
-            var trackNumber = value.track,
-                trackName = value.name;
-            // trackDuration = value.duration;
-            if (trackNumber.toString().length === 1) {
-                trackNumber = '0' + trackNumber;
-            }
-            $('#plList').append(
-                '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-                '<div>'+trackNumber+ '</div>  ' +
-                '<div>'+trackName+'.mp3</div>  ' +
-                //	'<div>'+ trackDuration +'</div> ' +
-                '</div>');
-        })
-    }
-
-function actualizar_tracks_primera_cancion() {
+function actualizar_lista() {
     $( "#plList" ).empty();
-    //alert("actualizando primera cancion despues de limpiar");
+    //alert("actualizando lista despues de limpiar");
     tracks=[];
-
-    //alert("actualizando");
     // Si no envias un parametro por algun extraño motivo no funciona */
-    $( ".reprodcutor_list_item" ).empty();
     $.ajaxSetup({async: false});
-    $("#ocultar_contenido").load("/Reproductor_lista_v2_first_song", {max_num_canciones: 40}, function (caca) {
-        //alert("Actualizando tracks -> " + caca);
+    $("#ocultar_contenido").load("/ReproductorLoadLista", {max_num_canciones: 40}, function (caca) {
+        //alert("aqui -> " + caca);
+       // alert("Actualizando listas v2 -> " + caca);
         var componentes = caca.split(",");
         //alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
         for (var i = 0, len = componentes.length; i < len;) {
@@ -77,8 +39,6 @@ function actualizar_tracks_primera_cancion() {
     })
 }
 
-
-
 jQuery(document).ready(function() {
     var supportsAudio = !!document.createElement('audio').canPlayType;
     if (supportsAudio) {
@@ -96,7 +56,7 @@ jQuery(document).ready(function() {
         /* Mostrar Path */
         // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); alert(dir);
 
-        actualizar_tracks();
+        actualizar_lista();
 
         //alert("aqui-v3 ->"+tracks[0].name +" "+ tracks[0].id);
 
@@ -120,7 +80,7 @@ jQuery(document).ready(function() {
 
 
 
-            trackCount = tracks.length,
+        trackCount = tracks.length,
             npTitle = $('#npTitle'),
 
             audio = $('#audio1').on('play', function () {
