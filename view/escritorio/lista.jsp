@@ -32,7 +32,22 @@
                         ${canciones.size()} elementos
                     </div>
                     <div class="pl-2">
-                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir</button>
+                        <button type="button" id="play_button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir</button>
+                        <script>
+                            $("#play_button").click( function()
+                                {
+                                    alert('button clicked' + $('#idCancion').attr('about'));
+
+                                    $("#ocultar_contenido").load("/ReproductorLoadLista", {max_num_canciones: 40}, function () {
+                                        alert('Lista loaded');
+                                        actualizar_tracks();
+                                    });
+
+
+
+                                }
+                            );
+                        </script>
                         <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio</button><br />
                         <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir</button>
                     </div>
