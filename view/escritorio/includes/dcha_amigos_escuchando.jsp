@@ -35,7 +35,7 @@
                     </c:if>
                     <c:if test="${sus.getUsuarioByIdSuscrito().getPublico()}">
                         <c:if test="${sus.getUsuarioByIdSuscrito().getConexion()}">
-                            <h6 class="media-heading"><a href="#">Cancion</a></h6>  <!-- Link a la canción -->
+                            <h6 class="media-heading"><a href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}</a></h6>  <!-- Link a la canción -->
                         </c:if>
                         <c:if test="${!sus.getUsuarioByIdSuscrito().getConexion()}">
                             <h6 class="media-heading"><a href="#">Desconectado</a></h6>  <!-- Link a la canción -->
