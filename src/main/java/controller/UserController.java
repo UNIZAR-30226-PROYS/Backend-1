@@ -116,7 +116,14 @@ public class UserController extends HttpServlet {
             }
         }
         else{
-            rd = request.getRequestDispatcher("/escritorio/artista.jsp");
+            if (username==null || (usuario !=null && usuario.getIdUser()!=username.getIdUser())) {
+                //response.sendRedirect("/movil/usuarioPublico.jsp");
+                rd = request.getRequestDispatcher("/escritorio/artista.jsp");
+            }
+            else {
+                //response.sendRedirect("/movil/usuario.jsp");
+                rd = request.getRequestDispatcher("/escritorio/usuario.jsp");
+            }
         }
         rd.forward(request,response);
     }

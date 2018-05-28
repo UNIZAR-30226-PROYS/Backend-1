@@ -37,11 +37,6 @@
                                     <button type="submit" class="btn btn-primary">Suscribirse</button>
                                 </form>
                             </c:if>
-                            <c:if test="${sessionScope.username.getIdUser() == usuario.getIdUser()}">
-                                <a href="${pageContext.request.contextPath}/escritorio/modificarCuenta.jsp">
-                                    <button type="button" class="btn btn-primary ml-1 mt-2 mb-3"><i class="fa fa-pencil"></i>&nbsp;Editar</button>
-                                </a>
-                            </c:if>
                         </div>
                     </div>
                 </div>

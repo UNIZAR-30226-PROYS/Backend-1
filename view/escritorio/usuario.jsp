@@ -25,7 +25,7 @@
                             <h2 class="text-left pl-3 pt-2">${username.getUsername()}</h2>
                             <!-- TODO (JSP): boton de editar, seguir o dejar de seguir, segun quien visite el perfil -->
                             <h3> </h3>
-                            <a href="modificarCuenta.jsp">
+                            <a href="/escritorio/modificarCuenta.jsp">
                                 <button type="button" class="btn btn-primary ml-1 mt-2 mb-3"><i class="fa fa-pencil"></i>&nbsp;Editar</button>
                             </a>
                             <button type="button" class="btn btn-primary ml-1 mt-2 mb-3" data-toggle="modal" data-target="#modalSuscribir">
@@ -41,27 +41,60 @@
                 <div class="border-bottom border-dark w-100 my-2 px-3"></div> <!-- Separador horizontal -->
                 <p class="text-danger">${requestScope.error}</p>
                 <!-- Navegacion en perfil de usuario -->
-                <nav id="profileNav" class="navbar navbar-expand-lg navbar-light sticky-top pb-1 pt-0">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarInternaPerfil" aria-controls="navbarInternaPerfil" aria-expanded="false" aria-label="Toggle profile nav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarInternaPerfil">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a id="nav-explorar" class="nav-link nav-profile-link" href="actividad">Actividad</a></li>
-                            <li class="nav-item"><a id="nav-listas" class="nav-link nav-profile-link" href="listas">Listas</a></li>
-                            <li class="nav-item"><a id="nav-artistas" class="nav-link nav-profile-link" href="canciones">Canciones</a></li>
-                            <li class="nav-item"><a id="nav-podcasts" class="nav-link nav-profile-link" href="siguiendo">Siguiendo</a></li>
-                            <li class="nav-item"><a id="nav-podcasts" class="nav-link nav-profile-link" href="seguidores">Seguidores</a></li>
-                        </ul>
+                <div class="media mt-2">
+                    <div class="media-body pt-2 pl-4">
+                        <h5 class="media-heading">Canciones</h5>
                     </div>
-                </nav>
-                <div class="border-bottom border-dark w-100 px-3"></div> <!-- Separador horizontal -->
-                <div id="contenido-perfil">
-                    <!-- Aqui carga el contenido de la seccion del perfil corerspondiente -->
-                    <script>
-                        $("#contenido-perfil").load('includes/usuario_actividad.jsp');
-                    </script>
                 </div>
+
+                <div class="row pl-4 pr-2">
+                    <c:forEach items="${musica.getCancioneslistasByIdLista()}" var="rel">
+                        <div class="col-3">
+                            <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
+                                <div class="img-thumbnail h-100">
+                                    <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${rel.getCancionByIdCancion().getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion">
+                                    <div class="caption pt-3 pb-2">
+                                        <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                           class="mx-0 my-0">${rel.getCancionByIdCancion().getNombre()}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
+                <div class="row pt-2 pl-4 pr-2">
+                    <div class="col-auto pt-2 pb-1">
+                        <a href = "/lists?id=${usuario.getIdUser()}"><h4>Listas</h4></a>
+                    </div>
+                </div>
+
+                <div class="row pl-4 pr-2">
+                    <c:forEach items="${listas}" var="lista" begin="0" end="5">
+                        <div class="col-3">
+                            <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                <div class="img-thumbnail h-100">
+                                    <img src="<c:choose>
+                                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                            </c:otherwise>
+                                        </c:choose>
+                                        " alt="Imagen lista" class="thumbnail-cuadrado">
+                                    <div class="caption pt-3 pb-2">
+                                        <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                           class="mx-0 my-0">${lista.getNombre()}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </div>
+
+
+
+
             </div> <!-- Container -->
             <!-- Modal1 -->
             <div class="modal fade" id="modalSuscribir" tabindex="-1" role="dialog" aria-labelledby="modalSuscribir" aria-hidden="true">

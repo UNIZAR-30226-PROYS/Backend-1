@@ -28,9 +28,9 @@ public class SuscribeController extends HttpServlet {
             Suscribir.addSuscripcion(suscriptor.getIdUser(),suscrito);
             int idUser = Usuario.getUser(suscrito).getIdUser();
             if (UA.contains("Mobile")){
-                response.sendRedirect("/user?id="+suscriptor);
+                response.sendRedirect("/user?id="+suscriptor.getIdUser());
             }else{
-                response.sendRedirect("/user?id="+suscriptor);
+                response.sendRedirect("/user?id="+suscriptor.getIdUser());
             }
 
         } catch (Exception e) {
