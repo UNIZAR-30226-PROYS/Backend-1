@@ -14,43 +14,45 @@
 <%@include file="includes/navbars.jsp" %>
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
-    <div class="col">
+    <div class="col my-2">
         <div class="row">
-            <div class="col">
-                <img class="img-fluid align-content-lg-end" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
+            <div class="col-12 w-100 align-self-center align-items-center align-content-center">
+                <img class="img-fluid align-self-center text-center" src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png" alt="Placeholder">
             </div>
         </div>
-        <div class="row">
-            <div class="col-6">
+        <div class="row pt-3 align-self-center align-items-center align-content-center">
+            <div class="col-10 mr-auto">
                 <h3>${cancion.getNombre()}</h3>
             </div>
-            <div class = "col-auto my-1">
+            <div class="col-2 px-2">
                 <a href="#">
                     <button type="button" class="btn btn-default align-bottom">
                         <span class="fa fa-play" style="font-size:20px; "></span>
                     </button>
                 </a>
             </div>
+        </div>
+        <div class="row">
             <c:if test="${sessionScope.username != null}">
                 <form id="addToListForm" class="needs-validation form-row" action="${pageContext.request.contextPath}/addSongToList">
                     <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
-                    <div class="col-auto my-1">
+                    <div class="col mr-auto">
                         <select name="list" class="custom-select mr-sm-2" id="anyadirLista" required>
                             <c:forEach items="${sessionScope.misListas}" var="lista">
                                 <option value="${lista.getIdLista()}">${lista.getNombre()}</option>
                             </c:forEach>
                         </select>
                     </div>
-                    <div class="col-auto my-1">
+                    <div class="col mx-auto">
                         <button type="submit" class="btn btn-primary">Añadir</button>
                     </div>
                 </form>
+                <div class="col ml-auto">
+                    <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalCrear">
+                        <span class="glyphicon glyphicon-plus" style="font-size:20px; "></span>
+                    </button>
+                </div>
             </c:if>
-            <div class="col-auto my-1">
-                <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalCrear">
-                    <span class="glyphicon glyphicon-plus" style="font-size:20px; "></span>
-                </button>
-            </div>
         </div>
         <div class="row">
             <div class="col-4 text-left">
@@ -60,7 +62,6 @@
                 <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
                     <h5>${cancion.getUsuarioByIdUser().getUsername()}</h5>
                 </a>
-                <br>
                 <h6>${cancion.getFechaSubida()}</h6>
             </div>
         </div>
@@ -88,7 +89,6 @@
 
         <ul class="list-unstyled">
             <c:forEach items="${comentarios}" var="com">
-
                 <li class="media">
                     <div class="media-left">
                         <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png" style="width:64px;height:64px;" alt="...">
