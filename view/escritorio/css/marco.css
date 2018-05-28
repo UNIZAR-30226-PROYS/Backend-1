@@ -177,3 +177,8 @@ form.search-button button {
     border-right: 28px solid rgba(0,0,0,.125);
     border-left: 28px solid transparent;
 }
+
+.thumbnail-cuadrado{
+    max-width:100%;
+    max-height:78px;
+}

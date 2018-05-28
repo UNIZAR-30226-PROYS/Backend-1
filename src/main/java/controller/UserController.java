@@ -98,6 +98,8 @@ public class UserController extends HttpServlet {
                 e.printStackTrace();
                 session.setAttribute("suscrito", false);
             }
+        } else {
+            session.setAttribute("suscrito",true);
         }
 
         //Cambiar si peta
@@ -114,14 +116,7 @@ public class UserController extends HttpServlet {
             }
         }
         else{
-            if (username==null || (usuario !=null && usuario.getIdUser()!=username.getIdUser())) {
-                //response.sendRedirect("/escritorio/artista.jsp");
-                rd = request.getRequestDispatcher("/escritorio/artista.jsp");
-            }
-            else {
-                //response.sendRedirect("/escritorio/usuario.jsp");
-                rd = request.getRequestDispatcher("/escritorio/usuario.jsp");
-            }
+            rd = request.getRequestDispatcher("/escritorio/artista.jsp");
         }
         rd.forward(request,response);
     }
