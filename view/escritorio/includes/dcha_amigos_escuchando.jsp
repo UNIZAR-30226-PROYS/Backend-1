@@ -29,8 +29,18 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getUsername()}</a></h6>
-                    <h6 class="media-heading"><a href="#">Nombre Canción</a></h6>  <!-- Link a la canción -->
+                    <h6 class="media-heading"><a href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">${sus.getUsuarioByIdSuscrito().getUsername()}</a></h6>
+                    <c:if test="${!sus.getUsuarioByIdSuscrito().getPublico()}">
+                        <h6 class="media-heading"><a href="#">Privado</a></h6>  <!-- Link a la canción -->
+                    </c:if>
+                    <c:if test="${sus.getUsuarioByIdSuscrito().getPublico()}">
+                        <c:if test="${sus.getUsuarioByIdSuscrito().getConexion()}">
+                            <h6 class="media-heading"><a href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}</a></h6>  <!-- Link a la canción -->
+                        </c:if>
+                        <c:if test="${!sus.getUsuarioByIdSuscrito().getConexion()}">
+                            <h6 class="media-heading"><a href="#">Desconectado</a></h6>  <!-- Link a la canción -->
+                        </c:if>
+                    </c:if>
                 </div>
             </div>
         </li>

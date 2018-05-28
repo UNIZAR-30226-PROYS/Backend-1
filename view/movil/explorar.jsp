@@ -56,7 +56,7 @@
                                     ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                                 </c:otherwise>
                             </c:choose>
-                            " alt="Imagen lista" style="height: 68px">
+                            " alt="Imagen lista" style="height: 68px" class="w-100">
                                 <div class="caption">
                                     <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                        class="mx-0 my-0">${lista.getNombre()}</p>
@@ -94,7 +94,7 @@
                                 ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                             </c:otherwise>
                         </c:choose>
-                        " alt="Imagen lista" style="height: 68px">
+                        " alt="Imagen lista" style="height: 68px" class="w-100">
                             <div class="caption">
                                 <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                    class="mx-0 my-0">${lista.getNombre()}</p>
@@ -124,7 +124,7 @@
                         <div class="img-thumbnail h-100">
                             <a href="/song?id=${audio.getIdCancion()}" target="_self">
                                 <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png"
-                                     alt="" style="height: 68px">
+                                     alt="" style="height: 68px" class="w-100">
                                 <div class="caption">
                                     <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                        class="mx-0 my-0">${audio.getNombre()}</p>
@@ -155,7 +155,7 @@
                     <div class="img-thumbnail h-100">
                         <a href="/song?id=${audio.getIdCancion()}" target="_self">
                             <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png"
-                                 alt="" style="height: 68px">
+                                 alt="" style="height: 68px" class="w-100">
                             <div class="caption">
                                 <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                    class="mx-0 my-0">${audio.getNombre()}</p>
@@ -165,6 +165,12 @@
                 </div>
             </c:if>
         </c:forEach>
+    </div>
+    <div style="margin-bottom: 50px">
+        <%--
+            Este div es para "levantar" la web por encima del reproductor y que no se
+            esconda contenido debajo de éste
+         --%>
     </div>
 </div>
 

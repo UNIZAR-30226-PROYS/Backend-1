@@ -31,7 +31,7 @@ public class ListsController extends HttpServlet {
         Usuario username = (Usuario) session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
         int idUser = Integer.parseInt(request.getParameter("id"));
-        Usuario usuario = null;
+        Usuario usuario = new Usuario();
         Collection<Listarep> listas = null;
         try {
             usuario = Usuario.getUser(idUser);

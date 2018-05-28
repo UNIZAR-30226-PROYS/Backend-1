@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>WolfSound - Artista</title>
+    <title>WolfSound - ${usuario.getUsername()}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
             <% } //if%>
-            <div id="tituloNuevo" value="WolfSound - Artista" style="display:none;"></div>
+            <div id="tituloNuevo" value="WolfSound - ${usuario.getUsername()}" style="display:none;"></div>
             <!-- CONTENIDO DE LA VISTA -->
             <div class="container mb-3">
 
@@ -50,14 +50,15 @@
                 <div class="row pl-4 pr-2">
                 <c:forEach items="${musica.getCancioneslistasByIdLista()}" var="rel">
                     <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
-                                <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${rel.getCancionByIdCancion().getIdCancion()}.png" class="pt-3" alt="" style="width:20%">
+                        <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
+                            <div class="img-thumbnail h-100">
+                                <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${rel.getCancionByIdCancion().getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion">
                                 <div class="caption pt-3 pb-2">
-                                    <p>${rel.getCancionByIdCancion().getNombre()}</p>
+                                    <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                       class="mx-0 my-0">${rel.getCancionByIdCancion().getNombre()}</p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
                 </c:forEach>
                 </div>
@@ -80,9 +81,10 @@
                                                 ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
                                             </c:otherwise>
                                         </c:choose>
-                                        " alt="Imagen lista" class="pt-3" style="width:20%">
+                                        " alt="Imagen lista" class="thumbnail-cuadrado">
                                     <div class="caption pt-3 pb-2">
-                                        <p>${lista.getNombre()}</p>
+                                        <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                           class="mx-0 my-0">${lista.getNombre()}</p>
                                     </div>
                                 </div>
                             </a>

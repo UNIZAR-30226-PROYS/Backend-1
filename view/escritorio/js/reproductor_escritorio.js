@@ -3,6 +3,7 @@
 var tracks = [];
 
     function actualizar_tracks() {
+// <<<<<<< HEAD
         $( "#plList" ).empty();
         //alert("actualizando historial despues de limpiar");
         tracks=[];
@@ -10,6 +11,13 @@ var tracks = [];
         $.ajaxSetup({async: false});
         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
             alert("Actualizando tracks -> " + caca);
+// =======
+//         alert("actualizando");
+//         // Si no envias un parametro por algun extraño motivo no funciona */
+//         $.ajaxSetup({async: false});
+//         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+//             //alert("aqui -> " + caca);
+// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
             var componentes = caca.split(",");
             //alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
             for (var i = 0, len = componentes.length; i < len;) {
@@ -21,6 +29,7 @@ var tracks = [];
         });
         $.ajaxSetup({async: true});
         tracks.pop();
+// <<<<<<< HEAD
 
         buildPlaylist = $(tracks).each(function(key, value) {
             var trackNumber = value.track,
@@ -78,6 +87,9 @@ function actualizar_tracks_primera_cancion() {
 }
 
 
+// =======
+//     }
+// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
 
 jQuery(document).ready(function() {
     var supportsAudio = !!document.createElement('audio').canPlayType;

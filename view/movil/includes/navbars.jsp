@@ -30,11 +30,7 @@
 
 <div id="sidebar" class="sidebar d-none">
     <c:if test="${sessionScope.username != null}">
-        <div class="sidebar-header">
-            <p class="text-center mx-auto">Escuchando</p>
-        </div>
         <ul class="list-unstyled components">
-
             <li><a href="${pageContext.request.contextPath}/movil/listas.jsp">Mis listas</a></li>
             <li><a href="${pageContext.request.contextPath}/movil/lista.jsp">Mi audio</a></li>
             <li><a href="${pageContext.request.contextPath}/suscriptions">Suscripciones</a></li>

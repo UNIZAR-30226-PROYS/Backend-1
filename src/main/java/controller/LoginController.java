@@ -1,5 +1,10 @@
 package main.java.controller;
 
+import main.java.model.Cancion;
+import main.java.model.Cancioneslista;
+import main.java.model.Listarep;
+import main.java.model.Usuario;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,11 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
-import main.java.model.*;
 
 @WebServlet(urlPatterns = "/login", name = "LoginController")
 public class LoginController extends HttpServlet {

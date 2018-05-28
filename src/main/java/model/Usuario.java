@@ -250,14 +250,6 @@ public class Usuario {
             newUser.activarListas(session);
 
             session.close();
-            File from = new File("/contenido/imagenes/user.png");
-            File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.png");
-            try {
-                Files.copy(from.toPath(),to.toPath(),StandardCopyOption.REPLACE_EXISTING);
-            }
-            catch (Exception e) {throw new Exception("Cant write lol:"+e.getMessage());}
-            if(!Files.exists(from.toPath())) {throw new Exception("Aqui no "+from.toString());}
-
             return newUser;
         }else{
             session.close();
@@ -498,6 +490,27 @@ public class Usuario {
             }
         }
         throw new Exception("El usuario no contiene dicha lista");
+    }
+
+    public static Cancion getLastHistorial(Usuario user) throws Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Listarep where usuarioByIdUser = :user and nombre = :nombre");
+        query.setParameter("user", user);
+        query.setParameter("nombre", "historial");
+        Listarep lista = (Listarep)query.uniqueResult();
+        Collection<Cancioneslista> aux  = lista.getCancioneslistasByIdLista();
+        List<Cancioneslista> listas = new ArrayList<>(aux);
+        Cancion cancion= new Cancion();
+        if(listas.size()!=0){
+            cancion = listas.get(listas.size()-1).getCancionByIdCancion();
+        }
+        else{
+            cancion.setNombre("");
+        }
+
+        session.close();
+        return cancion;
+
     }
 
     public static void guardarInstante(Usuario user, int rep) throws Exception{

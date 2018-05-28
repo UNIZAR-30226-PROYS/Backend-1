@@ -28,7 +28,6 @@ public class AddSongAndPlayController extends HttpServlet {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

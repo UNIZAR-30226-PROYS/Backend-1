@@ -130,7 +130,46 @@ jQuery(document).ready(function() {
         /* Mostrar Path */
         // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); alert(dir);
 
+// <<<<<<< HEAD
         actualizar_tracks();
+// =======
+//         var tracks = [];
+//         tracks.push({ track: 1, name:"1.mp3"  });
+//         tracks.push({ track: 2, name:"2.mp3"  });
+//         tracks.push({ track: 3, name:"3.mp3"  });
+//
+//         /*
+//         var file = "music/nombre_canciones.txt";
+//         var tracks_aux = [];
+//         $.ajaxSetup({async: false});
+//         $.get(file,function(txt){		// Llamada AJAX Asíncrona
+//             var lines = txt.split("\n");
+//             for (var i = 0, len = lines.length; i < len; i++) {
+//                 var componentes = lines[i].split(",");
+//                 tracks_aux.push({ track: (i+1), name: componentes[0], duration: componentes[1] });
+//             }
+//             tracks = tracks_aux;	//getFile(tracks_aux);
+//         });
+//         $.ajaxSetup({async: true});
+//         function getFile(f){	tracks = f;	};
+//         //alert(tracks[0].track + tracks[0].name + tracks[0].duration); alert(tracks[0].track + tracks[0].name + tracks[0].duration);	alert(tracks[1].track + tracks[1].name + tracks[1].duration);
+// 		*/
+//
+//         buildPlaylist = $(tracks).each(function(key, value) {
+//             var trackNumber = value.track,
+//                 trackName = value.name;
+//             // trackDuration = value.duration;
+//             if (trackNumber.toString().length === 1) {
+//                 trackNumber = '0' + trackNumber;
+//             }
+//             $('#plList').append(
+//                 '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
+//                 '<div>'+trackNumber+ '</div>  ' +
+//                 '<div>'+trackName+'</div>  ' +
+//                 //	'<div>'+ trackDuration +'</div> ' +
+//                 '</div>');
+//         }),
+// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
 
             trackCount = tracks.length,
             npTitle = $('#npTitle'),
