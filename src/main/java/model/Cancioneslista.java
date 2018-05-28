@@ -1,7 +1,7 @@
 package main.java.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -21,9 +21,9 @@ import java.sql.Date;
 import static main.java.HibernateUtil.getSession;
 
 @Entity
-public class Cancioneslista {
+public class Cancioneslista implements Comparable<Cancioneslista>{
     private int idCancLista;
-    private Date fechaIntroduccion;
+    private Timestamp fechaIntroduccion;
     private Listarep listarepByListaRep;
     private Cancion cancionByIdCancion;
 
@@ -41,13 +41,13 @@ public class Cancioneslista {
 
     @Basic
     @Column(name = "fechaIntroduccion")
-    public Date getFechaIntroduccion() {
+    public Timestamp getFechaIntroduccion() {
         return fechaIntroduccion;
     }
 
-    public void setFechaIntroduccion(Date fecha) {
+    public void setFechaIntroduccion(Timestamp fecha) {
         long millis=System.currentTimeMillis();
-        java.sql.Date date=new java.sql.Date(millis);
+        java.sql.Timestamp date=new java.sql.Timestamp(millis);
         this.fechaIntroduccion = date;
     }
 
@@ -114,7 +114,7 @@ public class Cancioneslista {
         if(!existsCancList(lista,cancion)){
             Cancioneslista objeto = new Cancioneslista();
             objeto.setIdCancLista(0);
-            objeto.setFechaIntroduccion(new Date(0));
+            objeto.setFechaIntroduccion(new Timestamp(0));
             objeto.setCancionByIdCancion(cancion);
             objeto.setListarepByListaRep(lista);
 
@@ -186,5 +186,10 @@ public class Cancioneslista {
             }
         }
         return exists;
+    }
+
+    @Override
+    public int compareTo(Cancioneslista cancion) {
+        return this.fechaIntroduccion.compareTo(cancion.fechaIntroduccion);
     }
 }
