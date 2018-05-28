@@ -23,13 +23,15 @@ public class AddSongAndPlayController extends HttpServlet {
             Usuario usuario = Usuario.getUser(userSession.getIdUser());
             Cancion cancion = Cancion.getCancion(Integer.parseInt(request.getParameter("song")));
             Cancioneslista.addCancALista(usuario,"historial", cancion);
+            response.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception e) {
-
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }
