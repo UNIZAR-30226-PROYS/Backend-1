@@ -51,7 +51,7 @@
     <c:forEach items="${canciones}" var="cancion">
         <div class="list-group pt-2">
             <div class="list-group-item list-group-item-action">
-                <div class="media">
+                <div class="media"  style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                     <div class="media-left" style="padding-right:15px">
                         <a href="/song?id=${cancion.getIdCancion()}">
                             <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png"
@@ -59,7 +59,7 @@
                                  alt="...">
                         </a>
                     </div>
-                    <div class="media-body">
+                    <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                         <!-- Nombre cancion-->
                         <h6 class="media-heading"
                             style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>

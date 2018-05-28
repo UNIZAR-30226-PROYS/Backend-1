@@ -35,7 +35,11 @@ public class SuscribeController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/usuario.jsp");
+            if (UA.contains("Mobile")){
+                response.sendRedirect("/movil/usuario.jsp");
+            }else{
+                response.sendRedirect("/escritorio/usuario.jsp");
+            }
             request.setAttribute("error", e.getMessage());
             rd.forward(request,response);
         }
