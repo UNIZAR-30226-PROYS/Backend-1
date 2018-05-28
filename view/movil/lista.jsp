@@ -64,7 +64,7 @@
                         <h6 class="media-heading"
                             style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>
                         <!-- Usuario que ha subido la canción-->
-                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
+                        <h6 class="media-heading" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                     </div>
                     <c:if test="${propietario}">
                         <div class="media-right">
