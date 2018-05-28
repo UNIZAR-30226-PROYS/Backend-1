@@ -85,8 +85,8 @@
                 <div class="row pl-4 pr-2">
                     <c:forEach items="${sessionScope.listasRecomendadas}" var="lista"  begin="0" end="3">
                         <div class="col-3 h-100 align-content-center align-items-center">
-                            <div class="img-thumbnail h-100">
-                                <a href="/list?id=${lista.getIdLista()}" target="_self">
+                            <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                <div class="img-thumbnail h-100">
                                     <img src="<c:choose>
                                         <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
                                             ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
@@ -99,8 +99,8 @@
                                     <div class="caption pt-3 pb-2">
                                         <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${lista.getNombre()}</p>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
+                            </a>
                         </div>
                     </c:forEach>
                 </div>
@@ -119,14 +119,14 @@
                     <div class="row pl-4 pr-2">
                         <c:forEach items="${sessionScope.misAudios}" var="audio"  begin="0" end="3">
                             <div class="col-3 h-100 align-content-center align-items-center">
-                                <div class="img-thumbnail h-100">
-                                    <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                                <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                                    <div class="img-thumbnail h-100">
                                         <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion" >
                                         <div class="caption pt-3 pb-2">
                                             <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${audio.getNombre()}</p>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </c:forEach>
                     </div>
@@ -145,15 +145,15 @@
                 <div class="row pl-4 pb-4 pr-2">
                     <c:forEach items="${sessionScope.audiosRecomendados}" var="audio"  begin="0" end="3">
                         <div class="col-3 h-100 align-content-center align-items-center">
-                            <div class="img-thumbnail h-100">
-                                <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                            <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                                <div class="img-thumbnail h-100">
                                     <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion" >
                                     <div class="caption pt-3 pb-2">
                                         <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                            class="mx-0 my-0">${audio.getNombre()}</p>
                                     </div>
-                                </a>
-                            </div>
+                                </div>
+                            </a>
                         </div>
                     </c:forEach>
                 </div>

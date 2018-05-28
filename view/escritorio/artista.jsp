@@ -55,15 +55,15 @@
                 <div class="row pl-4 pr-2">
                 <c:forEach items="${musica.getCancioneslistasByIdLista()}" var="rel">
                     <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
+                        <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
+                            <div class="img-thumbnail h-100">
                                 <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${rel.getCancionByIdCancion().getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion">
                                 <div class="caption pt-3 pb-2">
                                     <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                                        class="mx-0 my-0">${rel.getCancionByIdCancion().getNombre()}</p>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </a>
                     </div>
                 </c:forEach>
                 </div>
