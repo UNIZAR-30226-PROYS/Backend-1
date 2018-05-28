@@ -39,6 +39,7 @@
                     </div>
                 </div>
                 <div class="border-bottom border-dark w-100 my-2 px-3"></div> <!-- Separador horizontal -->
+                <p class="text-danger">${requestScope.error}</p>
                 <!-- Navegacion en perfil de usuario -->
                 <nav id="profileNav" class="navbar navbar-expand-lg navbar-light sticky-top pb-1 pt-0">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarInternaPerfil" aria-controls="navbarInternaPerfil" aria-expanded="false" aria-label="Toggle profile nav">

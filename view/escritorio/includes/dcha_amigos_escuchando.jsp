@@ -29,8 +29,8 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h6 class="media-heading"><a href="#">${sus.getUsuarioByIdSuscrito().getUsername()}</a></h6>
-                    <h6 class="media-heading"><a href="#">Nombre Canción</a></h6>  <!-- Link a la canción -->
+                    <h6 class="media-heading"><a href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">${sus.getUsuarioByIdSuscrito().getUsername()}</a></h6>
+                    <h6 class="media-heading"><a href="${pageContext.request.contextPath}/song?id=1">Nombre Canción</a></h6>  <!-- TODO: Link a la canción -->
                 </div>
             </div>
         </li>
