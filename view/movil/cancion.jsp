@@ -36,7 +36,7 @@
                 <div class="col-10 mr-auto">
                     <form id="addToListForm" class="needs-validation form-row mr-auto"
                           action="${pageContext.request.contextPath}/addSongToList">
-                        <div class="col-8 mr-auto">
+                        <div class="col-7 mr-auto">
                             <input type="hidden" name="song" value="${cancion.getIdCancion()}"/>
                             <select name="list" class="custom-select mr-sm-2" id="anyadirLista" required>
                                 <c:forEach items="${sessionScope.misListas}" var="lista">
@@ -58,7 +58,7 @@
                 </div>
             </c:if>
         </div>
-        <div class="row align-self-center align-items-center align-content-center">
+        <div class="mt-2 row align-self-center align-items-center align-content-center">
             <div class="col-4 text-left">
                 <img class="img-fluid"
                      src="/contenido/imagenes/usuarios/${cancion.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}"
