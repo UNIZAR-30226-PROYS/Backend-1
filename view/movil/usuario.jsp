@@ -75,7 +75,7 @@
                     </button>
                 </div>
             </div>
-            <%--<p class="text-danger">${error}</p>--%>
+            <p class="text-danger">${requestScope.error}</p>
 
             <div class="list-group pt-2">
                 <c:forEach items="${suscripciones}" var="sus">
