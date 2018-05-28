@@ -18,11 +18,17 @@
         <div class="col-5 mr-auto">
             <div class="row">
                 <div class="col-1 mr-auto">
-                    <a href="#">
-                        <button type="button" class="btn btn-default ">
+                        <button type="button" id="play_button"  class="btn btn-default ">
                             <span class="fa fa-play" style="font-size:20px; "></span>
                         </button>
-                    </a>
+                    <script>
+                        $("#play_button").click( function()
+                            {
+                                actualizar_lista();
+                                alert("se ha actualizado la lista");
+                            }
+                        );
+                    </script>
                 </div>
                 <%--TODO: reproducir aleatorio--%>
                 <div class="col-1 mx-auto">

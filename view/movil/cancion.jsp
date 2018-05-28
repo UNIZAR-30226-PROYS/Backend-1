@@ -26,10 +26,22 @@
             </div>
             <div class = "col-auto my-1">
                 <a href="#">
-                    <button type="button" class="btn btn-default align-bottom">
+                    <button type="button" id="play_button" class="btn btn-default align-bottom">
                         <span class="fa fa-play" style="font-size:20px; "></span>
                     </button>
                 </a>
+                <script>
+                    $("#play_button").click( function()
+                        {
+                            alert('button clicked' + $('#idCancion').attr('about'));
+
+                            $("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 40, song: $('#idCancion').attr('about') }, function () {
+                                alert('cancion loaded');
+                                actualizar_tracks_primera_cancion();
+                            });
+                        }
+                    );
+                </script>
             </div>
             <c:if test="${sessionScope.username != null}">
                 <form id="addToListForm" class="needs-validation form-row" action="${pageContext.request.contextPath}/addSongToList">
