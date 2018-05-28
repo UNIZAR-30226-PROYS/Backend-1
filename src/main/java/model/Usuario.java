@@ -250,14 +250,6 @@ public class Usuario {
             newUser.activarListas(session);
 
             session.close();
-            File from = new File("/contenido/imagenes/user.png");
-            File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.png");
-            try {
-                Files.copy(from.toPath(),to.toPath(),StandardCopyOption.REPLACE_EXISTING);
-            }
-            catch (Exception e) {throw new Exception("Cant write lol:"+e.getMessage());}
-            if(!Files.exists(from.toPath())) {throw new Exception("Aqui no "+from.toString());}
-
             return newUser;
         }else{
             session.close();
