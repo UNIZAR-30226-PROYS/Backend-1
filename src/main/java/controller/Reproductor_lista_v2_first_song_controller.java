@@ -12,13 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/ReproductorLoadLista", name = "ReproductorLoadListaController")
-public class ReproductorLoadListaController extends HttpServlet {
+@WebServlet(urlPatterns = "/Reproductor_lista_v2_first_song", name = "Reproductor_lista_v2_first_song_controller")
+public class Reproductor_lista_v2_first_song_controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        List<Cancion> canciones = (List<Cancion>) session.getAttribute("canciones");
+
         String text = "";
         response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
         response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
@@ -28,11 +31,21 @@ public class ReproductorLoadListaController extends HttpServlet {
             Integer i =0;
             Integer max_num_historioal =  Integer.parseInt( request.getParameter("max_num_canciones") );
             Usuario u = (Usuario) session.getAttribute("username");
-            for (Cancion cancion : canciones){
-                text = text+cancion.getNombre()+",";
-                text = text+cancion.getIdCancion()+",";
-                if ( i<max_num_historioal ) i++;
-                else { break; }
+            Listarep mi_historial = Usuario.getLista(u,"historial");
+
+            Collection<Cancioneslista> mi_collection =  mi_historial.getCancioneslistasByIdLista();
+            List<Cancion> canciones = new ArrayList<>();
+
+            // Si la lista es historial, se muestra de forma invertida, es decir, la ultima reproduccion primero
+            for (Cancioneslista x : mi_collection) {
+                canciones.add(x.getCancionByIdCancion());
+                break;
+            }
+
+            for (Cancion mi_cancion : canciones) {
+                text = text+mi_cancion.getNombre()+",";
+                text = text+mi_cancion.getIdCancion()+",";
+                break;
             }
 
             response.getWriter().write(text);       // Write response body.

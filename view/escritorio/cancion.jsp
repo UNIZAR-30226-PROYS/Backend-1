@@ -44,11 +44,8 @@
                                   
                                     $("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 40, song: $('#idCancion').attr('about') }, function () {
                                         alert('cancion loaded');
-                                        actualizar_tracks();
+                                        actualizar_tracks_primera_cancion();
                                     });
-
-
-
                                 }
                             );
                         </script>
