@@ -16,7 +16,7 @@
         </ul>
     </div>
     <c:if test="${username != null}">
-        <a href="${pageContext.request.contextPath}/escritorio/usuario.jsp" >&nbsp;<i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getUsername()}</a>&nbsp;
+        <a href="${pageContext.request.contextPath}/user?id=${sessionScope.username.getIdUser()}" >&nbsp;<i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getUsername()}</a>&nbsp;
         <form action="${pageContext.request.contextPath}/logout" method="get" >
             <button type="submit" class="btn btn-primary" style="border-color:#C81E37;background-color:#C81E37;"><i class="fa fa-power-off"></i></button>
         </form>
