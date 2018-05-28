@@ -33,10 +33,10 @@
         </div>
         <div class="row">
             <c:if test="${sessionScope.username != null}">
-                <form id="addToListForm" class="needs-validation form-row"
-                      action="${pageContext.request.contextPath}/addSongToList">
-                    <input type="hidden" name="song" value="${cancion.getIdCancion()}"/>
-                    <div class="col mr-auto">
+                <div class="col-6 mr-auto">
+                    <form id="addToListForm" class="needs-validation form-row"
+                          action="${pageContext.request.contextPath}/addSongToList">
+                        <input type="hidden" name="song" value="${cancion.getIdCancion()}"/>
                         <select name="list" class="custom-select mr-sm-2" id="anyadirLista" required>
                             <c:forEach items="${sessionScope.misListas}" var="lista">
                                 <c:if test="${lista.getNombre() != 'mimusica'}">
@@ -44,12 +44,13 @@
                                 </c:if>
                             </c:forEach>
                         </select>
-                    </div>
-                    <div class="col mx-auto">
-                        <button type="submit" class="btn btn-primary">Añadir</button>
-                    </div>
+                    </form>
+                </div>
+                <div class="col-4 mx-auto">
+                    <button type="submit" class="btn btn-primary">Añadir</button>
+                </div>
                 </form>
-                <div class="col ml-auto">
+                <div class="col-2 ml-auto">
                     <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modalCrear">
                         <span class="glyphicon glyphicon-plus" style="font-size:20px; "></span>
                     </button>

@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import main.java.Comp;
 import main.java.HibernateUtil;
 import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
@@ -42,14 +43,19 @@ public class ListController extends HttpServlet {
             e.printStackTrace();
         }
         user.activarListas(HibernateUtil.getSession());
-        Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
+        HibernateUtil.getSession().refresh(lista);
+        Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
         List<Cancion> canciones = new ArrayList<>();
+        List<Cancioneslista> cancioneslistas = new ArrayList<>(aux);
+        System.out.println(cancioneslistas);
+        Collections.sort(cancioneslistas, new Comp());
+        System.out.println(cancioneslistas);
 
         // Si la lista es historial, se muestra de forma invertida, es decir, la ultima reproduccion primero
-        for (Cancioneslista x : listacanciones) {
+        for (Cancioneslista x : cancioneslistas) {
             canciones.add(x.getCancionByIdCancion());
         }
-        Collections.sort(canciones);
+        System.out.println(canciones);
 
         if(lista.getNombre().equals("historial") || lista.getNombre().equals("favoritos")){
             Collections.reverse(canciones);

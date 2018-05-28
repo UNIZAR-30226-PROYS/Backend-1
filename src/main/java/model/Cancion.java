@@ -275,4 +275,11 @@ public class Cancion implements Comparable<Cancion> {
     public int compareTo(Cancion cancion) {
         return Integer.compare(idCancion, cancion.idCancion);
     }
+
+    @Override
+    public String toString() {
+        return "Cancion{" +
+                "nombre='" + nombre + '\'' +
+                '}';
+    }
 }

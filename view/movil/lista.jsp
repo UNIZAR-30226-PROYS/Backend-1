@@ -66,7 +66,7 @@
                                 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>
                         </a>
                             <!-- Usuario que ha subido la canción-->
-                        <a href="/user?id=${cancion.getUsuarioByIdUser().getUsername()}">
+                        <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
                             <h6 class="media-heading"
                                 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                         </a>

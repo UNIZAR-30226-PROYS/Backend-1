@@ -198,4 +198,11 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
     public int compareTo(Cancioneslista cancion) {
         return this.fechaIntroduccion.compareTo(cancion.fechaIntroduccion);
     }
+
+    @Override
+    public String toString() {
+        return "Cancioneslista{" +
+                "cancionByIdCancion=" + cancionByIdCancion +
+                '}';
+    }
 }

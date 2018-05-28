@@ -42,7 +42,7 @@ public class AddSongListController extends HttpServlet {
 
             if(lista.getUsuarioByIdUser().getIdUser() == userSession.getIdUser()){
                 //Si la lista es del usuario actual
-                Cancioneslista.addCancALista(lista,cancion);
+                lista = Cancioneslista.addCancALista(lista,cancion);
             } else {
                 throw new Exception("No es el propietario de esta lista");
             }

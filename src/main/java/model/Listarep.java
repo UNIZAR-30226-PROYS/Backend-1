@@ -191,4 +191,11 @@ public class Listarep {
         session.close();
         return lista;
     }
+
+    @Override
+    public String toString() {
+        return "Listarep{" +
+                "nombre='" + nombre + '\'' +
+                '}';
+    }
 }
