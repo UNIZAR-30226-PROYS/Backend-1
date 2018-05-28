@@ -111,7 +111,8 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
     //TODO: si es historial ver que se añada al final, y si ya existe en historial actualizar fecha
     public static Listarep addCancALista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
-        if(!existsCancList(lista,cancion)){
+        Cancioneslista aux = existsCancList(lista,cancion);
+        if(aux==null){
             Cancioneslista objeto = new Cancioneslista();
             objeto.setIdCancLista(0);
             objeto.setFechaIntroduccion(new Timestamp(0));
@@ -126,8 +127,13 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
             //session.refresh(lista);
             return lista;
         }else{
+            aux.setFechaIntroduccion(new Timestamp(0));
+            session.beginTransaction();
+            session.update( aux );
+            session.getTransaction().commit();
+            session.refresh(lista);
             session.close();
-            throw new Exception("Cancion ya existe en dicha lista");
+            return lista;
         }
     }
 
@@ -170,22 +176,20 @@ public class Cancioneslista implements Comparable<Cancioneslista>{
      *---------------------------------------------      EXIST      ----------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
-    public static boolean existsCancList(Listarep lista, Cancion song){
+    public static Cancioneslista existsCancList(Listarep lista, Cancion song){
         Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
-        boolean exists = false;
         if(aux!=null){
             List<Cancioneslista> canciones = new ArrayList<>(aux);
             for(Cancioneslista cancion : canciones){
                 try{
                     Cancion temp = Cancion.getCancion(cancion.getIdCancLista());
                     if(song.getNombre().equals(temp.getNombre())){
-                        exists = true;
-                        break;
+                        return cancion;
                     }
                 }catch (Exception e){}
             }
         }
-        return exists;
+        return null;
     }
 
     @Override
