@@ -26,7 +26,6 @@ public class RegisterController extends HttpServlet {
         String user = request.getParameter("register_user");
         String pass = hashpw(request.getParameter("register_pass"),gensalt());   //Contraseña hasheada
         String email = request.getParameter("register_email");
-        RequestDispatcher rd;
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
         try {
@@ -53,17 +52,14 @@ public class RegisterController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            session.setAttribute("error", e.getMessage());
+            RequestDispatcher rd;
             if (UA.contains("Mobile")){
-                response.sendRedirect("/movil/explorar.jsp");
+                rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
             }else{
-                response.sendRedirect("/escritorio/explorar.jsp");
+                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
             }
-
-            // request.setAttribute("error", e.getMessage());
-
-            // request.setAttribute("registro_activo", "active");
-            //rd.forward(request,response);
+            request.setAttribute("error", e.getMessage());
+            rd.forward(request,response);
         }
     }
 
