@@ -12,6 +12,8 @@
 </head>
 <body>
 
+<div class="d-none" id="idCancion" about="${cancion.getIdCancion()}" ></div>
+
 <div id="topbar-y-contenido" class="col-10 pl-0 pr-0">
     <%@include file="includes/topbar.jsp" %>
     <!-- CONTENIDO DE LA VISTA -->
@@ -31,10 +33,25 @@
                     </div>
                     <div class = "col-auto my-1">
                         <a href="#">
-                            <button type="button" class="btn btn-default align-bottom">
+                            <button type="button" id="play_button" class="btn btn-default align-bottom">
                                 <span class="fa fa-play" style="font-size:20px; "></span>
                             </button>
                         </a>
+                        <script>
+                            $("#play_button").click( function()
+                                {
+                                    alert('button clicked' + $('#idCancion').attr('about'));
+                                  
+                                    $("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 40, song: $('#idCancion').attr('about') }, function () {
+                                        alert('cancion loaded');
+                                        actualizar_tracks();
+                                    });
+
+
+
+                                }
+                            );
+                        </script>
                     </div>
                     <c:if test="${sessionScope.username != null}">
                         <form id="addToListForm" class="needs-validation form-row" action="${pageContext.request.contextPath}/addSongToList">
@@ -100,50 +117,50 @@
 
 
                 <ul class="list-unstyled">
-                <c:forEach items="${comentarios}" var="com">
+                    <c:forEach items="${comentarios}" var="com">
 
-                    <li class="media">
-                        <div class="media-left">
-                            <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" style="width:64px;height:64px;" alt="...">
-                        </div>
-                        <div class="media-body">
-                            <h4 class ="media-heading">
-                                <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}" >
-                                    <h5>${com.getUsuarioByIdUser().getUsername()}</h5>
-                                </a>
-                            </h4>
-                            <p>${com.getCuerpo()}</p>
-                        </div>
-                    </li>
+                        <li class="media">
+                            <div class="media-left">
+                                <img class = "align-self-center mr-3" src="/contenido/imagenes/usuarios/${com.getUsuarioByIdUser().getUsername()}Perfil.png?x=${rand}" style="width:64px;height:64px;" alt="...">
+                            </div>
+                            <div class="media-body">
+                                <h4 class ="media-heading">
+                                    <a href="/user?id=${com.getUsuarioByIdUser().getIdUser()}" >
+                                        <h5>${com.getUsuarioByIdUser().getUsername()}</h5>
+                                    </a>
+                                </h4>
+                                <p>${com.getCuerpo()}</p>
+                            </div>
+                        </li>
 
-                </c:forEach>
+                    </c:forEach>
                 </ul>
 
             </div>
         </div> <!-- Container -->
-<!-- Modal1 -->
-<div class="modal fade" id="modalCrear" tabindex="-1" role="dialog" aria-labelledby="modalCrear" aria-hidden="true">
-    <div class= "modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <!-- Modal1 -->
+        <div class="modal fade" id="modalCrear" tabindex="-1" role="dialog" aria-labelledby="modalCrear" aria-hidden="true">
+            <div class= "modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
 
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <form id="createAndAdd" class="needs-validation form-row" action="${pageContext.request.contextPath}/createList">
-                    <div class="form-group">
-                        <label for="listName">Crear Lista y añadir</label>
-                        <div class="input-group">
-                            <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
-                            <input type="text" class="form-control" name="listName" id="listName" placeholder="Nueva Lista" required>
-                        </div>
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form id="createAndAdd" class="needs-validation form-row" action="${pageContext.request.contextPath}/createList">
+                            <div class="form-group">
+                                <label for="listName">Crear Lista y añadir</label>
+                                <div class="input-group">
+                                    <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
+                                    <input type="text" class="form-control" name="listName" id="listName" placeholder="Nueva Lista" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Añadir</button>
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-primary">Añadir</button>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
-</div>
         <!-- Exito al añadir a lista -->
         <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="modalAdd" aria-hidden="true">
             <div class= "modal-dialog modal-dialog-centered" role="document">

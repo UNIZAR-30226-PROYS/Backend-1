@@ -6,7 +6,7 @@ var tracks = [];
         alert("actualizando");
         // Si no envias un parametro por algun extraño motivo no funciona */
         $.ajaxSetup({async: false});
-        $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+        $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
             //alert("aqui -> " + caca);
             var componentes = caca.split(",");
             //alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
@@ -19,6 +19,21 @@ var tracks = [];
         });
         $.ajaxSetup({async: true});
         tracks.pop();
+
+        buildPlaylist = $(tracks).each(function(key, value) {
+            var trackNumber = value.track,
+                trackName = value.name;
+            // trackDuration = value.duration;
+            if (trackNumber.toString().length === 1) {
+                trackNumber = '0' + trackNumber;
+            }
+            $('#plList').append(
+                '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
+                '<div>'+trackNumber+ '</div>  ' +
+                '<div>'+trackName+'.mp3</div>  ' +
+                //	'<div>'+ trackDuration +'</div> ' +
+                '</div>');
+        })
     }
 
 jQuery(document).ready(function() {
@@ -60,20 +75,7 @@ jQuery(document).ready(function() {
         //alert(tracks[0].track + tracks[0].name + tracks[0].duration); alert(tracks[0].track + tracks[0].name + tracks[0].duration);	alert(tracks[1].track + tracks[1].name + tracks[1].duration);
 		*/
 
-        buildPlaylist = $(tracks).each(function(key, value) {
-            var trackNumber = value.track,
-                trackName = value.name;
-            // trackDuration = value.duration;
-            if (trackNumber.toString().length === 1) {
-                trackNumber = '0' + trackNumber;
-            }
-            $('#plList').append(
-                '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-                '<div>'+trackNumber+ '</div>  ' +
-                '<div>'+trackName+'.mp3</div>  ' +
-                //	'<div>'+ trackDuration +'</div> ' +
-                '</div>');
-        }),
+
 
             trackCount = tracks.length,
             npTitle = $('#npTitle'),
