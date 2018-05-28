@@ -70,6 +70,7 @@ public class Listarep {
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
     @Cascade(CascadeType.DELETE)
+    @OrderBy("fechaIntroduccion")
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
     }

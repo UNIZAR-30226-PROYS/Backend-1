@@ -1,11 +1,11 @@
 package main.java.controller;
 
-import main.java.Comp;
 import main.java.HibernateUtil;
 import main.java.model.Cancion;
 import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
 import main.java.model.Usuario;
+import org.hibernate.Session;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,22 +34,20 @@ public class ListController extends HttpServlet {
         session.removeAttribute("canciones");
         session.removeAttribute("lista");
         session.removeAttribute("propietario");
-        Listarep lista = null;
-        Usuario user = null;
+        Listarep lista = new Listarep();
+        Usuario user = new Usuario();
+        Session sessionH = HibernateUtil.getSession();
         try {
-            lista = Listarep.getList(id);
+            lista = sessionH.get(Listarep.class, id);
             user = lista.getUsuarioByIdUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        user.activarListas(HibernateUtil.getSession());
-        HibernateUtil.getSession().refresh(lista);
+        user.activarListas(sessionH.getSession());
+        sessionH.refresh(lista);
         Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
         List<Cancion> canciones = new ArrayList<>();
         List<Cancioneslista> cancioneslistas = new ArrayList<>(aux);
-        System.out.println(cancioneslistas);
-        Collections.sort(cancioneslistas, new Comp());
-        System.out.println(cancioneslistas);
 
         // Si la lista es historial, se muestra de forma invertida, es decir, la ultima reproduccion primero
         for (Cancioneslista x : cancioneslistas) {
