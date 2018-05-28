@@ -262,6 +262,15 @@ public class Cancion implements Comparable<Cancion> {
         return lista;
     }
 
+    public void incrementarReps(){
+        Session session = getSession();
+        this.numRep++;
+        session.beginTransaction();
+        session.update( this );
+        session.getTransaction().commit();
+        session.close();
+    }
+
     @Override
     public int compareTo(Cancion cancion) {
         return Integer.compare(idCancion, cancion.idCancion);
