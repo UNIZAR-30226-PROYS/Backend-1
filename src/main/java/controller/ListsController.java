@@ -29,7 +29,7 @@ public class ListsController extends HttpServlet {
         session.removeAttribute("usuario");
         session.removeAttribute("listas");
         Usuario username = (Usuario) session.getAttribute("username");
-username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
 username.saveUser();
         String UA = request.getHeader("User-Agent");
         int idUser = Integer.parseInt(request.getParameter("id"));

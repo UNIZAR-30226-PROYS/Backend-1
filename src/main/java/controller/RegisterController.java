@@ -31,7 +31,7 @@ public class RegisterController extends HttpServlet {
         try {
             Usuario username = Usuario.addUser(user,pass,email);
             // List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
-    username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+    // username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
 username.saveUser();
             Collection<Listarep> aux = username.getListarepsByIdUser();
             List<Listarep> listas = new ArrayList<>(aux);

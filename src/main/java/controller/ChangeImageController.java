@@ -27,7 +27,7 @@ public class ChangeImageController extends HttpServlet {
         HttpSession session = request.getSession(true);
         String UA = request.getHeader("User-Agent");
         Usuario username = (Usuario) session.getAttribute("username");
-username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
 username.saveUser();
 
 

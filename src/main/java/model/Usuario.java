@@ -536,15 +536,17 @@ public class Usuario {
 
     public int estado() throws Exception {
         long millis=System.currentTimeMillis();
+        Timestamp min5 = new Timestamp(millis-300000);
+        Timestamp min10 = new Timestamp(millis-600000);
         Usuario user = getUser(this.idUser);
-        java.sql.Timestamp past = user.conexion;
-        long pastmil = past.getTime();
-        long diferencia = millis-pastmil;
-        System.out.println(new Timestamp(millis));
+        Timestamp past = user.conexion;
+        System.out.println(user.conexion);
         System.out.println(past);
-        System.out.println(diferencia);
-        if(diferencia<=300000){return 0;}
-        else if(diferencia<=600000){return 1;}
+        System.out.println(min5);
+        System.out.println(min10);
+
+        if(past.after(min5)){return 0;}
+        else if(past.after(min10)){return 1;}
         else{return 2;}
 
     }

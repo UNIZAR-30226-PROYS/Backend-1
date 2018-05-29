@@ -25,7 +25,7 @@ public class SuscriptionsController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
-username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
 username.saveUser();
         session.removeAttribute("novedades");
         List<Cancion> novedades = new ArrayList<Cancion>();

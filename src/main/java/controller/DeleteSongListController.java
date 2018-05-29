@@ -25,7 +25,7 @@ public class DeleteSongListController extends HttpServlet {
         HttpSession session = request.getSession(true);
         String UA = request.getHeader("User-Agent");
         Usuario username = (Usuario) session.getAttribute("username");
-username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
 username.saveUser();
         int user = Integer.parseInt(request.getParameter("user"));
         String list = request.getParameter("list");

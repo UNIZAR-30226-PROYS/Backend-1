@@ -31,7 +31,7 @@ public class ListController extends HttpServlet {
         Integer id = Integer.parseInt(idlista);
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
-username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
 username.saveUser();
         session.removeAttribute("canciones");
         session.removeAttribute("lista");
