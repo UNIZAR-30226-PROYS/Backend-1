@@ -104,7 +104,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                         <label class="form-check-label" for="invalidCheck">
-                            Acepto los <a href="#">terminos y condiciones</a> de uso.
+                            Acepto los <a href="../escritorio/includes/condiciones.html">terminos y condiciones</a> de uso.
                         </label>
                     </div>
                 </div>

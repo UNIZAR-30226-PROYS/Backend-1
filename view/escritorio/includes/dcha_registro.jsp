@@ -34,7 +34,7 @@
             <div class="form-check socialbarM">
                 <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                 <label class="form-check-label" style="color: black;" for="invalidCheck">
-                    Acepto los <a href="#">términos y condiciones</a> de uso.
+                    Acepto los <a href="includes/condiciones.html">términos y condiciones</a> de uso.
                 </label>
             </div>
         </div>
