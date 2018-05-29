@@ -535,13 +535,13 @@ public class Usuario {
      *----------------------------------------------------------------------------------------------------------------*/
 
     public int estado(){
-        long millis=System.currentTimeMillis();
+        long millis = System.currentTimeMillis();
         java.sql.Timestamp past = this.conexion;
         long pastmil = past.getTime();
         long diferencia = millis-pastmil;
 
-        if(diferencia<=300000){return 0;}
-        else if(diferencia<=600000){return 1;}
+        if(diferencia <= 300000){return 0;}
+        else if(diferencia <= 600000){return 1;}
         else{return 2;}
 
     }
@@ -550,6 +550,14 @@ public class Usuario {
         long millis=System.currentTimeMillis()-600000;
         java.sql.Timestamp date=new java.sql.Timestamp(millis);
         this.conexion = date;
+    }
+
+    public void saveUser(){
+        Session session = getSession();
+        session.beginTransaction();
+        session.save( this );
+        session.getTransaction().commit();
+        session.close();
     }
 
 
