@@ -41,7 +41,7 @@
 
                                 <div class="form-group">
                                     <label for="album">Album</label>
-                                    <input type="text" class="form-control" name = "album" id="album" placeholder = "Opcional">
+                                    <input type="text" class="form-control" name = "album" id="album" maxlength="100" placeholder = "Opcional">
                                     </input>
                                 </div>
 

@@ -94,7 +94,7 @@
                   novalidate>
                 <div class="row">
                     <div class="col-12" required>
-                        <textarea class="text form-control" id="comentario" name="texto" required></textarea>
+                        <textarea class="text form-control" id="comentario" name="texto" maxlength="500" required></textarea>
                         <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
                     </div>
                 </div>

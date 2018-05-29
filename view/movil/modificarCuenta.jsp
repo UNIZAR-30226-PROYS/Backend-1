@@ -11,19 +11,19 @@
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
     <!-- Mosificar Cuenta -->
-    <form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post" novalidate>
+    <form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post" >
         <h4 class="text-center py-3">Modificar Información del perfil</h4>
         <label for="nombreAp">Nombre y Apellidos</label>
         <div class="form-group">
             <div class="form-row">
                 <input type="text" class="form-control" name="nombre_Ap" id="nombreAp" placeholder="Nombre" required
-                       value="${username.getNomAp()}">
+                       value="${username.getNomAp()}" maxlength="100" >
             </div>
         </div>
         <div class="form-group">
             <label for="nombre_usuario">Nombre de usuario</label>
             <input type="text" class="form-control" name="new_user" id="nombre_usuario" placeholder="usuario_123"
-                   required value="${username.getUsername()}">
+                   required value="${username.getUsername()}" maxlength="50" >
 
             <div class="invalid-feedback"> No puedes dejar este campo en blanco.</div>
         </div>
@@ -31,7 +31,7 @@
         <div class="form-group">
             <label for="correo">Direccion de correo</label>
             <input type="email" class="form-control" name="mail" id="correo" placeholder="user@mail .." required
-                   value=${username.getEmail()}>
+                   value="${username.getEmail()}" maxlength="100" >
             <div class="invalid-feedback"> No puedes dejar este campo en blanco.</div>
         </div>
 

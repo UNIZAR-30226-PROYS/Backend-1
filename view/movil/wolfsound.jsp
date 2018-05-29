@@ -32,13 +32,13 @@
 
         <!-- Iniciar Sesion -->
         <div class="tab-pane fade active show" id="iniciar-sesion" role="tabpanel" aria-labelledby="iniciar-sesion-tab">
-            <form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" novalidate>
+            <form class="needs-validation" action="${pageContext.request.contextPath}/login" method="post" >
                 <h4 class="text-center py-3">Iniciar sesión en WolfSound</h4>
                 <p class="text-danger">${requestScope.error}</p>
                 <div class="form-group">
                     <label for="nombre_usuario">Nombre de usuario</label>
                     <input type="text" class="form-control" name="login_user" value="${user}" id="nombre_usuario"
-                           placeholder="usuario_123" required>
+                           placeholder="usuario_123" maxlength="50" required>
                     <%--<c:if test="${error == 'El usuario no existe'}">--%>
                     <%--<p class="text-danger">${error}</p>--%>
                     <%--</c:if>--%>
@@ -69,13 +69,12 @@
         <!-- Registrarse -->
         <div class="tab-pane fade" id="registrarse" role="tabpanel" aria-labelledby="registrarse-tab">
 
-            <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post"
-                  novalidate>
+            <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" >
                 <h4 class="text-center py-3">Registrarse en WolfSound</h4>
                 <div class="form-group">
                     <label for="nombre_usuario">Nombre de usuario</label>
                     <input type="text" class="form-control" name="register_user" id="nombre_usuario"
-                           placeholder="usuario_123" required>
+                           placeholder="usuario_123" maxlength="50" required>
                     <div class="invalid-feedback"> No puedes dejar este campo en blanco.</div>
                 </div>
 
@@ -95,7 +94,7 @@
                 <div class="form-group">
                     <label for="correo">Direccion de correo</label>
                     <input type="email" class="form-control" name="register_email" id="correo"
-                           placeholder="user@mail .." required>
+                           placeholder="user@mail .." maxlength="100" required>
                     <div class="invalid-feedback"> Se debe introducir una direccion valida.</div>
                 </div>
 
