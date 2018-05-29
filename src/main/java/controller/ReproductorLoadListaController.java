@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/ReproductorLoadLista", name = "ReproductorLoadListaController")
@@ -26,7 +28,13 @@ public class ReproductorLoadListaController extends HttpServlet {
             Usuario u = (Usuario) session.getAttribute("username");
             int idLista = Integer.parseInt(request.getParameter("list"));
             Listarep lista = Listarep.getList(idLista);
-            for (Cancioneslista cancionLista : lista.getCancioneslistasByIdLista()){
+            List<Cancioneslista> cancionesLista = new ArrayList<>(lista.getCancioneslistasByIdLista());
+
+            if(lista.getNombre().equals("historial") || lista.getNombre().equals("favoritos")){
+                Collections.reverse(cancionesLista);
+            }
+
+            for (Cancioneslista cancionLista : cancionesLista){
                 String nombre_cancion = cancionLista.getCancionByIdCancion().getNombre();
                 int id_cancion = cancionLista.getCancionByIdCancion().getIdCancion();
                 text = text+nombre_cancion+","+id_cancion+",";

@@ -14,7 +14,7 @@ var index = 0;
 
         $.ajaxSetup({async: false});
         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
-            alert("Actualizando tracks -> " + caca);
+            console.log("Actualizando tracks -> " + caca);
 // =======
 //         alert("actualizando");
 //         // Si no envias un parametro por algun extraño motivo no funciona */
