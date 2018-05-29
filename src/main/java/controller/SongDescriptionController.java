@@ -37,7 +37,7 @@ public class SongDescriptionController {
         JSONObject val = pages.getJSONObject((String)keys.next());
         String text = val.getString("extract");
         String desc = "La Wikipedia no tiene descripción para esta canción. ¡Anímate a poner una!";
-        if(text.contains("is a song")) desc = text;                                       //Si es la descripción de una canción, la aceptamos.
+        if(text.contains("song")) desc = text;                                       //Si es la descripción de una canción, la aceptamos.
         return desc;
     }
 
