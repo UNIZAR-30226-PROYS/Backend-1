@@ -28,24 +28,26 @@ public class RedirectController extends HttpServlet {
             List<Usuario> users = Usuario.getAllUsers();
             List<Cancion> canciones = new ArrayList<Cancion>();
             List<Listarep> listas = new ArrayList<Listarep>();
+            Integer rand = ThreadLocalRandom.current().nextInt(0, users.size()-1);
             for(int i = 0;i<3;i++){
-                Usuario user = users.get(ThreadLocalRandom.current().nextInt(0, users.size()-1));
+                Usuario user = users.get(rand);
                 List<Cancion> tmp = Usuario.getSongsObjectOrder(user.getIdUser());
                 user.activarListas(HibernateUtil.getSession());
                 Collection<Listarep> tmp2 = user.getListarepsByIdUser();
                 listas.addAll(tmp2);
                 canciones.addAll(tmp);
+                rand = (rand + 1 )%users.size();
+
             }
-            //request.setAttribute("listasRecomendadas", listas);
-            request.setAttribute("audiosRecomendados", canciones);
-            request.setAttribute("error","todo bien lol");
+            session.setAttribute("listasRecomendadas", listas);
+            session.setAttribute("audiosRecomendados", canciones);
+            session.setAttribute("error","todo bien lol"+Integer.toString(users.size()));
         }
-        catch (Exception e){request.setAttribute("error",e.getMessage());}
-        if (UA.contains("Mobile")){
-            request.getRequestDispatcher("/movil/wolfsound.jsp").forward(request,response);
-        }
-        else {
-            request.getRequestDispatcher("/escritorio/explorar.jsp").forward(request,response);
+        catch (Exception e){session.setAttribute("error",e.getMessage());}
+        if (UA.contains("Mobile")) {
+            response.sendRedirect("/movil/wolfsound.jsp");
+        } else {
+            response.sendRedirect("/escritorio/explorar.jsp");
         }
     }
 }
