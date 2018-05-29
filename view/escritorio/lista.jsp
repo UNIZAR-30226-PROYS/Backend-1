@@ -75,10 +75,6 @@
                                     </div>
                                     <div class="media-right">
                                         <c:if test="${sessionScope.username.getIdUser() == lista.getUsuarioByIdUser().getIdUser()}">
-                                            <button type="button" class="btn btn-default " data-toggle="modal"
-                                                    data-target="#modalOrden">
-                                                <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                                            </button>
                                             <a href="/deleteSongFromList?user=${lista.getUsuarioByIdUser().getIdUser()}&list=${lista.getNombre()}&song=${cancion.getIdCancion()}">
                                                 <button type="button" class="btn btn-default ">
                                                     <span class="fa fa-trash" style="font-size:20px; "></span>
