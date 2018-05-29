@@ -1,4 +1,4 @@
-package main.java.controller;
+package controller;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import main.java.model.*;
+import model.*;
 
 @WebServlet(urlPatterns = "/login", name = "LoginController")
 public class LoginController extends HttpServlet {

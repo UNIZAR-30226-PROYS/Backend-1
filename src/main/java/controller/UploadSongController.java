@@ -1,8 +1,8 @@
-package main.java.controller;
+package controller;
 
 import java.util.*;
-import main.java.model.Usuario;
-import main.java.model.Cancion;
+import model.Usuario;
+import model.Cancion;
 import java.io.File;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -1,27 +1,23 @@
-package main.java.model;
+package model;
+
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.naming.AuthenticationException;
 import javax.persistence.*;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.List;
-
-import main.java.HibernateUtil;
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
-import static main.java.BCrypt.checkpw;
-import static main.java.HibernateUtil.getSession;
-
 import java.io.File;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+
+import util.HibernateUtil;
+
+import static util.BCrypt.checkpw;
+import static util.HibernateUtil.getSession;
 
 @Entity
 public class Usuario {

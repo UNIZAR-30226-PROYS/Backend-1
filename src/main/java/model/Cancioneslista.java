@@ -1,4 +1,4 @@
-package main.java.model;
+package model;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.sql.Date;
 
-import static main.java.HibernateUtil.getSession;
+import static util.HibernateUtil.getSession;
 
 @Entity
 public class Cancioneslista {

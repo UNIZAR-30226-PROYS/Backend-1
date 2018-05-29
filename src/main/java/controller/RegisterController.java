@@ -1,7 +1,7 @@
-package main.java.controller;
+package controller;
 
-import main.java.model.Listarep;
-import main.java.model.Usuario;
+import model.Listarep;
+import model.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,8 +17,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static main.java.BCrypt.gensalt;
-import static main.java.BCrypt.hashpw;
+import static util.BCrypt.gensalt;
+import static util.BCrypt.hashpw;
 
 @WebServlet(name = "RegisterController", urlPatterns = "/register")
 public class RegisterController extends HttpServlet {

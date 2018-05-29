@@ -1,8 +1,8 @@
 <!-- TODO (JSP): "Lista" en el titulo es el nombre de la lista visitada -->
 <%@page contentType="text/html; UTF-8" %>
-<%@ page import="main.java.model.Usuario" %>
-<%@ page import="main.java.model.Cancion" %>
-<%@ page import="main.java.model.Comentario" %>
+<%@ page import="model.Usuario" %>
+<%@ page import="model.Cancion" %>
+<%@ page import="model.Comentario" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% if(request.getParameter("ajax")==null){ %>
 <!DOCTYPE html>

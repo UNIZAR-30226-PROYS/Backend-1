@@ -1,4 +1,4 @@
-package main.java.model;
+package model;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -8,11 +8,12 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import static main.java.HibernateUtil.getSession;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.FetchType;
+
+import static util.HibernateUtil.getSession;
 
 @Entity
 public class Listarep {

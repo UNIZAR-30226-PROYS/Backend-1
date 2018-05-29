@@ -1,11 +1,11 @@
-package main.java.model;
+package model;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 import org.hibernate.Session;
-import static main.java.HibernateUtil.getSession;
+import static util.HibernateUtil.getSession;
 
 @Entity
 public class Comentario {

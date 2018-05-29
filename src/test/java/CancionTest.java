@@ -1,5 +1,5 @@
 
-import main.java.model.*;
+import model.*;
 import org.junit.Test;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

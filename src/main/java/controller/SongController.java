@@ -1,6 +1,6 @@
-package main.java.controller;
+package controller;
 
-import main.java.model.*;
+import model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,7 +38,7 @@ public class SongController extends HttpServlet {
         List<Comentario> comentarios = null;
         try {
             cancion = (Cancion) Cancion.getCancion(id);
-            desc = main.java.controller.SongDescriptionController.getText(cancion.getNombre());
+            desc = controller.SongDescriptionController.getText(cancion.getNombre());
             comentarios = Comentario.searchComentarios(cancion);
 
         }

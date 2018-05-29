@@ -1,6 +1,5 @@
-package main.java.controller;
+package controller;
 
-import org.apache.commons..WordUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;

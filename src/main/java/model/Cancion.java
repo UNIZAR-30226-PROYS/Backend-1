@@ -1,9 +1,9 @@
-package main.java.model;
+package model;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import static main.java.HibernateUtil.getSession;
+import static util.HibernateUtil.getSession;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.FetchType;
 

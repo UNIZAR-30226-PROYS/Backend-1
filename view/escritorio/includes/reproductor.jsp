@@ -1,4 +1,4 @@
-<%@ page import="main.java.model.Usuario" %>
+<%@ page import="model.Usuario" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.sun.org.apache.xpath.internal.operations.Bool" %>
 <%@page contentType="text/html; UTF-8" %>

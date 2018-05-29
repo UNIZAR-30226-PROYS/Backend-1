@@ -1,4 +1,4 @@
-package main.java;
+package util;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -21,7 +21,7 @@ public class HibernateUtil {
     }
     public static Session getSession() throws HibernateException {
         return sessionFactory.openSession();
-        //return main.java.HibernateUtil.getSessionFactory().openSession(); //para conversaciones "largas"
+        //return HibernateUtil.getSessionFactory().openSession(); //para conversaciones "largas"
     }
 
     public static SessionFactory getSessionFactory() {

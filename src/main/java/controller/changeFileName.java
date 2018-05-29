@@ -1,4 +1,4 @@
-package main.java.controller;
+package controller;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

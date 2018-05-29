@@ -28,11 +28,12 @@ dependencies {
     compile group: 'taglibs', name: 'standard', version: '1.1.2'
     compile 'junit:junit:4.12'
 //    compile 'org.junit.jupiter:junit-jupiter-api'
+    testCompile 'junit:junit:4.12'
 }
 
 sourceSets{
-    main.java.srcDir "src/main"
-    test.java.srcDir "src/test"
+    srcDir "src/main/java"
+    test.java.srcDir "src/test/java"
 }
 
 jar {

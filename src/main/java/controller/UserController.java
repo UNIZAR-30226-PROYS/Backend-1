@@ -1,7 +1,7 @@
-package main.java.controller;
+package controller;
 
-import main.java.HibernateUtil;
-import main.java.model.*;
+import util.HibernateUtil;
+import model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

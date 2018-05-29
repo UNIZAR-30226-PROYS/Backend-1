@@ -1,11 +1,11 @@
-package main.java.model;
+package model;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
-import static main.java.HibernateUtil.getSession;
+import static util.HibernateUtil.getSession;
 
 @Entity
 public class Suscribir {

@@ -1,6 +1,6 @@
 <%--TODO: Terminar de implementar funcionalidad--%>
-<%@ page import="main.java.model.Usuario" %>
-<%@ page import="main.java.model.Cancion" %>
+<%@ page import="model.Usuario" %>
+<%@ page import="model.Cancion" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>

@@ -1,6 +1,6 @@
-<%@ page import="main.java.model.Suscribir" %>
+<%@ page import="model.Suscribir" %>
 <%@ page import="java.util.List" %>
-<%@ page import="main.java.model.Usuario" %>
+<%@ page import="model.Usuario" %>
 <%@page contentType="text/html; UTF-8" %>
 <!DOCTYPE html>
 <html lang="es">

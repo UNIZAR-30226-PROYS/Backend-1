@@ -1,7 +1,7 @@
-package main.java.controller;
+package controller;
 
-import main.java.model.Suscribir;
-import main.java.model.Usuario;
+import model.Suscribir;
+import model.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
