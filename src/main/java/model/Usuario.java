@@ -95,6 +95,10 @@ public class Usuario {
     }
 
     public void setConexion(Timestamp conexion) {
+        this.conexion = conexion;
+    }
+
+    public void setConexion() {
         long millis=System.currentTimeMillis();
         java.sql.Timestamp date=new java.sql.Timestamp(millis);
         this.conexion = date;
@@ -237,7 +241,7 @@ public class Usuario {
             newUser.setNomAp("Anonimo");
             newUser.setUltRep(0);
             newUser.setPublico(true);
-            newUser.setConexion(new Timestamp(0));
+            newUser.setConexion();
 
             //Almacenamiento en BBDD
             session.beginTransaction();
@@ -325,7 +329,6 @@ public class Usuario {
         try {
             Usuario user = correctUser(username, password, session);
             //Inicializacion de Lazy-Fetch de Listas y Canciones
-            user.setConexion(new Timestamp(0));
             user.activarCanciones(session);
             user.activarListas(session);
             // user.activarSuscripciones(session);
@@ -534,22 +537,27 @@ public class Usuario {
      *-------------------------------------       FUNCIONES CONEXION       ---------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
-    public int estado() throws Exception {
+    /*
+    public int estado(){
         long millis=System.currentTimeMillis();
         Timestamp min5 = new Timestamp(millis-300000);
         Timestamp min10 = new Timestamp(millis-600000);
-        Usuario user = getUser(this.idUser);
-        Timestamp past = user.conexion;
-        System.out.println(user.conexion);
-        System.out.println(past);
-        System.out.println(min5);
-        System.out.println(min10);
-
+        Timestamp past = this.conexion;
         if(past.after(min5)){return 0;}
         else if(past.after(min10)){return 1;}
         else{return 2;}
 
+    }*/
+
+    public int estado(){
+        long millis = System.currentTimeMillis();
+        long pastmil = this.conexion.getTime();
+        long diferencia = millis-pastmil;
+        if(diferencia<=300000){return 0;}
+        else if(diferencia<=600000){return 1;}
+        else{return 2;}
     }
+
 
     public void setOffline(){
         long millis=System.currentTimeMillis()-600000;
