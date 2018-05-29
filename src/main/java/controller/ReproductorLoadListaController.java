@@ -24,7 +24,7 @@ public class ReproductorLoadListaController extends HttpServlet {
             Integer i =0;
             Integer max_num =  Integer.parseInt( request.getParameter("max_num_canciones") );
             Usuario u = (Usuario) session.getAttribute("username");
-            int idLista = (int) session.getAttribute("list");
+            int idLista = Integer.parseInt(request.getParameter("list"));
             Listarep lista = Listarep.getList(idLista);
             for (Cancioneslista cancionLista : lista.getCancioneslistasByIdLista()){
                 String nombre_cancion = cancionLista.getCancionByIdCancion().getNombre();

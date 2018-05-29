@@ -4,6 +4,7 @@
 var mediaPath = 'http://wolfsound.ddns.net:6060/contenido/canciones/';
 
 var tracks = [];
+var index = 0;
 
     function actualizar_tracks() {
 // <<<<<<< HEAD
@@ -132,23 +133,22 @@ function reproducir_lista(id){
             $("#plList").empty();
             tracks = [];
             $(".reprodcutor_list_item").empty();
+            var numTrack = 1;
 
-            for(var i=0;i<datos.length-1/*por la ',' final*/;) {
-                var nombre_cancion = data.split(',')[0];
-                var id_cancion = data.split(',')[1];
+            for(var i=0;i<datos.length-1/*por la ',' final*/;i=i+2) {
+                var nombre_cancion = datos[i];
+                var id_cancion = datos[i+1];
 
-                tracks.push({track: ((i / 2) + 1), name: datos[i], id: datos[i+1]});
-
-                i = i + 1; //para usar en num de track abajo
+                tracks.push({track: numTrack, name: nombre_cancion, id: id_cancion});
 
                 $('#plList').append(
                     '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-                    '<div>'+i+'</div>  ' +
+                    '<div>'+numTrack+'</div>  ' +
                     '<div>' + nombre_cancion + '</div>  ' +
                     //	'<div>'+ trackDuration +'</div> ' +
                     '</div>');
 
-                i = i + 1; //siguiente par
+                numTrack = numTrack + 1;
             }
 
             playTrack(0);
@@ -164,7 +164,6 @@ function reproducir_lista(id){
 jQuery(document).ready(function() {
     var supportsAudio = !!document.createElement('audio').canPlayType;
     if (supportsAudio) {
-        var index = 0;
         playing = false;
         repeat_option = false;
         random_option = false;
@@ -304,16 +303,16 @@ jQuery(document).ready(function() {
 
             btnPrev = $('#btnPrev').on('click', function () {
                 index= (index-1);
-                if (index == -1 ) index = trackCount -1 ;
-                loadTrack(index);
+                if (index == -1 ) index = tracks.length -1 ;
+                playTrack(index);
                 if (playing) {
                     audio.play();
                 }
             }),
 
             btnNext = $('#btnNext').on('click', function () {
-                index= (index+1)%trackCount;
-                loadTrack(index);
+                index= (index+1)%tracks.length;
+                playTrack(index);
                 if (playing) {
                     audio.play();
                 }
@@ -371,8 +370,19 @@ jQuery(document).ready(function() {
             },
 
             playTrack = function (id) {
-                loadTrack(id);
-                audio.play();
+                // LA ID ES EN EL ARRAY DE TRACKS
+                $.ajax({
+                    url: "/AddAndPlay",
+                    type: 'get',
+                    data: {song:tracks[id].id},
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        alert('Ha ocurrido un error actualizando el historial.');
+                    },
+                    success: function(data){
+                        loadTrack(id);
+                        audio.play();
+                    }
+                });
             };
 
         extension = audio.canPlayType('audio/mpeg') ? '.mp3' : audio.canPlayType('audio/ogg') ? '.ogg' : '';
