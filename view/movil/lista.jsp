@@ -25,7 +25,7 @@
                         $("#play_button").click( function()
                             {
                                 actualizar_lista();
-                                alert("se ha actualizado la lista");
+                                // alert("se ha actualizado la lista");
                             }
                         );
                     </script>

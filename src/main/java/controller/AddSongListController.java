@@ -6,7 +6,6 @@ import main.java.model.Cancioneslista;
 import main.java.model.Listarep;
 import main.java.model.Usuario;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,15 +17,15 @@ import java.io.IOException;
 @WebServlet(name = "AddSongListController", urlPatterns = "/addSongToList")
 public class AddSongListController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String UA = request.getHeader("User-Agent");
         Usuario username = (Usuario) session.getAttribute("username");
-// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
-username.saveUser();
+        username.setConexion(); // Actualiza estado de conexion del usuario
+        username.saveUser();
 
         //String user = request.getParameter("user");
         try {
@@ -44,9 +43,9 @@ username.saveUser();
             System.out.println(lista);
             System.out.println(lista.getCancioneslistasByIdLista());*/
 
-            if(lista.getUsuarioByIdUser().getIdUser() == userSession.getIdUser()){
+            if (lista.getUsuarioByIdUser().getIdUser() == userSession.getIdUser()) {
                 //Si la lista es del usuario actual
-                lista = Cancioneslista.addCancALista(lista,cancion);
+                lista = Cancioneslista.addCancALista(lista, cancion);
             } else {
                 throw new Exception("No es el propietario de esta lista");
             }

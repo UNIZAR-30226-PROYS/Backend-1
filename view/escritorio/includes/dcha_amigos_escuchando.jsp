@@ -39,9 +39,13 @@
                     </c:if>
                         <%--<c:if test="${sus.getUsuarioByIdSuscrito().estado()}">--%>
                     <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 0}">
-                        <h6 class="media-heading"><a
-                                href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">Escuchando: ${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}</a>
-                        </h6> <!-- Link a la canción -->
+                        <h6 class="media-heading">Conectado</h6>
+                        <h6 class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                            <a
+                                    href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}
+                            </a>
+                        </h6>
+                        <!-- Link a la canción -->
                     </c:if>
                     <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 1}">
                         <h6 class="media-heading"><a href="#">Ausente</a></h6> <!-- Link a la canción -->

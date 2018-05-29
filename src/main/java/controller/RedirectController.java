@@ -1,6 +1,5 @@
 package main.java.controller;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,10 +11,9 @@ import java.io.IOException;
 public class RedirectController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String UA = request.getHeader("User-Agent");
-        if (UA.contains("Mobile")){
+        if (UA.contains("Mobile")) {
             response.sendRedirect("/movil/wolfsound.jsp");
-        }
-        else {
+        } else {
             response.sendRedirect("/escritorio/explorar.jsp");
         }
     }

@@ -15,17 +15,18 @@ import java.io.IOException;
 public class DeleteUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        Usuario username = (Usuario)session.getAttribute("username");
+        Usuario username = (Usuario) session.getAttribute("username");
         username.setOffline();
+        username.saveUser();
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
             Usuario.borrarUser(username.getIdUser());
             session.invalidate();
 
-            if (UA.contains("Mobile")){
+            if (UA.contains("Mobile")) {
                 response.sendRedirect("/movil/wolfsound.jsp");
-            }else{
+            } else {
                 response.sendRedirect("/escritorio/explorar.jsp");
             }
 
@@ -33,7 +34,7 @@ public class DeleteUserController extends HttpServlet {
             e.printStackTrace();
             rd = request.getRequestDispatcher("/movil/modificarCuenta.jsp");
             request.setAttribute("error", e.getMessage());
-            rd.forward(request,response);
+            rd.forward(request, response);
         }
     }
 

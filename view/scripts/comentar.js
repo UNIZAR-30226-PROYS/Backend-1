@@ -8,7 +8,7 @@ $(document).ready(function () {
             url: destino,
             type: 'post',
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                alert('Ha ocurrido un error comentando.');
+                // alert('Ha ocurrido un error comentando.');
             },
             success: function(data){
                 $("#contenido").load(window.location.href,{ajax:1});

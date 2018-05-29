@@ -1,6 +1,5 @@
 package main.java.controller;
 
-import main.java.model.Album;
 import main.java.model.Cancion;
 import main.java.model.Listarep;
 import main.java.model.Usuario;
@@ -13,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 
 @WebServlet(name = "SearchController", urlPatterns = "/search")
 public class SearchController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,14 +25,14 @@ public class SearchController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
-// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
-username.saveUser();
+        username.setConexion(); // Actualiza estado de conexion del usuario
+        username.saveUser();
         RequestDispatcher rd;
 
         List<Listarep> listas = null;
         List<Cancion> canciones = null;
         List<Usuario> usuarios = null;
-        if(!search.equals("")){
+        if (!search.equals("")) {
             System.out.println("Cadena no vacia");
             listas = Listarep.searchList(search);
             canciones = Cancion.searchSong(search);
@@ -44,17 +43,15 @@ username.saveUser();
             request.setAttribute("consulta", search);
             if (UA.contains("Mobile")) {
                 rd = request.getRequestDispatcher("/movil/resultados.jsp");
-            }
-            else{
+            } else {
                 rd = request.getRequestDispatcher("/escritorio/resultados.jsp");
             }
-            rd.forward(request,response);
-        }else{
+            rd.forward(request, response);
+        } else {
             System.out.println("Cadena vacia");
             if (UA.contains("Mobile")) {
                 response.sendRedirect("/movil/explorar.jsp");
-            }
-            else{
+            } else {
                 response.sendRedirect("/escritorio/explorar.jsp");
             }
         }

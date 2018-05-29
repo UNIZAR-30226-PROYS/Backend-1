@@ -22,7 +22,7 @@ import java.util.List;
 @WebServlet(name = "ListController", urlPatterns = "/list")
 public class ListController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request,response);
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,8 +31,8 @@ public class ListController extends HttpServlet {
         Integer id = Integer.parseInt(idlista);
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
-// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
-username.saveUser();
+        username.setConexion(); // Actualiza estado de conexion del usuario
+        username.saveUser();
         session.removeAttribute("canciones");
         session.removeAttribute("lista");
         session.removeAttribute("propietario");
@@ -57,7 +57,7 @@ username.saveUser();
         }
         System.out.println(canciones);
 
-        if(lista.getNombre().equals("historial") || lista.getNombre().equals("favoritos")){
+        if (lista.getNombre().equals("historial") || lista.getNombre().equals("favoritos")) {
             Collections.reverse(canciones);
         }
 
@@ -66,17 +66,16 @@ username.saveUser();
         session.setAttribute("lista", lista);
 
         // Si soy el propietario de la lista
-        if(lista.getUsuarioByIdUser().getIdUser() == (username.getIdUser())){
+        if (lista.getUsuarioByIdUser().getIdUser() == (username.getIdUser())) {
             session.setAttribute("propietario", true);
-        }
-        else {
+        } else {
             session.setAttribute("propietario", false);
         }
 
-        if (UA.contains("Mobile")){
+        if (UA.contains("Mobile")) {
             response.sendRedirect("/movil/lista.jsp");
-        }else{
-            request.getRequestDispatcher("/escritorio/lista.jsp").forward(request,response);
+        } else {
+            request.getRequestDispatcher("/escritorio/lista.jsp").forward(request, response);
         }
     }
 }

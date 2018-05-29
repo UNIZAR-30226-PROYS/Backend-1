@@ -16,16 +16,17 @@ public class LogoutController extends HttpServlet {
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
         username.setOffline(); // Actualiza estado de conexion del usuario
+        username.saveUser();
         String UA = request.getHeader("User-Agent");
         session.invalidate();
-        if (UA.contains("Mobile")){
+        if (UA.contains("Mobile")) {
             response.sendRedirect("/movil/explorar.jsp");
-        }else{
+        } else {
             response.sendRedirect("/escritorio/explorar.jsp");
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }
