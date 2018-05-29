@@ -41,8 +41,7 @@ username.saveUser();
             session.setAttribute("misListas", listas);
             session.setAttribute("misAudios", misAudios);
 
-            //session.setAttribute("listasRecomendadas", listas);
-            //session.setAttribute("audiosRecomendados", listas);
+
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{

@@ -434,7 +434,17 @@ public class Usuario {
     /*------------------------------------------------------------------------------------------------------------------
      *---------------------------------------------       GET       ----------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
-
+    /*
+     * True -> usuario existe
+     * False -> usuario no existe
+     */
+    public static List<Usuario> getAllUsers() throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Usuario");
+        List<Usuario> lista = query.list();
+        session.close();
+        return lista;
+    }
     /*
      * True -> usuario existe
      * False -> usuario no existe
@@ -478,6 +488,14 @@ public class Usuario {
     public static List<Cancion> getSongsObject(int idUser) throws  Exception{
         Session session = getSession();
         Query query = session.createQuery("from Cancion where idUser = :user ");
+        query.setParameter("user", idUser);
+        List<Cancion> lista = query.list();
+        return lista;
+    }
+
+    public static List<Cancion> getSongsObjectOrder(int idUser) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion c where idUser = :user ORDER BY c.numRep");
         query.setParameter("user", idUser);
         List<Cancion> lista = query.list();
         return lista;
