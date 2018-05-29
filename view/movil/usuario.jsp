@@ -1,4 +1,4 @@
-<%--TODO: Falta revisar codigo java dentro de la pagina--%>
+<%@ page import="main.java.model.Usuario" %>
 <%@page contentType="text/html; UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -97,21 +97,24 @@
                                 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${sus.getUsuarioByIdSuscrito().getUsername()}</h6>
                         </a>
                         <!-- Usuario que ha subido la canción-->
-                        <a href="/user?id=3">
-                            <h6 class="media-heading"
-                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-                                <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 0}">
-                                    Conectado <br>
-                                    <a style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
-                                       href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}
-                                    </a>
-                                </c:if>
-                                <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 1}">
-                                    Ausente<!-- Link a la canción -->
-                                </c:if>
-                                <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 2}">
-                                    Desconectado <!-- Link a la canción -->
-                                </c:if>
+                        <a href="/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">
+                            <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 0}">
+                                <h6 class="media-heading"
+                                    style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                                    Conectado</h6>
+                                <a style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                   href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}
+                                </a>
+                            </c:if>
+                            <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 1}">
+                                <h6 class="media-heading"
+                                    style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">Ausente</h6>
+                            </c:if>
+                            <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 2}">
+                                <h6 class="media-heading"
+                                    style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                                    Desconectado</h6>
+                            </c:if>
                             </h6>
                         </a>
                     </div>
