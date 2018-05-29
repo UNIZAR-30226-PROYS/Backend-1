@@ -18,7 +18,10 @@ import java.io.IOException;
 public class ComentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        Usuario usuario = (Usuario)session.getAttribute("username");
+        Usuario username = (Usuario) session.getAttribute("username");
+username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+username.saveUser();
+        Usuario usuario = username;
         Integer cancionI = Integer.parseInt(request.getParameter("cancion"));
         String texto = request.getParameter("texto");
 

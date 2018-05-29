@@ -21,12 +21,12 @@ import java.util.List;
 public class Reproductor_lista_v2_controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-
+        Usuario username = (Usuario) session.getAttribute("username");
+username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+username.saveUser();
         String text = "";
         response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
         response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-
-
         try {
             Integer i =0;
             Integer max_num_historioal =  Integer.parseInt( request.getParameter("max_num_canciones") );

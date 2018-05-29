@@ -18,12 +18,15 @@ import java.io.IOException;
 public class AddSongAndPlayController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
+        Usuario username = (Usuario) session.getAttribute("username");
+        username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+        username.saveUser();
         try {
             Usuario userSession = (Usuario) session.getAttribute("username");
             Usuario usuario = Usuario.getUser(userSession.getIdUser());
             Cancion cancion = Cancion.getCancion(Integer.parseInt(request.getParameter("song")));
             usuario.activarListas(HibernateUtil.getSession());
-            Cancioneslista.addCancALista(usuario,"historial", cancion);
+            Cancioneslista.addCancALista(usuario, "historial", cancion);
             cancion.incrementarReps();
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
@@ -37,6 +40,6 @@ public class AddSongAndPlayController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }

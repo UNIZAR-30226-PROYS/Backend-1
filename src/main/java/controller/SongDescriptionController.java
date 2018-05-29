@@ -1,7 +1,10 @@
 package main.java.controller;
 
+import main.java.model.Usuario;
 import org.apache.commons.text.WordUtils;
 import org.json.JSONObject;
+
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -10,7 +13,6 @@ import java.util.Iterator;
 import static org.apache.commons.text.WordUtils.capitalizeFully;
 
 public class SongDescriptionController {
-
     public static JSONObject readJsonFromUrl(String url) throws IOException {
         InputStream is = new URL(url).openStream();
         try {

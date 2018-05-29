@@ -26,6 +26,8 @@ public class UserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
+username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
+username.saveUser();
         String UA = request.getHeader("User-Agent");
         int idUser = Integer.parseInt(request.getParameter("id"));
 
