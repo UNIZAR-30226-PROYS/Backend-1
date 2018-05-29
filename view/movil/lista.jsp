@@ -17,26 +17,24 @@
         <%--TODO: reproducir normal--%>
         <div class="col-5 mr-auto">
             <div class="row">
-                <div class="col-1 mr-auto">
-                    <a href="#">
-                        <button type="button" class="btn btn-default ">
+                <div class="col-1">
+                        <button type="button" id="play_button"  class="btn btn-default ">
                             <span class="fa fa-play" style="font-size:20px; "></span>
                         </button>
-                    </a>
+                    <script>
+                        $("#play_button").click( function()
+                            {
+                                actualizar_lista();
+                                alert("se ha actualizado la lista");
+                            }
+                        );
+                    </script>
                 </div>
                 <%--TODO: reproducir aleatorio--%>
-                <div class="col-1 mx-auto">
+                <div class="col-1">
                     <a href="#">
-                        <button type="button" class="btn btn-default ">
+                        <button type="button" class="mx-4 btn btn-default ">
                             <span class="fa fa-random" style="font-size:20px; "></span>
-                        </button>
-                    </a>
-                </div>
-                <%--TODO: seguir la lista--%>
-                <div class="col-1 ml-auto">
-                    <a href="#">
-                        <button type="button" class="btn btn-default ">
-                            <span class="fa fa-rss" style="font-size:20px; "></span>
                         </button>
                     </a>
                 </div>

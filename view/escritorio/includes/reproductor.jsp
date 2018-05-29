@@ -47,7 +47,7 @@
                 <i class="fa fa-step-backward" id="btnPrev" style="font-size:20px; color: white" ></i>
             </div>
             <div class="col col-2 btn" id="btnPlayStio">
-                    <i class="fa fa-play"  id="btnPlayStio_v2" style="font-size:20px; color: white" ></i>
+                <i class="fa fa-play"  id="btnPlayStio_v2" style="font-size:20px; color: white" ></i>
             </div>
             <div class="col-2 btn">
                 <i class="fa fa-step-forward" id="btnNext" style="font-size:20px; color: white" ></i>
@@ -95,7 +95,7 @@
             <img id="imagen_cancion" src="" style="max-width: 48px; max-height: 48px">
 
             <div class="col col-4">
-               <p class="npTitle align-middle text-center pt-2" id="npTitle" style="color: white"></p>
+                <p class="npTitle align-middle text-center pt-2" id="npTitle" style="color: white"></p>
             </div>
 
             <div class="col col-2">

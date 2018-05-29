@@ -25,10 +25,22 @@
             </div>
             <div class="col-2 px-2">
                 <a href="#">
-                    <button type="button" class="btn btn-default align-bottom">
+                    <button type="button" id="play_button" class="btn btn-default align-bottom">
                         <span class="fa fa-play" style="font-size:20px; "></span>
                     </button>
                 </a>
+                <script>
+                    $("#play_button").click( function()
+                        {
+                            alert('button clicked' + $('#idCancion').attr('about'));
+
+                            $("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 40, song: $('#idCancion').attr('about') }, function () {
+                                alert('cancion loaded');
+                                actualizar_tracks_primera_cancion();
+                            });
+                        }
+                    );
+                </script>
             </div>
         </div>
         <div class="row mt-2">

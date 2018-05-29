@@ -87,7 +87,15 @@
                             <div class="media-body">
                                 <h6 class="media-heading">${sus.getUsuarioByIdSuscrito().getUsername()}</h6>
                                 <!--TODO: Estado del usuario, o bien desconectado, o bien el nombre de la cancion que esta escuchando/ha escuchado mas recientemente-->
-                                <h6 class="media-heading">Cancion 1</h6>
+                                <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 0}">
+                                    <h6 class="media-heading">Conectado</h6> <!-- Link a la canción -->
+                                </c:if>
+                                <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 1}">
+                                    <h6 class="media-heading"><a href="#">Ausente</a></h6> <!-- Link a la canción -->
+                                </c:if>
+                                <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 2}">
+                                    <h6 class="media-heading"><a href="#">Desconectado</a></h6> <!-- Link a la canción -->
+                                </c:if>
                             </div>
                         </div>
                     </a>

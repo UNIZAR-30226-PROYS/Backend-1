@@ -28,6 +28,7 @@
                     " class="img-thumbnail" style="max-width: 100%;max-height: 500px" alt="Imagen lista">
                     <div class="pt-2 pl-2">
                         <h3 class="media-heading">${lista.getNombre()}</h3>
+                        <div class="d-none" id="idLista" about="${lista.getIdLista()}" ></div>
                         <h5>De&nbsp;<a
                                 href="${pageContext.request.contextPath}/user?id=${lista.getUsuarioByIdUser().getIdUser()}"
                                 style="color: black; text-underline: none;">${lista.getUsuarioByIdUser().getUsername()}</a>
@@ -35,12 +36,15 @@
                         ${canciones.size()} elementos
                     </div>
                     <div class="pl-2">
-                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir
+                        <button type="button" id="play_button" class="btn btn-primary mt-1"><i class="fa fa-play"></i>&nbsp;Reproducir
                         </button>
+                        <script>
+                            $("#play_button").click(function () {
+                                    reproducir_lista($('#idLista').attr('about'));
+                                }
+                            );
+                        </script>
                         <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio
-                        </button>
-                        <br/>
-                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir
                         </button>
                     </div>
                 </div>
