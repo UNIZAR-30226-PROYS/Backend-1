@@ -1,6 +1,7 @@
 package main.java.controller;
 
-import org.apache.commons.text.WordUtils;
+import org.apache.commons..WordUtils;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
@@ -18,12 +19,15 @@ public class SongDescriptionController {
             String jsonText = rd.readLine();    //JSON solo tendrá una línea
             JSONObject json = new JSONObject(jsonText);
             return json;
+        } catch (JSONException e) {
+            e.printStackTrace();
         } finally {
             is.close();
         }
+        return null;
     }
 
-    public static String getText(String title) throws IOException{
+    public static String getText(String title) throws IOException, JSONException {
         String busq = "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=1&explaintext=1&titles=";
         String normTitle = capitalizeFully(title);  //Deja las primeras letras de cada palabra mayúsculas y el resto, minúsculas.
         normTitle = normTitle.replaceAll(" ","_");

@@ -1,3 +1,5 @@
+import main.java.model.*;
+
 import org.junit.Test;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -20,7 +22,7 @@ public class ListarepTest {
     }
 
     @Test
-    public void test(){
+    public void test() throws Exception {
         Listarep.addLista(this.user,"NuevisimaLista");
         assertTrue("La lista tendria que existir",
                 Listarep.existsListaBool(this.user,"NuevisimaLista"));

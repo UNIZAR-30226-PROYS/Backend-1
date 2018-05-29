@@ -1,3 +1,5 @@
+import main.java.model.*;
+
 import org.junit.Test;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

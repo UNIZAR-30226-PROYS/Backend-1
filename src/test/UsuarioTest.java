@@ -1,3 +1,4 @@
+import main.java.model.*;
 
 import org.junit.Test;
 import org.junit.AfterClass;
@@ -15,7 +16,7 @@ public class UsuarioTest {
 
 
     @BeforeClass
-    static public void beforeTest(){
+    static public void beforeTest() throws Exception {
         u = new Usuario("Nico", "Nicolas Lera", "hello@mail.com", "1234");
         Usuario.addUser("UsuarioTest2", "123456789", "uTest@gmai.com");
     }
@@ -31,7 +32,7 @@ public class UsuarioTest {
 
     @Test
     public void test2(){
-        Usuario user;
+        Usuario user = new Usuario();
         try {
             user = Usuario.getUser("UsuarioTest2");
         }

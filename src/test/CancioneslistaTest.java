@@ -1,4 +1,4 @@
-import Usuario;
+import main.java.model.*;
 import org.junit.Test;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -14,7 +14,7 @@ public class CancioneslistaTest {
     private Cancion song;
 
     @BeforeClass
-    public void antesTest(){
+    public void antesTest() throws Exception {
         Usuario u = Usuario.getUser("UsuarioTest2");
         Collection<Listarep> c1 = u.getListarepsByIdUser();
         Iterator<Listarep> it = c1.iterator();
@@ -42,7 +42,7 @@ public class CancioneslistaTest {
     }
     
     @Test
-    public void test(){
+    public void test() throws Exception {
         Cancioneslista.addCancALista(this.lr,this.song);
         assertTrue("Deberia existir la cancion en la lista", Cancioneslista.existsCancList(this.lr,this.song));
     }

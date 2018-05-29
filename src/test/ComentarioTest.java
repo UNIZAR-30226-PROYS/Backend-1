@@ -1,3 +1,5 @@
+import main.java.model.*;
+
 import org.junit.Test;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -14,7 +16,7 @@ public class ComentarioTest {
     private Cancion song;
 
     @BeforeClass
-    public void antesDeTest(){
+    public void antesDeTest() throws Exception {
         try{
              u = Usuario.getUser("UsuarioTest2");
         }
@@ -36,7 +38,7 @@ public class ComentarioTest {
     }
 
     @Test
-    public void test(){
+    public void test() throws Exception {
         List<Comentario> li = Comentario.searchComentarios(this.song);
         Iterator<Comentario> it = li.iterator();
         assertTrue("Debería existir un comentario",it.hasNext());
