@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Objects;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import static util.HibernateUtil.getSession;
 
 @Entity

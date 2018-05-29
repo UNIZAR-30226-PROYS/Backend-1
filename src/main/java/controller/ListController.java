@@ -4,6 +4,8 @@ import model.Cancion;
 import model.Cancioneslista;
 import model.Listarep;
 import model.Usuario;
+import org.hibernate.Session;
+import util.HibernateUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,10 +1,10 @@
-package main.java.controller;
+package controller;
 
-import main.java.HibernateUtil;
-import main.java.model.Cancion;
-import main.java.model.Cancioneslista;
-import main.java.model.Listarep;
-import main.java.model.Usuario;
+import util.HibernateUtil;
+import model.Cancion;
+import model.Cancioneslista;
+import model.Listarep;
+import model.Usuario;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

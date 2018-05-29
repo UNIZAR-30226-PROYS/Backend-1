@@ -39,7 +39,7 @@ public class SongController extends HttpServlet {
         try {
             cancion = (Cancion) Cancion.getCancion(id);
             comentarios = Comentario.searchComentarios(cancion);
-            desc = main.java.controller.SongDescriptionController.getText(cancion.getNombre());
+            desc = controller.SongDescriptionController.getText(cancion.getNombre());
 
         }
         catch (Exception e){e.printStackTrace();}

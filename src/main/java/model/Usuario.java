@@ -2,6 +2,8 @@ package model;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.query.Query;
 
@@ -15,8 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import util.HibernateUtil;
-
+import util.FileOperations;
 import static util.BCrypt.checkpw;
 import static util.HibernateUtil.getSession;
 
