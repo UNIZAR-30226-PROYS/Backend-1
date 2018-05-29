@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import main.java.HibernateUtil;
 import main.java.model.Cancion;
 import main.java.model.Listarep;
 import main.java.model.Suscribir;
@@ -30,21 +31,21 @@ public class RedirectController extends HttpServlet {
             for(int i = 0;i<3;i++){
                 Usuario user = users.get(ThreadLocalRandom.current().nextInt(0, users.size()-1));
                 List<Cancion> tmp = Usuario.getSongsObjectOrder(user.getIdUser());
+                user.activarListas(HibernateUtil.getSession());
                 Collection<Listarep> tmp2 = user.getListarepsByIdUser();
                 listas.addAll(tmp2);
                 canciones.addAll(tmp);
             }
-            session.setAttribute("listasRecomendadas", listas);
-            session.setAttribute("audiosRecomendados", canciones);
-            session.setAttribute("error","todo bien lol");
+            //request.setAttribute("listasRecomendadas", listas);
+            request.setAttribute("audiosRecomendados", canciones);
+            request.setAttribute("error","todo bien lol");
         }
         catch (Exception e){request.setAttribute("error",e.getMessage());}
-        session.setAttribute("error","No entiendo");
         if (UA.contains("Mobile")){
-            response.sendRedirect("/movil/wolfsound.jsp");
+            request.getRequestDispatcher("/movil/wolfsound.jsp").forward(request,response);
         }
         else {
-            response.sendRedirect("/escritorio/explorar.jsp");
+            request.getRequestDispatcher("/escritorio/explorar.jsp").forward(request,response);
         }
     }
 }
