@@ -46,9 +46,6 @@
                         </script>
                         <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio
                         </button>
-                        <br/>
-                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-rss"></i>&nbsp;Seguir
-                        </button>
                     </div>
                 </div>
                 <div class="col-8">

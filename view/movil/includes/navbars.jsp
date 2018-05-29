@@ -31,8 +31,8 @@
 <div id="sidebar" class="sidebar d-none">
     <c:if test="${sessionScope.username != null}">
         <ul class="list-unstyled components">
-            <li><a href="${pageContext.request.contextPath}/movil/listas.jsp">Mis listas</a></li>
-            <li><a href="${pageContext.request.contextPath}/movil/lista.jsp">Mi audio</a></li>
+            <li><a href="${pageContext.request.contextPath}/lists?id=${username.getIdUser()}">Mis listas</a></li>
+            <li><a href="${pageContext.request.contextPath}/list?id=${username.getListarepsByIdUser().get(1).getIdLista()}">Mi audio</a></li>
             <li><a href="${pageContext.request.contextPath}/suscriptions">Suscripciones</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a></li>
         </ul>
