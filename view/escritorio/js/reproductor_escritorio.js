@@ -1,5 +1,8 @@
 /* Ideas obtenidas de https://codepen.io/markhillard/pen/Hjcwu?editors=1010	*/
 /* Last Modified : 22/04/2018 Jorge	*/
+
+var mediaPath = 'http://wolfsound.ddns.net:6060/contenido/canciones/';
+
 var tracks = [];
 
     function actualizar_tracks() {
@@ -86,6 +89,35 @@ function actualizar_tracks_primera_cancion() {
     })
 }
 
+function reproducir_cancion(id){
+    $.ajax({
+        url: "/AddAndPlay",
+        type: 'get',
+        data: {song:id},
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert('Ha ocurrido un error actualizando el historial y obteniendo la cancion.');
+        },
+        success: function(data){
+            var nombre_cancion = data.split(',')[0];
+            var id_cancion = data.split(',')[1];
+            $( "#plList" ).empty();
+            tracks=[];
+            $( ".reprodcutor_list_item" ).empty();
+
+            tracks.push({track:1,name:nombre_cancion,id:id_cancion});
+
+            $('#plList').append(
+                '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
+                '<div>1</div>  ' +
+                '<div>'+nombre_cancion+'</div>  ' +
+                //	'<div>'+ trackDuration +'</div> ' +
+                '</div>');
+
+            playTrack(0);
+        }
+    });
+}
+
 
 // =======
 //     }
@@ -99,7 +131,6 @@ jQuery(document).ready(function() {
         repeat_option = false;
         random_option = false;
         var mouseup = false;
-        mediaPath = 'http://wolfsound.ddns.net:7000/contenido/canciones/';
         imagePath = 'http://wolfsound.ddns.net:7000/contenido/imagenes/canciones/';
         extension = '';
 
@@ -297,7 +328,7 @@ jQuery(document).ready(function() {
                 index = id;
                 audio.src = mediaPath + tracks[id].id +'.mp3';
                 //alert("src "+audio.src);
-                $('#imagen_cancion').attr('src', imagePath + tracks[id].id +'.jpg');
+                $('#imagen_cancion').attr('src', imagePath + tracks[id].id +'.png');
 
             },
 

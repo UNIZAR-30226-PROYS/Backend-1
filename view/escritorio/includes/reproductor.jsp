@@ -16,7 +16,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/escritorio/js/reproductor_escritorio.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/escritorio/js/reproductor_escritorio_lista.js"></script>
 <audio id="audio1"></audio>
 
 <%

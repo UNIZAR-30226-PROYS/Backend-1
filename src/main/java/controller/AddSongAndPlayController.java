@@ -22,7 +22,12 @@ public class AddSongAndPlayController extends HttpServlet {
             Usuario userSession = (Usuario) session.getAttribute("username");
             Usuario usuario = Usuario.getUser(userSession.getIdUser());
             Cancion cancion = Cancion.getCancion(Integer.parseInt(request.getParameter("song")));
+            usuario.activarListas(HibernateUtil.getSession());
             Cancioneslista.addCancALista(usuario,"historial", cancion);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            String text = cancion.getNombre() + "," + cancion.getIdCancion();
+            response.getWriter().print(text);
             response.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception e) {
             e.printStackTrace();
