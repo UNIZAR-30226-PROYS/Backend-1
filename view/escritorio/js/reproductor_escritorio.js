@@ -45,9 +45,9 @@ var index = 0;
             $('#plList').append(
                 '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
                 '<div>'+trackNumber+ '</div>  ' +
-                '<div>'+trackName+'.mp3</div>  ' +
-                //	'<div>'+ trackDuration +'</div> ' +
-                '</div>');
+                '<div>'+trackName+'.mp3</div>  '
+                //	+'<div>'+ trackDuration +'</div> ' +
+            );
         })
     }
 
@@ -84,9 +84,9 @@ function actualizar_tracks_primera_cancion() {
         $('#plList').append(
             '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
             '<div>'+trackNumber+ '</div>  ' +
-            '<div>'+trackName+'.mp3</div>  ' +
-            //	'<div>'+ trackDuration +'</div> ' +
-            '</div>');
+            '<div>'+trackName+'.mp3</div>  '
+            //	+'<div>'+ trackDuration +'</div> ' +
+        );
     })
 }
 
@@ -110,11 +110,18 @@ function reproducir_cancion(id){
             $('#plList').append(
                 '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
                 '<div>1</div>  ' +
-                '<div>'+nombre_cancion+'</div>  ' +
-                //	'<div>'+ trackDuration +'</div> ' +
-                '</div>');
+                '<div>'+nombre_cancion+'</div>  '
+                //	+'<div>'+ trackDuration +'</div> ' +
+            );
 
             playTrack(0);
+
+            $('#plList li').on('click', function () {
+                var id = parseInt($(this).index());
+                if (id !== index) {
+                    playTrack(id);
+                }
+            })
         }
     });
 }
@@ -144,14 +151,21 @@ function reproducir_lista(id){
                 $('#plList').append(
                     '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
                     '<div>'+numTrack+'</div>  ' +
-                    '<div>' + nombre_cancion + '</div>  ' +
-                    //	'<div>'+ trackDuration +'</div> ' +
-                    '</div>');
+                    '<div>' + nombre_cancion + '</div>  '
+                    //	+'<div>'+ trackDuration +'</div> ' +
+                );
 
                 numTrack = numTrack + 1;
             }
 
             playTrack(0);
+
+            $('#plList li').on('click', function () {
+                var id = parseInt($(this).index());
+                if (id !== index) {
+                    playTrack(id);
+                }
+            })
         }
     });
 }
