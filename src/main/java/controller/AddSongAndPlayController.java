@@ -24,6 +24,7 @@ public class AddSongAndPlayController extends HttpServlet {
             Cancion cancion = Cancion.getCancion(Integer.parseInt(request.getParameter("song")));
             usuario.activarListas(HibernateUtil.getSession());
             Cancioneslista.addCancALista(usuario,"historial", cancion);
+            cancion.incrementarReps();
             response.setContentType("text/plain");
             response.setCharacterEncoding("UTF-8");
             String text = cancion.getNombre() + "," + cancion.getIdCancion();
