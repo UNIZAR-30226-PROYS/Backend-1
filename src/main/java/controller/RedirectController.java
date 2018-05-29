@@ -39,9 +39,15 @@ public class RedirectController extends HttpServlet {
                 rand = (rand + 1 )%users.size();
 
             }
+            for(int i = 0;i < listas.size();i++){
+                if(listas.get(i).getNombre().equals("historial")){listas.remove(i);i--;}
+                else if(listas.get(i).getNombre().equals("favoritos")){listas.remove(i);i--;}
+                else if(listas.get(i).getNombre().equals("mimusica")){listas.remove(i);i--;}
+
+            }
             session.setAttribute("listasRecomendadas", listas);
             session.setAttribute("audiosRecomendados", canciones);
-            session.setAttribute("error","todo bien lol"+Integer.toString(users.size()));
+
         }
         catch (Exception e){session.setAttribute("error",e.getMessage());}
         if (UA.contains("Mobile")) {
