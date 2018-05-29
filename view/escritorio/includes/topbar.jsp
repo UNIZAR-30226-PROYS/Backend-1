@@ -10,13 +10,13 @@
             <li class="nav-item"><a id="nav-explorar" class="nav-link" href="${pageContext.request.contextPath}/escritorio/explorar.jsp">Explorar</a></li>
             <c:if test="${sessionScope.username != null}">
                 <li class="nav-item"><a id="nav-listas" class="nav-link" href="${pageContext.request.contextPath}/lists?id=${username.getIdUser()}">Listas</a></li>
-                <li class="nav-item"><a id="nav-artistas" class="nav-link" href="${pageContext.request.contextPath}/escritorio/artistas.jsp">Suscripciones</a></li>
+                <li class="nav-item"><a id="nav-artistas" class="nav-link" href="${pageContext.request.contextPath}/suscriptions">Suscripciones</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/escritorio/subirMusica.jsp"><button type="button" class="btn btn-primary ml-1 mt-1">Sube tu música</button></a></li>
             </c:if>
         </ul>
     </div>
     <c:if test="${username != null}">
-        <a href="${pageContext.request.contextPath}/escritorio/usuario.jsp" >&nbsp;<i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getIdUser()}</a>&nbsp;
+        <a href="${pageContext.request.contextPath}/user?id=${sessionScope.username.getIdUser()}" >&nbsp;<i class="fa fa-user pt-1 pr-1" style="font-size:20px;"></i>${username.getUsername()}</a>&nbsp;
         <form action="${pageContext.request.contextPath}/logout" method="get" >
             <button type="submit" class="btn btn-primary" style="border-color:#C81E37;background-color:#C81E37;"><i class="fa fa-power-off"></i></button>
         </form>

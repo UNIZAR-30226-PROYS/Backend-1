@@ -67,11 +67,12 @@ public class Listarep {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(idLista, nombre, numElementos);
     }
 
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "listarepByListaRep")
+    @Cascade(CascadeType.DELETE)
+    @OrderBy("fechaIntroduccion")
     public Collection<Cancioneslista> getCancioneslistasByIdLista() {
         return cancioneslistasByIdLista;
     }
@@ -90,9 +91,19 @@ public class Listarep {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     public static Listarep addLista(Usuario user, String nombre) throws Exception{
         Session session = getSession();
-        //user.activarListas(session);
+        user.activarListas(session);
         if(!existsListaBool(user,nombre)){
             Listarep newLista = new Listarep();
             newLista.setIdLista(0);
@@ -129,7 +140,7 @@ public class Listarep {
      */
     public static void borrarLista(int id) throws Exception{
         Session session = getSession();
-        Listarep lista = searchList(id);
+        Listarep lista = getList(id);
         session.beginTransaction();
         session.delete( lista );
         session.getTransaction().commit();
@@ -155,16 +166,11 @@ public class Listarep {
         return exists;
     }
 
-    public static List<Listarep> searchList(String listaS){
-        Session session = getSession();
-        Query query = session.createQuery("from Listarep where nombre like :lista ");
-        query.setParameter("lista", "%"+listaS+"%");
-        List<Listarep> lista = query.list();
-        session.close();
-        return lista;
-    }
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------       GET       ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
-    public static Listarep searchList(int id) throws Exception{
+    public static Listarep getList(int id) throws Exception{
         Session session = getSession();
         Query query = session.createQuery("from Listarep where idLista = :lista ");
         query.setParameter("lista", id);
@@ -174,5 +180,25 @@ public class Listarep {
             throw new Exception("La lista no existe");
         }
         return lista;
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    public static List<Listarep> searchList(String listas) {
+        Session session = getSession();
+        Query query = session.createQuery("from Listarep where nombre like :lista ");
+        query.setParameter("lista", "%" + listas + "%");
+        List<Listarep> lista = query.list();
+        session.close();
+        return lista;
+    }
+
+    @Override
+    public String toString() {
+        return "Listarep{" +
+                "nombre='" + nombre + '\'' +
+                '}';
     }
 }

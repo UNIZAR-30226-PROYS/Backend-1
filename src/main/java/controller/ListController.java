@@ -5,7 +5,6 @@ import model.Cancioneslista;
 import model.Listarep;
 import model.Usuario;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet(name = "ListController", urlPatterns = "/list")
@@ -33,24 +32,37 @@ public class ListController extends HttpServlet {
         session.removeAttribute("canciones");
         session.removeAttribute("lista");
         session.removeAttribute("propietario");
-        Listarep lista = null;
+        Listarep lista = new Listarep();
+        Usuario user = new Usuario();
+        Session sessionH = HibernateUtil.getSession();
         try {
-            lista = Listarep.searchList(id);
+            lista = sessionH.get(Listarep.class, id);
+            user = lista.getUsuarioByIdUser();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
+        user.activarListas(sessionH.getSession());
+        sessionH.refresh(lista);
+        Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
         List<Cancion> canciones = new ArrayList<>();
-        for (Cancioneslista x : listacanciones) {
+        List<Cancioneslista> cancioneslistas = new ArrayList<>(aux);
+
+        // Si la lista es historial, se muestra de forma invertida, es decir, la ultima reproduccion primero
+        for (Cancioneslista x : cancioneslistas) {
             canciones.add(x.getCancionByIdCancion());
         }
-        // System.out.println(canciones);
+        System.out.println(canciones);
 
+        if(lista.getNombre().equals("historial") || lista.getNombre().equals("favoritos")){
+            Collections.reverse(canciones);
+        }
+
+        System.out.println(canciones);
         session.setAttribute("canciones", canciones);
         session.setAttribute("lista", lista);
 
         // Si soy el propietario de la lista
-        if(lista.getUsuarioByIdUser().getIdUser().equals(username.getIdUser())){
+        if(lista.getUsuarioByIdUser().getIdUser() == (username.getIdUser())){
             session.setAttribute("propietario", true);
         }
         else {

@@ -26,10 +26,11 @@ public class ChangeImageController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         String UA = request.getHeader("User-Agent");
+
         RequestDispatcher rd = null;
         try {
-            String user = ((Usuario)session.getAttribute("username")).getIdUser();
-
+            String user = ((Usuario)session.getAttribute("username")).getUsername();
+            Integer id = ((Usuario)session.getAttribute("username")).getIdUser();
             File file ;
             int maxFileSize = 5000 * 1024;
             int maxMemSize = 5000 * 1024;
@@ -61,9 +62,9 @@ public class ChangeImageController extends HttpServlet {
 
 
             if (UA.contains("Mobile")){
-                response.sendRedirect("/user?id="+user);
+                response.sendRedirect("/user?id="+id);
             }else{
-                response.sendRedirect("/user?id="+user);
+                response.sendRedirect("/user?id="+id);
             }
 
         } catch (Exception e) {

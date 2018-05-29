@@ -19,20 +19,28 @@
     </div>
 
     <div class="list-group pt-2">
-    <c:forEach items="${username.getSuscribirsByIdUser()}" var="usuario">
-            <a href="#" class="list-group-item list-group-item-action">
-                <div class="media">
-                    <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}.jpg" style="width:30px;" alt="...">
-                    </div>
-                    <div class="media-body">
-                        <!--TODO: Sustituir por funcion getLastUploads-->
-                        <h6 class="media-heading">${usuario.getNomAp()}</h6>
-                        <h6 class="media-heading">${usuario.getIdUser()}</h6>
+        <c:forEach items="${novedades}" var="cancion">
+            <div class="list-group pt-2">
+                <div class="list-group-item list-group-item-action">
+                    <div class="media">
+                        <div class="media-left" style="padding-right:15px">
+                            <a href="/song?id=${cancion.getIdCancion()}">
+                                <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png"
+                                     style="width:64px;"
+                                     alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <!-- Nombre cancion-->
+                            <h6 class="media-heading"
+                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>
+                            <!-- Usuario que ha subido la canción-->
+                            <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
+                        </div>
                     </div>
                 </div>
-            </a>
-    </c:forEach>
+            </div>
+        </c:forEach>
     </div>
 </div> <!-- Container -->
 

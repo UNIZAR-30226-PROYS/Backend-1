@@ -13,7 +13,7 @@ public class LogoutController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String UA = request.getHeader("User-Agent");
-        session.removeAttribute("username");
+        session.invalidate();
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/explorar.jsp");
         }else{
@@ -24,7 +24,7 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String UA = request.getHeader("User-Agent");
-        session.removeAttribute("username");
+        session.invalidate();
         if (UA.contains("Mobile")){
             response.sendRedirect("/movil/explorar.jsp");
         }else{

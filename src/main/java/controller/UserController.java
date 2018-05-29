@@ -26,7 +26,7 @@ public class UserController extends HttpServlet {
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
         String UA = request.getHeader("User-Agent");
-        String idUser = request.getParameter("id");
+        int idUser = Integer.parseInt(request.getParameter("id"));
 
         // Limpieza de valores antiguos
         session.removeAttribute("usuario");
@@ -51,14 +51,16 @@ public class UserController extends HttpServlet {
 
         try {
             usuario = Usuario.getUser(idUser);
+            System.out.println(usuario);
             usuario.activarSuscripciones(HibernateUtil.getSession());
+            // usuario.activarListas(HibernateUtil.getSession());
             suscripciones = usuario.getSuscribirsByIdUser_0();
             listas = usuario.getListarepsByIdUser();
             misListas = new ArrayList<>(listas);
             historial = misListas.get(0);
             mimusica = misListas.get(1);
             favoritos = misListas.get(2);
-            publico = usuario.isPublico();
+            publico = usuario.getPublico();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,7 +84,7 @@ public class UserController extends HttpServlet {
 
 
         // Si el usuario no esta llamandose a si mismo
-        if (username!=null && usuario !=null && !usuario.getIdUser().equals(username.getIdUser())){
+        if (username!=null && usuario !=null && usuario.getIdUser()!=username.getIdUser()){
             // Si el usuario logueado esta suscrito al que esta buscando.
             try {
                 if (Suscribir.existsSuscribir(username.getIdUser(),usuario.getIdUser())){
@@ -95,13 +97,15 @@ public class UserController extends HttpServlet {
                 e.printStackTrace();
                 session.setAttribute("suscrito", false);
             }
+        } else {
+            session.setAttribute("suscrito",true);
         }
 
         //Cambiar si peta
         RequestDispatcher rd;
 
         if (UA.contains("Mobile")){
-            if (username==null || (usuario !=null && !usuario.getIdUser().equals(username.getIdUser())) ) {
+            if (username==null || (usuario !=null && usuario.getIdUser()!=username.getIdUser())) {
                 //response.sendRedirect("/movil/usuarioPublico.jsp");
                 rd = request.getRequestDispatcher("/movil/usuarioPublico.jsp");
             }
@@ -111,12 +115,12 @@ public class UserController extends HttpServlet {
             }
         }
         else{
-            if (username==null || (usuario !=null && !usuario.getIdUser().equals(username.getIdUser())) ) {
-                //response.sendRedirect("/escritorio/artista.jsp");
+            if (username==null || (usuario !=null && usuario.getIdUser()!=username.getIdUser())) {
+                //response.sendRedirect("/movil/usuarioPublico.jsp");
                 rd = request.getRequestDispatcher("/escritorio/artista.jsp");
             }
             else {
-                //response.sendRedirect("/escritorio/usuario.jsp");
+                //response.sendRedirect("/movil/usuario.jsp");
                 rd = request.getRequestDispatcher("/escritorio/usuario.jsp");
             }
         }

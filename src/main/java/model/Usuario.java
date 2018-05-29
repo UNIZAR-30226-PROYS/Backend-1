@@ -2,6 +2,7 @@ package model;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.query.Query;
 
 import javax.naming.AuthenticationException;
@@ -21,7 +22,9 @@ import static util.HibernateUtil.getSession;
 
 @Entity
 public class Usuario {
-    private String idUser;
+
+    private int idUser;
+    private String username;
     private String nomAp;
     private String email;
     private boolean conexion;
@@ -35,26 +38,27 @@ public class Usuario {
     private Collection<Suscribir> suscribirsByIdUser;
     private Collection<Suscribir> suscribirsByIdUser_0;
 
-    public Usuario() {}
-
-    public Usuario(String idUser, String nomAp, String email, String contrasenya) {
-        this.idUser = idUser;
-        this.nomAp = nomAp;
-        this.email = email;
-        this.conexion = false;
-        this.ultRep = 0;
-        this.contrasenya = contrasenya;
-        this.publico = false;
-    }
 
     @Id
+    @GenericGenerator(name="genUsr" , strategy="increment")
+    @GeneratedValue(generator="genUsr")
     @Column(name = "idUser")
-    public String getIdUser() {
+    public int getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(String idUser) {
+    public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    @Basic
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Basic
@@ -109,7 +113,7 @@ public class Usuario {
 
     @Basic
     @Column(name = "Publico")
-    public boolean isPublico() {
+    public boolean getPublico() {
         return publico;
     }
 
@@ -125,6 +129,7 @@ public class Usuario {
         return ultRep == usuario.ultRep &&
                 publico == usuario.publico &&
                 Objects.equals(idUser, usuario.idUser) &&
+                Objects.equals(username, usuario.username) &&
                 Objects.equals(nomAp, usuario.nomAp) &&
                 Objects.equals(email, usuario.email) &&
                 Objects.equals(conexion, usuario.conexion) &&
@@ -134,10 +139,11 @@ public class Usuario {
     @Override
     public int hashCode() {
 
-        return Objects.hash(idUser, nomAp, email, conexion, ultRep, contrasenya, publico);
+        return Objects.hash(idUser, username, nomAp, email, conexion, ultRep, contrasenya, publico);
     }
 
-    @OneToMany( mappedBy = "usuarioByIdUser")
+    @OneToMany(mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Album> getAlbumsByIdUser() {
         return albumsByIdUser.get();
     }
@@ -146,7 +152,8 @@ public class Usuario {
         this.albumsByIdUser.set(albumsByIdUser);
     }
 
-    @OneToMany( mappedBy = "usuarioByIdUser")
+    @OneToMany(mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Cancion> getCancionsByIdUser() {
         return cancionsByIdUser;
     }
@@ -156,6 +163,7 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Comentario> getComentariosByIdUser() {
         return comentariosByIdUser;
     }
@@ -164,7 +172,8 @@ public class Usuario {
         this.comentariosByIdUser = comentariosByIdUser;
     }
 
-    @OneToMany( mappedBy = "usuarioByIdUser")
+    @OneToMany(mappedBy = "usuarioByIdUser")
+    @Cascade(CascadeType.ALL)
     public Collection<Listarep> getListarepsByIdUser() {
         return listarepsByIdUser;
     }
@@ -174,6 +183,7 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioByIdSuscrito")
+    @Cascade(CascadeType.ALL)
     public Collection<Suscribir> getSuscribirsByIdUser() {
         return suscribirsByIdUser;
     }
@@ -183,6 +193,7 @@ public class Usuario {
     }
 
     @OneToMany(mappedBy = "usuarioByIdSuscriptor")
+    @Cascade(CascadeType.ALL)
     public Collection<Suscribir> getSuscribirsByIdUser_0() {
         return suscribirsByIdUser_0;
     }
@@ -193,14 +204,13 @@ public class Usuario {
 
     /*------------------------------------------------------------------------------------------------------------------
      *------------------------------------------------------------------------------------------------------------------
-     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *--------------------------------------      FUNCIONES PROPIAS      -----------------------------------------------
      *------------------------------------------------------------------------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
     /*------------------------------------------------------------------------------------------------------------------
-     *--------------------------------------CREACION BORRADO Y MODIFICACION---------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
-
     /*
      * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
      * Devuelve el Usuario creado
@@ -211,7 +221,8 @@ public class Usuario {
             Usuario newUser = new Usuario();
 
             //Asignacion de atributos
-            newUser.setIdUser(username);
+            newUser.setIdUser(0);
+            newUser.setUsername(username);
             newUser.setContrasenya(password);
             newUser.setEmail(email);
             newUser.setNomAp("Anonimo");
@@ -234,14 +245,6 @@ public class Usuario {
             newUser.activarListas(session);
 
             session.close();
-            File from = new File("/contenido/imagenes/user.png");
-            File to = new File("/contenido/imagenes/usuarios/"+username+"Perfil.png");
-            try {
-                Files.copy(from.toPath(),to.toPath(),StandardCopyOption.REPLACE_EXISTING);
-            }
-            catch (Exception e) {throw new Exception("Cant write lol:"+e.getMessage());}
-            if(!Files.exists(from.toPath())) {throw new Exception("Aqui no "+from.toString());}
-
             return newUser;
         }else{
             session.close();
@@ -249,41 +252,54 @@ public class Usuario {
         }
     }
 
+
     /*
-     * En caso de que usernameNew no este cojido, modifica a usernameOld con los nuevos atributos.
+     * Borra permanentemente un usuario del sistema
      */
+    public static void borrarUser(String username) throws Exception{
+        Session session = getSession();
+        Usuario user = getUser(username);
+        FileOperations.delete("/contenido/imagenes/usuarios/"+username+"Perfil.png");
+        borrarCanciones(user.getIdUser());
+        session.beginTransaction();
+        session.delete( user );
+        session.getTransaction().commit();
+        session.close();
+    }
+
     /*
-    public static Usuario modUser(String usernameOld, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
+     * Borra permanentemente un usuario del sistema
+     */
+    public static void borrarUser(int idUser) throws Exception{
         Session session = getSession();
-        if (!existsUser(usernameNew) || usernameOld.equals(usernameNew)){
-            Usuario User = getUser(usernameOld);
-            User.setEmail(email);
-            User.setNomAp(nomAp);
-            User.setPublico(publico);
-            if(!(usernameOld.equals(usernameNew))) {
-                User.setIdUser(usernameNew);
-            }
+        Usuario user = getUser(idUser);
+        FileOperations.delete("/contenido/imagenes/usuarios/"+user.getUsername()+"Perfil.png");
+        borrarCanciones(idUser);
+        session.beginTransaction();
+        session.delete( user );
+        session.getTransaction().commit();
+        session.close();
+    }
 
-            session.beginTransaction();
-            session.saveOrUpdate( User );
-            if(!(usernameOld.equals(usernameNew))) {
-                User = getUser(usernameOld);
-                session.delete( User );
-            }
-            session.getTransaction().commit();
-            session.close();
-            return User;
-        }else{
-            session.close();
-            throw new Exception("Nombre de usuario ya existe");
+    public static void borrarCanciones(int idUser) throws Exception {
+        List<Integer> lista = getSongs(idUser);
+        for(Integer idCancion : lista){
+            FileOperations.delete("/contenido/canciones/"+Integer.toString(idCancion)+".mp3");
+            FileOperations.delete("/contenido/imagenes/canciones/"+Integer.toString(idCancion)+".png");
         }
-    }*/
+    }
 
-    public Usuario modUser(String email,String nomAp,Boolean publico) throws Exception{
+    public Usuario modUser(String nombre, String email,String nomAp,Boolean publico) throws Exception{
         Session session = getSession();
+        String oldNombre = this.getUsername();
+        this.setUsername(nombre);
         this.setEmail(email);
         this.setNomAp(nomAp);
         this.setPublico(publico);
+        if(!oldNombre.equals(nombre)){
+            FileOperations.rename("/contenido/imagenes/usuarios/"+oldNombre+"Perfil.png",
+                    "/contenido/imagenes/usuarios/"+nombre+"Perfil.png");
+        }
         session.beginTransaction();
         session.update( this );
         session.getTransaction().commit();
@@ -291,33 +307,29 @@ public class Usuario {
         return this;
     }
 
-
-    //TODO: cambiar username -> depende de Cascade delete y saveupdate
     /*
-    public static Usuario modUserName(Usuario usuario, String usernameNew, String email,String nomAp,Boolean publico) throws Exception{
-        Session session = getSession();
-        Usuario newUser = usuario;
-        newUser.setIdUser(usernameNew);
-
-        return newUser;
-    }*/
-
-    /*
-     * Borra permanentemente un usuario del sistema
-     *
+     * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
+     * si no, lanza excepcion
      */
-    public static void borrarUser(String username) throws Exception{
+    public static Usuario login(String username, String password) throws Exception{
         Session session = getSession();
-        Usuario User = getUser(username);
-        session.beginTransaction();
-        session.delete( User );
-        session.getTransaction().commit();
-        session.close();
-        //TODO: borrar canciones, comentarios etc de usuario si, no ¿lo hace por cascada hibernate?
+        try {
+            Usuario user = correctUser(username, password, session);
+            //Inicializacion de Lazy-Fetch de Listas y Canciones
+            user.setConexion(true);
+            user.activarCanciones(session);
+            user.activarListas(session);
+            // user.activarSuscripciones(session);
+            return user;
+        }catch (Exception e){
+            throw e;
+        }finally {
+            session.close();
+        }
     }
 
     /*------------------------------------------------------------------------------------------------------------------
-     *----------------------------------------------ACTIVACION FETCH----------------------------------------------------
+     *------------------------------------------    ACTIVACION FETCH    ------------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
     //Activa Canciones
@@ -348,26 +360,9 @@ public class Usuario {
         return this;
     }
 
-    /*
-     * Devuelve el usuario siempre que exista y la contrasenya sea correcta,
-     * si no, lanza excepcion
-     */
-    public static Usuario login(String username, String password) throws Exception{
-        Session session = getSession();
-        try {
-            Usuario user = correctUser(username, password, session);
-            //Inicializacion de Lazy-Fetch de Listas y Canciones
-            user.setConexion(true);
-            user.activarCanciones(session);
-            user.activarListas(session);
-            // user.activarSuscripciones(session);
-            return user;
-        }catch (Exception e){
-            throw e;
-        }finally {
-            session.close();
-        }
-    }
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     /*
      * True -> usuario existe
@@ -376,28 +371,57 @@ public class Usuario {
     public static boolean existsUser(String username){
         Session session = getSession();
         boolean exists = false;
-        Query query = session.createQuery("from Usuario where idUser = :user ");
+        Query query = session.createQuery("from Usuario where username = :user ");
         query.setParameter("user", username);
         if (query.uniqueResult() != null){
-           exists = true;
+            exists = true;
         }
         session.close();
         return exists;
     }
 
-    public static void guardarInstante(Usuario user, int rep) throws Exception{
+    /*
+     * True -> usuario existe
+     * False -> usuario no existe
+     */
+    public static boolean existsUser(int idUser){
         Session session = getSession();
-        if (existsUser(user.getIdUser())){
-            user.setUltRep(rep);
-            session.beginTransaction();
-            session.saveOrUpdate( user );
-            session.getTransaction().commit();
-        }else{
-            throw new Exception("Usuario no existe");
+        boolean exists = false;
+        Query query = session.createQuery("from Usuario where idUser = :user ");
+        query.setParameter("user", idUser);
+        if (query.uniqueResult() != null){
+            exists = true;
         }
         session.close();
+        return exists;
     }
 
+    /*
+     * Devuelve el usuario en caso de que exista y la contraseña sea correcta
+     */
+    public static Usuario correctUser(String username, String password, Session session) throws Exception{
+        Usuario user = getUser(username);
+        if (!checkpw(password,user.getContrasenya())) {
+            throw new AuthenticationException("Contraseña errónea");
+        }
+        return user;
+    }
+
+    /*
+       Devuelve lista de elementos de Usuario que tengan el string user en el idUser
+    */
+    public static List<Usuario> searchUser(String user){
+        Session session = getSession();
+        Query query = session.createQuery("from Usuario where username like :user ");
+        query.setParameter("user", "%"+user+"%");
+        List<Usuario> lista = query.list();
+        session.close();
+        return lista;
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------       GET       ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     /*
      * True -> usuario existe
@@ -405,7 +429,7 @@ public class Usuario {
      */
     public static Usuario getUser(String username) throws  Exception{
         Session session = getSession();
-        Query query = session.createQuery("from Usuario where idUser = :user ");
+        Query query = session.createQuery("from Usuario where username = :user ");
         query.setParameter("user", username);
         Usuario user = (Usuario) query.uniqueResult();
         session.close();
@@ -413,6 +437,38 @@ public class Usuario {
             throw new Exception("El usuario no existe");
         }
         return user;
+    }
+
+    /*
+     * True -> usuario existe
+     * False -> usuario no existe
+     */
+    public static Usuario getUser(int idUser) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Usuario where idUser = :user ");
+        query.setParameter("user", idUser);
+        Usuario user = (Usuario) query.uniqueResult();
+        session.close();
+        if (user==null){
+            throw new Exception("El usuario no existe");
+        }
+        return user;
+    }
+
+    public static List<Integer> getSongs(int idUser) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("select idCancion from Cancion where idUser = :user ");
+        query.setParameter("user", idUser);
+        List<Integer> lista = query.list();
+        return lista;
+    }
+
+    public static List<Cancion> getSongsObject(int idUser) throws  Exception{
+        Session session = getSession();
+        Query query = session.createQuery("from Cancion where idUser = :user ");
+        query.setParameter("user", idUser);
+        List<Cancion> lista = query.list();
+        return lista;
     }
 
     public static Listarep getLista(Usuario user, String nombre) throws Exception{
@@ -431,31 +487,47 @@ public class Usuario {
         throw new Exception("El usuario no contiene dicha lista");
     }
 
-    /*
-     * Devuelve el usuario en caso de que exista y la contraseña sea correcta
-     */
-    public static Usuario correctUser(String username, String password, Session session) throws Exception{
-        Query query = session.createQuery("from Usuario where idUser = :user ");
-        query.setParameter("user", username);
-        Usuario user = (Usuario) query.uniqueResult();
-        if (user==null){
-            throw new Exception("El usuario no existe");
-        }else if (!checkpw(password,user.getContrasenya())) {
-            throw new AuthenticationException("Contraseña errónea");
-        }
-        return user;
-    }
-
-    /*
-       Devuelve lista de elementos de Usuario que tengan el string user en el idUser
-    */
-    public static List<Usuario> searchUser(String user){
+    public static Cancion getLastHistorial(Usuario user) throws Exception{
         Session session = getSession();
-        Query query = session.createQuery("from Usuario where idUser like :user ");
-        query.setParameter("user", "%"+user+"%");
-        List<Usuario> lista = query.list();
+        Query query = session.createQuery("from Listarep where usuarioByIdUser = :user and nombre = :nombre");
+        query.setParameter("user", user);
+        query.setParameter("nombre", "historial");
+        Listarep lista = (Listarep)query.uniqueResult();
+        Collection<Cancioneslista> aux  = lista.getCancioneslistasByIdLista();
+        List<Cancioneslista> listas = new ArrayList<>(aux);
+        Cancion cancion= new Cancion();
+        if(listas.size()!=0){
+            cancion = listas.get(listas.size()-1).getCancionByIdCancion();
+        }
+        else{
+            cancion.setNombre("");
+        }
+
         session.close();
-        return lista;
+        return cancion;
+
     }
 
+    public static void guardarInstante(Usuario user, int rep) throws Exception{
+        Session session = getSession();
+        if (existsUser(user.getIdUser())){
+            user.setUltRep(rep);
+            session.beginTransaction();
+            session.saveOrUpdate( user );
+            session.getTransaction().commit();
+        }else{
+            throw new Exception("Usuario no existe");
+        }
+        session.close();
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUser=" + idUser +
+                ", username='" + username + '\'' +
+                ", conexion=" + conexion +
+                ", publico=" + publico +
+                '}';
+    }
 }

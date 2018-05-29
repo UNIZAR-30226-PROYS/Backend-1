@@ -25,7 +25,7 @@
                     <form id="formBuscar" class="search-button" action="/search" method="get">
                         <div class="orm-group">
                             <div class="input-group">
-                                <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
+                                <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off" required>
                                 <span class="input-group-btn search-button">
                                         <button type="submit" class="btn btn-secondary">
                                             <span class="fa fa-search" style="font-size:20px;"  ></span>
@@ -56,7 +56,7 @@
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getNombre()}</h6>
-                                <h6 class="media-heading">${resultado.getUsuarioByIdUser().getIdUser()}</h6>
+                                <h6 class="media-heading">${resultado.getUsuarioByIdUser().getUsername()}</h6>
                             </div>
                         </div>
                     </a>
@@ -67,10 +67,10 @@
                     <a href="/user?id=${resultado.getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/imagenes/usuarios/${resultado.getIdUser()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${resultado.getUsername()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">${resultado.getIdUser()}</h6>
+                                <h6 class="media-heading">${resultado.getUsername()}</h6>
                                 <h6 class="media-heading">${resultado.getNomAp()}</h6>
                             </div>
                         </div>
@@ -82,7 +82,15 @@
                     <a href="/list?id=${resultado.getIdLista()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/web/imagenes/wolf.jpg" style="width:64px;" alt="...">
+                                <img src="<c:choose>
+                                    <c:when test="${resultado.getCancioneslistasByIdLista().isEmpty()}">
+                                        ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${pageContext.request.contextPath}/contenido/imagenes/canciones/${resultado.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                    </c:otherwise>
+                                </c:choose>
+                                " alt="Imagen lista" style="width:64px">
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getNombre()}</h6>

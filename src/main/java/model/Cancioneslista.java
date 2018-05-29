@@ -1,14 +1,16 @@
 package model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import javax.persistence.FetchType;
 
+import main.java.FileOperations;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.query.Query;
 
@@ -19,9 +21,9 @@ import java.sql.Date;
 import static util.HibernateUtil.getSession;
 
 @Entity
-public class Cancioneslista {
+public class Cancioneslista implements Comparable<Cancioneslista>{
     private int idCancLista;
-    private Date fechaIntroduccion;
+    private Timestamp fechaIntroduccion;
     private Listarep listarepByListaRep;
     private Cancion cancionByIdCancion;
 
@@ -39,12 +41,14 @@ public class Cancioneslista {
 
     @Basic
     @Column(name = "fechaIntroduccion")
-    public Date getFechaIntroduccion() {
+    public Timestamp getFechaIntroduccion() {
         return fechaIntroduccion;
     }
 
-    public void setFechaIntroduccion(Date fechaIntroduccion) {
-        this.fechaIntroduccion = fechaIntroduccion;
+    public void setFechaIntroduccion(Timestamp fecha) {
+        long millis=System.currentTimeMillis();
+        java.sql.Timestamp date=new java.sql.Timestamp(millis);
+        this.fechaIntroduccion = date;
     }
 
     @Override
@@ -82,12 +86,37 @@ public class Cancioneslista {
         this.cancionByIdCancion = cancionByIdCancion;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        addCancALista(listarep, cancion);
+        return listarep;
+    }
+
+    public static Listarep borrarCancDeLista(Usuario user, String lista, Cancion cancion) throws Exception{
+        Listarep listarep = Usuario.getLista(user,lista);
+        borrarCancDeLista(listarep, cancion);
+        return listarep;
+    }
+
+    //TODO: si es historial ver que se añada al final, y si ya existe en historial actualizar fecha
     public static Listarep addCancALista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
-        if(!existsCancList(lista,cancion)){
+        Cancioneslista aux = existsCancList(lista,cancion);
+        if(aux==null){
+            System.out.println("Entro en el if");
             Cancioneslista objeto = new Cancioneslista();
             objeto.setIdCancLista(0);
-            objeto.setFechaIntroduccion(new Date(0));
+            objeto.setFechaIntroduccion(new Timestamp(0));
             objeto.setCancionByIdCancion(cancion);
             objeto.setListarepByListaRep(lista);
 
@@ -99,29 +128,22 @@ public class Cancioneslista {
             //session.refresh(lista);
             return lista;
         }else{
+            System.out.println("Entro en el else");
+            aux.setFechaIntroduccion(new Timestamp(0));
+            session.beginTransaction();
+            session.update( aux );
+            session.getTransaction().commit();
+            session.refresh(lista);
             session.close();
-            throw new Exception("Cancion ya existe en dicha lista");
+            return lista;
         }
     }
-
-    public static Listarep addCancALista(Usuario user, String lista, Cancion cancion) throws Exception{
-        Listarep listarep = Usuario.getLista(user,lista);
-        addCancALista(listarep, cancion);
-        return listarep;
-    }
-
-//    public static Listarep borrarCancDeLista(Usuario user, Listarep lista, Cancion cancion) throws Exception{
-//        // Listarep listarep = Usuario.getLista(user,lista);
-//        borrarCancDeLista(lista, cancion);
-//        return lista;
-//    }
 
     public static Listarep borrarCancDeLista(Listarep lista, Cancion cancion) throws Exception{
         Session session = getSession();
         Collection<Cancioneslista> listacanciones = lista.getCancioneslistasByIdLista();
         if(listacanciones!=null) {
             Cancioneslista borrar = null;
-            listacanciones.contains(cancion);
             for (Cancioneslista x : listacanciones) {
                 if (x.getCancionByIdCancion().getIdCancion() == cancion.getIdCancion() &&
                         x.getListarepByListaRep().getIdLista() == lista.getIdLista()){
@@ -131,7 +153,13 @@ public class Cancioneslista {
             }
             if(borrar != null){
                 session.beginTransaction();
-                session.delete(borrar);
+                if(lista.getNombre().equals("mimusica")){
+                    FileOperations.delete("/contenido/canciones/"+Integer.toString(cancion.getIdCancion())+".mp3");
+                    FileOperations.delete("/contenido/imagenes/canciones/"+Integer.toString(cancion.getIdCancion())+".png");
+                    session.delete(cancion);
+                }else{
+                    session.delete(borrar);
+                }
                 session.getTransaction().commit();
                 session.refresh(lista);
                 session.close();
@@ -146,21 +174,35 @@ public class Cancioneslista {
         }
     }
 
-    public static boolean existsCancList(Listarep lista, Cancion song){
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    public static Cancioneslista existsCancList(Listarep lista, Cancion song){
         Collection<Cancioneslista> aux = lista.getCancioneslistasByIdLista();
-        boolean exists = false;
         if(aux!=null){
             List<Cancioneslista> canciones = new ArrayList<>(aux);
-            for(Cancioneslista cancion : canciones){
+            for(Cancioneslista cancionlista : canciones){
                 try{
-                    Cancion temp = Cancion.getCancion(cancion.getIdCancLista());
-                    if(song.getNombre().equals(temp.getNombre())){
-                        exists = true;
-                        break;
+                    Cancion cancion = cancionlista.getCancionByIdCancion();
+                    if(song.getIdCancion()==cancion.getIdCancion()){
+                        return cancionlista;
                     }
                 }catch (Exception e){}
             }
         }
-        return exists;
+        return null;
+    }
+
+    @Override
+    public int compareTo(Cancioneslista cancion) {
+        return this.fechaIntroduccion.compareTo(cancion.fechaIntroduccion);
+    }
+
+    @Override
+    public String toString() {
+        return "Cancioneslista{" +
+                "cancionByIdCancion=" + cancionByIdCancion +
+                '}';
     }
 }

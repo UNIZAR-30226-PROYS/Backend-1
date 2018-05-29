@@ -21,7 +21,7 @@
             <form id="formBuscar" class="search-button" action="/search" method="get">
                 <div class="form-group">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="search_input" placeholder="Buscar ...">
+                        <input type="text" class="form-control" name="search_input" placeholder="Buscar ..." required>
                         <span class="input-group-btn search-button">
                             <button type="submit" class="btn btn-secondary">
                                 <span class="fa fa-search" style="font-size:20px;"></span>
@@ -57,7 +57,7 @@
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${cancion.getNombre()}</h6>
-                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getUsername()}</h6>
                     </div>
                 </div>
             </a>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${usuario.getNomAp()}</h6>
-                        <h6 class="media-heading">${usuario.getIdUser()}</h6>
+                        <h6 class="media-heading">${usuario.getUsername()}</h6>
                     </div>
                 </div>
             </a>
@@ -83,7 +83,15 @@
             <a href="/list?id=${lista.getIdLista()}" class="list-group-item list-group-item-action">
                 <div class="media">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/${lista.getIdLista()}.png" style="width:64px;" alt="...">
+                        <img src="<c:choose>
+                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                            </c:when>
+                            <c:otherwise>
+                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                            </c:otherwise>
+                        </c:choose>
+                        " alt="Imagen lista" class="pt-3" style="width:64px">
                     </div>
                     <div class="media-body">
                         <h6 class="media-heading">${lista.getNombre()}</h6>

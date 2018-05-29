@@ -2,10 +2,11 @@ package model;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.query.Query;
 import static util.HibernateUtil.getSession;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.FetchType;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -20,7 +21,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-public class Cancion {
+public class Cancion implements Comparable<Cancion> {
     private int idCancion;
     private String nombre;
     private String genero;
@@ -136,6 +137,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
+    @Cascade(CascadeType.DELETE)
     public Collection<Cancioneslista> getCancioneslistasByIdCancion() {
         return cancioneslistasByIdCancion;
     }
@@ -145,6 +147,7 @@ public class Cancion {
     }
 
     @OneToMany(mappedBy = "cancionByIdCancion")
+    @Cascade(CascadeType.DELETE)
     public Collection<Comentario> getComentariosByIdCancion() {
         return comentariosByIdCancion;
     }
@@ -153,14 +156,27 @@ public class Cancion {
         this.comentariosByIdCancion = comentariosByIdCancion;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     /*
+     * TODO: activar canciones sin fetchear el objeto otra vez
      * Anyade un nuevo usuario a la base de datos en caso de que el username no este cogido
      * Devuelve el Usuario creado
      */
-    public static Cancion addCancion(String nombre, String genero, Usuario user) throws Exception{
+    public static Cancion addCancion(String nombre, String genero, Usuario usuario) throws Exception{
         Session session = getSession();
+        Usuario user = Usuario.getUser(usuario.getIdUser());
         user.activarCanciones(session);
         user.activarListas(session);
+
         if (!existsCancion(user,nombre)){
             Cancion newCancion = new Cancion();
 
@@ -191,6 +207,10 @@ public class Cancion {
 
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     public static boolean existsCancion(Usuario user, String song){
         Collection<Cancion> aux = user.getCancionsByIdUser();
         boolean exists = false;
@@ -205,6 +225,11 @@ public class Cancion {
         }
         return exists;
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------       GET       ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     /*
      * True -> usuario existe
      * False -> usuario no existe
@@ -221,6 +246,10 @@ public class Cancion {
         return ca;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     /*
         Devuelve lista de elementos de Cancion que tengan el string song en el nombre
      */
@@ -231,5 +260,26 @@ public class Cancion {
         List<Cancion> lista = query.list();
         session.close();
         return lista;
+    }
+
+    public void incrementarReps(){
+        Session session = getSession();
+        this.numRep++;
+        session.beginTransaction();
+        session.update( this );
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
+    public int compareTo(Cancion cancion) {
+        return Integer.compare(idCancion, cancion.idCancion);
+    }
+
+    @Override
+    public String toString() {
+        return "Cancion{" +
+                "nombre='" + nombre + '\'' +
+                '}';
     }
 }

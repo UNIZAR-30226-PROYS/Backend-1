@@ -37,7 +37,7 @@ public class Suscribir {
         return Objects.hash(idSuscripcion);
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idSuscrito", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdSuscrito() {
         return usuarioByIdSuscrito;
@@ -47,7 +47,7 @@ public class Suscribir {
         this.usuarioByIdSuscrito = usuarioByIdSuscrito;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idSuscriptor", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdSuscriptor() {
         return usuarioByIdSuscriptor;
@@ -57,56 +57,76 @@ public class Suscribir {
         this.usuarioByIdSuscriptor = usuarioByIdSuscriptor;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
-    public static Suscribir addSuscripcion(String suscriptor, String suscrito) throws Exception{
+    public static Suscribir addSuscripcion(int suscriptor, int suscrito) throws Exception{
         Session session = getSession();
-        if(existsSuscribir(suscriptor,suscrito)){
+        if(!existsSuscribir(suscriptor,suscrito)){
+            Suscribir newSus = new Suscribir();
+            Usuario uSuscriptor = Usuario.getUser(suscriptor);
+            Usuario uSuscrito = Usuario.getUser(suscrito);
+
+            newSus.setUsuarioByIdSuscriptor(uSuscriptor);
+            newSus.setUsuarioByIdSuscrito(uSuscrito);
+
+            session.beginTransaction();
+            session.save( newSus );
+            session.getTransaction().commit();
+
+            session.close();
+            return newSus;
+        }else{
             session.close();
             throw new Exception("Ya estas suscrito a dicho usuario.");
         }
-        Suscribir newSus = new Suscribir();
-        Usuario uSuscriptor = Usuario.getUser(suscriptor);
-        Usuario uSuscrito = Usuario.getUser(suscrito);
-
-        newSus.setUsuarioByIdSuscriptor(uSuscriptor);
-        newSus.setUsuarioByIdSuscrito(uSuscrito);
-
-        session.beginTransaction();
-        session.save( newSus );
-        session.getTransaction().commit();
-
-        session.close();
-        return newSus;
-
     }
+
+    public static Suscribir addSuscripcion(int suscriptor, String suscrito) throws Exception{
+        return addSuscripcion(suscriptor, Usuario.getUser(suscrito).getIdUser());
+    }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------      EXIST      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
     /*
         Devuelve si y solo si suscriptor esta suscrito a suscrito.
      */
-    public static boolean existsSuscribir(String suscriptor, String suscrito) throws Exception{
+    public static boolean existsSuscribir(int suscriptor, int suscrito) throws Exception{
         Session session = getSession();
         Boolean exists = false;
-        Usuario uSuscriptor = Usuario.getUser(suscriptor);
         Usuario uSuscrito = Usuario.getUser(suscrito);
+        Usuario uSuscriptor = Usuario.getUser(suscriptor);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor and usuarioByIdSuscrito = :suscrito");
         query.setParameter("suscriptor", uSuscriptor);
         query.setParameter("suscrito", uSuscrito);
-        exists = ! query.getResultList().isEmpty();
-
-
+        if (query.uniqueResult() != null){
+            exists = true;
+        }
         session.close();
         return exists;
-
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     /*
        Devuelve lista de elementos de Suscribir que tengan el string user como suscriptor
     */
-    public static List<Suscribir> searchSuscripciones(String user) throws Exception{
+    public static List<Suscribir> searchSuscripciones(int user) throws Exception{
         Session session = getSession();
-        Usuario uSuscriptor = Usuario.getUser(user);
+        Usuario usuario = Usuario.getUser(user);
         Query query = session.createQuery("from Suscribir where usuarioByIdSuscriptor = :suscriptor ");
-        query.setParameter("suscriptor", uSuscriptor);
+        query.setParameter("suscriptor", usuario);
         List<Suscribir> lista = query.getResultList();
         session.close();
         return lista;

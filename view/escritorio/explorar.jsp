@@ -24,7 +24,7 @@
                         <form id="formBuscar" class="search-button" action="${pageContext.request.contextPath}/search" method="get">
                             <div class="orm-group">
                                 <div class="input-group">
-                                    <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off">
+                                    <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off" required>
                                     <span class="input-group-btn search-button">
                                         <button type="submit" class="btn btn-secondary">
                                             <span class="fa fa-search" style="font-size:20px;"  ></span>
@@ -35,7 +35,7 @@
                         </form>
                     </div>
                 </div>
-                ${sessionScope.error}
+                ${requestScope.error}
                 <c:remove var="error"></c:remove>
                 <c:if test="${not empty sessionScope.username}">
                     <div class="row pl-4 pr-2">
@@ -43,22 +43,30 @@
                             <h4>Mis listas</h4>
                         </div>
                         <div class="float-right mr-3 pt-2">
-                            <a href="listas.jsp" class="btn btn-link" role="button" >
+                            <a href="${pageContext.request.contextPath}/lists?id=${sessionScope.username.getIdUser()}" class="btn btn-link" role="button" >
                                 <span class="fa fa-chevron-right" style="font-size:20px;"></span>
                             </a>
                         </div>
                     </div>
                     <div class="row pl-4 pr-2">
                         <c:forEach items="${misListas}" var="lista" begin="0" end="3">
-                            <div class="col-3">
-                                <div class="img-thumbnail h-100">
-                                    <a href="/list?id=${lista.getIdLista()}" target="_self">
-                                        <img src="/contenido/web/imagenes/${lista.getIdLista()}.jpg" class="pt-3" alt="" style="width:20%">
+                            <div class="col-3 h-100 align-content-center align-items-center">
+                                <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                    <div class="img-thumbnail h-100">
+                                        <img src="<c:choose>
+                                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                            </c:otherwise>
+                                        </c:choose>
+                                        " alt="Imagen lista" class="thumbnail-cuadrado" >
                                         <div class="caption pt-3 pb-2">
-                                            <p>${lista.getNombre()}</p>
+                                            <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${lista.getNombre()}</p>
                                         </div>
-                                    </a>
-                                </div>
+                                    </div>
+                                </a>
                             </div>
                         </c:forEach>
                     </div>
@@ -75,46 +83,26 @@
                     </div>
                 </div>
                 <div class="row pl-4 pr-2">
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/list?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista rec. 1</p>
+                    <c:forEach items="${sessionScope.listasRecomendadas}" var="lista"  begin="0" end="3">
+                        <div class="col-3 h-100 align-content-center align-items-center">
+                            <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                <div class="img-thumbnail h-100">
+                                    <img src="<c:choose>
+                                        <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                            ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                        </c:when>
+                                        <c:otherwise>
+                                            ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                        </c:otherwise>
+                                    </c:choose>
+                                    " alt="Imagen lista" class="thumbnail-cuadrado" >
+                                    <div class="caption pt-3 pb-2">
+                                        <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${lista.getNombre()}</p>
+                                    </div>
                                 </div>
                             </a>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/list?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista rec. 2</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/list?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista rec. 3</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/list?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista rec. 4</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
 
                 <c:if test="${not empty sessionScope.username}">
@@ -129,46 +117,18 @@
                         </div>
                     </div>
                     <div class="row pl-4 pr-2">
-                        <div class="col-3">
-                            <div class="img-thumbnail h-100">
-                                <a href="/song?id=1" target="_self">
-                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                    <div class="caption pt-3 pb-2">
-                                        <p>Nombre Mi audio 1</p>
+                        <c:forEach items="${sessionScope.misAudios}" var="audio"  begin="0" end="3">
+                            <div class="col-3 h-100 align-content-center align-items-center">
+                                <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                                    <div class="img-thumbnail h-100">
+                                        <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion" >
+                                        <div class="caption pt-3 pb-2">
+                                            <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap" class="mx-0 my-0">${audio.getNombre()}</p>
+                                        </div>
                                     </div>
                                 </a>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="img-thumbnail h-100">
-                                <a href="/song?id=1" target="_self">
-                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                    <div class="caption pt-3 pb-2">
-                                        <p>Nombre Mi audio 2</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="img-thumbnail h-100">
-                                <a href="/song?id=1" target="_self">
-                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                    <div class="caption pt-3 pb-2">
-                                        <p>Nombre Mi audio 3</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="img-thumbnail h-100">
-                                <a href="/song?id=1" target="_self">
-                                    <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                    <div class="caption pt-3 pb-2">
-                                        <p>Nombre Mi audio 4</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                 </c:if>
 
@@ -183,54 +143,27 @@
                     </div>
                 </div>
                 <div class="row pl-4 pb-4 pr-2">
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/song?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre audio rec. 1</p>
+                    <c:forEach items="${sessionScope.audiosRecomendados}" var="audio"  begin="0" end="3">
+                        <div class="col-3 h-100 align-content-center align-items-center">
+                            <a href="/song?id=${audio.getIdCancion()}" target="_self">
+                                <div class="img-thumbnail h-100">
+                                    <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${audio.getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion" >
+                                    <div class="caption pt-3 pb-2">
+                                        <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                           class="mx-0 my-0">${audio.getNombre()}</p>
+                                    </div>
                                 </div>
                             </a>
                         </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/song?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre audio rec. 2</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/song?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre audio rec. 3</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="/song?id=1" target="_self">
-                                <img src="/contenido/web/imagenes/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre audio rec. 4</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
+            <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
         <% if(request.getParameter("ajax")==null){ %>
         </div>
     </div>
     <%@include file="includes/socialbar.jsp" %>
     <%@include file="includes/reproductor.jsp" %>
-    <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
 </body>
 </html>
 <% } %>

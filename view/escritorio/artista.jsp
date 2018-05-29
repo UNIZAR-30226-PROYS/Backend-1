@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>WolfSound - Artista</title>
+    <title>WolfSound - ${usuario.getUsername()}</title>
     <%@include file="includes/html_head.jsp" %>
 </head>
 <body>
@@ -16,22 +16,22 @@
         <!-- CONTENIDO DE LA VISTA -->
         <div id="contenido">
             <% } //if%>
-            <div id="tituloNuevo" value="WolfSound - Artista" style="display:none;"></div>
+            <div id="tituloNuevo" value="WolfSound - ${usuario.getUsername()}" style="display:none;"></div>
             <!-- CONTENIDO DE LA VISTA -->
             <div class="container mb-3">
 
                 <div class="media mt-2">
                     <div class="row media-body pt-2 pl-4">
                         <div class="media-left pl-1" style="padding-right:15px">
-                            <img src="/contenido/imagenes/usuarios/${usuario.getIdUser()}Perfil.png?x=${rand}" style="width:300px;" alt="...">
+                            <img src="/contenido/imagenes/usuarios/${usuario.getUsername()}Perfil.png?x=${rand}" style="width:300px;" alt="...">
                         </div>
                         <div class="row media-body pt-5 pl-5 mt-auto mb-auto">
-                            <h1 class="media-heading">${usuario.getIdUser()}</h1>
+                            <h1 class="media-heading">${usuario.getUsername()}</h1>
                             <c:if test="${!suscrito}">
                                 <form action="${pageContext.request.contextPath}/Suscribe" method="get" >
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <input type="hidden" value="${usuario.getIdUser()}" name="name" required>
+                                            <input type="hidden" value="${usuario.getUsername()}" name="name" required>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Suscribirse</button>
@@ -43,35 +43,25 @@
 
                 <div class="media mt-2">
                     <div class="media-body pt-2 pl-4">
-                        <h5 class="media-heading">Populares</h5>
+                        <h5 class="media-heading">Canciones</h5>
                     </div>
                 </div>
 
-                <div class="list-group pl-4 pt-1 pr-2">
-                    <a href="#" class="list-group-item list-group-item-action pt-1 pb-0">
-                        <div class="media mt-auto">
-                            <div class="media-left pl-1 mt-auto mb-auto pb-1" style="padding-right:15px">
-                                <img src="images/wolf.jpg" style="width:40px;" alt="...">
+                <div class="row pl-4 pr-2">
+                <c:forEach items="${musica.getCancioneslistasByIdLista()}" var="rel">
+                    <div class="col-3">
+                        <a href="/song?id=${rel.getCancionByIdCancion().getIdCancion()}" target="_self">
+                            <div class="img-thumbnail h-100">
+                                <img src="${pageContext.request.contextPath}/contenido/imagenes/canciones/${rel.getCancionByIdCancion().getIdCancion()}.png" class="thumbnail-cuadrado" alt="Imagen cancion">
+                                <div class="caption pt-3 pb-2">
+                                    <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                       class="mx-0 my-0">${rel.getCancionByIdCancion().getNombre()}</p>
+                                </div>
                             </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-5">Nombre Cancion</h6>
-                                <h6 class="media-heading pl-5">Usuario</h6>
-                            </div>
-                            <div class="media-body mt-auto">
-                                <h6 class="media-heading pl-3">Album</h6>
-                                <h6 class="media-heading pl-3">Mejores momentos</h6>
-                            </div>
-                            <button type="button" class="btn btn-default mt-auto mb-auto">
-                                <span class="fa fa-plus mt-auto mb-auto pt-1" style="font-size:20px; "></span>
-                            </button>
-                        </div>
-                    </a>
-
-
-
-
+                        </a>
+                    </div>
+                </c:forEach>
                 </div>
-
                 <div class="row pt-2 pl-4 pr-2">
                     <div class="col-auto pt-2 pb-1">
                         <a href = "/lists?id=${usuario.getIdUser()}"><h4>Listas</h4></a>
@@ -79,17 +69,29 @@
                 </div>
 
                 <div class="row pl-4 pr-2">
-                    <div class="col-3">
-                        <div class="img-thumbnail h-100">
-                            <a href="lista.jsp" target="_self">
-                                <img src="images/wolf.jpg" class="pt-3" alt="" style="width:20%">
-                                <div class="caption pt-3 pb-2">
-                                    <p>Nombre lista 1</p>
+                    <c:forEach items="${listas}" var="lista" begin="0" end="5">
+                        <div class="col-3">
+                            <a href="/list?id=${lista.getIdLista()}" target="_self">
+                                <div class="img-thumbnail h-100">
+                                    <img src="<c:choose>
+                                            <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
+                                                ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
+                                            </c:when>
+                                            <c:otherwise>
+                                                ${pageContext.request.contextPath}/contenido/imagenes/canciones/${lista.getCancioneslistasByIdLista().get(0).getCancionByIdCancion().getIdCancion()}.png
+                                            </c:otherwise>
+                                        </c:choose>
+                                        " alt="Imagen lista" class="thumbnail-cuadrado">
+                                    <div class="caption pt-3 pb-2">
+                                        <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
+                                           class="mx-0 my-0">${lista.getNombre()}</p>
+                                    </div>
                                 </div>
                             </a>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
+
             </div> <!-- Container -->
             <% if(request.getParameter("ajax")==null){ %>
         </div>

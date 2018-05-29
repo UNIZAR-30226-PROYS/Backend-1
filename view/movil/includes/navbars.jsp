@@ -13,7 +13,7 @@
             </a>
         </div>
         <div class="col-4 ml-auto text-right">
-            <a href="${pageContext.request.contextPath}/user?id=${username.getIdUser()}"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username.getIdUser()}</a>
+            <a href="${pageContext.request.contextPath}/user?id=${username.getIdUser()}"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username.getUsername()}</a>
         </div>
     </c:if>
     <c:if test="${sessionScope.username == null}">
@@ -30,14 +30,10 @@
 
 <div id="sidebar" class="sidebar d-none">
     <c:if test="${sessionScope.username != null}">
-        <div class="sidebar-header">
-            <p class="text-center mx-auto">Escuchando</p>
-        </div>
         <ul class="list-unstyled components">
-
-            <li><a href="${pageContext.request.contextPath}/movil/listas.jsp">Mis listas</a></li>
-            <li><a href="${pageContext.request.contextPath}/movil/lista.jsp">Mi audio</a></li>
-            <li><a href="${pageContext.request.contextPath}/movil/suscripciones.jsp">Suscripciones</a></li>
+            <li><a href="${pageContext.request.contextPath}/lists?id=${username.getIdUser()}">Mis listas</a></li>
+            <li><a href="${pageContext.request.contextPath}/list?id=${username.getListarepsByIdUser().get(1).getIdLista()}">Mi audio</a></li>
+            <li><a href="${pageContext.request.contextPath}/suscriptions">Suscripciones</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Cerrar sesión</a></li>
         </ul>
         <div class="text-white text-center">

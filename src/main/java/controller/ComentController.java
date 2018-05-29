@@ -25,7 +25,7 @@ public class ComentController extends HttpServlet {
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
-            if(! (usuario == null)) {
+            if(usuario != null) {
                 Cancion cancion = Cancion.getCancion(cancionI);
                 Comentario.addComentario(usuario, cancion, texto);
             }
@@ -33,18 +33,19 @@ public class ComentController extends HttpServlet {
             if (UA.contains("Mobile")){
                 response.sendRedirect("/song?id="+Integer.toString(cancionI));
             }else{
-                response.sendRedirect("/song?id="+Integer.toString(cancionI));
+                response.setStatus(HttpServletResponse.SC_OK);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-            rd = request.getRequestDispatcher("/movil/usuario.jsp");
+            /*rd = request.getRequestDispatcher("/movil/usuario.jsp");
             request.setAttribute("error", e.getMessage());
-            rd.forward(request,response);
+            rd.forward(request,response);*/
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }

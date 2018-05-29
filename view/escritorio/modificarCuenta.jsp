@@ -32,12 +32,12 @@
                                     <label for="nombreAp">Nombre y Apellidos</label>
                                     <div class="form-group">
                                         <div class="form-row">
-                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value =${username.getNomAp()} >
+                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value="${username.getNomAp()}" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre_usuario">Nombre de usuario</label>
-                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =${username.getIdUser()} >
+                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =${username.getUsername()} >
 
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
@@ -53,17 +53,17 @@
                                         <label for="visperfil">Visibilidad del perfil</label>
                                         <select class="form-control" name="visibilidad" id="visperfil" required>
                                             <option disabled> Seleccione la visibilidad de su perfil</option>
-                                            <c:if test="${username.isPublico()}">
+                                            <c:if test="${username.getPublico()}">
                                                 <option>Privado</option>
                                                 <option selected>Público</option>
                                             </c:if>
-                                            <c:if test="${!username.isPublico()}">
+                                            <c:if test="${!username.getPublico()}">
                                                 <option selected>Privado</option>
                                                 <option>Público</option>
                                             </c:if>
                                         </select>
                                     </div>
-                                    <p class="text-danger">${error}</p>
+                                    <%--<p class="text-danger">${error}</p>--%>
 
                                     <div class="row">
                                         <div class="mx-auto col-6">
@@ -102,7 +102,7 @@
                                                     </form>
                                                 </div>
                                                 <div class = "col align-items-center">
-                                                    <form action = "explorar.jsp">
+                                                    <form action = "${pageContext.request.contextPath}/deleteUser" method="post" >
                                                         <button type="submit" class="btn btn-danger">Aceptar</button>
                                                     </form>
                                                 </div>

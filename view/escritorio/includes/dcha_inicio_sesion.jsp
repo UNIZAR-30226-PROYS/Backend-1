@@ -18,7 +18,7 @@
             <label for="contrasenya" style="color: black">Contraseña</label>
             <input type="password" class="form-control socialbarM" name="login_pass" id="contrasenya" placeholder="*****" required>
             <c:if test="${error == 'Contraseña errónea'}">
-                <p class="text-danger">${error}</p>
+                <%--<p class="text-danger">${error}</p>--%>
             </c:if>
             <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
             <button type="submit" class="col btn btn-primary socialbarM mt-3">Iniciar sesión</button>

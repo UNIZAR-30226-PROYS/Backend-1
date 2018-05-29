@@ -7,16 +7,16 @@ function buscar(action,camposUrl){
         $('#gifLoad').removeClass("d-none");
 
         // Cargar contenido
-        $("#contenido").load(destino, {ajax:1}, function(){$('#gifLoad').addClass("d-none")});
+        $("#contenido").load(destino, {ajax:1}, function(){
+            $('#gifLoad').addClass("d-none");
 
-        // Cambiar URL y titulo
-        setTimeout(function () { //todo: mejorar esto para mostrar el titulo directamente y no depender de un timeout de 100ms
+            // Cambiar URL y titulo
             window.history.pushState({
                 "html": destino,
                 "titulo": $('#tituloNuevo').attr('value')
             }, "", destino);
             document.title = $('#tituloNuevo').attr('value');
-        }, 100);
+        });
     } catch ($ex) {
         window.console && console.log($ex);
     } finally {

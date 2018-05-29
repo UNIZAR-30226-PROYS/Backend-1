@@ -11,11 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 
 import static util.BCrypt.gensalt;
 import static util.BCrypt.hashpw;
@@ -26,7 +25,6 @@ public class RegisterController extends HttpServlet {
         String user = request.getParameter("register_user");
         String pass = hashpw(request.getParameter("register_pass"),gensalt());   //Contraseña hasheada
         String email = request.getParameter("register_email");
-        RequestDispatcher rd;
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
         try {
@@ -38,6 +36,10 @@ public class RegisterController extends HttpServlet {
             System.out.println(listas);
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
+            Random rand = new Random();
+            int  num = rand.nextInt(9) + 1;
+            FileOperations.dup("/contenido/web/imagenes/wolf"+Integer.toString(num)+".png",
+                    "/contenido/imagenes/usuarios/"+user+"Perfil.png" );
             // session.setAttribute("misAudios", listas);
             // session.setAttribute("listasRecomendadas", listas);
             // session.setAttribute("audiosRecomendados", listas);
@@ -49,17 +51,14 @@ public class RegisterController extends HttpServlet {
 
         } catch (Exception e) {
             e.printStackTrace();
-            session.setAttribute("error", e.getMessage());
+            RequestDispatcher rd;
             if (UA.contains("Mobile")){
-                response.sendRedirect("/movil/explorar.jsp");
+                rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
             }else{
-                response.sendRedirect("/escritorio/explorar.jsp");
+                rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
             }
-
-            // request.setAttribute("error", e.getMessage());
-
-            // request.setAttribute("registro_activo", "active");
-            //rd.forward(request,response);
+            request.setAttribute("error", e.getMessage());
+            rd.forward(request,response);
         }
     }
 

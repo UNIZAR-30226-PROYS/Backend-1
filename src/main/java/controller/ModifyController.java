@@ -27,19 +27,12 @@ public class ModifyController extends HttpServlet {
         Boolean visiB = visiS.equals("Público");
 
         RequestDispatcher rd = null;
+        String iduserOld = userOld.getUsername();
         try {
-            Usuario nuser;
             // TODO: Esperar a poder borrar usuarios y updates del ORM
-//            if (!iduserNew.equals(userOld.getIdUser())){
-//                userOld.modUserName(iduserNew,mail,nombreAp,visiB);
-//            }
-//            else {
-//                userOld.modUser(mail,nombreAp,visiB);
-//            }
-            userOld.modUser(mail,nombreAp,visiB);
+            userOld.modUser(iduserNew,mail,nombreAp,visiB);
             session.removeAttribute("username");
             session.setAttribute("username", userOld);
-
             if (UA.contains("Mobile")){
                 response.sendRedirect("/movil/explorar.jsp");
             }else{

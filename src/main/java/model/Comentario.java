@@ -43,7 +43,7 @@ public class Comentario {
 
     public void setFechaSubida(Date fecha) {
         long millis=System.currentTimeMillis();
-        java.sql.Date date=new java.sql.Date(millis);
+        Date date=new Date(millis);
         this.fechaSubida = date;
     }
 
@@ -64,6 +64,7 @@ public class Comentario {
     }
 
     @ManyToOne
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     @JoinColumn(name = "idCancion", referencedColumnName = "idCancion", nullable = false)
     public Cancion getCancionByIdCancion() {
         return cancionByIdCancion;
@@ -74,6 +75,7 @@ public class Comentario {
     }
 
     @ManyToOne
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     @JoinColumn(name = "idUser", referencedColumnName = "idUser", nullable = false)
     public Usuario getUsuarioByIdUser() {
         return usuarioByIdUser;
@@ -83,6 +85,15 @@ public class Comentario {
         this.usuarioByIdUser = usuarioByIdUser;
     }
 
+    /*------------------------------------------------------------------------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *--------------------------------------------FUNCIONES PROPIAS-----------------------------------------------------
+     *------------------------------------------------------------------------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *-----------------------------------   CREACION BORRADO Y MODIFICACION   ------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     public static Comentario addComentario(Usuario user, Cancion cancion,String texto) throws Exception{
         Session session = getSession();
@@ -102,6 +113,10 @@ public class Comentario {
         return newCom;
 
     }
+
+    /*------------------------------------------------------------------------------------------------------------------
+     *---------------------------------------------     SEARCH      ----------------------------------------------------
+     *----------------------------------------------------------------------------------------------------------------*/
 
     public static List<Comentario> searchComentarios(Cancion cancion) throws Exception{
         Session session = getSession();

@@ -1,5 +1,5 @@
 <%--TODO: Terminar de implementar funcionalidad--%>
-<%@page contentType="text/html; UTF-8" %>
+<%@page contentType="text/html; UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,26 +17,24 @@
         <%--TODO: reproducir normal--%>
         <div class="col-5 mr-auto">
             <div class="row">
-                <div class="col-1 mr-auto">
-                    <a href="#">
-                        <button type="button" class="btn btn-default ">
+                <div class="col-1">
+                        <button type="button" id="play_button"  class="btn btn-default ">
                             <span class="fa fa-play" style="font-size:20px; "></span>
                         </button>
-                    </a>
+                    <script>
+                        $("#play_button").click( function()
+                            {
+                                actualizar_lista();
+                                alert("se ha actualizado la lista");
+                            }
+                        );
+                    </script>
                 </div>
                 <%--TODO: reproducir aleatorio--%>
-                <div class="col-1 mx-auto">
+                <div class="col-1">
                     <a href="#">
-                        <button type="button" class="btn btn-default ">
+                        <button type="button" class="mx-4 btn btn-default ">
                             <span class="fa fa-random" style="font-size:20px; "></span>
-                        </button>
-                    </a>
-                </div>
-                <%--TODO: seguir la lista--%>
-                <div class="col-1 ml-auto">
-                    <a href="#">
-                        <button type="button" class="btn btn-default ">
-                            <span class="fa fa-rss" style="font-size:20px; "></span>
                         </button>
                     </a>
                 </div>
@@ -44,14 +42,14 @@
         </div>
     </div>
     <div class="pt-1">
-        <h4 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${lista.getNombre()}jhfjhgcjhgcjhgcjhgcjhgcjhgcjgchgcfcu</h4>
+        <h4 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${lista.getNombre()}</h4>
     </div>
 
 
     <c:forEach items="${canciones}" var="cancion">
         <div class="list-group pt-2">
             <div class="list-group-item list-group-item-action">
-                <div class="media">
+                <div class="media" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                     <div class="media-left" style="padding-right:15px">
                         <a href="/song?id=${cancion.getIdCancion()}">
                             <img src="/contenido/imagenes/canciones/${cancion.getIdCancion()}.png"
@@ -59,11 +57,18 @@
                                  alt="...">
                         </a>
                     </div>
-                    <div class="media-body">
+                    <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                         <!-- Nombre cancion-->
-                        <h6 class="media-heading">${cancion.getNombre()}</h6>
-                        <!-- Usuario que ha subido la canción-->
-                        <h6 class="media-heading">${cancion.getUsuarioByIdUser().getIdUser()}</h6>
+                        <a href="/song?id=${cancion.getIdCancion()}">
+                            <h6 class="media-heading"
+                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getNombre()}</h6>
+                        </a>
+                            <!-- Usuario que ha subido la canción-->
+                        <a href="/user?id=${cancion.getUsuarioByIdUser().getIdUser()}">
+                            <h6 class="media-heading"
+                                style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${cancion.getUsuarioByIdUser().getUsername()}</h6>
+                        </a>
+
                     </div>
                     <c:if test="${propietario}">
                         <div class="media-right">
