@@ -93,7 +93,7 @@
                 </div>
                 <div class = "row align-items-center">
                     <div class="col ">
-                        <form class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post" novalidate>
+                        <form id="formComentar" class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post" >
                             <div class="col" required>
                                 <textarea class="text form-control" id="comentario"  name="texto" required></textarea>
                                 <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
@@ -165,6 +165,7 @@
             </div>
         </div>
         <script src="${pageContext.request.contextPath}/scripts/addToList.js"></script>
+        <script src="${pageContext.request.contextPath}/scripts/comentar.js"></script>
         <% if(request.getParameter("ajax")==null){ %>
     </div>
 </div>
