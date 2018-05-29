@@ -25,17 +25,17 @@
 
                             <!-- Subir Cancion -->
                             <!-- TODO: ajax para enviar este formulario sin recargar la pagina -->
-                            <form class="needs-validation" action = "${pageContext.request.contextPath}/uploadSong" method="post" enctype = "multipart/form-data" novalidate>
+                            <form class="needs-validation" action = "${pageContext.request.contextPath}/uploadSong" method="post" enctype = "multipart/form-data">
                                 <h4 class="text-center py-3">Sube tu canción</h4>
                                 <div class="form-group">
                                     <label for="nombre_cancion">Nombre de la canción</label>
-                                    <input type="text" class="form-control" id="nombre_cancion" name="nombre" placeholder="Jailhouse Rock" required>
+                                    <input type="text" class="form-control" id="nombre_cancion" name="nombre" maxlength="100" placeholder="Jailhouse Rock" required>
                                     <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="genero_musical">Genero Musical</label>
-                                    <input type="text" class="form-control" id="genero_musical" name="genero" placeholder="Rock" required>
+                                    <input type="text" class="form-control" id="genero_musical" name="genero" maxlength="100" placeholder="Rock" required>
                                     <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                 </div>
 
@@ -53,7 +53,7 @@
 
                                 <div class="form-group">
                                     <label for="portada">Seleccione la portada(Formato de imagen)</label>
-                                    <input type="file" class="form-control-file" name="portada" id="portada" accept=image/*" required>
+                                    <input type="file" class="form-control-file" name="portada" id="portada" accept="image/*" required>
                                     <div class="invalid-feedback">Seleccione la canción.</div>
                                 </div>
                                 <p class="text-danger">${requestScope.error}</p>
