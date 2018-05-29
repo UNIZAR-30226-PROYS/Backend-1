@@ -47,11 +47,6 @@
                                 <div class="media-body">
                                     <h6 class="media-heading">${lista.getNombre()}</h6>
                                 </div>
-                                <div class="media-right">
-                                    <button type="button" class="btn btn-default ">
-                                        <span class="fa fa-trash" style="font-size:20px; "></span>
-                                    </button>
-                                </div>
                             </div>
                         </a>
                     </div>

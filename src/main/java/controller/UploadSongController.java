@@ -103,7 +103,7 @@ public class UploadSongController extends HttpServlet {
             if (UA.contains("Mobile")){
                 rd = request.getRequestDispatcher("/movil/subirCancion.jsp");
             }else{
-                rd = request.getRequestDispatcher("/escritorio/subirCancion.jsp");
+                rd = request.getRequestDispatcher("/escritorio/subirMusica.jsp");
             }
             rd.forward(request,response);
         }
