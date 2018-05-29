@@ -18,31 +18,33 @@ import java.util.List;
 public class ReproductorLoadListaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        List<Cancion> canciones = (List<Cancion>) session.getAttribute("canciones");
         String text = "";
-        response.setContentType("text/plain");  // Set content type of the response so that jQuery knows what it can expect.
-        response.setCharacterEncoding("UTF-8"); // You want world domination, huh?
-
 
         try {
             Integer i =0;
-            Integer max_num_historioal =  Integer.parseInt( request.getParameter("max_num_canciones") );
+            Integer max_num =  Integer.parseInt( request.getParameter("max_num_canciones") );
             Usuario u = (Usuario) session.getAttribute("username");
-            for (Cancion cancion : canciones){
-                text = text+cancion.getNombre()+",";
-                text = text+cancion.getIdCancion()+",";
-                if ( i<max_num_historioal ) i++;
+            int idLista = (int) session.getAttribute("list");
+            Listarep lista = Listarep.getList(idLista);
+            for (Cancioneslista cancionLista : lista.getCancioneslistasByIdLista()){
+                String nombre_cancion = cancionLista.getCancionByIdCancion().getNombre();
+                int id_cancion = cancionLista.getCancionByIdCancion().getIdCancion();
+                text = text+nombre_cancion+","+id_cancion+",";
+                if ( i<max_num ) i++;
                 else { break; }
             }
 
-            response.getWriter().write(text);       // Write response body.
-
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().print(text);
+            response.setStatus(HttpServletResponse.SC_OK);
         } catch (Exception e) {
-            response.getWriter().write("Ninguna cancion");       // Write response body.
+            response.getWriter().print("Ninguna cancion");
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 }

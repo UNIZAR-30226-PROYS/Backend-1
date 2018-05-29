@@ -118,6 +118,44 @@ function reproducir_cancion(id){
     });
 }
 
+function reproducir_lista(id){
+    $.ajax({
+        url: "/ReproductorLoadLista",
+        type: 'get',
+        data: {list:id, max_num_canciones:40},
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            alert('Ha ocurrido un error obteniendo la lista.');
+        },
+        success: function(data){
+            var datos = data.split(',');
+
+            $("#plList").empty();
+            tracks = [];
+            $(".reprodcutor_list_item").empty();
+
+            for(var i=0;i<datos.length-1/*por la ',' final*/;) {
+                var nombre_cancion = data.split(',')[0];
+                var id_cancion = data.split(',')[1];
+
+                tracks.push({track: ((i / 2) + 1), name: datos[i], id: datos[i+1]});
+
+                i = i + 1; //para usar en num de track abajo
+
+                $('#plList').append(
+                    '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
+                    '<div>'+i+'</div>  ' +
+                    '<div>' + nombre_cancion + '</div>  ' +
+                    //	'<div>'+ trackDuration +'</div> ' +
+                    '</div>');
+
+                i = i + 1; //siguiente par
+            }
+
+            playTrack(0);
+        }
+    });
+}
+
 
 // =======
 //     }
