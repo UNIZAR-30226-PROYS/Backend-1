@@ -381,6 +381,8 @@ jQuery(document).ready(function() {
                     success: function(data){
                         loadTrack(id);
                         audio.play();
+                        $('#btnPlayStio_v2').removeClass('fa-play');
+                        $('#btnPlayStio_v2').addClass('fa-pause');
                     }
                 });
             };
