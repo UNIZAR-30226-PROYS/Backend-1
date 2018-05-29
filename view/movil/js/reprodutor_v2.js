@@ -1,15 +1,27 @@
 /* Ideas obtenidas de https://codepen.io/markhillard/pen/Hjcwu?editors=1010	*/
 /* Last Modified : 22/04/2018 Jorge	*/
+
+var mediaPath = 'http://wolfsound.ddns.net:6060/contenido/canciones/';
+
 var tracks = [];
+var index = 0;
 
 function actualizar_tracks() {
+// <<<<<<< HEAD
     $( "#plList" ).empty();
-    // alert("actualizando historial despues de limpiar");
+    //// alert("actualizando historial despues de limpiar");
     tracks=[];
 
     $.ajaxSetup({async: false});
     $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
-        // alert("Actualizando tracks -> " + caca);
+        console.log("Actualizando tracks -> " + caca);
+// =======
+//         // alert("actualizando");
+//         // Si no envias un parametro por algun extraño motivo no funciona */
+//         $.ajaxSetup({async: false});
+//         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+//             //// alert("aqui -> " + caca);
+// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
         var componentes = caca.split(",");
         //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
         for (var i = 0, len = componentes.length; i < len;) {
@@ -21,6 +33,7 @@ function actualizar_tracks() {
     });
     $.ajaxSetup({async: true});
     tracks.pop();
+// <<<<<<< HEAD
 
     buildPlaylist = $(tracks).each(function(key, value) {
         var trackNumber = value.track,
@@ -32,15 +45,15 @@ function actualizar_tracks() {
         $('#plList').append(
             '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
             '<div>'+trackNumber+ '</div>  ' +
-            '<div>'+trackName+'.mp3</div>  ' +
-            //	'<div>'+ trackDuration +'</div> ' +
-            '</div>');
+            '<div>'+trackName+'.mp3</div>  '
+            //	+'<div>'+ trackDuration +'</div> ' +
+        );
     })
 }
 
 function actualizar_tracks_primera_cancion() {
     $( "#plList" ).empty();
-    // alert("actualizando primera cancion despues de limpiar");
+    //// alert("actualizando primera cancion despues de limpiar");
     tracks=[];
 
     //// alert("actualizando");
@@ -48,7 +61,7 @@ function actualizar_tracks_primera_cancion() {
     $( ".reprodcutor_list_item" ).empty();
     $.ajaxSetup({async: false});
     $("#ocultar_contenido").load("/Reproductor_lista_v2_first_song", {max_num_canciones: 40}, function (caca) {
-        // alert("Actualizando tracks -> " + caca);
+        //// alert("Actualizando tracks -> " + caca);
         var componentes = caca.split(",");
         //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
         for (var i = 0, len = componentes.length; i < len;) {
@@ -71,107 +84,137 @@ function actualizar_tracks_primera_cancion() {
         $('#plList').append(
             '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
             '<div>'+trackNumber+ '</div>  ' +
-            '<div>'+trackName+'.mp3</div>  ' +
-            //	'<div>'+ trackDuration +'</div> ' +
-            '</div>');
+            '<div>'+trackName+'.mp3</div>  '
+            //	+'<div>'+ trackDuration +'</div> ' +
+        );
     })
 }
 
-function actualizar_lista() {
-    $( "#plList" ).empty();
-    // alert("actualizando lista despues de limpiar");
-    tracks=[];
-    // Si no envias un parametro por algun extraño motivo no funciona */
-    $.ajaxSetup({async: false});
-    $("#ocultar_contenido").load("/ReproductorLoadLista", {max_num_canciones: 40}, function (caca) {
-        //// alert("aqui -> " + caca);
-        // alert("Actualizando listas v2 -> " + caca);
-        var componentes = caca.split(",");
-        //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
-        for (var i = 0, len = componentes.length; i < len;) {
-            tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
+function reproducir_cancion(id){
+    $.ajax({
+        url: "/AddAndPlay",
+        type: 'get',
+        data: {song:id},
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            // alert('Ha ocurrido un error actualizando el historial y obteniendo la cancion.');
+        },
+        success: function(data){
+            var nombre_cancion = data.split(',')[0];
+            var id_cancion = data.split(',')[1];
+            $( "#plList" ).empty();
+            tracks=[];
+            $( ".reprodcutor_list_item" ).empty();
 
-            i = i + 2;
-            // // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
+            tracks.push({track:1,name:nombre_cancion,id:id_cancion});
+
+            $('#plList').append(
+                '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
+                '<div>1</div>  ' +
+                '<div>'+nombre_cancion+'</div>  '
+                //	+'<div>'+ trackDuration +'</div> ' +
+            );
+
+            playTrack(0);
+
+            $('#plList li').on('click', function () {
+                var id = parseInt($(this).index());
+                if (id !== index) {
+                    playTrack(id);
+                }
+            })
         }
     });
-    $.ajaxSetup({async: true});
-    tracks.pop();
-
-    buildPlaylist = $(tracks).each(function(key, value) {
-        var trackNumber = value.track,
-            trackName = value.name;
-        // trackDuration = value.duration;
-        if (trackNumber.toString().length === 1) {
-            trackNumber = '0' + trackNumber;
-        }
-        $('#plList').append(
-            '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-            '<div>'+trackNumber+ '</div>  ' +
-            '<div>'+trackName+'.mp3</div>  ' +
-            //	'<div>'+ trackDuration +'</div> ' +
-            '</div>');
-    })
 }
+
+function reproducir_lista(id){
+    $.ajax({
+        url: "/ReproductorLoadLista",
+        type: 'get',
+        data: {list:id, max_num_canciones:40},
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+            // alert('Ha ocurrido un error obteniendo la lista.');
+        },
+        success: function(data){
+            var datos = data.split(',');
+
+            $("#plList").empty();
+            tracks = [];
+            $(".reprodcutor_list_item").empty();
+            var numTrack = 1;
+
+            for(var i=0;i<datos.length-1/*por la ',' final*/;i=i+2) {
+                var nombre_cancion = datos[i];
+                var id_cancion = datos[i+1];
+
+                tracks.push({track: numTrack, name: nombre_cancion, id: id_cancion});
+
+                $('#plList').append(
+                    '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
+                    '<div>'+numTrack+'</div>  ' +
+                    '<div>' + nombre_cancion + '</div>  '
+                    //	+'<div>'+ trackDuration +'</div> ' +
+                );
+
+                numTrack = numTrack + 1;
+            }
+
+            playTrack(0);
+
+            $('#plList li').on('click', function () {
+                var id = parseInt($(this).index());
+                if (id !== index) {
+                    playTrack(id);
+                }
+            })
+        }
+    });
+}
+
+
+// =======
+//     }
+// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
 
 jQuery(document).ready(function() {
     var supportsAudio = !!document.createElement('audio').canPlayType;
     if (supportsAudio) {
-        var index = 0;
         playing = false;
         repeat_option = false;
         random_option = false;
         var mouseup = false;
-        mediaPath = 'http://wolfsound.ddns.net:7000/contenido/canciones/';
+        imagePath = 'http://wolfsound.ddns.net:7000/contenido/imagenes/canciones/';
         extension = '';
 
-        var actualizar_reproduccion = 12;  /* Frecuencia de actualización del ultimo momento de reproduccion */
+        var actualizar_reproduccion = 10;  /* Frecuencia de actualización del ultimo momento de reproduccion */
 
         /* Mostrar Path */
         // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); // alert(dir);
 
-// <<<<<<< HEAD
         actualizar_tracks();
-// =======
-//         var tracks = [];
-//         tracks.push({ track: 1, name:"1.mp3"  });
-//         tracks.push({ track: 2, name:"2.mp3"  });
-//         tracks.push({ track: 3, name:"3.mp3"  });
-//
-//         /*
-//         var file = "music/nombre_canciones.txt";
-//         var tracks_aux = [];
-//         $.ajaxSetup({async: false});
-//         $.get(file,function(txt){		// Llamada AJAX Asíncrona
-//             var lines = txt.split("\n");
-//             for (var i = 0, len = lines.length; i < len; i++) {
-//                 var componentes = lines[i].split(",");
-//                 tracks_aux.push({ track: (i+1), name: componentes[0], duration: componentes[1] });
-//             }
-//             tracks = tracks_aux;	//getFile(tracks_aux);
-//         });
-//         $.ajaxSetup({async: true});
-//         function getFile(f){	tracks = f;	};
-//         //// alert(tracks[0].track + tracks[0].name + tracks[0].duration); // alert(tracks[0].track + tracks[0].name + tracks[0].duration);	// alert(tracks[1].track + tracks[1].name + tracks[1].duration);
-// 		*/
-//
-//         buildPlaylist = $(tracks).each(function(key, value) {
-//             var trackNumber = value.track,
-//                 trackName = value.name;
-//             // trackDuration = value.duration;
-//             if (trackNumber.toString().length === 1) {
-//                 trackNumber = '0' + trackNumber;
-//             }
-//             $('#plList').append(
-//                 '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-//                 '<div>'+trackNumber+ '</div>  ' +
-//                 '<div>'+trackName+'</div>  ' +
-//                 //	'<div>'+ trackDuration +'</div> ' +
-//                 '</div>');
-//         }),
-// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
 
-            trackCount = tracks.length,
+        //// alert("aqui-v3 ->"+tracks[0].name +" "+ tracks[0].id);
+
+        /*
+         $.ajaxSetup({async: true});
+        var file = "music/nombre_canciones.txt";
+        var tracks_aux = [];
+        $.ajaxSetup({async: false});
+        $.get(file,function(txt){		// Llamada AJAX Asíncrona
+            var lines = txt.split("\n");
+            for (var i = 0, len = lines.length; i < len; i++) {
+                var componentes = lines[i].split(",");
+                tracks_aux.push({ track: (i+1), name: componentes[0], duration: componentes[1] });
+            }
+            tracks = tracks_aux;	//getFile(tracks_aux);
+        });
+        $.ajaxSetup({async: true});
+        function getFile(f){	tracks = f;	};
+        //// alert(tracks[0].track + tracks[0].name + tracks[0].duration); // alert(tracks[0].track + tracks[0].name + tracks[0].duration);	// alert(tracks[1].track + tracks[1].name + tracks[1].duration);
+		*/
+
+
+
+        trackCount = tracks.length,
             npTitle = $('#npTitle'),
 
             audio = $('#audio1').on('play', function () {
@@ -183,7 +226,6 @@ jQuery(document).ready(function() {
                 if (repeat_option == true ){
                     loadTrack(index);
                     audio.play();
-
                 }
                 else if (random_option == true){
                     var song_to_play = Math.floor(Math.random() * (trackCount ) ) ;
@@ -203,12 +245,15 @@ jQuery(document).ready(function() {
                 }
             }).get(0),
 
+            /*
             $("#volumen").bind("change", function() {
+                // alert("a");
                 audio.volume =  ($(this).val());
             });
+            *(
+            */
 
-
-        $("#seek").on("mouseup", function () {	 mouseup = false;		});
+            $("#seek").on("mouseup", function () {	 mouseup = false;		});
 
         $("#seek").on("mousedown", function () { mouseup = true;		});
 
@@ -239,6 +284,7 @@ jQuery(document).ready(function() {
 
             if ( mouseup == false ){
                 $("#seek").val(this.currentTime);
+
                 // var form = document.getElementById("ultimo_instante_reproduccion"); form.submit();
                 actualizar_reproduccion = actualizar_reproduccion - 1;
                 if (actualizar_reproduccion == 0) {
@@ -258,7 +304,7 @@ jQuery(document).ready(function() {
             if (!playing) {
                 audio.play();
 
-                audio.currentTime =  ($("#seek").val() );   //// alert("empiezo" + $("#seek").val());
+                audio.currentTime =  $("#seek").val();   //// alert("empiezo" + $("#seek").val());
 
                 $('#btnPlayStio_v2').removeClass('fa-play');
                 $('#btnPlayStio_v2').addClass('fa-pause');
@@ -271,16 +317,16 @@ jQuery(document).ready(function() {
 
             btnPrev = $('#btnPrev').on('click', function () {
                 index= (index-1);
-                if (index == -1 ) index = trackCount -1 ;
-                loadTrack(index);
+                if (index == -1 ) index = tracks.length -1 ;
+                playTrack(index);
                 if (playing) {
                     audio.play();
                 }
             }),
 
             btnNext = $('#btnNext').on('click', function () {
-                index= (index+1)%trackCount;
-                loadTrack(index);
+                index= (index+1)%tracks.length;
+                playTrack(index);
                 if (playing) {
                     audio.play();
                 }
@@ -329,19 +375,38 @@ jQuery(document).ready(function() {
                 $('.list-group  > .active').removeClass('active');
                 $('#plList li:eq(' + id + ')').addClass('active');
 
-                npTitle.text(tracks[id].name);
+                npTitle.text(tracks[id].name+'.mp3');
                 index = id;
-                audio.src = mediaPath + tracks[id].name;
+                audio.src = mediaPath + tracks[id].id +'.mp3';
+                //// alert("src "+audio.src);
+
 
             },
 
             playTrack = function (id) {
-                loadTrack(id);
-                audio.play();
+                // LA ID ES EN EL ARRAY DE TRACKS
+                $.ajax({
+                    url: "/AddAndPlay",
+                    type: 'get',
+                    data: {song:tracks[id].id},
+                    error: function(XMLHttpRequest, textStatus, errorThrown){
+                        // alert('Ha ocurrido un error actualizando el historial.');
+                    },
+                    success: function(data){
+                        loadTrack(id);
+                        audio.play();
+                        $('#btnPlayStio_v2').removeClass('fa-play');
+                        $('#btnPlayStio_v2').addClass('fa-pause');
+                    }
+                });
             };
 
         extension = audio.canPlayType('audio/mpeg') ? '.mp3' : audio.canPlayType('audio/ogg') ? '.ogg' : '';
         loadTrack(index);
+
+        /* Tipo escritorio */
+        // playTrack(index);
+        // Cargar ultimo momento de reproduccion
     }
     else {
         // alert("Su navegador no es capaz de reproducir canciones");

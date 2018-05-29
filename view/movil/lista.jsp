@@ -110,6 +110,7 @@
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"></jsp:include>
+<%@include file="includes/reproductor.jsp" %>
 </body>
 </html>
 

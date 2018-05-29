@@ -101,6 +101,7 @@
 </div>
 
 <jsp:include page="includes/footer.jsp"></jsp:include>
+<%@include file="includes/reproductor.jsp" %>
 
 <script>
     /* Derechos de autor  : https://getbootstrap.com/docs/4.0/components/forms/#validation */
