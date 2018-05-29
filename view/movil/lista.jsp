@@ -25,7 +25,7 @@
                         $("#play_button").click( function()
                             {
                                 actualizar_lista();
-                                alert("se ha actualizado la lista");
+                                // alert("se ha actualizado la lista");
                             }
                         );
                     </script>
@@ -72,10 +72,6 @@
                     </div>
                     <c:if test="${propietario}">
                         <div class="media-right">
-                            <button type="button" class="btn btn-default " data-toggle="modal"
-                                    data-target="#modalOrden">
-                                <span class="fa fa-list-ol" style="font-size:20px; "></span>
-                            </button>
                             <a href="/deleteSongFromList?user=${lista.getUsuarioByIdUser().getIdUser()}&list=${lista.getNombre()}&song=${cancion.getIdCancion()}">
                                 <button type="button" class="btn btn-default ">
                                     <span class="fa fa-trash" style="font-size:20px; "></span>

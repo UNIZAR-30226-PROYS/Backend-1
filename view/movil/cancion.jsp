@@ -32,10 +32,10 @@
                 <script>
                     $("#play_button").click( function()
                         {
-                            alert('button clicked' + $('#idCancion').attr('about'));
+                            // alert('button clicked' + $('#idCancion').attr('about'));
 
                             $("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 40, song: $('#idCancion').attr('about') }, function () {
-                                alert('cancion loaded');
+                                // alert('cancion loaded');
                                 actualizar_tracks_primera_cancion();
                             });
                         }

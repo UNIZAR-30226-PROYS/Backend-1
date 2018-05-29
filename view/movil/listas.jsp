@@ -46,11 +46,6 @@
                         <h6 style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap"
                             class="media-heading">${lista.getNombre()}</h6>
                     </div>
-                    <div class="media-right">
-                        <button type="button" class="btn btn-default ">
-                            <span class="fa fa-trash" style="font-size:20px; "></span>
-                        </button>
-                    </div>
                 </div>
             </div>
         </c:forEach>

@@ -198,10 +198,10 @@
             cache: false,
             processData:false,
             success: function(data){
-                alert("ok");
+                // alert("ok");
             },
             error: function(){
-                alert("error");
+                // alert("error");
             }
         })
     }));

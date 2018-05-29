@@ -1,9 +1,8 @@
 package main.java.controller;
 
-import main.java.model.Suscribir;
-import main.java.model.Usuario;
 import main.java.model.Cancion;
 import main.java.model.Comentario;
+import main.java.model.Usuario;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,8 +18,8 @@ public class ComentController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         Usuario username = (Usuario) session.getAttribute("username");
-// username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
-username.saveUser();
+        username.setConexion(); // Actualiza estado de conexion del usuario
+        username.saveUser();
         Usuario usuario = username;
         Integer cancionI = Integer.parseInt(request.getParameter("cancion"));
         String texto = request.getParameter("texto");
@@ -28,14 +27,14 @@ username.saveUser();
         String UA = request.getHeader("User-Agent");
         RequestDispatcher rd = null;
         try {
-            if(usuario != null) {
+            if (usuario != null) {
                 Cancion cancion = Cancion.getCancion(cancionI);
                 Comentario.addComentario(usuario, cancion, texto);
             }
 
-            if (UA.contains("Mobile")){
-                response.sendRedirect("/song?id="+Integer.toString(cancionI));
-            }else{
+            if (UA.contains("Mobile")) {
+                response.sendRedirect("/song?id=" + Integer.toString(cancionI));
+            } else {
                 response.setStatus(HttpServletResponse.SC_OK);
             }
 
@@ -49,6 +48,6 @@ username.saveUser();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }

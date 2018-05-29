@@ -27,8 +27,8 @@ public class LoginController extends HttpServlet {
         try {
             Usuario username = Usuario.login(user,pass);
             session.setAttribute("username", username);
-    // username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
-username.saveUser();
+            username.setConexion(); // Actualiza estado de conexion del usuario
+            username.saveUser();
             Collection<Listarep> aux = username.getListarepsByIdUser();
             List<Listarep> listas = new ArrayList<>(aux);
 
