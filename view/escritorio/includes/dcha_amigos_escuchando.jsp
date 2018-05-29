@@ -30,30 +30,30 @@
                              style="width:50px;" alt="...">
                     </a>
                 </div>
-                <div class="media-body">
+                <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                     <h6 class="media-heading"><a
                             href="${pageContext.request.contextPath}/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">${sus.getUsuarioByIdSuscrito().getUsername()}</a>
                     </h6>
                     <c:if test="${!sus.getUsuarioByIdSuscrito().getPublico()}">
                         <h6 class="media-heading"><a href="#">Privado</a></h6> <!-- Link a la canción -->
                     </c:if>
-                        <%--<c:if test="${sus.getUsuarioByIdSuscrito().estado()}">--%>
-                    <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 0}">
-                        <h6 class="media-heading">Conectado</h6>
-                        <h6 class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-                            <a
-                                    href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}
-                            </a>
-                        </h6>
-                        <!-- Link a la canción -->
+                    <c:if test="${sus.getUsuarioByIdSuscrito().getPublico()}">
+                        <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 0}">
+                            <h6 class="media-heading"><a href="#">Conectado</a></h6>
+                            <h6 class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                                <a
+                                        href="/song?id=${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getIdCancion()}">${Usuario.getLastHistorial(sus.getUsuarioByIdSuscrito()).getNombre()}
+                                </a>
+                            </h6>
+                            <!-- Link a la canción -->
+                        </c:if>
+                        <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 1}">
+                            <h6 class="media-heading"><a href="#">Ausente</a></h6> <!-- Link a la canción -->
+                        </c:if>
+                        <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 2}">
+                            <h6 class="media-heading"><a href="#">Desconectado</a></h6> <!-- Link a la canción -->
+                        </c:if>
                     </c:if>
-                    <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 1}">
-                        <h6 class="media-heading"><a href="#">Ausente</a></h6> <!-- Link a la canción -->
-                    </c:if>
-                    <c:if test="${sus.getUsuarioByIdSuscrito().estado() == 2}">
-                        <h6 class="media-heading"><a href="#">Desconectado</a></h6> <!-- Link a la canción -->
-                    </c:if>
-                        <%--</c:if>--%>
                 </div>
             </div>
         </li>

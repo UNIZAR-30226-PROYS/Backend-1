@@ -85,7 +85,7 @@
                 <div class="media" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                     <div class="media-left" style="padding-right:15px">
                         <a href="/user?id=${sus.getUsuarioByIdSuscrito().getIdUser()}">
-                            <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getUsername()}.png"
+                            <img src="/contenido/imagenes/usuarios/${sus.getUsuarioByIdSuscrito().getUsername()}Perfil.png"
                                  style="width:64px;"
                                  alt="...">
                         </a>
