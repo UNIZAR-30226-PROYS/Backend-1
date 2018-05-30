@@ -1,4 +1,4 @@
-<div style="margin-bottom: 50px">
+<div style="margin-bottom: 65px">
     <%--
         Este div es para "levantar" la web por encima del reproductor y que no se
         esconda contenido debajo de éste
