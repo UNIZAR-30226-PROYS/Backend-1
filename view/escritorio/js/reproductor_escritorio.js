@@ -1,7 +1,7 @@
 /* Ideas obtenidas de https://codepen.io/markhillard/pen/Hjcwu?editors=1010	*/
 /* Last Modified : 22/04/2018 Jorge	*/
 
-var mediaPath = 'http://wolfsound.ddns.net:6060/contenido/canciones/';
+var mediaPath = 'http://wolfsound.ddns.net/contenido/canciones/';
 
 var tracks = [];
 var index = 0;
@@ -143,7 +143,7 @@ jQuery(document).ready(function() {
         repeat_option = false;
         random_option = false;
         var mouseup = false;
-        imagePath = 'http://wolfsound.ddns.net:7000/contenido/imagenes/canciones/';
+        imagePath = 'http://wolfsound.ddns.net/contenido/imagenes/canciones/';
         extension = '';
 
         var actualizar_reproduccion = 10;  /* Frecuencia de actualización del ultimo momento de reproduccion */
