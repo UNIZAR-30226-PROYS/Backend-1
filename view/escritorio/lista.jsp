@@ -44,8 +44,8 @@
                                 }
                             );
                         </script>
-                        <button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio
-                        </button>
+                        <%--<button type="button" class="btn btn-primary mt-1"><i class="fa fa-random"></i>&nbsp;Aleatorio--%>
+                        <%--</button>--%>
                     </div>
                 </div>
                 <div class="col-8">

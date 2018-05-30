@@ -28,14 +28,14 @@
                         });
                     </script>
                 </div>
-                <%--TODO: reproducir aleatorio--%>
-                <div class="col-1">
-                    <a href="#">
-                        <button type="button" class="mx-4 btn btn-default ">
-                            <span class="fa fa-random" style="font-size:20px; "></span>
-                        </button>
-                    </a>
-                </div>
+                <%--&lt;%&ndash;TODO: reproducir aleatorio&ndash;%&gt;--%>
+                <%--<div class="col-1">--%>
+                    <%--<a href="#">--%>
+                        <%--<button type="button" class="mx-4 btn btn-default ">--%>
+                            <%--<span class="fa fa-random" style="font-size:20px; "></span>--%>
+                        <%--</button>--%>
+                    <%--</a>--%>
+                <%--</div>--%>
             </div>
         </div>
     </div>
