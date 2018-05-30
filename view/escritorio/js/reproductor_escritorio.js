@@ -209,7 +209,7 @@ jQuery(document).ready(function() {
             /*
             $("#volumen").bind("change", function() {
                 // alert("a");
-                audio.volume =  ($(this).attr('value'));
+                audio.volume =  ($(this).val());
             });
             *(
             */
@@ -221,7 +221,7 @@ jQuery(document).ready(function() {
 
         $("#seek").bind("change", function() {
             mouseup = true;
-            audio.currentTime = ($(this).attr('value'));
+            audio.currentTime = ($(this).val());
             mouseup = false;
         });
 
@@ -273,7 +273,7 @@ jQuery(document).ready(function() {
             if (!playing) {
                 audio.play();
 
-                audio.currentTime =  $("#seek").attr('value');   //// alert("empiezo" + $("#seek").attr('value'));
+                audio.currentTime =  $("#seek").val();   //// alert("empiezo" + $("#seek").val());
 
                 $('#btnPlayStio_v2').removeClass('fa-play');
                 $('#btnPlayStio_v2').addClass('fa-pause');
