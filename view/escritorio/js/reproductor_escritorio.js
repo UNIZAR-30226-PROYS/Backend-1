@@ -21,15 +21,8 @@ var index = 0;
                 console.log('Ha ocurrido un error cargando la lista.');
             },
             success: function(data){
-                console.log("Actualizando tracks -> " + caca);
-    // =======
-    //         // alert("actualizando");
-    //         // Si no envias un parametro por algun extraño motivo no funciona */
-    //         $.ajaxSetup({async: false});
-    //         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
-    //             //// alert("aqui -> " + caca);
-    // >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
-                var componentes = caca.split(",");
+                console.log("Actualizando tracks -> " + data);
+                var componentes = data.split(",");
                 //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
                 for (var i = 0, len = componentes.length; i < len;) {
                     tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
