@@ -12,7 +12,7 @@
     <%@include file="includes/topbar.jsp" %>
     <!-- CONTENIDO DE LA VISTA -->
     <div id="contenido">
-<% } //if%>
+        <% } //if%>
         <div id="tituloNuevo" value="Resultados de ${consulta}" style="display:none;"></div>
         <div class="container mb-3">
             <div class="media mt-2">
@@ -25,10 +25,11 @@
                     <form id="formBuscar" class="search-button" action="/search" method="get">
                         <div class="orm-group">
                             <div class="input-group">
-                                <input id="textoBuscar" name="search_input" type="text" class="form-control" placeholder="Buscar ..." autocomplete="off" required>
+                                <input id="textoBuscar" name="search_input" type="text" class="form-control"
+                                       placeholder="Buscar ..." autocomplete="off" required>
                                 <span class="input-group-btn search-button">
                                         <button type="submit" class="btn btn-secondary">
-                                            <span class="fa fa-search" style="font-size:20px;"  ></span>
+                                            <span class="fa fa-search" style="font-size:20px;"></span>
                                         </button>
                                     </span>
                             </div>
@@ -52,7 +53,8 @@
                     <a href="/song?id=${resultado.getIdCancion()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/imagenes/canciones/${resultado.getIdCancion()}.png" style="width:64px;" alt="...">
+                                <img src="/contenido/imagenes/canciones/${resultado.getIdCancion()}.png"
+                                     style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getNombre()}</h6>
@@ -67,7 +69,8 @@
                     <a href="/user?id=${resultado.getIdUser()}" class="list-group-item list-group-item-action">
                         <div class="media">
                             <div class="media-left" style="padding-right:15px">
-                                <img src="/contenido/imagenes/usuarios/${resultado.getUsername()}Perfil.png?x=${rand}" style="width:64px;" alt="...">
+                                <img src="/contenido/imagenes/usuarios/${resultado.getUsername()}Perfil.png?x=${rand}"
+                                     style="width:64px;" alt="...">
                             </div>
                             <div class="media-body">
                                 <h6 class="media-heading">${resultado.getUsername()}</h6>
@@ -79,10 +82,11 @@
             </div>
             <div id="result_listas" class="list-group pt-2 d-none">
                 <c:forEach items="${listas}" var="resultado">
-                    <a href="/list?id=${resultado.getIdLista()}" class="list-group-item list-group-item-action">
-                        <div class="media">
-                            <div class="media-left" style="padding-right:15px">
-                                <img src="<c:choose>
+                    <c:if test="${lista.getNombre() != 'historial' && lista.getNombre() != 'mimusica' && lista.getNombre() != 'favoritos'}">
+                        <a href="/list?id=${resultado.getIdLista()}" class="list-group-item list-group-item-action">
+                            <div class="media">
+                                <div class="media-left" style="padding-right:15px">
+                                    <img src="<c:choose>
                                     <c:when test="${resultado.getCancioneslistasByIdLista().isEmpty()}">
                                         ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
                                     </c:when>
@@ -91,13 +95,14 @@
                                     </c:otherwise>
                                 </c:choose>
                                 " alt="Imagen lista" style="width:64px">
+                                </div>
+                                <div class="media-body">
+                                    <h6 class="media-heading">${resultado.getNombre()}</h6>
+                                    <h6 class="media-heading">${resultado.getNumElementos()} canciones</h6>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <h6 class="media-heading">${resultado.getNombre()}</h6>
-                                <h6 class="media-heading">${resultado.getNumElementos()} canciones</h6>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    </c:if>
                 </c:forEach>
             </div>
         </div>
@@ -105,7 +110,7 @@
     <script src="${pageContext.request.contextPath}/scripts/busqueda.js"></script>
     <script>
         $(document).ready(function () {
-            $('#inputGroupSelect04').on('change',function () {
+            $('#inputGroupSelect04').on('change', function () {
                 // console.log("Entra en seleccionado");
                 var seleccionado = $('#inputGroupSelect04 option').filter(':selected').text();
                 // console.log(seleccionado);
