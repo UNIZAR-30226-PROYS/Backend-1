@@ -21,6 +21,7 @@
         </div>
         <div class="row pt-3 align-self-center align-items-center align-content-center">
             <div class="col-10 mr-auto">
+                <div class="d-none" id="idCancion" about="${cancion.getIdCancion()}" ></div>
                 <h3>${cancion.getNombre()}</h3>
             </div>
             <div class="col-2 px-2">
@@ -30,16 +31,9 @@
                     </button>
                 </a>
                 <script>
-                    $("#play_button").click( function()
-                        {
-                            // alert('button clicked' + $('#idCancion').attr('about'));
-
-                            $("#ocultar_contenido").load("/AddAndPlay", {max_num_canciones: 40, song: $('#idCancion').attr('about') }, function () {
-                                // alert('cancion loaded');
-                                actualizar_tracks_primera_cancion();
-                            });
-                        }
-                    );
+                    $("#play_button").click( function() {
+                        reproducir_cancion($('#idCancion').attr('about'));
+                    });
                 </script>
             </div>
         </div>

@@ -13,26 +13,33 @@ var index = 0;
         tracks=[];
 
         $.ajaxSetup({async: false});
-        $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
-            console.log("Actualizando tracks -> " + caca);
-// =======
-//         // alert("actualizando");
-//         // Si no envias un parametro por algun extraño motivo no funciona */
-//         $.ajaxSetup({async: false});
-//         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
-//             //// alert("aqui -> " + caca);
-// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
-            var componentes = caca.split(",");
-            //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
-            for (var i = 0, len = componentes.length; i < len;) {
-                tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
+        $.ajax({
+            url: '/Reproductor_lista_v2',
+            type: 'post',
+            data: {max_num_canciones:40},
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('Ha ocurrido un error cargando la lista.');
+            },
+            success: function(data){
+                console.log("Actualizando tracks -> " + caca);
+    // =======
+    //         // alert("actualizando");
+    //         // Si no envias un parametro por algun extraño motivo no funciona */
+    //         $.ajaxSetup({async: false});
+    //         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+    //             //// alert("aqui -> " + caca);
+    // >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
+                var componentes = caca.split(",");
+                //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
+                for (var i = 0, len = componentes.length; i < len;) {
+                    tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
 
-                i = i + 2;
-                // // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
+                    i = i + 2;
+                }
+                tracks.pop();
             }
         });
         $.ajaxSetup({async: true});
-        tracks.pop();
 // <<<<<<< HEAD
 
         buildPlaylist = $(tracks).each(function(key, value) {
@@ -50,45 +57,6 @@ var index = 0;
             );
         })
     }
-
-function actualizar_tracks_primera_cancion() {
-    $( "#plList" ).empty();
-    //// alert("actualizando primera cancion despues de limpiar");
-    tracks=[];
-
-    //// alert("actualizando");
-    // Si no envias un parametro por algun extraño motivo no funciona */
-    $( ".reprodcutor_list_item" ).empty();
-    $.ajaxSetup({async: false});
-    $("#ocultar_contenido").load("/Reproductor_lista_v2_first_song", {max_num_canciones: 40}, function (caca) {
-        //// alert("Actualizando tracks -> " + caca);
-        var componentes = caca.split(",");
-        //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
-        for (var i = 0, len = componentes.length; i < len;) {
-            tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
-
-            i = i + 2;
-            // // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
-        }
-    });
-    $.ajaxSetup({async: true});
-    tracks.pop();
-
-    buildPlaylist = $(tracks).each(function(key, value) {
-        var trackNumber = value.track,
-            trackName = value.name;
-        // trackDuration = value.duration;
-        if (trackNumber.toString().length === 1) {
-            trackNumber = '0' + trackNumber;
-        }
-        $('#plList').append(
-            '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-            '<div>'+trackNumber+ '</div>  ' +
-            '<div>'+trackName+'.mp3</div>  '
-            //	+'<div>'+ trackDuration +'</div> ' +
-        );
-    })
-}
 
 function reproducir_cancion(id){
     $.ajax({
