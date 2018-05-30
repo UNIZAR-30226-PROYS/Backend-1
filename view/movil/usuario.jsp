@@ -18,11 +18,11 @@
                 </button>
             </a>
         </div>
-        <div class="col-4">
-            <div class="img-responsive text-center">
+        <div class="col-4" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+            <div class="img-responsive text-center" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                 <img src="/contenido/imagenes/usuarios/${username.getUsername()}Perfil.png?x=${rand}"
                      style="height: 80px;" alt="Usuario" data-toggle="modal" data-target="#modalImagen">
-                <p>${username.getUsername()}</p>
+                <p style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">${username.getUsername()}</p>
             </div>
         </div>
         <div class="col-4">

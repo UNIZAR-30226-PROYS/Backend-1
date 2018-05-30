@@ -166,12 +166,6 @@
             </c:if>
         </c:forEach>
     </div>
-    <div style="margin-bottom: 50px">
-        <%--
-            Este div es para "levantar" la web por encima del reproductor y que no se
-            esconda contenido debajo de éste
-         --%>
-    </div>
 </div>
 
 <jsp:include page="includes/footer.jsp"></jsp:include>
