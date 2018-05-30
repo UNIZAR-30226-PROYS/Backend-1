@@ -5,7 +5,7 @@
 <html lang="es">
 <head>
     <c:if test="${usuario.getIdUser() == username.getIdUser()}">
-        <title>Mis listas - ${username.getUsername()}</title>
+        <title >Mis listas - ${username.getUsername()}</title>
     </c:if>
     <c:if test="${usuario.getIdUser() != username.getIdUser()}">
         <title> Listas de ${usuario.getUsername()}</title>
@@ -18,8 +18,8 @@
 <div class="container mb-3">
 
     <div class="media mt-2">
-        <div class="media-body">
-            <h4 class="media-heading">Listas de ${usuario.getUsername()}</h4>
+        <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+            <h4 class="media-heading" >Listas de ${usuario.getUsername()}</h4>
         </div>
 
     </div>

@@ -12,7 +12,7 @@
                 <img src="${pageContext.request.contextPath}/contenido/web/imagenes/wolfsound-white.png" style="height:40px;" alt="Wolfic">
             </a>
         </div>
-        <div class="col-4 ml-auto text-right">
+        <div class="col-4 ml-auto text-right" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
             <a href="${pageContext.request.contextPath}/user?id=${username.getIdUser()}"> <i class="fa fa-user pt-1" style="font-size:20px; color:white;"></i>  ${sessionScope.username.getUsername()}</a>
         </div>
     </c:if>
