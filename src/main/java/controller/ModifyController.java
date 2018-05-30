@@ -24,7 +24,7 @@ public class ModifyController extends HttpServlet {
         String nombreAp = request.getParameter("nombre_Ap");
         String mail = request.getParameter("mail");
         String visiS = request.getParameter("visibilidad");
-        Boolean visiB = visiS.equals("Público");
+        Boolean visiB = !(visiS.equals("Privado"));
 
         RequestDispatcher rd = null;
         String iduserOld = userOld.getUsername();
