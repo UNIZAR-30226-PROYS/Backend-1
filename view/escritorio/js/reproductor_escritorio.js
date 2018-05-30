@@ -185,23 +185,23 @@ jQuery(document).ready(function() {
             }).on('ended', function () {
 
                 if (repeat_option == true ){
-                    loadTrack(index);
+                    playTrack(index);
                     audio.play();
                 }
                 else if (random_option == true){
                     var song_to_play = Math.floor(Math.random() * (trackCount ) ) ;
-                    loadTrack(song_to_play);
+                    playTrack(song_to_play);
                     audio.play();
                 }
                 else{
                     if ((index + 1) < trackCount) {
                         index++;
-                        loadTrack(index);
+                        playTrack(index);
                         audio.play();
                     } else {
                         audio.pause();
                         index = 0;
-                        loadTrack(index);
+                        playTrack(index);
                     }
                 }
             }).get(0),
@@ -209,7 +209,7 @@ jQuery(document).ready(function() {
             /*
             $("#volumen").bind("change", function() {
                 // alert("a");
-                audio.volume =  ($(this).val());
+                audio.volume =  ($(this).attr('value'));
             });
             *(
             */
@@ -221,7 +221,7 @@ jQuery(document).ready(function() {
 
         $("#seek").bind("change", function() {
             mouseup = true;
-            audio.currentTime = ($(this).val());
+            audio.currentTime = ($(this).attr('value'));
             mouseup = false;
         });
 
@@ -252,8 +252,16 @@ jQuery(document).ready(function() {
                     actualizar_reproduccion = 12;
                     var tiempo_actual = this.currentTime;
                     var max_tiempo = this.duration;
-                    $("#ocultar_contenido").load("/reproductor_cont", {momento_cancion: tiempo_actual, momento_cancion_max : max_tiempo}, function () {
-                        //// alert("Load was performed.");
+                    $.ajax({
+                        url: '/reproductor_cont',
+                        type: 'post',
+                        data: {momento_cancion: tiempo_actual, momento_cancion_max: max_tiempo},
+                        error: function(XMLHttpRequest, textStatus, errorThrown){
+                            console.log('Error actualizando instante de reproduccion.');
+                        },
+                        success: function(data){
+
+                        }
                     });
                 }
             }
@@ -265,7 +273,7 @@ jQuery(document).ready(function() {
             if (!playing) {
                 audio.play();
 
-                audio.currentTime =  $("#seek").val();   //// alert("empiezo" + $("#seek").val());
+                audio.currentTime =  $("#seek").attr('value');   //// alert("empiezo" + $("#seek").attr('value'));
 
                 $('#btnPlayStio_v2').removeClass('fa-play');
                 $('#btnPlayStio_v2').addClass('fa-pause');
