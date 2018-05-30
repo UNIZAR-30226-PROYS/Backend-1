@@ -69,10 +69,10 @@
                 --%>
 				<% if ( user_found.equals("false") )  { %>
 				<%-- <h1>sin ultimo instante <%=ultimo_momento%> <%=user_found%> </h1> --%>
-				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="0" max=""/>
+				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="0" max="600"/>
 				<% } else {%>
 				<%-- <h1>con ultimo instante <%=ultimo_momento%> <%=user_found%></h1> --%>
-				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="<%=ultimo_momento%>" max="${sessionScope.max_instante_reproduccion}"/>
+				<input class="w-100 custom-range" type="range" name="momento_cancion" id="seek" min="0" value="<%=ultimo_momento%>" max="600"/>
 				<% } %>
 			</div>
 		</form>
