@@ -8,7 +8,7 @@
 </div>
 
 <div class="socialbar-cuerpo">
-    <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" >
+    <form id="formRegistro" class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" >
         <!-- Apartados -->
         <div class="form-group pt-2">
             <label for="nombre_usuario" style="color: black">Nombre de usuario</label>
@@ -66,5 +66,15 @@
                 });
             }, false);
         })();
+    </script>
+    <script>
+        $('#formRegistro').submit(function(e){
+           if($('#contrasenya').val() === $('#confirmar_contrasenya').val()){
+               return true;
+           }else{
+               e.preventDefault();
+               alert("Las contraseñas no son iguales");
+           }
+        });
     </script>
 </div>

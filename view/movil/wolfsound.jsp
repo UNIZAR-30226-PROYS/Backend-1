@@ -69,7 +69,7 @@
         <!-- Registrarse -->
         <div class="tab-pane fade" id="registrarse" role="tabpanel" aria-labelledby="registrarse-tab">
 
-            <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" >
+            <form id="formRegistro" class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" >
                 <h4 class="text-center py-3">Registrarse en WolfSound</h4>
                 <div class="form-group">
                     <label for="nombre_usuario">Nombre de usuario</label>
@@ -145,6 +145,16 @@
             });
         }, false);
     })();
+</script>
+<script>
+    $('#formRegistro').submit(function(e){
+        if($('#contrasenya').val() === $('#confirmar_contrasenya').val()){
+            return true;
+        }else{
+            e.preventDefault();
+            alert("Las contraseñas no son iguales");
+        }
+    });
 </script>
 </body>
 </html>
