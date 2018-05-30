@@ -82,7 +82,7 @@
             </div>
             <div id="result_listas" class="list-group pt-2 d-none">
                 <c:forEach items="${listas}" var="resultado">
-                    <c:if test="${lista.getNombre() != 'historial' && lista.getNombre() != 'mimusica' && lista.getNombre() != 'favoritos'}">
+                    <c:if test="${resultado.getNombre() != 'historial' && resultado.getNombre() != 'mimusica' && resultado.getNombre() != 'favoritos'}">
                         <a href="/list?id=${resultado.getIdLista()}" class="list-group-item list-group-item-action">
                             <div class="media">
                                 <div class="media-left" style="padding-right:15px">
