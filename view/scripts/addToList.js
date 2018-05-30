@@ -3,7 +3,7 @@ function addToList(destino){
         url: destino,
         type: 'get',
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert('Ha ocurrido un error actualizando la lista. Inténtalo de nuevo en unos minutos.');
+            // alert('Ha ocurrido un error actualizando la lista. Inténtalo de nuevo en unos minutos.');
         },
         success: function(data){
             $("#modalAdd").modal("show");
@@ -33,7 +33,7 @@ $(document).ready(function () {
             url: destino,
             type: 'get',
             error: function(XMLHttpRequest, textStatus, errorThrown){
-                alert('Ha ocurrido un error creando la lista. Inténtalo de nuevo en unos minutos.');
+                // alert('Ha ocurrido un error creando la lista. Inténtalo de nuevo en unos minutos.');
             },
             success: function(data){
                 var idListaNueva = data;

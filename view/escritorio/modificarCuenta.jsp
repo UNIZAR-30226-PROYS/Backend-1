@@ -28,23 +28,23 @@
                             <div class="container mb-3">
                                 <!-- Mosificar Cuenta -->
                                 <!-- TODO: ajax para enviar este formulario sin recargar la pagina -->
-                                <form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post" novalidate>
+                                <form class="needs-validation" action="${pageContext.request.contextPath}/modify" method="post">
                                     <label for="nombreAp">Nombre y Apellidos</label>
                                     <div class="form-group">
                                         <div class="form-row">
-                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" placeholder="Nombre" required value="${username.getNomAp()}" >
+                                            <input type="text" class="form-control" name = "nombre_Ap" id="nombreAp" maxlength="100" placeholder="Nombre" required value="${username.getNomAp()}" >
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="nombre_usuario">Nombre de usuario</label>
-                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" placeholder="usuario_123" required value =${username.getUsername()} >
+                                        <input type="text" class="form-control" name ="new_user" id="nombre_usuario" maxlength="50" placeholder="usuario_123" required value="${username.getUsername()}" >
 
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="correo">Direccion de correo</label>
-                                        <input type="email" class="form-control" name = "mail" id="correo" placeholder="user@mail .."required  value =${username.getEmail()}>
+                                        <input type="email" class="form-control" name = "mail" id="correo" maxlength="100" placeholder="user@mail .." required  value="${username.getEmail()}">
                                         <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
                                     </div>
 

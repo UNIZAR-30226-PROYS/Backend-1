@@ -13,6 +13,7 @@
 
 <!-- CONTENIDO DE LA VISTA -->
 <div class="container mb-3">
+    <div class="d-none" id="idLista" about="${lista.getIdLista()}" ></div>
     <div class="row pt-3">
         <%--TODO: reproducir normal--%>
         <div class="col-5 mr-auto">
@@ -22,12 +23,9 @@
                             <span class="fa fa-play" style="font-size:20px; "></span>
                         </button>
                     <script>
-                        $("#play_button").click( function()
-                            {
-                                actualizar_lista();
-                                alert("se ha actualizado la lista");
-                            }
-                        );
+                        $("#play_button").click( function() {
+                            reproducir_lista($('#idLista').attr('about'));
+                        });
                     </script>
                 </div>
                 <%--TODO: reproducir aleatorio--%>
@@ -110,6 +108,7 @@
     </div>
 </div>
 <jsp:include page="includes/footer.jsp"></jsp:include>
+<%@include file="includes/reproductor.jsp" %>
 </body>
 </html>
 

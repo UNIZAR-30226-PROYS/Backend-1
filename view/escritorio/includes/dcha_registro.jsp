@@ -8,11 +8,11 @@
 </div>
 
 <div class="socialbar-cuerpo">
-    <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" novalidate>
+    <form class="needs-validation" action="${pageContext.request.contextPath}/register" method="post" >
         <!-- Apartados -->
         <div class="form-group pt-2">
             <label for="nombre_usuario" style="color: black">Nombre de usuario</label>
-            <input type="text" class="form-control socialbarM" name="register_user" id="nombre_usuario" placeholder="usuario_123" required>
+            <input type="text" class="form-control socialbarM" name="register_user" id="nombre_usuario" placeholder="usuario_123" maxlength="50" required>
             <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
         </div>
         <div class="form-group pb-2">
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group">
             <label for="correo" style="color: black">Dirección de correo</label>
-            <input type="email" class="form-control socialbarM" name="register_email" id="correo" placeholder="user@mail .." required>
+            <input type="email" class="form-control socialbarM" name="register_email" id="correo" placeholder="user@mail .." maxlength="100" required>
             <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
         </div>
         <div class="form-group">

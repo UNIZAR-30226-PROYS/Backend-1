@@ -15,7 +15,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="${pageContext.request.contextPath}/movil/js/reprodutor_v2.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/escritorio/js/reproductor_escritorio.js"></script>
 
 
 <%
@@ -198,10 +198,10 @@
             cache: false,
             processData:false,
             success: function(data){
-                alert("ok");
+                // alert("ok");
             },
             error: function(){
-                alert("error");
+                // alert("error");
             }
         })
     }));

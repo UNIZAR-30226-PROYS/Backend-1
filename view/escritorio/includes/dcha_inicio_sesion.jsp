@@ -11,7 +11,7 @@
         <!-- Apartados -->
         <div class="form-group pt-2">
             <label for="nombre_usuario" style="color: black">Nombre de usuario</label>
-            <input type="text" class="form-control socialbarM" name="login_user" value="${user}" id="nombre_usuario" placeholder="usuario_123" required>
+            <input type="text" class="form-control socialbarM" name="login_user" value="${user}" id="nombre_usuario" placeholder="usuario_123" maxlength="50" required>
             <div class="invalid-feedback"> No puedes dejar este campo en blanco. </div>
         </div>
         <div class="form-group pb-2">

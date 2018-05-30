@@ -95,7 +95,7 @@
                     <div class="col ">
                         <form id="formComentar" class="needs-validation form-row" action="${pageContext.request.contextPath}/Coment" method="post" >
                             <div class="col" required>
-                                <textarea class="text form-control" id="comentario"  name="texto" required></textarea>
+                                <textarea class="text form-control" id="comentario"  name="texto" maxlength="500" required></textarea>
                                 <input type="hidden" value="${cancion.getIdCancion()}" name="cancion" required>
                             </div>
                             <div class="col">
@@ -142,7 +142,7 @@
                                 <label for="listName">Crear Lista y añadir</label>
                                 <div class="input-group">
                                     <input type="hidden" name="song" value="${cancion.getIdCancion()}" />
-                                    <input type="text" class="form-control" name="listName" id="listName" placeholder="Nueva Lista" required>
+                                    <input type="text" class="form-control" name="listName" id="listName" placeholder="Nueva Lista" maxlength="50" required>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Añadir</button>

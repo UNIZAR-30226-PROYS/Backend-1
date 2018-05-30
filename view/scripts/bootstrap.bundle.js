@@ -193,26 +193,26 @@ var Util = function ($$$1) {
 
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v4.0.0): alert.js
+ * Bootstrap (v4.0.0): // alert.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  * --------------------------------------------------------------------------
  */
 
-var Alert = function ($$$1) {
+var // alert = function ($$$1) {
   /**
    * ------------------------------------------------------------------------
    * Constants
    * ------------------------------------------------------------------------
    */
-  var NAME = 'alert';
+  var NAME = '// alert';
   var VERSION = '4.0.0';
-  var DATA_KEY = 'bs.alert';
+  var DATA_KEY = 'bs.// alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
   var JQUERY_NO_CONFLICT = $$$1.fn[NAME];
   var TRANSITION_DURATION = 150;
   var Selector = {
-    DISMISS: '[data-dismiss="alert"]'
+    DISMISS: '[data-dismiss="// alert"]'
   };
   var Event = {
     CLOSE: "close" + EVENT_KEY,
@@ -220,7 +220,7 @@ var Alert = function ($$$1) {
     CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
   };
   var ClassName = {
-    ALERT: 'alert',
+    // alert: '// alert',
     FADE: 'fade',
     SHOW: 'show'
     /**
@@ -231,15 +231,15 @@ var Alert = function ($$$1) {
 
   };
 
-  var Alert =
+  var // alert =
   /*#__PURE__*/
   function () {
-    function Alert(element) {
+    function // alert(element) {
       this._element = element;
     } // Getters
 
 
-    var _proto = Alert.prototype;
+    var _proto = // alert.prototype;
 
     // Public
     _proto.close = function close(element) {
@@ -271,7 +271,7 @@ var Alert = function ($$$1) {
       }
 
       if (!parent) {
-        parent = $$$1(element).closest("." + ClassName.ALERT)[0];
+        parent = $$$1(element).closest("." + ClassName.// alert)[0];
       }
 
       return parent;
@@ -304,13 +304,13 @@ var Alert = function ($$$1) {
     }; // Static
 
 
-    Alert._jQueryInterface = function _jQueryInterface(config) {
+    // alert._jQueryInterface = function _jQueryInterface(config) {
       return this.each(function () {
         var $element = $$$1(this);
         var data = $element.data(DATA_KEY);
 
         if (!data) {
-          data = new Alert(this);
+          data = new // alert(this);
           $element.data(DATA_KEY, data);
         }
 
@@ -320,23 +320,23 @@ var Alert = function ($$$1) {
       });
     };
 
-    Alert._handleDismiss = function _handleDismiss(alertInstance) {
+    // alert._handleDismiss = function _handleDismiss(// alertInstance) {
       return function (event) {
         if (event) {
           event.preventDefault();
         }
 
-        alertInstance.close(this);
+        // alertInstance.close(this);
       };
     };
 
-    _createClass(Alert, null, [{
+    _createClass(// alert, null, [{
       key: "VERSION",
       get: function get() {
         return VERSION;
       }
     }]);
-    return Alert;
+    return // alert;
   }();
   /**
    * ------------------------------------------------------------------------
@@ -345,22 +345,22 @@ var Alert = function ($$$1) {
    */
 
 
-  $$$1(document).on(Event.CLICK_DATA_API, Selector.DISMISS, Alert._handleDismiss(new Alert()));
+  $$$1(document).on(Event.CLICK_DATA_API, Selector.DISMISS, // alert._handleDismiss(new // alert()));
   /**
    * ------------------------------------------------------------------------
    * jQuery
    * ------------------------------------------------------------------------
    */
 
-  $$$1.fn[NAME] = Alert._jQueryInterface;
-  $$$1.fn[NAME].Constructor = Alert;
+  $$$1.fn[NAME] = // alert._jQueryInterface;
+  $$$1.fn[NAME].Constructor = // alert;
 
   $$$1.fn[NAME].noConflict = function () {
     $$$1.fn[NAME] = JQUERY_NO_CONFLICT;
-    return Alert._jQueryInterface;
+    return // alert._jQueryInterface;
   };
 
-  return Alert;
+  return // alert;
 }($);
 
 /**
@@ -6311,7 +6311,7 @@ var Tab = function ($$$1) {
 })($);
 
 exports.Util = Util;
-exports.Alert = Alert;
+exports.// alert = // alert;
 exports.Button = Button;
 exports.Carousel = Carousel;
 exports.Collapse = Collapse;

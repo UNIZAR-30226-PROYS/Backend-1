@@ -9,30 +9,37 @@ var index = 0;
     function actualizar_tracks() {
 // <<<<<<< HEAD
         $( "#plList" ).empty();
-        //alert("actualizando historial despues de limpiar");
+        //// alert("actualizando historial despues de limpiar");
         tracks=[];
 
         $.ajaxSetup({async: false});
-        $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 40}, function (caca) {
-            console.log("Actualizando tracks -> " + caca);
-// =======
-//         alert("actualizando");
-//         // Si no envias un parametro por algun extraño motivo no funciona */
-//         $.ajaxSetup({async: false});
-//         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
-//             //alert("aqui -> " + caca);
-// >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
-            var componentes = caca.split(",");
-            //alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
-            for (var i = 0, len = componentes.length; i < len;) {
-                tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
+        $.ajax({
+            url: '/Reproductor_lista_v2',
+            type: 'post',
+            data: {max_num_canciones:40},
+            error: function(XMLHttpRequest, textStatus, errorThrown){
+                console.log('Ha ocurrido un error cargando la lista.');
+            },
+            success: function(data){
+                console.log("Actualizando tracks -> " + caca);
+    // =======
+    //         // alert("actualizando");
+    //         // Si no envias un parametro por algun extraño motivo no funciona */
+    //         $.ajaxSetup({async: false});
+    //         $("#ocultar_contenido").load("/Reproductor_lista_v2", {max_num_canciones: 5}, function (caca) {
+    //             //// alert("aqui -> " + caca);
+    // >>>>>>> ffda881e3df99e4d2860c9dbec2d0538968aab15
+                var componentes = caca.split(",");
+                //// alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
+                for (var i = 0, len = componentes.length; i < len;) {
+                    tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
 
-                i = i + 2;
-                // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
+                    i = i + 2;
+                }
+                tracks.pop();
             }
         });
         $.ajaxSetup({async: true});
-        tracks.pop();
 // <<<<<<< HEAD
 
         buildPlaylist = $(tracks).each(function(key, value) {
@@ -51,52 +58,13 @@ var index = 0;
         })
     }
 
-function actualizar_tracks_primera_cancion() {
-    $( "#plList" ).empty();
-    //alert("actualizando primera cancion despues de limpiar");
-    tracks=[];
-
-    //alert("actualizando");
-    // Si no envias un parametro por algun extraño motivo no funciona */
-    $( ".reprodcutor_list_item" ).empty();
-    $.ajaxSetup({async: false});
-    $("#ocultar_contenido").load("/Reproductor_lista_v2_first_song", {max_num_canciones: 40}, function (caca) {
-        //alert("Actualizando tracks -> " + caca);
-        var componentes = caca.split(",");
-        //alert("aqui_v2 -> "+componentes[0] + " " +componentes[1]);
-        for (var i = 0, len = componentes.length; i < len;) {
-            tracks.push({track: ((i / 2) + 1), name: componentes[i], id: componentes[i + 1]});
-
-            i = i + 2;
-            // alert("aqui-v4 ->"+tracks[0].name +" "+ tracks[0].id);
-        }
-    });
-    $.ajaxSetup({async: true});
-    tracks.pop();
-
-    buildPlaylist = $(tracks).each(function(key, value) {
-        var trackNumber = value.track,
-            trackName = value.name;
-        // trackDuration = value.duration;
-        if (trackNumber.toString().length === 1) {
-            trackNumber = '0' + trackNumber;
-        }
-        $('#plList').append(
-            '<li class="list-group-item list-group-item-action text-white  reprodcutor_list_item d-flex justify-content-between" data-toggle="list" > ' +
-            '<div>'+trackNumber+ '</div>  ' +
-            '<div>'+trackName+'.mp3</div>  '
-            //	+'<div>'+ trackDuration +'</div> ' +
-        );
-    })
-}
-
 function reproducir_cancion(id){
     $.ajax({
         url: "/AddAndPlay",
         type: 'get',
         data: {song:id},
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert('Ha ocurrido un error actualizando el historial y obteniendo la cancion.');
+            // alert('Ha ocurrido un error actualizando el historial y obteniendo la cancion.');
         },
         success: function(data){
             var nombre_cancion = data.split(',')[0];
@@ -132,7 +100,7 @@ function reproducir_lista(id){
         type: 'get',
         data: {list:id, max_num_canciones:40},
         error: function(XMLHttpRequest, textStatus, errorThrown){
-            alert('Ha ocurrido un error obteniendo la lista.');
+            // alert('Ha ocurrido un error obteniendo la lista.');
         },
         success: function(data){
             var datos = data.split(',');
@@ -188,11 +156,11 @@ jQuery(document).ready(function() {
         var actualizar_reproduccion = 10;  /* Frecuencia de actualización del ultimo momento de reproduccion */
 
         /* Mostrar Path */
-        // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); alert(dir);
+        // var loc = window.location.pathname; var dir = loc.substring(0, loc.lastIndexOf('/')); // alert(dir);
 
         actualizar_tracks();
 
-        //alert("aqui-v3 ->"+tracks[0].name +" "+ tracks[0].id);
+        //// alert("aqui-v3 ->"+tracks[0].name +" "+ tracks[0].id);
 
         /*
          $.ajaxSetup({async: true});
@@ -209,7 +177,7 @@ jQuery(document).ready(function() {
         });
         $.ajaxSetup({async: true});
         function getFile(f){	tracks = f;	};
-        //alert(tracks[0].track + tracks[0].name + tracks[0].duration); alert(tracks[0].track + tracks[0].name + tracks[0].duration);	alert(tracks[1].track + tracks[1].name + tracks[1].duration);
+        //// alert(tracks[0].track + tracks[0].name + tracks[0].duration); // alert(tracks[0].track + tracks[0].name + tracks[0].duration);	// alert(tracks[1].track + tracks[1].name + tracks[1].duration);
 		*/
 
 
@@ -247,7 +215,7 @@ jQuery(document).ready(function() {
 
             /*
             $("#volumen").bind("change", function() {
-                alert("a");
+                // alert("a");
                 audio.volume =  ($(this).val());
             });
             *(
@@ -292,7 +260,7 @@ jQuery(document).ready(function() {
                     var tiempo_actual = this.currentTime;
                     var max_tiempo = this.duration;
                     $("#ocultar_contenido").load("/reproductor_cont", {momento_cancion: tiempo_actual, momento_cancion_max : max_tiempo}, function () {
-                        //alert("Load was performed.");
+                        //// alert("Load was performed.");
                     });
                 }
             }
@@ -304,7 +272,7 @@ jQuery(document).ready(function() {
             if (!playing) {
                 audio.play();
 
-                audio.currentTime =  $("#seek").val();   //alert("empiezo" + $("#seek").val());
+                audio.currentTime =  $("#seek").val();   //// alert("empiezo" + $("#seek").val());
 
                 $('#btnPlayStio_v2').removeClass('fa-play');
                 $('#btnPlayStio_v2').addClass('fa-pause');
@@ -378,7 +346,7 @@ jQuery(document).ready(function() {
                 npTitle.text(tracks[id].name+'.mp3');
                 index = id;
                 audio.src = mediaPath + tracks[id].id +'.mp3';
-                //alert("src "+audio.src);
+                //// alert("src "+audio.src);
                 $('#imagen_cancion').attr('src', imagePath + tracks[id].id +'.png');
 
             },
@@ -390,7 +358,7 @@ jQuery(document).ready(function() {
                     type: 'get',
                     data: {song:tracks[id].id},
                     error: function(XMLHttpRequest, textStatus, errorThrown){
-                        alert('Ha ocurrido un error actualizando el historial.');
+                        // alert('Ha ocurrido un error actualizando el historial.');
                     },
                     success: function(data){
                         loadTrack(id);
@@ -405,6 +373,6 @@ jQuery(document).ready(function() {
         loadTrack(index);
     }
     else {
-        alert("Su navegador no es capaz de reproducir canciones");
+        // alert("Su navegador no es capaz de reproducir canciones");
     }
 });

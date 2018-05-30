@@ -555,18 +555,6 @@ public class Usuario {
      *-------------------------------------       FUNCIONES CONEXION       ---------------------------------------------
      *----------------------------------------------------------------------------------------------------------------*/
 
-    /*
-    public int estado(){
-        long millis=System.currentTimeMillis();
-        Timestamp min5 = new Timestamp(millis-300000);
-        Timestamp min10 = new Timestamp(millis-600000);
-        Timestamp past = this.conexion;
-        if(past.after(min5)){return 0;}
-        else if(past.after(min10)){return 1;}
-        else{return 2;}
-
-    }*/
-
     public int estado(){
         long millis = System.currentTimeMillis();
         long pastmil = this.conexion.getTime();

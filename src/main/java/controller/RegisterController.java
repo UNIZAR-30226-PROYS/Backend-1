@@ -24,43 +24,43 @@ import static main.java.BCrypt.hashpw;
 public class RegisterController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = request.getParameter("register_user");
-        String pass = hashpw(request.getParameter("register_pass"),gensalt());   //Contraseña hasheada
+        String pass = hashpw(request.getParameter("register_pass"), gensalt());   //Contraseña hasheada
         String email = request.getParameter("register_email");
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
         try {
-            Usuario username = Usuario.addUser(user,pass,email);
+            Usuario username = Usuario.addUser(user, pass, email);
             // List<String> listas = Arrays.asList("Lista 1", "Lista 2", "Lista 3");
-    // username.setConexion(new java.sql.Timestamp(0)); // Actualiza estado de conexion del usuario
-username.saveUser();
+            username.setConexion(); // Actualiza estado de conexion del usuario
+            username.saveUser();
             Collection<Listarep> aux = username.getListarepsByIdUser();
             List<Listarep> listas = new ArrayList<>(aux);
             System.out.println(listas);
             session.setAttribute("username", username);
             session.setAttribute("misListas", listas);
             Random rand = new Random();
-            int  num = rand.nextInt(9) + 1;
-            FileOperations.dup("/contenido/web/imagenes/wolf"+Integer.toString(num)+".png",
-                    "/contenido/imagenes/usuarios/"+user+"Perfil.png" );
+            int num = rand.nextInt(9) + 1;
+            FileOperations.dup("/contenido/web/imagenes/wolf" + Integer.toString(num) + ".png",
+                    "/contenido/imagenes/usuarios/" + user + "Perfil.png");
             // session.setAttribute("misAudios", listas);
             // session.setAttribute("listasRecomendadas", listas);
             // session.setAttribute("audiosRecomendados", listas);
-            if (UA.contains("Mobile")){
+            if (UA.contains("Mobile")) {
                 response.sendRedirect("/movil/explorar.jsp");
-            }else{
+            } else {
                 response.sendRedirect("/escritorio/explorar.jsp");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             RequestDispatcher rd;
-            if (UA.contains("Mobile")){
+            if (UA.contains("Mobile")) {
                 rd = request.getRequestDispatcher("/movil/wolfsound.jsp");
-            }else{
+            } else {
                 rd = request.getRequestDispatcher("/escritorio/explorar.jsp");
             }
             request.setAttribute("error", e.getMessage());
-            rd.forward(request,response);
+            rd.forward(request, response);
         }
     }
 
