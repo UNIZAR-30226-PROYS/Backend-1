@@ -94,7 +94,7 @@
         <div class="row">
             <img id="imagen_cancion" src="" style="max-width: 48px; max-height: 48px">
 
-            <div class="col col-4">
+            <div class="col col-4" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                 <p class="npTitle align-middle text-center pt-2" id="npTitle" style="color: white"></p>
             </div>
 
