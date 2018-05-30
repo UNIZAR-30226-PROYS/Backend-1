@@ -19,7 +19,7 @@ wolfsound()
 
 case $1 in
     wolfsound)
-        wolfsound
+        build && wolfsound
         ;;
     *)
         build && upload $1
