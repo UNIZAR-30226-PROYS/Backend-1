@@ -13,7 +13,8 @@
 
     <div class="media mt-2" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
         <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-            <h4 class="media-heading" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">Resultados de "${consulta}"</h4>
+            <h4 class="media-heading" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">Resultados
+                de "${consulta}"</h4>
         </div>
     </div>
     <div class="row pt-1">
@@ -68,7 +69,8 @@
             <a href="/user?id=${usuario.getIdUser()}" class="list-group-item list-group-item-action">
                 <div class="media" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                     <div class="media-left" style="padding-right:15px">
-                        <img src="/contenido/imagenes/usuarios/${usuario.getUsername()}Perfil.png" style="width:64px;" alt="...">
+                        <img src="/contenido/imagenes/usuarios/${usuario.getUsername()}Perfil.png" style="width:64px;"
+                             alt="...">
                     </div>
                     <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
                         <h6 class="media-heading">${usuario.getNomAp()}</h6>
@@ -80,10 +82,11 @@
     </div>
     <div id="result_listas" class="list-group pt-2 d-none">
         <c:forEach items="${listas}" var="lista">
-            <a href="/list?id=${lista.getIdLista()}" class="list-group-item list-group-item-action">
-                <div class="media" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-                    <div class="media-left" style="padding-right:15px">
-                        <img src="<c:choose>
+            <c:if test="${lista.getNombre() != 'historial' && lista.getNombre() != 'mimusica' && lista.getNombre() != 'favoritos'}">
+                <a href="/list?id=${lista.getIdLista()}" class="list-group-item list-group-item-action">
+                    <div class="media" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                        <div class="media-left" style="padding-right:15px">
+                            <img src="<c:choose>
                             <c:when test="${lista.getCancioneslistasByIdLista().isEmpty()}">
                                 ${pageContext.request.contextPath}/contenido/web/imagenes/wolf.jpg
                             </c:when>
@@ -92,13 +95,14 @@
                             </c:otherwise>
                         </c:choose>
                         " alt="Imagen lista" class="pt-3" style="width:64px">
+                        </div>
+                        <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                            <h6 class="media-heading">${lista.getNombre()}</h6>
+                            <h6 class="media-heading">${lista.getNumElementos()} canciones</h6>
+                        </div>
                     </div>
-                    <div class="media-body" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
-                        <h6 class="media-heading">${lista.getNombre()}</h6>
-                        <h6 class="media-heading">${lista.getNumElementos()} canciones</h6>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </c:if>
         </c:forEach>
     </div>
 </div> <!-- Container -->
