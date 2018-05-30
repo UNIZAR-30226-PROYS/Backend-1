@@ -5,6 +5,7 @@ import main.java.model.Listarep;
 import main.java.model.Suscribir;
 import main.java.model.Usuario;
 
+import org.hibernate.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,11 +53,12 @@ public class UserController extends HttpServlet {
         List<Listarep> misListas = null;
         boolean publico = false;
         String rand = null;
-
+        Session sesion = HibernateUtil.getSession();
         try {
             usuario = Usuario.getUser(idUser);
             System.out.println(usuario);
-            usuario.activarSuscripciones(HibernateUtil.getSession());
+
+            usuario.activarSuscripciones(sesion);
             // usuario.activarListas(HibernateUtil.getSession());
             suscripciones = usuario.getSuscribirsByIdUser_0();
             listas = usuario.getListarepsByIdUser();
@@ -78,14 +80,13 @@ public class UserController extends HttpServlet {
         session.setAttribute("favoritos", favoritos);
         session.setAttribute("publico", publico);
         session.setAttribute("rand", Integer.toString(ThreadLocalRandom.current().nextInt(0, 100000)));
-
+        sesion.close();
         System.out.println(usuario);
         System.out.println(misListas);
         System.out.println(suscripciones);
         System.out.println(historial);
         System.out.println(mimusica);
         System.out.println(favoritos);
-
 
         // Si el usuario no esta llamandose a si mismo
         if (username!=null && usuario !=null && usuario.getIdUser()!=username.getIdUser()){

@@ -6,6 +6,7 @@ import main.java.model.Listarep;
 import main.java.model.Suscribir;
 import main.java.model.Usuario;
 
+import org.hibernate.Session;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +25,7 @@ public class RedirectController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String UA = request.getHeader("User-Agent");
         HttpSession session = request.getSession(true);
+        Session sesion = HibernateUtil.getSession();
         try {
             List<Usuario> users = Usuario.getAllUsers();
             List<Cancion> canciones = new ArrayList<Cancion>();
@@ -32,7 +34,7 @@ public class RedirectController extends HttpServlet {
             for(int i = 0;i<3;i++){
                 Usuario user = users.get(rand);
                 List<Cancion> tmp = Usuario.getSongsObjectOrder(user.getIdUser());
-                user.activarListas(HibernateUtil.getSession());
+                user.activarListas(sesion);
                 Collection<Listarep> tmp2 = user.getListarepsByIdUser();
                 listas.addAll(tmp2);
                 canciones.addAll(tmp);
@@ -50,6 +52,7 @@ public class RedirectController extends HttpServlet {
 
         }
         catch (Exception e){session.setAttribute("error",e.getMessage());}
+        sesion.close();
         if (UA.contains("Mobile")) {
             response.sendRedirect("/movil/wolfsound.jsp");
         } else {
