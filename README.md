@@ -1,47 +1,20 @@
-# Backend
+# WolfSound
 
 ## Compilación y despliegue
+La compilación y despliegue automático de la aplicación se hará mediante el script de shell
+`deploy.sh`.  
+Este script se encargará de descargar Gradle si es necesario y compilará las con las dependencias 
+necesarias mediante el uso del gradle-wrapper. Tras esta compilación, se preparará el entorno
+remoto y se enviará el fichero ROOT.war a éste.  Una vez ahí, el .war se desplegará automáticamente 
+en el servidor web Apache Tomcat 9.0.8 junto con una base de datos MySQL 5.7.21.  
+Tanto el servidor web como la base de datos se ejecutan sobre contenedores Docker
+independientes conectados entre si para facilitar el despliegue. 
 
-### Despliegue mediante contenedor en Docker
-#### Windows / Linux / MacOS X
-Dependencias:
--   Java
--   Docker (https://docs.docker.com/install/)
--   Docker-compose (en gestor de paquetes)
+El comando necesario para el despliegue completo automatizado es el siguiente:
 
-###### Cómo desplegar la aplicación la primera vez:
 ```
-Backend $ sh deploy.sh start-docker
+sh deploy.sh wolfsound
 ```
-Esto compilará y montará automáticamente la base de datos MySQL y el servidor Tomcat enlazados al puerto 8080.  
-En el navegador, ir a la url `localhost:8080/wolfsound` y cargará automáticamente la vista según dispositivo.
 
-###### Desplegar la aplicación tras haber realizado cambios tras el primer despliegue:
-```
-Backend $ sh deploy.sh reload
-```
-Esto recompilará el proyecto y sustituirá la imagen .war en el contenedor docker y aparecerán los cambios en unos segundos.
-
-### Despliegue mediante script shell 
-#### Linux / MacOS
-Dependencias:  
-- Wget
-- Java
-- MySQL (Base de datos montada localmente, instrucciones en Google Drive)
-
-###### Cómo desplegar la aplicación la primera vez:
-```
-Backend $ sh deploy.sh build
-```
-Esto descargará el servidor Tomcat, compilará el proyecto y montará el .war en el servidor, accesible mediante la url `localhost:8080/wolfsound`.  
-**Este script no monta la base de datos MySQL**. Para poder usarla, tiene que estar configurada previamente según está indicado en Google Drive.
-
-###### Desplegar la aplicación tras haber realizado cambios tras el primer despliegue:
-```
-Backend $ sh deploy.sh reload
-```
-Esto recompilará el proyecto y sustituirá la imagen .war en la carpeta de Tomcat y aparecerán los cambios en unos segundos.
- 
-
-
+**Es conveniente establecer conexión mediante clave SSH para la ejecución.**
  
